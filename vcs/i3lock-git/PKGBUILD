@@ -1,0 +1,55 @@
+# Maintainer: Thorsten Töpper <atsutane-aur@freethoughts.de>
+# Contributor: William Giokas <1007380@gmail.com>
+
+# The lines prefaced with a ## are for use with pacman-git. They will either
+# break your build process or have no effect at all. Only uncomment for pacman-git.
+# Lines that can be commented out when pacman 4.0.3.403 becomes mainstream
+# are marked by a
+########## REMOVE FOR PACMAN 4.0.4 ##########
+# and closed by
+#############################################
+#
+# Thank you,
+# William Giokas
+
+pkgname=i3lock-git
+pkgver=2.4.1.10.gd6b9e33
+pkgrel=1
+pkgdesc="An improved screenlocker based upon XCB and PAM"
+arch=('i686' 'x86_64')
+url="http://i3wm.org"
+license=('MIT')
+depends=('xcb-util-image' 'pam' 'libev' 'cairo' 'libxkbcommon' 'libxkbfile')
+provides=('i3lock')
+conflicts=('i3lock')
+makedepends=('git')
+source=(git://code.i3wm.org/i3lock)
+sha1sums=('SKIP')
+
+_gitname="i3lock"
+
+pkgver() {
+  cd "$srcdir/$_gitname"
+  git describe --tags | sed 's/-/./g'
+}
+
+build() {
+  cd "$_gitname"
+  make
+  gzip i3lock.1
+}
+
+
+package() {  
+  cd "$_gitname"
+
+  make DESTDIR="$pkgdir" install
+  
+  install -Dm644 i3lock.1.gz ${pkgdir}/usr/share/man/man1/i3lock.1.gz
+  install -Dm644 LICENSE ${pkgdir}/usr/share/licenses/${pkgname}/LICENSE
+
+  make clean
+}
+
+# vim:set ts=2 sw=2 et:
+

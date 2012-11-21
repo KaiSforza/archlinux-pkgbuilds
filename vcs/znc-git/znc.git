@@ -1,0 +1,1530 @@
+  
+
+
+<!DOCTYPE html>
+<html>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# githubog: http://ogp.me/ns/fb/githubog#">
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>znc/znc · GitHub</title>
+    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub" />
+    <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub" />
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="apple-touch-icon-114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144.png" />
+    <meta name="msapplication-TileImage" content="/windows-tile.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+
+    
+    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="n4J+DDOOCJ8HIlIvV1ZBrX7/kNuTymn59VV6H9l8hcM=" name="csrf-token" />
+
+    <link href="https://a248.e.akamai.net/assets.github.com/assets/github-b7d14f15386474a415371e1e947f9ee86b7543d7.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="https://a248.e.akamai.net/assets.github.com/assets/github2-4112c34ae7346f2e199ce39dee2225ad5b865070.css" media="screen" rel="stylesheet" type="text/css" />
+    
+
+
+    <script src="https://a248.e.akamai.net/assets.github.com/assets/frameworks-c9ece3c1d530c8b5201cab80ec5efc53bf244a05.js" type="text/javascript"></script>
+    <script src="https://a248.e.akamai.net/assets.github.com/assets/github-dc267d1446ee781525186ac9e71b24f30a85d8e0.js" type="text/javascript"></script>
+    
+
+      <link rel='permalink' href='/znc/znc/tree/be77054136eb117036b57d25608c3dfde1fbe2fd'>
+    <meta property="og:title" content="znc"/>
+    <meta property="og:type" content="githubog:gitrepository"/>
+    <meta property="og:url" content="https://github.com/znc/znc"/>
+    <meta property="og:image" content="https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png?1345673562"/>
+    <meta property="og:site_name" content="GitHub"/>
+    <meta property="og:description" content="Official repository for the ZNC IRC bouncer. Contribute to znc development by creating an account on GitHub."/>
+
+    <meta name="description" content="Official repository for the ZNC IRC bouncer. Contribute to znc development by creating an account on GitHub." />
+
+  <link href="https://github.com/znc/znc/commits/master.atom" rel="alternate" title="Recent Commits to znc:master" type="application/atom+xml" />
+
+  </head>
+
+
+  <body class="logged_out   vis-public env-production ">
+    <div id="wrapper">
+
+    
+    
+
+    
+
+      <div id="header" class="true clearfix">
+        <div class="container clearfix">
+          <a class="site-logo " href="https://github.com/">
+            <img alt="GitHub" class="github-logo-4x" height="30" src="https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7@4x.png?1338956357" />
+            <img alt="GitHub" class="github-logo-4x-hover" height="30" src="https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7@4x-hover.png?1338956357" />
+          </a>
+
+
+                  <ul class="top-nav logged_out">
+        <li class="pricing"><a href="https://github.com/signup">Sign up for free</a></li>
+        <li class="explore"><a href="https://github.com/explore">Explore GitHub</a></li>
+      <li class="features"><a href="https://github.com/features">Features</a></li>
+        <li class="blog"><a href="https://github.com/blog">Blog</a></li>
+      <li class="login"><a href="https://github.com/login?return_to=%2Fznc%2Fznc">Sign in</a></li>
+    </ul>
+
+
+
+          
+        </div>
+      </div>
+
+      
+
+      
+
+
+            <div class="site hfeed" itemscope itemtype="http://schema.org/WebPage">
+      <div class="hentry">
+        
+        <div class="pagehead repohead instapaper_ignore readability-menu">
+          <div class="container">
+            <div class="title-actions-bar">
+              
+
+
+                  <ul class="pagehead-actions">
+
+
+          <li>
+            <span class="star-button"><a href="/login?return_to=%2Fznc%2Fznc" class="minibutton js-toggler-target entice tooltipped leftwards" title="You must be signed in to use this feature" rel="nofollow"><span class="mini-icon mini-icon-star"></span>Star</a><a class="social-count js-social-count" href="/znc/znc/stargazers">336</a></span>
+          </li>
+          <li>
+            <a href="/login?return_to=%2Fznc%2Fznc" class="minibutton js-toggler-target fork-button entice tooltipped leftwards"  title="You must be signed in to fork a repository" rel="nofollow"><span class="mini-icon mini-icon-fork"></span>Fork</a><a href="/znc/znc/network" class="social-count">76</a>
+          </li>
+    </ul>
+
+              <h1 itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="entry-title public">
+                <span class="repo-label"><span>public</span></span>
+                <span class="mega-icon mega-icon-public-repo"></span>
+                <span class="author vcard">
+                  <a href="/znc" class="url fn" itemprop="url" rel="author">
+                  <span itemprop="title">znc</span>
+                  </a></span> /
+                <strong><a href="/znc/znc" class="js-current-repository">znc</a></strong>
+              </h1>
+            </div>
+
+            
+
+  <ul class="tabs">
+    <li><a href="/znc/znc" class="selected" highlight="repo_sourcerepo_downloadsrepo_commitsrepo_tagsrepo_branches">Code</a></li>
+    <li><a href="/znc/znc/network" highlight="repo_network">Network</a></li>
+    <li><a href="/znc/znc/pulls" highlight="repo_pulls">Pull Requests <span class='counter'>9</span></a></li>
+
+      <li><a href="/znc/znc/issues" highlight="repo_issues">Issues <span class='counter'>74</span></a></li>
+
+
+
+    <li><a href="/znc/znc/graphs" highlight="repo_graphsrepo_contributors">Graphs</a></li>
+
+
+  </ul>
+  
+  <div id="repo_details" class="metabox clearfix
+       ">
+      <div id="repo_details_loader" class="metabox-loader" style="display:none">Sending Request&hellip;</div>
+
+        <div class="repo-desc-homepage">
+          
+    <div class="repository-lang-stats">
+      <div class="repository-lang-stats-graph">
+      <span class="language-color" style="width:93.4%; background-color:#f34b7d;" itemprop="keywords">C++</span><span class="language-color" style="width:2.4%; background-color:#0298c3;" itemprop="keywords">Perl</span><span class="language-color" style="width:2.0%; background-color:#555;" itemprop="keywords">C</span><span class="language-color" style="width:1.3%; background-color:#3581ba;" itemprop="keywords">Python</span>
+      </div>
+      <ol class="list-tip">
+        <li>
+            <a href="/languages/C%2B%2B">
+              <span class="color-block language-color" style="background-color:#f34b7d;"></span>
+              <span class="lang">C++</span>
+              <span class="percent">93.4%</span>
+            </a>
+        </li>
+        <li>
+            <a href="/languages/Perl">
+              <span class="color-block language-color" style="background-color:#0298c3;"></span>
+              <span class="lang">Perl</span>
+              <span class="percent">2.4%</span>
+            </a>
+        </li>
+        <li>
+            <a href="/languages/C">
+              <span class="color-block language-color" style="background-color:#555;"></span>
+              <span class="lang">C</span>
+              <span class="percent">2.0%</span>
+            </a>
+        </li>
+        <li>
+            <a href="/languages/Python">
+              <span class="color-block language-color" style="background-color:#3581ba;"></span>
+              <span class="lang">Python</span>
+              <span class="percent">1.3%</span>
+            </a>
+        </li>
+        <li>
+            <span class="other">
+              <span data-lang="Other" class="color-block language-color"></span>
+              <span class="lang">Other</span>
+              <span class="percent">0.9%</span>
+            </span>
+        </li>
+      </ol>
+    </div>
+
+<div id="repository_description" class="repository-description">
+    <p>Official repository for the ZNC IRC bouncer
+      <span id="read_more" style="display:none">&mdash; <a href="#readme">Read more</a></span>
+    </p>
+</div>
+
+
+<div class="repository-homepage" id="repository_homepage">
+  <p><a href="http://znc.in/" rel="nofollow">http://znc.in/</a></p>
+</div>
+
+
+        </div>
+
+      <div class="edit-repo-desc-homepage" style="display:none">
+        <form accept-charset="UTF-8" action="/znc/znc/admin/update_meta" id="js-update-repo-meta-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="_method" type="hidden" value="put" /><input name="authenticity_token" type="hidden" value="n4J+DDOOCJ8HIlIvV1ZBrX7/kNuTymn59VV6H9l8hcM=" /></div>
+          <p class="error" style="display:none">Sorry, but there was a problem saving your changes.</p>
+          <div>
+            <input type="text" id="repository-description-field" class="description-field" name="repo_description" value="Official repository for the ZNC IRC bouncer" placeholder="Add a description to this repository" />
+
+            <input type="text" id="repository-homepage-field" class="homepage-field" name="repo_homepage" value="http://znc.in/" placeholder="Add a website to this repository" />
+          </div>
+
+          <button type="submit" class="classy save-button">Save Changes</button>
+          <p class="cancel"><a href="#" class="danger">Cancel</a></p>
+</form>      </div>
+
+      
+<div class="url-box">
+  <ul class="native-clones">
+      <li><a href="/znc/znc/archive/master.zip" class="minibutton " icon_class="mini-icon-download" rel="nofollow" title="Download this repository as a zip file"><span class="mini-icon mini-icon-download"></span>ZIP</a>
+  </ul>
+
+  <ul class="clone-urls">
+    <li class="http_clone_url selected"><a href="https://github.com/znc/znc.git" class="js-git-protocol-selector" data-permission="Read-Only" data-url="/users/set_protocol?protocol_selector=http&amp;protocol_type=clone">HTTP</a></li>
+
+<li class="public_clone_url"><a href="git://github.com/znc/znc.git" class="js-git-protocol-selector" data-permission="Read-Only" data-url="/users/set_protocol?protocol_selector=gitweb&amp;protocol_type=clone">Git Read-Only</a></li>
+  </ul>
+  <input type="text" spellcheck="false" class="url-field" value="https://github.com/znc/znc.git">
+  <span class="js-clippy mini-icon mini-icon-clippy url-box-clippy" data-clipboard-text="https://github.com/znc/znc.git" data-copied-hint="copied!" data-copy-hint="copy to clipboard"></span>
+  <p class="url-description"><span class="bold js-clone-url-permission">Read-Only</span> access</p>
+</div>
+
+        </div>
+
+<div class="tabnav">
+
+  <span class="tabnav-right">
+    <ul class="tabnav-tabs">
+      <li><a href="/znc/znc/tags" class="tabnav-tab" highlight="repo_tags">Tags <span class="counter ">48</span></a></li>
+      <li><a href="/znc/znc/downloads" class="tabnav-tab" highlight="repo_downloads">Downloads <span class="counter blank">0</span></a></li>
+    </ul>
+    
+  </span>
+
+  <div class="tabnav-widget scope">
+
+
+    <div class="context-menu-container js-menu-container js-context-menu">
+      <a href="#"
+         class="minibutton bigger switcher js-menu-target js-commitish-button btn-branch repo-tree"
+         data-hotkey="w"
+         data-ref="master">
+         <span><em class="mini-icon mini-icon-branch"></em><i>branch:</i> master</span>
+      </a>
+
+      <div class="context-pane commitish-context js-menu-content">
+        <a href="javascript:;" class="close js-menu-close"><span class="mini-icon mini-icon-remove-close"></span></a>
+        <div class="context-title">Switch branches/tags</div>
+        <div class="context-body pane-selector commitish-selector js-navigation-container">
+          <div class="filterbar">
+            <input type="text" id="context-commitish-filter-field" class="js-navigation-enable js-filterable-field" placeholder="Filter branches/tags">
+            <ul class="tabs">
+              <li><a href="#" data-filter="branches" class="selected">Branches</a></li>
+                <li><a href="#" data-filter="tags">Tags</a></li>
+            </ul>
+          </div>
+
+          <div class="js-filter-tab js-filter-branches" data-filterable-for="context-commitish-filter-field" data-filterable-type=substring>
+              <div class="commitish-item branch-commitish selector-item js-navigation-item js-navigation-target ">
+                <span class="mini-icon mini-icon-confirm"></span>
+                <h4>
+                    <a href="/znc/znc/tree/0.204-bugfix" class="js-navigation-open" data-name="0.204-bugfix" rel="nofollow">0.204-bugfix</a>
+                </h4>
+              </div>
+              <div class="commitish-item branch-commitish selector-item js-navigation-item js-navigation-target selected">
+                <span class="mini-icon mini-icon-confirm"></span>
+                <h4>
+                    <a href="/znc/znc/tree/master" class="js-navigation-open" data-name="master" rel="nofollow">master</a>
+                </h4>
+              </div>
+          </div>
+
+            <div class="js-filter-tab js-filter-tags " style="display:none" data-filterable-for="context-commitish-filter-field" data-filterable-type=substring>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-1.0" class="js-navigation-open" data-name="znc-1.0" rel="nofollow">znc-1.0</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.206" class="js-navigation-open" data-name="znc-0.206" rel="nofollow">znc-0.206</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.204" class="js-navigation-open" data-name="znc-0.204" rel="nofollow">znc-0.204</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.202" class="js-navigation-open" data-name="znc-0.202" rel="nofollow">znc-0.202</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.200" class="js-navigation-open" data-name="znc-0.200" rel="nofollow">znc-0.200</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.098" class="js-navigation-open" data-name="znc-0.098" rel="nofollow">znc-0.098</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.096" class="js-navigation-open" data-name="znc-0.096" rel="nofollow">znc-0.096</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.094" class="js-navigation-open" data-name="znc-0.094" rel="nofollow">znc-0.094</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.092" class="js-navigation-open" data-name="znc-0.092" rel="nofollow">znc-0.092</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.090" class="js-navigation-open" data-name="znc-0.090" rel="nofollow">znc-0.090</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.080" class="js-navigation-open" data-name="znc-0.080" rel="nofollow">znc-0.080</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.078" class="js-navigation-open" data-name="znc-0.078" rel="nofollow">znc-0.078</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.076" class="js-navigation-open" data-name="znc-0.076" rel="nofollow">znc-0.076</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.074" class="js-navigation-open" data-name="znc-0.074" rel="nofollow">znc-0.074</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.072" class="js-navigation-open" data-name="znc-0.072" rel="nofollow">znc-0.072</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.070" class="js-navigation-open" data-name="znc-0.070" rel="nofollow">znc-0.070</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.068" class="js-navigation-open" data-name="znc-0.068" rel="nofollow">znc-0.068</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.066" class="js-navigation-open" data-name="znc-0.066" rel="nofollow">znc-0.066</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.064" class="js-navigation-open" data-name="znc-0.064" rel="nofollow">znc-0.064</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.062" class="js-navigation-open" data-name="znc-0.062" rel="nofollow">znc-0.062</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.060" class="js-navigation-open" data-name="znc-0.060" rel="nofollow">znc-0.060</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.058" class="js-navigation-open" data-name="znc-0.058" rel="nofollow">znc-0.058</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.056" class="js-navigation-open" data-name="znc-0.056" rel="nofollow">znc-0.056</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.054-rc3" class="js-navigation-open" data-name="znc-0.054-rc3" rel="nofollow">znc-0.054-rc3</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.054-rc2" class="js-navigation-open" data-name="znc-0.054-rc2" rel="nofollow">znc-0.054-rc2</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.054-rc1" class="js-navigation-open" data-name="znc-0.054-rc1" rel="nofollow">znc-0.054-rc1</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.054" class="js-navigation-open" data-name="znc-0.054" rel="nofollow">znc-0.054</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.052" class="js-navigation-open" data-name="znc-0.052" rel="nofollow">znc-0.052</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.050" class="js-navigation-open" data-name="znc-0.050" rel="nofollow">znc-0.050</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.047" class="js-navigation-open" data-name="znc-0.047" rel="nofollow">znc-0.047</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.045" class="js-navigation-open" data-name="znc-0.045" rel="nofollow">znc-0.045</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.044" class="js-navigation-open" data-name="znc-0.044" rel="nofollow">znc-0.044</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.043" class="js-navigation-open" data-name="znc-0.043" rel="nofollow">znc-0.043</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.041" class="js-navigation-open" data-name="znc-0.041" rel="nofollow">znc-0.041</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.040" class="js-navigation-open" data-name="znc-0.040" rel="nofollow">znc-0.040</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.039" class="js-navigation-open" data-name="znc-0.039" rel="nofollow">znc-0.039</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.038" class="js-navigation-open" data-name="znc-0.038" rel="nofollow">znc-0.038</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.037" class="js-navigation-open" data-name="znc-0.037" rel="nofollow">znc-0.037</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.036" class="js-navigation-open" data-name="znc-0.036" rel="nofollow">znc-0.036</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.035" class="js-navigation-open" data-name="znc-0.035" rel="nofollow">znc-0.035</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.034" class="js-navigation-open" data-name="znc-0.034" rel="nofollow">znc-0.034</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.033" class="js-navigation-open" data-name="znc-0.033" rel="nofollow">znc-0.033</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.030" class="js-navigation-open" data-name="znc-0.030" rel="nofollow">znc-0.030</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.029" class="js-navigation-open" data-name="znc-0.029" rel="nofollow">znc-0.029</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.028" class="js-navigation-open" data-name="znc-0.028" rel="nofollow">znc-0.028</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.027" class="js-navigation-open" data-name="znc-0.027" rel="nofollow">znc-0.027</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.025" class="js-navigation-open" data-name="znc-0.025" rel="nofollow">znc-0.025</a>
+                  </h4>
+                </div>
+                <div class="commitish-item tag-commitish selector-item js-navigation-item js-navigation-target ">
+                  <span class="mini-icon mini-icon-confirm"></span>
+                  <h4>
+                      <a href="/znc/znc/tree/znc-0.023" class="js-navigation-open" data-name="znc-0.023" rel="nofollow">znc-0.023</a>
+                  </h4>
+                </div>
+            </div>
+
+          <div class="no-results">Nothing to show</div>
+        </div>
+      </div><!-- /.commitish-context-context -->
+    </div>
+  </div> <!-- /.scope -->
+
+  <ul class="tabnav-tabs">
+    <li><a href="/znc/znc" class="selected tabnav-tab" highlight="repo_source">Files</a></li>
+    <li><a href="/znc/znc/commits/master" class="tabnav-tab" highlight="repo_commits">Commits</a></li>
+    <li><a href="/znc/znc/branches" class="tabnav-tab" highlight="repo_branches" rel="nofollow">Branches <span class="counter ">2</span></a></li>
+  </ul>
+
+</div>
+
+  
+  
+  
+
+
+            
+          </div>
+        </div><!-- /.repohead -->
+
+        <div id="js-repo-pjax-container" class="container context-loader-container" data-pjax-container>
+          
+
+
+    
+
+<!-- tree commit key: views10/v8/tree:v21:949105ee30e6de63809f38a9ade0298f -->
+
+  <div id="slider">
+
+
+        <p class="history-link js-history-link-replace" data-path="/">
+<a href="/znc/znc/commits/master">              <span class="mini-icon mini-icon-history tooltipped" title="Browse commits for this branch"></span>
+              1000+ commits
+</a>        </p>
+
+
+
+      <div class="breadcrumb" data-path="/">
+        <b itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/znc/znc" class="js-slider-breadcrumb" itemscope="url"><span itemprop="title">znc</span></a></b> / 
+      </div>
+
+      <a href="/znc/znc/find/master" class="js-slide-to" data-hotkey="t" style="display:none">Show File Finder</a>
+
+        
+
+  <div class="frames">
+    <div class="frame frame-center" data-path="/" data-permalink-url="/znc/znc/tree/be77054136eb117036b57d25608c3dfde1fbe2fd" data-title="znc/znc · GitHub" data-type="tree">
+
+      <div class="bubble tree-browser-wrapper">
+
+      <table class="tree-browser css-truncate" cellpadding="0" cellspacing="0">
+        <thead>
+            
+  <div class="commit commit-tease js-details-container">
+    <p class="commit-title ">
+        <a href="/znc/znc/commit/be77054136eb117036b57d25608c3dfde1fbe2fd" class="message">Fix spelling error in blockuser.</a>
+        <span class="hidden-text-expander inline"><a href="javascript:;" class="js-details-target">…</a></span>
+    </p>
+      <div class="commit-desc"><pre>Thanks to the-me (Patrick Matthäi) for the patch.</pre></div>
+    <div class="commit-meta">
+      <a href="/znc/znc/commit/be77054136eb117036b57d25608c3dfde1fbe2fd" class="sha-block">latest commit <span class="sha">be77054136</span></a>
+      <span class="js-clippy mini-icon mini-icon-clippy " data-clipboard-text="be77054136eb117036b57d25608c3dfde1fbe2fd" data-copied-hint="copied!" data-copy-hint="Copy SHA"></span>
+
+      <div class="authorship">
+        <img class="gravatar" height="20" src="https://secure.gravatar.com/avatar/6f7e45634f97553e7497b6d50c6cae90?s=140&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" width="20" />
+        <span class="author-name">Alexey Sokolov</span>
+        authored <time class="js-relative-date updated" datetime="2012-11-15T06:13:22-08:00" title="2012-11-15 06:13:22">November 15, 2012</time>
+
+      </div>
+    </div>
+  </div>
+
+        </thead>
+
+        
+
+<tbody class="tree-entries "
+    data-url="/znc/znc/tree-commits/master">
+
+
+    <tr>
+      <td class="icon"><span class="mini-icon mini-icon-directory"></span></td>
+      <td class="content"><a href="/znc/znc/tree/master/include" class="js-slide-to css-truncate-target" id="d436eb0fd9de10b54a828ce6435f7e81-70ff8d49672128192bbc77d3329e2d22786a4b7b" title="include">include</a></td>
+      <td class="age"><time class="js-relative-date" datetime="2012-11-06T10:33:45-08:00" title="2012-11-06 10:33:45">November 06, 2012</time></td>
+
+      <td class="message">
+          <a href="/znc/znc/commit/071801a65d0818af165bcd4f98989411e4020fb4" class="message">Increase the version number to 1.1</a> [<a href="/DarthGandalf" rel="contributor">DarthGandalf</a>]
+
+      </td>
+    </tr>
+    <tr>
+      <td class="icon"><span class="mini-icon mini-icon-directory"></span></td>
+      <td class="content"><a href="/znc/znc/tree/master/m4" class="js-slide-to css-truncate-target" id="fd6b6fc9220b72d21683ae8e4f50a210-c8d94aaab8a501b853e965f589177adc5d3b8711" title="m4">m4</a></td>
+      <td class="age"><time class="js-relative-date" datetime="2012-11-06T11:02:22-08:00" title="2012-11-06 11:02:22">November 06, 2012</time></td>
+
+      <td class="message">
+          <a href="/znc/znc/commit/da5c6b6a8b6534808d89c988b845fefbed9c686e" class="message">Bump SWIG req to 2.0.8, remove our hacks around old SWIG.</a> [<a href="/DarthGandalf" rel="contributor">DarthGandalf</a>]
+
+      </td>
+    </tr>
+    <tr>
+      <td class="icon"><span class="mini-icon mini-icon-directory"></span></td>
+      <td class="content"><a href="/znc/znc/tree/master/man" class="js-slide-to css-truncate-target" id="39c63ddb96a31b9610cd976b896ad4f0-d315e95f70a1be94dd330c5e2f709a045c78dc38" title="man">man</a></td>
+      <td class="age"><time class="js-relative-date" datetime="2012-07-04T14:21:37-07:00" title="2012-07-04 14:21:37">July 04, 2012</time></td>
+
+      <td class="message">
+          <a href="/znc/znc/commit/9be208c2429e512f9116cf71fea0013ebb31ba09" class="message">Drop znc-config, change znc-buildmod so it doesn't need znc-config</a> [<a href="/kylef" rel="contributor">kylef</a>]
+
+      </td>
+    </tr>
+    <tr>
+      <td class="icon"><span class="mini-icon mini-icon-directory"></span></td>
+      <td class="content"><a href="/znc/znc/tree/master/modules" class="js-slide-to css-truncate-target" id="0eb9b3af2e4a00837a1b1a854c9ea18c-5e327ad3264ef42795d4746577ec0fca7aacd403" title="modules">modules</a></td>
+      <td class="age"><time class="js-relative-date" datetime="2012-11-15T06:13:22-08:00" title="2012-11-15 06:13:22">November 15, 2012</time></td>
+
+      <td class="message">
+          <a href="/znc/znc/commit/be77054136eb117036b57d25608c3dfde1fbe2fd" class="message">Fix spelling error in blockuser.</a> [Alexey Sokolov]
+
+      </td>
+    </tr>
+    <tr>
+      <td class="icon"><span class="mini-icon mini-icon-directory"></span></td>
+      <td class="content"><a href="/znc/znc/tree/master/src" class="js-slide-to css-truncate-target" id="25d902c24283ab8cfbac54dfa101ad31-6aa1ec4b392149a3bbfe24ceec3001c24237912b" title="src">src</a></td>
+      <td class="age"><time class="js-relative-date" datetime="2012-11-07T06:40:37-08:00" title="2012-11-07 06:40:37">November 07, 2012</time></td>
+
+      <td class="message">
+          <a href="/znc/znc/commit/f54d4d443f1e8a952ef3e84afcb29e70e0a41e6f" class="message">Merge commit 'refs/pull/206/head' of github.com:znc/znc</a> [<a href="/DarthGandalf" rel="contributor">DarthGandalf</a>]
+
+      </td>
+    </tr>
+    <tr>
+      <td class="icon"><span class="mini-icon mini-icon-directory"></span></td>
+      <td class="content"><a href="/znc/znc/tree/master/test" class="js-slide-to css-truncate-target" id="098f6bcd4621d373cade4e832627b4f6-80fb91a546696722a9a9074a9897929f4773f64a" title="test">test</a></td>
+      <td class="age"><time class="js-relative-date" datetime="2012-09-09T04:31:10-07:00" title="2012-09-09 04:31:10">September 09, 2012</time></td>
+
+      <td class="message">
+          <a href="/znc/znc/commit/3be9c7a9db54096c290c8385f7fe97fcaf50b08c" class="message">Fix the tests for out-of-source builds.</a> [<a href="/Philantrop" rel="contributor">Philantrop</a>]
+
+      </td>
+    </tr>
+    <tr>
+      <td class="icon"><span class="mini-icon mini-icon-directory"></span></td>
+      <td class="content"><a href="/znc/znc/tree/master/webskins" class="js-slide-to css-truncate-target" id="c1b5c9e8cd2dd19a4b530324c05150e3-0b374921dbbe5975e552d4b32d2d5381763ea5e2" title="webskins">webskins</a></td>
+      <td class="age"><time class="js-relative-date" datetime="2012-06-08T05:51:45-07:00" title="2012-06-08 05:51:45">June 08, 2012</time></td>
+
+      <td class="message">
+          <a href="/znc/znc/commit/eb59be79057960ae39b1157fb61425d6d3214874" class="message">Use standard HTML table elements instead of custom classes</a> [<a href="/kylef" rel="contributor">kylef</a>]
+
+      </td>
+    </tr>
+    <tr>
+      <td class="icon"><span class="mini-icon mini-icon-text-file"></span></td>
+      <td class="content"><a href="/znc/znc/blob/master/.gitignore" class="js-slide-to css-truncate-target" id="a084b794bc0759e7a6b77810e01874f2-4c791ffd4ec507a6f5ea129abdfdb7199948d23f" title=".gitignore">.gitignore</a></td>
+      <td class="age"><time class="js-relative-date" datetime="2012-07-04T14:21:37-07:00" title="2012-07-04 14:21:37">July 04, 2012</time></td>
+
+      <td class="message">
+          <a href="/znc/znc/commit/9be208c2429e512f9116cf71fea0013ebb31ba09" class="message">Drop znc-config, change znc-buildmod so it doesn't need znc-config</a> [<a href="/kylef" rel="contributor">kylef</a>]
+
+      </td>
+    </tr>
+    <tr>
+      <td class="icon"><span class="mini-icon mini-icon-text-file"></span></td>
+      <td class="content"><a href="/znc/znc/blob/master/.travis.yml" class="js-slide-to css-truncate-target" id="354f30a63fb0907d4ad57269548329e3-a884821960d9dcd59a6951a3d41ef7f866e7393c" title=".travis.yml">.travis.yml</a></td>
+      <td class="age"><time class="js-relative-date" datetime="2012-11-06T11:10:32-08:00" title="2012-11-06 11:10:32">November 06, 2012</time></td>
+
+      <td class="message">
+          <a href="/znc/znc/commit/f174d49e814dc0f141c6fa77aa1a6c66052defb2" class="message">Update travis conf to install SWIG 2.0.8</a> [<a href="/DarthGandalf" rel="contributor">DarthGandalf</a>]
+
+      </td>
+    </tr>
+    <tr>
+      <td class="icon"><span class="mini-icon mini-icon-text-file"></span></td>
+      <td class="content"><a href="/znc/znc/blob/master/AUTHORS" class="js-slide-to css-truncate-target" id="3d350169560e75d0cf9fc8e3574a3639-5ff84e373b3010db1f31cbb2d144ac0b5bf7104f" title="AUTHORS">AUTHORS</a></td>
+      <td class="age"><time class="js-relative-date" datetime="2012-03-28T03:24:27-07:00" title="2012-03-28 03:24:27">March 28, 2012</time></td>
+
+      <td class="message">
+          <a href="/znc/znc/commit/92ec9381502aa709405381c7b3d8d66b15fec2ff" class="message">Added Webskin "znc-ation"</a> [<a href="/jakoch" rel="contributor">jakoch</a>]
+
+      </td>
+    </tr>
+    <tr>
+      <td class="icon"><span class="mini-icon mini-icon-text-file"></span></td>
+      <td class="content"><a href="/znc/znc/blob/master/LICENSE" class="js-slide-to css-truncate-target" id="9879d6db96fd29134fc802214163b95a-d511905c1647a1e311e8b20d5930a37a9c2531cd" title="LICENSE">LICENSE</a></td>
+      <td class="age"><time class="js-relative-date" datetime="2006-09-12T19:59:38-07:00" title="2006-09-12 19:59:38">September 12, 2006</time></td>
+
+      <td class="message">
+          <a href="/znc/znc/commit/8f9f65357c48d30a35fb66df58d4cbd4b843eae9" class="message">Added license info</a> [prozacx]
+
+      </td>
+    </tr>
+    <tr>
+      <td class="icon"><span class="mini-icon mini-icon-text-file"></span></td>
+      <td class="content"><a href="/znc/znc/blob/master/LICENSE.OpenSSL" class="js-slide-to css-truncate-target" id="e284daf343fb6b760fa6c14af9f8d469-98454f2fb5e4f8f7484c2c7e4eca87bdf2bbd37f" title="LICENSE.OpenSSL">LICENSE.OpenSSL</a></td>
+      <td class="age"><time class="js-relative-date" datetime="2006-09-12T19:59:38-07:00" title="2006-09-12 19:59:38">September 12, 2006</time></td>
+
+      <td class="message">
+          <a href="/znc/znc/commit/8f9f65357c48d30a35fb66df58d4cbd4b843eae9" class="message">Added license info</a> [prozacx]
+
+      </td>
+    </tr>
+    <tr>
+      <td class="icon"><span class="mini-icon mini-icon-text-file"></span></td>
+      <td class="content"><a href="/znc/znc/blob/master/Makefile.in" class="js-slide-to css-truncate-target" id="7e056ddc530791272d363e50c1f25647-ec4b8a8e1ab3e9821bbe5f67bee1feb833c4b949" title="Makefile.in">Makefile.in</a></td>
+      <td class="age"><time class="js-relative-date" datetime="2012-09-23T03:03:22-07:00" title="2012-09-23 03:03:22">September 23, 2012</time></td>
+
+      <td class="message">
+          <a href="/znc/znc/commit/84ec49780e8ab1e1b26d381e97ddb2323e504ccc" class="message">Get rid of the modpythin jobhack</a> [<a href="/psychon" rel="contributor">psychon</a>]
+
+      </td>
+    </tr>
+    <tr>
+      <td class="icon"><span class="mini-icon mini-icon-text-file"></span></td>
+      <td class="content"><a href="/znc/znc/blob/master/README.md" class="js-slide-to css-truncate-target" id="04c6e90faac2675aa89e2176d2eec7d8-75e24b714dd5f3710e47ff12aa1da145587db1e0" title="README.md">README.md</a></td>
+      <td class="age"><time class="js-relative-date" datetime="2012-07-24T07:46:52-07:00" title="2012-07-24 07:46:52">July 24, 2012</time></td>
+
+      <td class="message">
+          <a href="/znc/znc/commit/902b7e64f20a6a304df691e4e7525670262a2f5f" class="message">note dependency on automake for github install</a> [<a href="/wchristian" rel="contributor">wchristian</a>]
+
+      </td>
+    </tr>
+    <tr>
+      <td class="icon"><span class="mini-icon mini-icon-text-file"></span></td>
+      <td class="content"><a href="/znc/znc/blob/master/autogen.sh" class="js-slide-to css-truncate-target" id="f88e95eed7716507cfe3a54a2c9dd382-8b9f3ebf5f65f46d8866bcd9a85dcd14bb13c9d2" title="autogen.sh">autogen.sh</a></td>
+      <td class="age"><time class="js-relative-date" datetime="2012-02-02T17:44:24-08:00" title="2012-02-02 17:44:24">February 02, 2012</time></td>
+
+      <td class="message">
+          <a href="/znc/znc/commit/6b2029fa16568bd3e1c29242d064b20ad979cb20" class="message">Show error from bootstrap.sh if pkg-config not found.</a> [<a href="/DarthGandalf" rel="contributor">DarthGandalf</a>]
+
+      </td>
+    </tr>
+    <tr>
+      <td class="icon"><span class="mini-icon mini-icon-text-file"></span></td>
+      <td class="content"><a href="/znc/znc/blob/master/bootstrap.sh" class="js-slide-to css-truncate-target" id="3af436e6760a0c5f1e3d16a3384853a8-5347ab2e9548f998cac1413398b145116e36bcfa" title="bootstrap.sh">bootstrap.sh</a></td>
+      <td class="age"><time class="js-relative-date" datetime="2011-05-08T01:14:13-07:00" title="2011-05-08 01:14:13">May 08, 2011</time></td>
+
+      <td class="message">
+          <a href="/znc/znc/commit/7091937b670aba9af7ac4dd8c87bbb89a4edc10e" class="message">Add bootstrap.sh as symlink to autogen.sh</a> [Alexey Sokolov]
+
+      </td>
+    </tr>
+    <tr>
+      <td class="icon"><span class="mini-icon mini-icon-text-file"></span></td>
+      <td class="content"><a href="/znc/znc/blob/master/configure.ac" class="js-slide-to css-truncate-target" id="67e997bcfdac55191033d57a16d1408a-dba0c8384322935783776f4b9f1a93c187b8a6a3" title="configure.ac">configure.ac</a></td>
+      <td class="age"><time class="js-relative-date" datetime="2012-11-06T11:02:22-08:00" title="2012-11-06 11:02:22">November 06, 2012</time></td>
+
+      <td class="message">
+          <a href="/znc/znc/commit/da5c6b6a8b6534808d89c988b845fefbed9c686e" class="message">Bump SWIG req to 2.0.8, remove our hacks around old SWIG.</a> [<a href="/DarthGandalf" rel="contributor">DarthGandalf</a>]
+
+      </td>
+    </tr>
+    <tr>
+      <td class="icon"><span class="mini-icon mini-icon-text-file"></span></td>
+      <td class="content"><a href="/znc/znc/blob/master/znc-buildmod.in" class="js-slide-to css-truncate-target" id="3ec897135a2ddb6fc865fbf9cf04a3de-5460e292ae4fb415dd1b94b9e1f78a570814667b" title="znc-buildmod.in">znc-buildmod.in</a></td>
+      <td class="age"><time class="js-relative-date" datetime="2012-08-17T07:47:31-07:00" title="2012-08-17 07:47:31">August 17, 2012</time></td>
+
+      <td class="message">
+          <a href="/znc/znc/commit/4059c5666f82601a50a88fe3936321085acdb58f" class="message">We don't need to find the znc binary</a> [<a href="/kylef" rel="contributor">kylef</a>]
+
+      </td>
+    </tr>
+    <tr>
+      <td class="icon"><span class="mini-icon mini-icon-text-file"></span></td>
+      <td class="content"><a href="/znc/znc/blob/master/znc-uninstalled.pc.in" class="js-slide-to css-truncate-target" id="40c2e9e67bdb8624eea4830a6d2477a6-73570abb094e91456a98016f0bd2b2686bd4d380" title="znc-uninstalled.pc.in">znc-uninstalled.pc.in</a></td>
+      <td class="age"><time class="js-relative-date" datetime="2011-09-02T09:21:50-07:00" title="2011-09-02 09:21:50">September 02, 2011</time></td>
+
+      <td class="message">
+          <a href="/znc/znc/commit/013d0d2773c600b004baafcc487f1140a85316e1" class="message">Drop @DEFS@ from the build system</a> [<a href="/psychon" rel="contributor">psychon</a>]
+
+      </td>
+    </tr>
+    <tr>
+      <td class="icon"><span class="mini-icon mini-icon-text-file"></span></td>
+      <td class="content"><a href="/znc/znc/blob/master/znc.pc.in" class="js-slide-to css-truncate-target" id="e119becd59ecacff59108797ddba760a-c4588bea9c7da14c2d52d9c8ba9f311a54be0e52" title="znc.pc.in">znc.pc.in</a></td>
+      <td class="age"><time class="js-relative-date" datetime="2011-09-02T09:21:50-07:00" title="2011-09-02 09:21:50">September 02, 2011</time></td>
+
+      <td class="message">
+          <a href="/znc/znc/commit/013d0d2773c600b004baafcc487f1140a85316e1" class="message">Drop @DEFS@ from the build system</a> [<a href="/psychon" rel="contributor">psychon</a>]
+
+      </td>
+    </tr>
+    <tr>
+      <td class="icon"><span class="mini-icon mini-icon-text-file"></span></td>
+      <td class="content"><a href="/znc/znc/blob/master/znc.service" class="js-slide-to css-truncate-target" id="bf801f6cda35031c0b978d5c1b2cbaf0-2f862bf3791e334bcbf5d09de96b2bc1d355ac0b" title="znc.service">znc.service</a></td>
+      <td class="age"><time class="js-relative-date" datetime="2012-06-02T12:47:54-07:00" title="2012-06-02 12:47:54">June 02, 2012</time></td>
+
+      <td class="message">
+          <a href="/znc/znc/commit/f696796b60235b1668d4166e6936d480b796c15c" class="message">znc.service: Improve description, don't fork on your own</a> [<a href="/Philantrop" rel="contributor">Philantrop</a>]
+
+      </td>
+    </tr>
+</tbody>
+
+      </table>
+      </div>
+
+        <!-- readme cache key: tree-readme:465681:75e24b714dd5f3710e47ff12aa1da145587db1e0 -->
+        <div id="readme" class="clearfix announce instapaper_body md" data-path="/">
+          <span class="name"><span class="mini-icon mini-icon-readme"></span> README.md</span><article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1>
+<a name="---an-advanced-irc-bouncer" class="anchor" href="#---an-advanced-irc-bouncer"><span class="mini-icon mini-icon-link"></span></a><a href="http://znc.in"><img src="https://a248.e.akamai.net/camo.github.com/ea665e3db66b3ff84aefc67066c6755e660ef4ce/687474703a2f2f77696b692e7a6e632e696e2f736b696e732f636f6d6d6f6e2f696d616765732f77696b692e706e67" alt="ZNC" style="max-width:100%;"></a> - An advanced IRC bouncer</h1>
+
+<h2>
+<a name="table-of-contents" class="anchor" href="#table-of-contents"><span class="mini-icon mini-icon-link"></span></a>Table of contents</h2>
+
+<ul>
+<li>Minimal Requirements</li>
+<li>Optional Requirements</li>
+<li>Installing ZNC</li>
+<li>Setting up znc.conf</li>
+<li>Special config options</li>
+<li>Using ZNC</li>
+<li>File Locations</li>
+<li>ZNC's config file</li>
+<li>Writing own modules</li>
+<li>Further infos</li>
+</ul><h2>
+<a name="minimal-requirements" class="anchor" href="#minimal-requirements"><span class="mini-icon mini-icon-link"></span></a>Minimal Requirements</h2>
+
+<p>Core:</p>
+
+<ul>
+<li>GNU make (try gmake if make fails)</li>
+<li>GCC 3 or later</li>
+</ul><h2>
+<a name="optional-requirements" class="anchor" href="#optional-requirements"><span class="mini-icon mini-icon-link"></span></a>Optional Requirements</h2>
+
+<p>SSL support:</p>
+
+<ul>
+<li>openssl 0.9.7d or later (try installing openssl-dev, openssl-devel or
+libssl-dev)</li>
+</ul><p>modperl:</p>
+
+<ul>
+<li>This needs perl and its bundled libperl</li>
+</ul><p>modpython:</p>
+
+<ul>
+<li>This needs perl(!) and python's bundled libpython</li>
+</ul><p>saslauth:</p>
+
+<ul>
+<li>This module needs cyrus-sasl2</li>
+</ul><h2>
+<a name="installing-znc" class="anchor" href="#installing-znc"><span class="mini-icon mini-icon-link"></span></a>Installing ZNC</h2>
+
+<p>Installation is done with the <code>./configure ; make ; make install</code> commands.</p>
+
+<p>If you are building from git, you will need to run <code>./autogen.sh</code> first to produce the <code>configure</code> script.
+Note that this requires <code>automake</code> to be installed.</p>
+
+<p>You can use
+    ./configure --help
+if you want to get a list of options, though the defaults should be suiting
+most needs. After you compiled it with make (or gmake if make doesn't work) you
+can install it with
+    make install
+though you don't need to as ZNC supports in-place execution.</p>
+
+<h2>
+<a name="setting-up-zncconf" class="anchor" href="#setting-up-zncconf"><span class="mini-icon mini-icon-link"></span></a>Setting up znc.conf</h2>
+
+<p>For setting up a configuration file in <code>~/.znc</code> you can simply do
+    znc --makeconf
+or
+    ./znc --makeconf
+for in-place execution.</p>
+
+<p>If you are using SSL you should do
+    znc --makepem</p>
+
+<h2>
+<a name="special-config-options" class="anchor" href="#special-config-options"><span class="mini-icon mini-icon-link"></span></a>Special config options</h2>
+
+<p>When you create your ZNC configuration file via --makeconf, you are asked two
+questions which might not be easy to understand.</p>
+
+<blockquote>
+<p>Number of lines to buffer per channel</p>
+</blockquote>
+
+<p>How many messages should be buffered for each channel. When you connect to ZNC
+you get a buffer replay for each channel which shows what was said last. This
+option selects the number of lines this replay should consist of. Increasing
+this can greatly increase ZNC's memory usage if you are hosting many users.
+The default value should be fine for most setups.</p>
+
+<blockquote>
+<p>Would you like to keep buffers after replay?</p>
+</blockquote>
+
+<p>If this is disabled, you get the buffer playback only once and then it is
+deleted. If this is enabled, the buffer is not deleted. This may be useful if
+you regularly use more than one client to connect to ZNC.</p>
+
+<h2>
+<a name="using-znc" class="anchor" href="#using-znc"><span class="mini-icon mini-icon-link"></span></a>Using ZNC</h2>
+
+<p>Once you have started ZNC you can connect with your favorite IRC-client to ZNC.
+You should use <code>username:password</code> as the server password (e.g. <code>/pass user:pass</code>).</p>
+
+<p>Once you are connected you can do <code>/msg *status help</code> for some commands.
+Every module you have loaded (<code>/msg *status listmods</code>) should additionally provide
+    /msg *modulename help</p>
+
+<h2>
+<a name="file-locations" class="anchor" href="#file-locations"><span class="mini-icon mini-icon-link"></span></a>File Locations</h2>
+
+<p>In its data dir (<code>~/.znc</code> is default) ZNC saves most of its data. The only
+exception are modules and module data, which are saved in <code>&lt;prefix&gt;/lib/znc</code>
+and <code>&lt;prefix&gt;/share/znc</code>, and the znc binary itself.
+More modules (e.g. if you install some later) can be saved in
+<code>&lt;data dir&gt;/modules</code> (-&gt; <code>~/.znc/modules</code>).</p>
+
+<p>In the datadir are only two files:</p>
+
+<ul>
+<li>
+<code>znc.pid</code> - The pid of the currently running ZNC instance.</li>
+<li>
+<code>znc.pem</code> - This is the server certificate ZNC uses for listening and is created
+with <code>znc --makepem</code>.</li>
+</ul><p>These directories are also in there:</p>
+
+<ul>
+<li>configs - Contains <code>znc.conf</code> (ZNC's config file) and backups of older configs.</li>
+<li>modules - ZNC also looks in here for a module.</li>
+<li>moddata - Global modules save their settings here.
+(e.g. webadmin saves the current skin name in here)</li>
+<li>users   - This is per-user data and mainly contains just a moddata directory.</li>
+</ul><h2>
+<a name="zncs-config-file" class="anchor" href="#zncs-config-file"><span class="mini-icon mini-icon-link"></span></a>ZNC's config file</h2>
+
+<p>This file shouldn't be too hard too understand. An explanation of all the
+items can be found on the <a href="http://wiki.znc.in/Configuration">Configuration</a>-Page.
+Warning: better not to edit config, while ZNC is running.</p>
+
+<p>To rehash the config file, you can send ZNC SIGHUP via
+    pkill -SIGHUP znc
+or you can login to ZNC and use
+    /msg *status rehash</p>
+
+<p>If you changed some settings while ZNC is running, a simple
+    pkill -SIGUSR1 znc
+will make ZNC rewrite its config file. Alternatively you can use this:
+    /msg *status saveconfig</p>
+
+<h2>
+<a name="writing-own-modules" class="anchor" href="#writing-own-modules"><span class="mini-icon mini-icon-link"></span></a>Writing own modules</h2>
+
+<p>You can write your own modules in either C++, python or perl.</p>
+
+<p>C++ modules are compiled by either saving them in the modules source dir and
+running make or with the znc-buildmod shell script.</p>
+
+<p>For additional info look in the wiki:</p>
+
+<ul>
+<li><a href="http://wiki.znc.in/WritingModules">Writing Modules</a></li>
+<li><a href="http://wiki.znc.in/ModuleHooks">Module Hooks</a></li>
+</ul><p>Perl modules are loaded through the global module <a href="http://wiki.znc.in/Modperl">ModPerl</a>.</p>
+
+<p>Python modules are loaded through the global module <a href="http://wiki.znc.in/Modpython">ModPython</a>.</p>
+
+<h2>
+<a name="further-infos" class="anchor" href="#further-infos"><span class="mini-icon mini-icon-link"></span></a>Further infos</h2>
+
+<p>Please visit <a href="http://znc.in/">http://znc.in/</a> or #znc on EFNet if you still have questions.</p>
+
+<p>You can get the latest development version with git:
+    git clone git://github.com/znc/znc.git</p></article>
+        </div>
+    </div>
+  </div>
+  <br style="clear:both;">
+
+
+<br style="clear:both;">
+
+<div class="frame frame-loading large-loading-area" style="display:none;">
+  <img alt="Octocat-spinner-128" height="64" src="https://a248.e.akamai.net/assets.github.com/images/spinners/octocat-spinner-128.gif?1347543528" width="64" />
+</div>
+
+
+  </div>
+
+        </div>
+      </div>
+      <div class="context-overlay"></div>
+    </div>
+
+      <div id="footer-push"></div><!-- hack for sticky footer -->
+    </div><!-- end of wrapper - hack for sticky footer -->
+
+      <!-- footer -->
+      <div id="footer" >
+        
+  <div class="upper_footer">
+     <div class="container clearfix">
+
+       <h4 id="blacktocat">GitHub Links</h4>
+
+       <ul class="footer_nav">
+         <h4>GitHub</h4>
+         <li><a href="https://github.com/about">About</a></li>
+         <li><a href="https://github.com/blog">Blog</a></li>
+         <li><a href="https://github.com/features">Features</a></li>
+         <li><a href="https://github.com/contact">Contact &amp; Support</a></li>
+         <li><a href="http://training.github.com/">Training</a></li>
+         <li><a href="http://enterprise.github.com/">GitHub Enterprise</a></li>
+         <li><a href="http://status.github.com/">Site Status</a></li>
+       </ul>
+
+       <ul class="footer_nav">
+         <h4>Clients</h4>
+         <li><a href="http://mac.github.com/">GitHub for Mac</a></li>
+         <li><a href="http://windows.github.com/">GitHub for Windows</a></li>
+         <li><a href="http://eclipse.github.com/">GitHub for Eclipse</a></li>
+         <li><a href="http://mobile.github.com/">GitHub Mobile Apps</a></li>
+       </ul>
+
+       <ul class="footer_nav">
+         <h4>Tools</h4>
+         <li><a href="http://get.gaug.es/">Gauges: Web analytics</a></li>
+         <li><a href="http://speakerdeck.com">Speaker Deck: Presentations</a></li>
+         <li><a href="https://gist.github.com">Gist: Code snippets</a></li>
+
+         <h4 class="second">Extras</h4>
+         <li><a href="http://jobs.github.com/">Job Board</a></li>
+         <li><a href="http://shop.github.com/">GitHub Shop</a></li>
+         <li><a href="http://octodex.github.com/">The Octodex</a></li>
+       </ul>
+
+       <ul class="footer_nav">
+         <h4>Documentation</h4>
+         <li><a href="http://help.github.com/">GitHub Help</a></li>
+         <li><a href="http://developer.github.com/">Developer API</a></li>
+         <li><a href="http://github.github.com/github-flavored-markdown/">GitHub Flavored Markdown</a></li>
+         <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+       </ul>
+
+     </div><!-- /.site -->
+  </div><!-- /.upper_footer -->
+
+<div class="lower_footer">
+  <div class="container clearfix">
+    <div id="legal">
+      <ul>
+          <li><a href="https://github.com/site/terms">Terms of Service</a></li>
+          <li><a href="https://github.com/site/privacy">Privacy</a></li>
+          <li><a href="https://github.com/security">Security</a></li>
+      </ul>
+
+      <p>&copy; 2012 <span title="0.09968s from fe1.rs.github.com">GitHub</span> Inc. All rights reserved.</p>
+    </div><!-- /#legal or /#legal_ie-->
+
+  </div><!-- /.site -->
+</div><!-- /.lower_footer -->
+
+
+      </div><!-- /#footer -->
+
+    
+
+<div id="keyboard_shortcuts_pane" class="instapaper_ignore readability-extra" style="display:none">
+  <h2>Keyboard Shortcuts <small><a href="#" class="js-see-all-keyboard-shortcuts">(see all)</a></small></h2>
+
+  <div class="columns threecols">
+    <div class="column first">
+      <h3>Site wide shortcuts</h3>
+      <dl class="keyboard-mappings">
+        <dt>s</dt>
+        <dd>Focus command bar</dd>
+      </dl>
+      <dl class="keyboard-mappings">
+        <dt>?</dt>
+        <dd>Bring up this help dialog</dd>
+      </dl>
+    </div><!-- /.column.first -->
+
+    <div class="column middle" style='display:none'>
+      <h3>Commit list</h3>
+      <dl class="keyboard-mappings">
+        <dt>j</dt>
+        <dd>Move selection down</dd>
+      </dl>
+      <dl class="keyboard-mappings">
+        <dt>k</dt>
+        <dd>Move selection up</dd>
+      </dl>
+      <dl class="keyboard-mappings">
+        <dt>c <em>or</em> o <em>or</em> enter</dt>
+        <dd>Open commit</dd>
+      </dl>
+      <dl class="keyboard-mappings">
+        <dt>y</dt>
+        <dd>Expand URL to its canonical form</dd>
+      </dl>
+    </div><!-- /.column.first -->
+
+    <div class="column last js-hidden-pane" style='display:none'>
+      <h3>Pull request list</h3>
+      <dl class="keyboard-mappings">
+        <dt>j</dt>
+        <dd>Move selection down</dd>
+      </dl>
+      <dl class="keyboard-mappings">
+        <dt>k</dt>
+        <dd>Move selection up</dd>
+      </dl>
+      <dl class="keyboard-mappings">
+        <dt>o <em>or</em> enter</dt>
+        <dd>Open issue</dd>
+      </dl>
+      <dl class="keyboard-mappings">
+        <dt><span class="platform-mac">⌘</span><span class="platform-other">ctrl</span> <em>+</em> enter</dt>
+        <dd>Submit comment</dd>
+      </dl>
+      <dl class="keyboard-mappings">
+        <dt><span class="platform-mac">⌘</span><span class="platform-other">ctrl</span> <em>+</em> shift p</dt>
+        <dd>Preview comment</dd>
+      </dl>
+    </div><!-- /.columns.last -->
+
+  </div><!-- /.columns.equacols -->
+
+  <div class="js-hidden-pane" style='display:none'>
+    <div class="rule"></div>
+
+    <h3>Issues</h3>
+
+    <div class="columns threecols">
+      <div class="column first">
+        <dl class="keyboard-mappings">
+          <dt>j</dt>
+          <dd>Move selection down</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>k</dt>
+          <dd>Move selection up</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>x</dt>
+          <dd>Toggle selection</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>o <em>or</em> enter</dt>
+          <dd>Open issue</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt><span class="platform-mac">⌘</span><span class="platform-other">ctrl</span> <em>+</em> enter</dt>
+          <dd>Submit comment</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt><span class="platform-mac">⌘</span><span class="platform-other">ctrl</span> <em>+</em> shift p</dt>
+          <dd>Preview comment</dd>
+        </dl>
+      </div><!-- /.column.first -->
+      <div class="column last">
+        <dl class="keyboard-mappings">
+          <dt>c</dt>
+          <dd>Create issue</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>l</dt>
+          <dd>Create label</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>i</dt>
+          <dd>Back to inbox</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>u</dt>
+          <dd>Back to issues</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>/</dt>
+          <dd>Focus issues search</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <div class="js-hidden-pane" style='display:none'>
+    <div class="rule"></div>
+
+    <h3>Issues Dashboard</h3>
+
+    <div class="columns threecols">
+      <div class="column first">
+        <dl class="keyboard-mappings">
+          <dt>j</dt>
+          <dd>Move selection down</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>k</dt>
+          <dd>Move selection up</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>o <em>or</em> enter</dt>
+          <dd>Open issue</dd>
+        </dl>
+      </div><!-- /.column.first -->
+    </div>
+  </div>
+
+  <div class="js-hidden-pane" style='display:none'>
+    <div class="rule"></div>
+
+    <h3>Network Graph</h3>
+    <div class="columns equacols">
+      <div class="column first">
+        <dl class="keyboard-mappings">
+          <dt><span class="badmono">←</span> <em>or</em> h</dt>
+          <dd>Scroll left</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt><span class="badmono">→</span> <em>or</em> l</dt>
+          <dd>Scroll right</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt><span class="badmono">↑</span> <em>or</em> k</dt>
+          <dd>Scroll up</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt><span class="badmono">↓</span> <em>or</em> j</dt>
+          <dd>Scroll down</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>t</dt>
+          <dd>Toggle visibility of head labels</dd>
+        </dl>
+      </div><!-- /.column.first -->
+      <div class="column last">
+        <dl class="keyboard-mappings">
+          <dt>shift <span class="badmono">←</span> <em>or</em> shift h</dt>
+          <dd>Scroll all the way left</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>shift <span class="badmono">→</span> <em>or</em> shift l</dt>
+          <dd>Scroll all the way right</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>shift <span class="badmono">↑</span> <em>or</em> shift k</dt>
+          <dd>Scroll all the way up</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>shift <span class="badmono">↓</span> <em>or</em> shift j</dt>
+          <dd>Scroll all the way down</dd>
+        </dl>
+      </div><!-- /.column.last -->
+    </div>
+  </div>
+
+  <div class="js-hidden-pane" >
+    <div class="rule"></div>
+    <div class="columns threecols">
+      <div class="column first js-hidden-pane" >
+        <h3>Source Code Browsing</h3>
+        <dl class="keyboard-mappings">
+          <dt>t</dt>
+          <dd>Activates the file finder</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>l</dt>
+          <dd>Jump to line</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>w</dt>
+          <dd>Switch branch/tag</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>y</dt>
+          <dd>Expand URL to its canonical form</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <div class="js-hidden-pane" style='display:none'>
+    <div class="rule"></div>
+    <div class="columns threecols">
+      <div class="column first">
+        <h3>Browsing Commits</h3>
+        <dl class="keyboard-mappings">
+          <dt><span class="platform-mac">⌘</span><span class="platform-other">ctrl</span> <em>+</em> enter</dt>
+          <dd>Submit comment</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>escape</dt>
+          <dd>Close form</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>p</dt>
+          <dd>Parent commit</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>o</dt>
+          <dd>Other parent commit</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <div class="js-hidden-pane" style='display:none'>
+    <div class="rule"></div>
+    <h3>Notifications</h3>
+
+    <div class="columns threecols">
+      <div class="column first">
+        <dl class="keyboard-mappings">
+          <dt>j</dt>
+          <dd>Move selection down</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>k</dt>
+          <dd>Move selection up</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>o <em>or</em> enter</dt>
+          <dd>Open notification</dd>
+        </dl>
+      </div><!-- /.column.first -->
+
+      <div class="column second">
+        <dl class="keyboard-mappings">
+          <dt>e <em>or</em> shift i <em>or</em> y</dt>
+          <dd>Mark as read</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>shift m</dt>
+          <dd>Mute thread</dd>
+        </dl>
+      </div><!-- /.column.first -->
+    </div>
+  </div>
+
+</div>
+
+    <div id="markdown-help" class="instapaper_ignore readability-extra">
+  <h2>Markdown Cheat Sheet</h2>
+
+  <div class="cheatsheet-content">
+
+  <div class="mod">
+    <div class="col">
+      <h3>Format Text</h3>
+      <p>Headers</p>
+      <pre>
+# This is an &lt;h1&gt; tag
+## This is an &lt;h2&gt; tag
+###### This is an &lt;h6&gt; tag</pre>
+     <p>Text styles</p>
+     <pre>
+*This text will be italic*
+_This will also be italic_
+**This text will be bold**
+__This will also be bold__
+
+*You **can** combine them*
+</pre>
+    </div>
+    <div class="col">
+      <h3>Lists</h3>
+      <p>Unordered</p>
+      <pre>
+* Item 1
+* Item 2
+  * Item 2a
+  * Item 2b</pre>
+     <p>Ordered</p>
+     <pre>
+1. Item 1
+2. Item 2
+3. Item 3
+   * Item 3a
+   * Item 3b</pre>
+    </div>
+    <div class="col">
+      <h3>Miscellaneous</h3>
+      <p>Images</p>
+      <pre>
+![GitHub Logo](/images/logo.png)
+Format: ![Alt Text](url)
+</pre>
+     <p>Links</p>
+     <pre>
+http://github.com - automatic!
+[GitHub](http://github.com)</pre>
+<p>Blockquotes</p>
+     <pre>
+As Kanye West said:
+
+> We're living the future so
+> the present is our past.
+</pre>
+    </div>
+  </div>
+  <div class="rule"></div>
+
+  <h3>Code Examples in Markdown</h3>
+  <div class="col">
+      <p>Syntax highlighting with <a href="http://github.github.com/github-flavored-markdown/" title="GitHub Flavored Markdown" target="_blank">GFM</a></p>
+      <pre>
+```javascript
+function fancyAlert(arg) {
+  if(arg) {
+    $.facebox({div:'#foo'})
+  }
+}
+```</pre>
+    </div>
+    <div class="col">
+      <p>Or, indent your code 4 spaces</p>
+      <pre>
+Here is a Python code example
+without syntax highlighting:
+
+    def foo:
+      if not bar:
+        return true</pre>
+    </div>
+    <div class="col">
+      <p>Inline code for comments</p>
+      <pre>
+I think you should use an
+`&lt;addr&gt;` element here instead.</pre>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+
+    <div id="ajax-error-message" class="flash flash-error">
+      <span class="mini-icon mini-icon-exclamation"></span>
+      Something went wrong with that request. Please try again.
+      <a href="#" class="mini-icon mini-icon-remove-close ajax-error-dismiss"></a>
+    </div>
+
+    <div id="logo-popup">
+      <h2>Looking for the GitHub logo?</h2>
+      <ul>
+        <li>
+          <h4>GitHub Logo</h4>
+          <a href="http://github-media-downloads.s3.amazonaws.com/GitHub_Logos.zip"><img alt="Github_logo" src="https://a248.e.akamai.net/assets.github.com/images/modules/about_page/github_logo.png?1338956357" /></a>
+          <a href="http://github-media-downloads.s3.amazonaws.com/GitHub_Logos.zip" class="minibutton download">Download</a>
+        </li>
+        <li>
+          <h4>The Octocat</h4>
+          <a href="http://github-media-downloads.s3.amazonaws.com/Octocats.zip"><img alt="Octocat" src="https://a248.e.akamai.net/assets.github.com/images/modules/about_page/octocat.png?1338956357" /></a>
+          <a href="http://github-media-downloads.s3.amazonaws.com/Octocats.zip" class="minibutton download">Download</a>
+        </li>
+      </ul>
+    </div>
+
+    
+    
+    <span id='server_response_time' data-time='0.10121' data-host='fe1'></span>
+    
+  </body>
+</html>
+

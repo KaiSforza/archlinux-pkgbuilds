@@ -1,0 +1,20 @@
+*~
+*.swp
+*.swap
+*src/
+*pkg/
+!PKGBUILD
+hib/*
+kernel/*
+main/*
+testbed/*
+vcs/*
+!vcs/i3-git
+*.log*
+logpipe*
+
+#PACKAGE SOURCES TO IGNORE
+*.[xgb]z
+*.bz2
+*.sig
+vcs/i3-git/i3/*

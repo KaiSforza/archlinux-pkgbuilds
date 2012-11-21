@@ -1,0 +1,58 @@
+# Maintainer: Thorsten Töpper <atsutane-aur@freethoughts.de>
+# Contributor: William Giokas <1007380@gmail.com>
+
+# The lines prefaced with a ## are for use with pacman-git. They will either
+# break your build process or have no effect at all. Only uncomment for pacman-git.
+# Lines that can be commented out when pacman 4.0.3.403 becomes mainstream
+# are marked by a
+########## REMOVE FOR PACMAN 4.0.4 ##########
+# and closed by
+#############################################
+#
+# Thank you,
+# William Giokas
+
+pkgname=i3status-git
+pkgver=2.6.19.g0eeded8
+pkgrel=1
+pkgdesc="Generates status bar to use with dzen2 or wmii"
+arch=('i686' 'x86_64')
+url="http://i3wm.org/i3status/"
+license=('BSD')
+depends=('wireless_tools' 'confuse' 'alsa-lib' 'yajl')
+optdepends=("dzen2-svn: As statusbar, dzen2 stable doesn't support -dock yet.")
+makedepends=('git' 'pkgconfig' 'asciidoc')
+options=('docs')
+install=i3status.install
+conflicts=('i3status')
+provides=('i3status')
+source=(git://code.i3wm.org/i3status)
+sha1sums=('SKIP')
+
+_gitname="i3status"
+
+pkgver() {
+  cd "$srcdir/$_gitname"
+  git describe --tags | sed 's/-/./g'
+}
+
+build() {
+  cd "$_gitname"
+  # Remove comment if you want to use i3status with wmii
+  # sed -i "s/CFLAGS+=-DDZEN/#CFLAGS+=-DDZEN/g" Makefile
+  make
+}
+
+package() {
+  cd "${_gitname}"
+
+  make DESTDIR="${pkgdir}" install
+
+  install -Dm644 LICENSE \
+    ${pkgdir}/usr/share/licenses/${pkgname}/LICENSE
+
+  make clean
+}
+
+# vim:set ts=2 sw=2 et:
+

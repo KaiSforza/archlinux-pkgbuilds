@@ -1,0 +1,33 @@
+# Maintainer: Dave Reisner <d@falconindy.com>
+
+pkgname=cower-git
+pkgver=7.6.g7a52b44
+pkgrel=1
+pkgdesc="A simple AUR agent with a pretentious name"
+arch=('i686' 'x86_64')
+url="http://github.com/falconindy/cower"
+license=('MIT')
+depends=('curl' 'libarchive' 'pacman' 'yajl' )
+makedepends=('git' 'perl')
+conflicts=('cower')
+provides=('cower')
+
+source=("git://github.com/falconindy/cower.git#branch=pacman41")
+md5sums=('SKIP')
+_gitname="cower"
+
+pkgver() {
+        cd $srcdir/$_gitname
+        git describe | sed 's/-/./g'
+}
+
+build() {
+  cd "$srcdir/$_gitname"
+  make
+}
+
+package() {
+  make -C "$srcdir/$_gitname" PREFIX=/usr DESTDIR="$pkgdir" install
+}
+
+# vim: ft=sh syn=sh et

@@ -1,0 +1,30 @@
+#!/bin/sh
+
+sd_booted() {
+  [ -e sys/fs/cgroup/systemd ]
+}
+
+machine_id_setup() {
+  if [ ! -f etc/machine-id ]; then
+    systemd-machine-id-setup
+  fi
+}
+
+post_install() {
+  # enable getty@tty1 by default, but don't track the file
+  systemctl enable getty@.service
+
+  echo ":: Append 'init=/bin/systemd' to your kernel command line in your"
+  echo "   bootloader to replace sysvinit with systemd"
+}
+
+post_upgrade() {
+  machine_id_setup
+
+  if sd_booted; then
+    systemctl daemon-reload
+    systemctl daemon-reexec
+  fi
+}
+
+# vim:set ts=2 sw=2 et:

@@ -1,0 +1,38 @@
+pkgname=znc-git
+pkgver=znc.1.0.12.gbe77054
+pkgrel=1
+pkgdesc='An IRC bouncer with modules & scripts support'
+url='http://znc.in/'
+license=('GPL2')
+arch=('i686' 'x86_64')
+provides=('znc')
+conflicts=('znc')
+depends=('openssl')
+makedepends=('swig' 'tcl' 'python' 'perl' 'cyrus-sasl')
+optdepends=('tcl: modtcl module'
+            'python: modpython module'
+            'perl: modperl module'
+            'cyrus-sasl: saslauth module')
+source=("git://github.com/znc/znc.git")
+md5sums=('SKIP')
+_gitname="znc"
+
+pkgver() {
+  cd $srcdir/$_gitname
+  git describe | sed 's/-/./g'
+}
+build() {
+  cd "$srcdir/$_gitname"
+  ./autogen.sh
+  ./configure --prefix=/usr \
+    --enable-cyrus
+    #--enable-tcl \
+    #--enable-perl \
+    #--enable-python
+  make
+}
+
+package() {
+  cd "$srcdir/$_gitname"
+  make DESTDIR="$pkgdir" install
+}
