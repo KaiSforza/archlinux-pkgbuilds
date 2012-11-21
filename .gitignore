@@ -3,18 +3,29 @@
 *.swap
 *src/
 *pkg/
+*log/
 !PKGBUILD
 hib/*
-kernel/*
 main/*
 testbed/*
-vcs/*
-!vcs/i3-git
 *.log*
 logpipe*
 
-#PACKAGE SOURCES TO IGNORE
+# Package sources, sigs, and packages themselves.
 *.[xgb]z
 *.bz2
 *.sig
-vcs/i3-git/i3/*
+
+# GIT REPOS TO IGNORE
+vcs/i3*-git/i3*/*
+vcs/ii-hg/ii/*
+vcs/cower-git/cower/*
+vcs/luakit-git/luakit/*
+vcs/mangle-git/mangle/*
+vcs/ompload-git/omploader/*
+vcs/pacman-git/pacman/*
+vcs/ponymix-git/ponymix/*
+vcs/systemd-git/systemd/*
+vcs/znc-git/znc/*
+kernel/acpi_call-git/acpi_call/*
+kernel/linux-mainline/linux/*
