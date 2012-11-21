@@ -1,4 +1,4 @@
-==Archlinux PKGBUILDS
+Archlinux PKGBUILDS
 
 Note, these are not all my work. The `mangle-git` one is, but the others are simply modified by me.
 
