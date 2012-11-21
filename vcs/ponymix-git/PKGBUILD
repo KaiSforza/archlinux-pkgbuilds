@@ -1,7 +1,8 @@
 # Maintainer: Dave Reisner <d@falconindy.com>
 
 pkgname=ponymix-git
-pkgver=20121028
+epoch=1
+pkgver=9c64dce
 pkgrel=1
 pkgdesc="CLI PulseAudio Volume Control"
 arch=('i686' 'x86_64')
@@ -13,31 +14,23 @@ conflicts=('ponymix' 'pulsemix-git')
 provides=('ponymix' 'pulsemix-git')
 replaces=('pulsemix-git')
 
-_gitroot="git://github.com/falconindy/ponymix.git"
+source=("git://github.com/falconindy/ponymix.git")
+md5sums=('SKIP')
 _gitname="ponymix"
 
+pkgver() {
+  cd $srcdir/$_gitname
+  echo $(git describe --always)
+}
+
 build() {
-  msg "Connecting to GIT server...."
-
-  if [[ -d $_gitname ]] ; then
-    cd "$_gitname" && git pull origin
-    msg "The local files are updated."
-  else
-    git clone "$_gitroot" "$_gitname"
-  fi
-
-  msg "GIT checkout done or server timeout"
-  msg "Starting make..."
-
-  rm -rf "$srcdir/$_gitname-build"
-  cp -r "$srcdir/$_gitname" "$srcdir/$_gitname-build"
-  cd "$srcdir/$_gitname-build"
+  cd "$srcdir/$_gitname"
 
   make
 }
 
 package() {
-  make -C "$_gitname-build" DESTDIR="$pkgdir" install
+  make -C "$_gitname" DESTDIR="$pkgdir" install
 }
 
 # vim: ft=sh syn=sh et

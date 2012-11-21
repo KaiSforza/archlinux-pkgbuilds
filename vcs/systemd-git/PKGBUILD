@@ -1,7 +1,7 @@
 # Maintainer: Dave Reisner <dreisner@archlinux.org>
 
 pkgname=systemd-git
-pkgver=20121108
+pkgver=196_4_gadc40dc
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
@@ -42,6 +42,11 @@ md5sums=('SKIP'
          'df69615503ad293c9ddf9d8b7755282d')
 
 _gitname="systemd"
+
+pkgver() {
+	cd "$srcdir/$_gitname"
+	echo $(git describe | sed 's#-#_#g;s#v##')
+}
 
 build() {
   cd "$srcdir/$_gitname"
