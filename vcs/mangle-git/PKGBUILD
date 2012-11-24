@@ -1,6 +1,6 @@
 # Maintainer: William Giokas <1007380 at gmail dot com>
 pkgname=mangle-git
-pkgver=20121020
+pkgver=20121124
 #Previous versions:
 #	   20120425
 pkgrel=1
@@ -14,38 +14,23 @@ provides=('mangle')
 conflicts=('mangle-git' 'mangle')
 install=mangle.install
 
-_gitroot="https://github.com/FooSoft/mangle.git"
+#_gitroot="https://github.com/FooSoft/mangle.git"
 _gitname="mangle"
 
-build() {
-	cd $srcdir
-	msg "Connecting to the GIT server...."
-	
-	if [[ -d $srcdir/$_gitname ]] ; then
-		cd $_gitname
-		git pull origin
-		msg "The local files have been updated."
-	else
-		git clone $_gitroot $_gitname
-	fi
-	  
-	cd $srcdir
-	#Make directories
+source=("git+https://github.com/FooSoft/mangle.git")
+md5sums=('SKIP')
+
+
+
+package() {
+	cd ${srcdir}/mangle
 	mkdir -p "$pkgdir/usr/share/mangle/"
 	mkdir -p "$pkgdir/usr/bin/mangle/"
-	mkdir -p "$pkgdir/usr/share/mangle/"
+	mkdir -p "$pkgdir/usr/share/mangle"
 
-    #Copying git files
-    cd "$srcdir/mangle"
-    cp -R "mangle" "$pkgdir/usr/share/mangle/mangle"
-	cp -R "ref" "$pkgdir/usr/share/mangle/ref"
-	#Copy main pyw file
-	cp mangle.pyw $pkgdir/usr/share/mangle/mangle.pyw
-	
-	#Making a startup script for mangle
-	echo "#!/bin/bash" > $pkgdir/usr/share/mangle/manglestart.sh
-	echo "python2 /usr/share/mangle/mangle.pyw" >> $pkgdir/usr/share/mangle/manglestart.sh
-	ln $pkgdir/usr/share/mangle/manglestart.sh $pkgdir/usr/bin/mangle-convert
-	chmod +x $pkgdir/usr/bin/mangle-convert
+	cp -r mangle "$pkgdir/usr/share/mangle/mangle"
+	cp -r ref "$pkgdir/usr/share/mangle/ref"
+	cp mangle.pyw "$pkgdir/usr/share/mangle/mangle.pyw"
+	ln -s "$pkgdir/usr/share/mangle/mangle.pyw" "$pkgdir/usr/bin/mangle-convert"
+	chmod +x "$pkgdir/usr/bin/mangle-convert"
 }
-
