@@ -3,7 +3,6 @@
 # Maintainer: Thomas Baechler <thomas@archlinux.org>
 
 pkgbase=linux-mainline
-#pkgname=linux-mainline
 _srcname=linux-3.7-rc6
 _gitver=3.7-rc6
 pkgver=3.7rc6
