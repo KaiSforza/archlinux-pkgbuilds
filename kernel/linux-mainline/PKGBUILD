@@ -14,8 +14,8 @@ license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl')
 options=('!strip')
 PKGEXT='.pkg.tar.gz'
-source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=v${_gitver}"
-	#"http://www.kernel.org/pub/linux/kernel/v3.x/testing/${_srcname}.tar.xz"
+source=(#"git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=v${_gitver}"
+	"http://www.kernel.org/pub/linux/kernel/v3.x/testing/${_srcname}.tar.xz"
         # the main kernel config files
         'config' 'config.x86_64'
         # standard config files for mkinitcpio ramdisk
@@ -37,7 +37,7 @@ _kernelname=${pkgbase#linux}
 
 
 build() {
-  cd "$srcdir/linux"
+  cd "$srcdir/${_srcname}"
 
   # set DEFAULT_CONSOLE_LOGLEVEL to 4 (same value as the 'quiet' kernel param)
   # remove this when a Kconfig knob is made available by upstream
@@ -63,16 +63,16 @@ build() {
   sed -i '2iexit 0' scripts/depmod.sh
 
   # get kernel version
-  make prepare
+  #make prepare
 
   # load configuration
   # Configure the kernel. Replace the line below with one of your choice.
   #make menuconfig # CLI menu for configuration
   #make nconfig # new CLI menu for configuration
-  make xconfig # qt-based configuration
+  #make xconfig # qt-based configuration
   #make gconfig # gtk-based configuration
   #make oldconfig # using old config from previous kernel version
-  #yes ""|make oldconfig # Lazy version
+  yes ""|make oldconfig # Lazy version
   # ... or manually edit .config
 
   # rewrite configuration
@@ -106,8 +106,8 @@ _package() {
   backup=("etc/mkinitcpio.d/${pkgbase}.preset")
   install=linux.install
 
-  #cd "${srcdir}/${_srcname}"
-  cd "${srcdir}/linux"
+  cd "${srcdir}/${_srcname}"
+  #cd "${srcdir}/linux"
 
   KARCH=x86
 
@@ -169,8 +169,8 @@ _package-headers() {
   cd "${pkgdir}/usr/lib/modules/${_kernver}"
   ln -sf ../../../src/linux-${_kernver} build
 
-  #cd "${srcdir}/${_srcname}"
-  cd "${srcdir}/linux"
+  cd "${srcdir}/${_srcname}"
+  #cd "${srcdir}/linux"
   install -D -m644 Makefile \
     "${pkgdir}/usr/src/linux-${_kernver}/Makefile"
   install -D -m644 kernel/Makefile \
@@ -296,8 +296,8 @@ _package-docs() {
   conflicts=("kernel26${_kernelname}-docs")
   replaces=("kernel26${_kernelname}-docs")
 
-  #cd "${srcdir}/${_srcname}"
-  cd "${srcdir}/linux"
+  cd "${srcdir}/${_srcname}"
+  #cd "${srcdir}/linux"
 
   mkdir -p "${pkgdir}/usr/src/linux-${_kernver}"
   cp -al Documentation "${pkgdir}/usr/src/linux-${_kernver}"
@@ -316,8 +316,8 @@ for _p in ${pkgname[@]}; do
 done
 
 # vim:set ts=8 sts=2 sw=2 et:
-md5sums=('SKIP'
-	 '4c290383f1e05d150b70270e0011f57a'
+md5sums=('66a670a84bacec902d548362e9679112'
+         '4c290383f1e05d150b70270e0011f57a'
          '4c290383f1e05d150b70270e0011f57a'
          'eb14dcfd80c00852ef81ded6e826826a'
          '9d3c56a4b999c8bfbd4018089a62f662'
