@@ -29,3 +29,5 @@ vcs/systemd-git/systemd/*
 vcs/znc-git/znc/*
 kernel/acpi_call-git/acpi_call/*
 kernel/linux-mainline/linux/*
+!kernel/linux-mainline/config*
+!kernel/linux-mainline/*.patch
