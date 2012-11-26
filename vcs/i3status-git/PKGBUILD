@@ -1,17 +1,6 @@
 # Maintainer: Thorsten Töpper <atsutane-aur@freethoughts.de>
 # Contributor: William Giokas <1007380@gmail.com>
 
-# The lines prefaced with a ## are for use with pacman-git. They will either
-# break your build process or have no effect at all. Only uncomment for pacman-git.
-# Lines that can be commented out when pacman 4.0.3.403 becomes mainstream
-# are marked by a
-########## REMOVE FOR PACMAN 4.0.4 ##########
-# and closed by
-#############################################
-#
-# Thank you,
-# William Giokas
-
 pkgname=i3status-git
 pkgver=2.6.19.g0eeded8
 pkgrel=1
