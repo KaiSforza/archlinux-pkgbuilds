@@ -4,9 +4,9 @@
 
 pkgbase=linux-mainline
 #pkgname=linux-mainline
-_srcname=linux-3.7-rc6
-_gitver=3.7-rc6
-pkgver=3.7rc6
+_srcname=linux-3.7-rc7
+_gitver=3.7-rc7
+pkgver=3.7rc7
 pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
@@ -208,14 +208,14 @@ _package-headers() {
   cp arch/${KARCH}/kernel/asm-offsets.s "${pkgdir}/usr/src/linux-${_kernver}/arch/${KARCH}/kernel/"
 
   # add headers for lirc package
-  mkdir -p "${pkgdir}/usr/src/linux-${_kernver}/drivers/video"
+  #mkdir -p "${pkgdir}/usr/src/linux-${_kernver}/drivers/video"
 
-  cp drivers/video/*.h  "${pkgdir}/usr/src/linux-${_kernver}/drivers/video/"
+  #cp drivers/video/*.h  "${pkgdir}/usr/src/linux-${_kernver}/drivers/video/"
 
-  for i in bt8xx cpia2 cx25840 cx88 em28xx pwc saa7134 sn9c102; do
-    mkdir -p "${pkgdir}/usr/src/linux-${_kernver}/drivers/video/${i}"
-    cp -a drivers/video/${i}/*.h "${pkgdir}/usr/src/linux-${_kernver}/drivers/video/${i}"
-  done
+  #for i in bt8xx cpia2 cx25840 cx88 em28xx pwc saa7134 sn9c102; do
+  #  mkdir -p "${pkgdir}/usr/src/linux-${_kernver}/drivers/video/${i}"
+  #  cp -a drivers/video/${i}/*.h "${pkgdir}/usr/src/linux-${_kernver}/drivers/video/${i}"
+  #done
 
   # add docbook makefile
   install -D -m644 Documentation/DocBook/Makefile \

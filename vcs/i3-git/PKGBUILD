@@ -13,7 +13,7 @@
 # William Giokas
 
 pkgname=i3-git
-pkgver=4.3.159.geaf13ea
+pkgver=4.3.162.g19cbd3c
 pkgrel=1
 pkgdesc="An improved dynamic tiling window manager"
 arch=('i686' 'x86_64')

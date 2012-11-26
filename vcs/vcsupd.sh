@@ -22,8 +22,8 @@ cd $vcshome/cower-git
 makepkg -siL --noconfirm --needed
 
 # pacman
-cd $vcshome/pacman-git
-makepkg -siL --noconfirm --needed
+#cd $vcshome/pacman-git
+#makepkg -siL --noconfirm --needed
 
 ## acpi_call-git
 #cd $vcshome/../kernel/acpi_call-git
