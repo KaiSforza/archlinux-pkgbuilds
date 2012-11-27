@@ -1,9 +1,10 @@
 # Maintainer: nblock <nblock [/at\] archlinux DOT us>
 # Contributor: Frederik Alkærsig (FALKER) <havnelisten AT gmail.com>
+# Contributor: William Giokas (KaiSforza) <1007380@gmail.com>
 
 pkgname=thinkfan
 pkgver=0.8.1
-pkgrel=3
+pkgrel=4
 pkgdesc="A minimalist fan control program. Supports the sysfs hwmon interface and thinkpad_acpi"
 arch=('i686' 'x86_64')
 license=('GPL')

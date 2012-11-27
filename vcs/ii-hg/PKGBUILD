@@ -3,7 +3,7 @@
 
 pkgname=ii-hg
 pkgver=99
-pkgrel=1
+pkgrel=2
 pkgdesc="A minimalist FIFO and filesystem-based IRC client"
 arch=(i686 x86_64)
 url="http://wmii.de/index.php/WMII/ii"
