@@ -1,8 +1,6 @@
 # Maintainer: William Giokas <1007380 at gmail dot com>
 pkgname=mangle-git
 pkgver=20121124
-#Previous versions:
-#	   20120425
 pkgrel=1
 pkgdesc="A simple python image converter for the Amazon Kindle"
 arch=('any')
