@@ -1,0 +1,44 @@
+# Maintainer: Dmitry Korzhevin <dkorzhevin AT gmail DOT com>
+# Contributor: Mark Foxwell <fastfret79@archlinux.org.uk>
+# Contributor: Licia Todd <tigrmesh at aol dot com>
+# Contributor: Tim Zebulla <amon at faumrahrer dot de>
+
+pkgname=weechat-git
+pkgver=0.3.9.76.g37a3001
+pkgrel=1
+pkgdesc="Fast, light & extensible IRC client (curses UI)"
+arch=('i686' 'x86_64')
+url="http://www.weechat.org/"
+license=('GPL3')
+depends=('gnutls')
+makedepends=('git' 'cmake' 'pkgconfig' 'perl' 'python2' 'lua' 'tcl' 'ruby' 'aspell' 'curl')
+optdepends=('perl' 'python2' 'lua' 'tcl' 'ruby' 'aspell')
+provides=('weechat')
+conflicts=('weechat')
+options=(!libtool)
+source=("git://git.sv.gnu.org/weechat.git")
+md5sums=('SKIP')
+_gitname="weechat"
+
+pkgver() {
+    cd "$srcdir/$_gitname"
+    echo "$(git describe | sed 's#-#.#g;s#v##')"
+}
+
+build() {
+  cd "$srcdir/$_gitname"
+
+  mkdir build
+  cd build
+
+  cmake .. -DPREFIX=/usr \
+        -DPYTHON_EXECUTABLE=/usr/bin/python2 \
+        -DPYTHON_LIBRARY=/usr/lib/libpython2.7.so
+}
+
+package() {
+  cd "$srcdir/$_gitname/build"
+
+  make DESTDIR="${pkgdir}/" install
+}
+

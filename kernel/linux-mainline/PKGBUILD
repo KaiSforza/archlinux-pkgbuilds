@@ -5,16 +5,16 @@
 pkgbase=linux-mainline
 #pkgname=linux-mainline
 _srcname=linux-3.7-rc7
-_gitver=3.7-rc7
-pkgver=3.7rc7
+_gitver=v3.7-rc7
+pkgver=3.7.rc7
 pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl')
 options=('!strip')
-PKGEXT='.pkg.tar.gz'
-source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=v${_gitver}"
+PKGEXT='.pkg.tar.xz'
+source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=${_gitver}"
 	#"http://www.kernel.org/pub/linux/kernel/v3.x/testing/${_srcname}.tar.xz"
         # the main kernel config files
         'config' 'config.x86_64'
@@ -24,6 +24,10 @@ source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#ta
 	'fix-sandy-bridge.patch')
 
 _kernelname=${pkgbase#linux}
+
+pkgver() {
+    echo "$(echo ${_gitver} | sed 's/-/./g;s/v//')"
+}
 
 # mainline: Rescued from _package()
 #pkgdesc="The ${pkgbase} kernel and modules"

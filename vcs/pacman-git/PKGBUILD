@@ -4,7 +4,7 @@
 # Contributor: Andres Perera <aepd87@gmail.com>
 
 pkgname=pacman-git
-pkgver=4.0.3_503_gfe5fc02
+pkgver=4.0.3_505_gce2e6f8
 pkgrel=1
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
 arch=('i686' 'x86_64')
@@ -19,8 +19,8 @@ conflicts=('pacman' 'pacman-contrib')
 options=('!libtool' '!strip')
 backup=(etc/pacman.conf
         etc/makepkg.conf)
-#source=('pacman::git+file:///home/wgiokas/git/archlinux/pacman#branch=working-wgiokas')
-source=('pacman::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working')
+source=('pacman::git+file:///home/wgiokas/git/archlinux/pacman#branch=working-wgiokas')
+#source=('pacman::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working')
 sha1sums=('SKIP')
 
 pkgver() {

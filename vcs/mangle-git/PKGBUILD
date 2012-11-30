@@ -1,6 +1,6 @@
 # Maintainer: William Giokas <1007380 at gmail dot com>
 pkgname=mangle-git
-pkgver=20121124
+pkgver=35.a71ff52
 pkgrel=1
 pkgdesc="A simple python image converter for the Amazon Kindle"
 arch=('any')
@@ -11,13 +11,14 @@ makedepends=('git')
 provides=('mangle')
 conflicts=('mangle-git' 'mangle')
 install=mangle.install
-
-#_gitroot="https://github.com/FooSoft/mangle.git"
 _gitname="mangle"
-
 source=("git+https://github.com/FooSoft/mangle.git")
 md5sums=('SKIP')
 
+pkgver() {
+    cd "$srcdir/$_gitname"
+    echo "$(git shortlog | grep -c '^\s\+').$(git describe --always)"
+}
 
 
 package() {
