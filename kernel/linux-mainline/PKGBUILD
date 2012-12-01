@@ -14,7 +14,7 @@ license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl')
 options=('!strip')
 PKGEXT='.pkg.tar.xz'
-source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=${_gitver}"
+source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_gitver"
 	#"http://www.kernel.org/pub/linux/kernel/v3.x/testing/${_srcname}.tar.xz"
         # the main kernel config files
         'config' 'config.x86_64'
@@ -26,7 +26,8 @@ source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#ta
 _kernelname=${pkgbase#linux}
 
 pkgver() {
-    echo "$(echo ${_gitver} | sed 's/-/./g;s/v//')"
+    cd "$srcdir/linux"
+    echo "$(git describe | sed 's/-/./g;s/v//')"
 }
 
 # mainline: Rescued from _package()

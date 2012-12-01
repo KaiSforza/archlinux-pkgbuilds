@@ -21,6 +21,12 @@ makepkg -siL --noconfirm --needed
 cd $vcshome/cower-git
 makepkg -siL --noconfirm --needed
 
+cd $vcshome/weechat-git
+makepkg -siL --noconfirm --needed
+cd $vcshome/expac-git
+makepkg -siL --noconfirm --needed
+cd $vcshome/luakit-git
+makepkg -siL --noconfirm --needed
 # pacman
 #cd $vcshome/pacman-git
 #makepkg -siL --noconfirm --needed
