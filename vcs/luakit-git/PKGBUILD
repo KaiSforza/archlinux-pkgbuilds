@@ -1,7 +1,7 @@
 # Maintainer: J. W. Birdsong <jwbirdsong AT gmail DOT com>
 
 pkgname=luakit-git
-pkgver=2012.09.13.r1.24.ge9031a1
+pkgver=2012.09.13.r1.25.g5599ed8
 pkgrel=1
 pkgdesc="A fast, small, webkit-gtk based browser extensible by Lua"
 arch=('i686' 'x86_64')
