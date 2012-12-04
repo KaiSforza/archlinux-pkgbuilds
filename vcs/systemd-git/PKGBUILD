@@ -1,7 +1,7 @@
 # Maintainer: Dave Reisner <dreisner@archlinux.org>
 
 pkgname=systemd-git
-pkgver=196_60_g8050c22
+pkgver=196_90_g20ad4cf
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')

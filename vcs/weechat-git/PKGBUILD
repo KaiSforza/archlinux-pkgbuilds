@@ -4,14 +4,14 @@
 # Contributor: Tim Zebulla <amon at faumrahrer dot de>
 
 pkgname=weechat-git
-pkgver=0.3.9.83.gf411a59
+pkgver=v0.3.9.89.gd224594
 pkgrel=1
 pkgdesc="Fast, light & extensible IRC client (curses UI)"
 arch=('i686' 'x86_64')
 url="http://www.weechat.org/"
 license=('GPL3')
 depends=('gnutls')
-makedepends=('git' 'cmake' 'pkgconfig' 'perl' 'python2' 'lua' 'tcl' 'ruby' 'aspell' 'curl')
+makedepends=('git' 'cmake' 'pkgconfig' 'perl' 'python2' 'lua' 'tcl' 'ruby' 'aspell')
 optdepends=('perl' 'python2' 'lua' 'tcl' 'ruby' 'aspell')
 provides=('weechat')
 conflicts=('weechat')
@@ -22,23 +22,19 @@ _gitname="weechat"
 
 pkgver() {
     cd "$srcdir/$_gitname"
-    echo "$(git describe | sed 's#-#.#g;s#v##')"
+    echo "$(git describe --tags | sed 's#-#.#g')"
 }
 
 build() {
-  cd "$srcdir/$_gitname"
-
-  mkdir build
-  cd build
-
-  cmake .. -DPREFIX=/usr \
+  rm -rf "$srcdir/build"
+  mkdir -p "$srcdir/build"
+  pushd "$srcdir/build"
+  cmake "$srcdir/$_gitname" -DPREFIX=/usr \
         -DPYTHON_EXECUTABLE=/usr/bin/python2 \
         -DPYTHON_LIBRARY=/usr/lib/libpython2.7.so
 }
 
 package() {
-  cd "$srcdir/$_gitname/build"
-
-  make DESTDIR="${pkgdir}/" install
+  make -C "$srcdir/build" DESTDIR="${pkgdir}/" install
 }
 

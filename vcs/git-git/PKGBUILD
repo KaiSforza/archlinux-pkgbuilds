@@ -4,8 +4,8 @@
 # Based on [extra]'s git
 
 pkgname=git-git
-pkgver=20120119
-pkgrel=2
+pkgver=1.8.0.1.350.gee26a6e
+pkgrel=1
 pkgdesc="The fast distributed version control system - Git version"
 arch=('i686' 'x86_64')
 url="http://git-scm.com/"
@@ -26,31 +26,22 @@ provides=('git')
 conflicts=('git')
 backup=('etc/conf.d/git-daemon.conf')
 source=('git-daemon'
-        'git-daemon.conf')
+        'git-daemon.conf'
+        'git://git.kernel.org/pub/scm/git/git.git')
 
 md5sums=('8e2648910fd5dd4f1c41d3c7fa9e9156'
-         '2e42bf97779a1c6411d89043334c9e78')
+         '2e42bf97779a1c6411d89043334c9e78'
+         'SKIP')
 
-_gitroot="git://git.kernel.org/pub/scm/git/git.git"
 _gitname="git"
 
+pkgver() {
+    cd "$srcdir/$_gitname"
+    echo $(git describe | sed 's/-/./g;s/v//g')
+}
+
 build() {
-  msg "Connecting to GIT server...."
-
-  if [[ -d $_gitname ]]; then
-    cd $_gitname && git pull origin
-    msg "The local files are updated."
-  else
-    git clone --depth 1 $_gitroot $_gitname #shallow clone
-  fi
-
-  msg "GIT checkout done or server timeout"
-  msg "Starting build..."
-    
-  rm -rf "$srcdir/"$_gitname-build
-  mkdir "$srcdir/"$_gitname-build
-  cd "$srcdir/"$_gitname && ls -A1 --indicator-style=none | grep -v "^.git" | xargs -d '\n' cp -r -t ../$_gitname-build # do not copy over the .git folder
-  cd "$srcdir/"$_gitname-build
+  cd "$srcdir/"$_gitname
 	
   export PYTHON_PATH='/usr/bin/python2'
   make prefix=/usr gitexecdir=/usr/lib/git-core \
@@ -65,7 +56,7 @@ build() {
 package() {
   export PYTHON_PATH='/usr/bin/python2'
 
-  cd "$srcdir/"$_gitname-build
+  cd "$srcdir/"$_gitname
   make prefix=/usr gitexecdir=/usr/lib/git-core \
     CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" \
     USE_LIBPCRE=1 \
@@ -80,7 +71,7 @@ package() {
   # scripts are for python 2.x
   sed -i 's|#![ ]*/usr/bin/env python|#!/usr/bin/env python2|' \
     $(find "$pkgdir" -name '*.py') \
-    "$pkgdir"/usr/share/git/{fast-import/git-p4,gitview/gitview}
+    "$pkgdir"/usr/share/git/gitview/gitview
 
   # emacs interface
   cd contrib/emacs

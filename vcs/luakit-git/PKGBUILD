@@ -7,7 +7,7 @@ pkgdesc="A fast, small, webkit-gtk based browser extensible by Lua"
 arch=('i686' 'x86_64')
 url="http://www.luakit.org/projects/luakit" 
 license=('GPL3')
-depends=('libwebkit' 'luafilesystem' 'libunique')
+depends=('libwebkit' 'lua51-filesystem' 'libunique')
 makedepends=('git' 'lua' 'help2man')
 optdepends=('luajit2: Needed if use the luajit option in make')
 source=("git://github.com/mason-larobina/luakit.git#branch=develop"

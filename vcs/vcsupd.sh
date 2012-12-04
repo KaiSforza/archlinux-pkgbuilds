@@ -4,29 +4,30 @@
 # set the main VCS directory
 vcshome='/home/wgiokas/aur/vcs'
 run_from=$(pwd)
+mpkgflags='-siL --noconfirm -f'
 
 # i3-git:
 cd $vcshome/i3-git
-makepkg -siL --noconfirm --needed
+makepkg "$mpkgflags"
 
 # i3-status
 cd $vcshome/i3status-git
-makepkg -siL --noconfirm --needed
+makepkg "$mpkgflags"
 
 # i3-lock
 cd $vcshome/i3lock-git
-makepkg -siL --noconfirm --needed
+makepkg "$mpkgflags"
 
 # cower
 cd $vcshome/cower-git
-makepkg -siL --noconfirm --needed
+makepkg "$mpkgflags"
 
 cd $vcshome/weechat-git
-makepkg -siL --noconfirm --needed
+makepkg "$mpkgflags"
 cd $vcshome/expac-git
-makepkg -siL --noconfirm --needed
-cd $vcshome/luakit-git
-makepkg -siL --noconfirm --needed
+makepkg "$mpkgflags"
+#cd $vcshome/luakit-git
+#makepkg -siL --noconfirm --needed
 # pacman
 #cd $vcshome/pacman-git
 #makepkg -siL --noconfirm --needed
