@@ -1,23 +1,27 @@
 # Contributor: Anthony Martin <ality@pbrane.org>
 # Contributor: Chris Brannon <cmbrannon79 (at) gmail.com>
 
-pkgname=ii-hg
-pkgver=99
-pkgrel=2
+pkgname=ii-git
+pkgver=1.6.7.g7a99152
+pkgrel=1
 pkgdesc="A minimalist FIFO and filesystem-based IRC client"
 arch=(i686 x86_64)
 url="http://wmii.de/index.php/WMII/ii"
 license=('MIT')
 depends=('glibc')
-makedepends=('mercurial')
+makedepends=('git')
+replaces=('ii-hg')
 provides=('ii')
 conflicts=('ii')
 source=('config.mk'
-	'hg+http://hg.suckless.org/ii')
+	'ii::git+http://git.suckless.org/ii')
 md5sums=('17d6db42d3297691e4a8e98598065f59'
-	 'SKIP')
+         'SKIP')
 
-_hgrepo='ii'
+pkgver() {
+    cd "$srcdir/ii"
+    echo $(git describe --tags | sed 's/-/./g')
+}
 
 build() {
     cd "$srcdir/ii"
@@ -31,8 +35,8 @@ package() {
     cd "$srcdir/ii"
     make DESTDIR="$pkgdir" install
 
-    install -m755 -d  "$pkgdir/usr/share/licenses/ii-hg" || return 1
-    install -m644 LICENSE "$pkgdir/usr/share/licenses/ii-hg" || return 1
+    install -m755 -d  "$pkgdir/usr/share/licenses/ii-git"
+    install -m644 LICENSE "$pkgdir/usr/share/licenses/ii-git"
     # make install sets permissions to 775...
 
     chmod 755 "$pkgdir/usr/local/bin/ii"

@@ -7,7 +7,7 @@ pkgbase=linux-mainline
 _srcname=linux-3.7-rc8
 _gitver=v3.7-rc8
 pkgver=3.7.rc8
-pkgrel=1
+pkgrel=3
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -322,8 +322,8 @@ done
 
 # vim:set ts=8 sts=2 sw=2 et:
 md5sums=('SKIP'
-	 '4c290383f1e05d150b70270e0011f57a'
+         '4c290383f1e05d150b70270e0011f57a'
          '4c290383f1e05d150b70270e0011f57a'
          'eb14dcfd80c00852ef81ded6e826826a'
          '9d3c56a4b999c8bfbd4018089a62f662'
-         '3b0cfc494f330a2263153cd89722d720')
+         '8ae40af8fc0577abb3c15e708717518e')
