@@ -15,6 +15,7 @@ options=('docs')
 install=i3status.install
 conflicts=('i3status')
 provides=('i3status')
+groups=('i3-vcs')
 source=(git://code.i3wm.org/i3status)
 sha1sums=('SKIP')
 
