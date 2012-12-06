@@ -27,7 +27,7 @@ _gitname="i3"
 
 pkgver() {
   cd "$srcdir/$_gitname"
-  git describe --tags | sed 's/-/./g'
+  echo "$(git describe --tags | tr - .)"
 }
 
 build() {

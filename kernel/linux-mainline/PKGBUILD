@@ -4,10 +4,9 @@
 
 pkgbase=linux-mainline
 #pkgname=linux-mainline
-_srcname=linux-3.7-rc8
 _gitver=v3.7-rc8
 pkgver=3.7.rc8
-pkgrel=5
+pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -15,20 +14,22 @@ makedepends=('xmlto' 'docbook-xsl')
 options=('!strip' '!ccache')
 PKGEXT='.pkg.tar.gz'
 source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_gitver"
-	#"http://www.kernel.org/pub/linux/kernel/v3.x/testing/${_srcname}.tar.xz"
+    	#"http://www.kernel.org/pub/linux/kernel/v3.x/testing/linux-${_gitver}.tar.xz"
         # the main kernel config files
         'config' 'config.x86_64'
         # standard config files for mkinitcpio ramdisk
         'linux.preset'
         'change-default-console-loglevel.patch'
-	'fix-sandy-bridge.patch')
+	    'fix-sandy-bridge.patch')
 
 _kernelname=${pkgbase#linux}
 
 pkgver() {
-    cd "$srcdir/linux"
-    echo "$(git describe | sed 's/-/./g;s/v//')"
+  cd "$srcdir/linux"
+  #echo "$(git describe --long | sed 's/-/./g;s/v//')"
+  echo "$(git describe)"
 }
+msg "Making package: ${pkgbase} ${pkgver}-${pkgrel} ($(date))"
 
 # mainline: Rescued from _package()
 #pkgdesc="The ${pkgbase} kernel and modules"
@@ -47,10 +48,12 @@ prepare() {
   # remove this when a Kconfig knob is made available by upstream
   # (relevant patch sent upstream: https://lkml.org/lkml/2011/7/26/227)
   patch -Np1 -i "${srcdir}/change-default-console-loglevel.patch"
+  # Patch hoping to fix the {c,g}pu scaling issues encountered since 3.6.x.
   patch -Np1 -i "${srcdir}/fix-sandy-bridge.patch"
 }
 
 build() {
+  msg "Making package: ${pkgbase} ${pkgver}-${pkgrel} ($(date))"
   cd "$srcdir/linux"
 
   if [ "${CARCH}" = "x86_64" ]; then
@@ -325,7 +328,6 @@ done
 
 # vim:set ts=8 sts=2 sw=2 et:
 md5sums=('SKIP'
-         '4c290383f1e05d150b70270e0011f57a'
          '4c290383f1e05d150b70270e0011f57a'
          '4223b8d15369b47208cd5b960057145d'
          'eb14dcfd80c00852ef81ded6e826826a'
