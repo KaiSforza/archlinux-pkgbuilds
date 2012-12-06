@@ -1,6 +1,10 @@
 #
 # Automatically generated file; DO NOT EDIT.
+<<<<<<< HEAD
 # Linux/x86_64 3.7.0-5 Kernel Configuration
+=======
+# Linux/x86_64 3.7.0-3 Kernel Configuration
+>>>>>>> 014a02eede8b680c0dfe0f3dc14a5c40693087b5
 #
 CONFIG_64BIT=y
 CONFIG_X86_64=y
