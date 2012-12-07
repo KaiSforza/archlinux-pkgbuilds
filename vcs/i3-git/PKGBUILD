@@ -2,7 +2,7 @@
 # Contributor: William Giokas <1007380@gmail.com>
 
 pkgname=i3-git
-pkgver=4.3.168.gfdf14b8
+pkgver=4.3.169.ge8149c7
 pkgrel=1
 pkgdesc="An improved dynamic tiling window manager"
 arch=('i686' 'x86_64')

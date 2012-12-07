@@ -4,7 +4,7 @@
 
 pkgbase=linux-mainline
 #pkgname=linux-mainline
-_gitver=v3.7-rc8
+_gitver=v3.7-rc9
 pkgver=3.7.rc8
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -29,7 +29,6 @@ pkgver() {
   #echo "$(git describe --long | sed 's/-/./g;s/v//')"
   echo "$(git describe)"
 }
-msg "Making package: ${pkgbase} ${pkgver}-${pkgrel} ($(date))"
 
 # mainline: Rescued from _package()
 #pkgdesc="The ${pkgbase} kernel and modules"
@@ -50,10 +49,6 @@ prepare() {
   patch -Np1 -i "${srcdir}/change-default-console-loglevel.patch"
   # Patch hoping to fix the {c,g}pu scaling issues encountered since 3.6.x.
   patch -Np1 -i "${srcdir}/fix-sandy-bridge.patch"
-}
-
-build() {
-  msg "Making package: ${pkgbase} ${pkgver}-${pkgrel} ($(date))"
   cd "$srcdir/linux"
 
   if [ "${CARCH}" = "x86_64" ]; then
@@ -85,7 +80,9 @@ build() {
   #make oldconfig # using old config from previous kernel version
   #yes ""|make oldconfig # Lazy version
   # ... or manually edit .config
+}
 
+build() {
   # rewrite configuration
   yes "" | make config >/dev/null
 
