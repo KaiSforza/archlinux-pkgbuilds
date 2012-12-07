@@ -21,15 +21,9 @@ source=(#"git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#t
         # standard config files for mkinitcpio ramdisk
         'linux.preset'
         'change-default-console-loglevel.patch'
-	    'fix-sandy-bridge.patch')
+	'fix-sandy-bridge.patch')
 
 _kernelname=${pkgbase#linux}
-
-pkgver() {
-  cd "$srcdir/linux"
-  #echo "$(git describe --long | sed 's/-/./g;s/v//')"
-  echo "$(git describe)"
-}
 
 # mainline: Rescued from _package()
 #pkgdesc="The ${pkgbase} kernel and modules"
@@ -40,7 +34,6 @@ pkgver() {
 #replaces=("kernel26${_kernelname}")
 #backup=("etc/mkinitcpio.d/${pkgbase}.preset")
 #install=linux.install
-
 
 build() {
   cd "$srcdir/${_srcname}"
