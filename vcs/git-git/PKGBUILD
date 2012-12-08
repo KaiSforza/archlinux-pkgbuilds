@@ -4,7 +4,7 @@
 # Based on [extra]'s git
 
 pkgname=git-git
-pkgver=1.8.0.1.350.gee26a6e
+pkgver=1.8.1.rc1
 pkgrel=1
 pkgdesc="The fast distributed version control system - Git version"
 arch=('i686' 'x86_64')
