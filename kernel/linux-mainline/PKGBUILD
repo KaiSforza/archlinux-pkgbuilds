@@ -4,8 +4,8 @@
 
 pkgbase=linux-mainline
 #pkgname=linux-mainline
-_gitver=v3.7-rc9
-pkgver=3.7.rc8
+_gitver=v3.7-rc8
+pkgver=3.7.rc8.0.gb69f085
 pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
@@ -26,8 +26,7 @@ _kernelname=${pkgbase#linux}
 
 pkgver() {
   cd "$srcdir/linux"
-  #echo "$(git describe --long | sed 's/-/./g;s/v//')"
-  echo "$(git describe)"
+  echo "$(git describe --long | sed 's/-/./g;s/v//')"
 }
 
 # mainline: Rescued from _package()
