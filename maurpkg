@@ -1,0 +1,118 @@
+#!/bin/bash
+#maurpkg
+
+pkgbuilds="$HOME/aur/"
+packagesrepo="$HOME/.cache/pacman/pkg"
+verbose="-v"
+reponame="WST420"
+if [[ $UID != 0 ]]; then
+    _pacman="sudo pacman"
+else 
+    echo "You should not be running any of these operations as root!"
+    echo "But if you want to, pacman won't use sudo for you."
+    _pacman="pacman"
+fi
+pacman_options="-Syu --needed"
+
+declare -a packages
+declare -i incr
+incr=0
+
+build() {
+    loc=$(find $pkgbuilds -maxdepth 2 -path "*$1")
+    if [[ -z $loc ]]; then
+        exit 65;
+    fi
+    pushd "$loc"
+    if [[ ! -f PKGBUILD ]]; then
+        exit 67;
+    fi
+    paccache -r -c $packagesrepo -k 1 $1
+    if [[ ! $(makepkg -sLc) ]]; then
+        exit 70;
+    fi
+}
+signrepos(){
+    pushd "$packagesrepo"
+    for f in $1*.pkg.tar.xz; do
+        if [[ ! -f "${f}.sig" ]]; then
+            gpg --detach-sign "$f"
+        fi
+    done
+    repo-add --sign -q "$packagesrepo/$reponame.db.tar.gz" "$packagesrepo/$1"*.pkg.tar.[gx]z
+    repo-add --sign -f -q "$packagesrepo/$reponame.files.tar.gz" "$packagesrepo/$1"*.pkg.tar.[gx]z
+}
+downloadpkg(){
+    if [[ -e $pkgbuilds/$1 ]]; then
+        read -p "Overwrite $pkgbuilds/$1? [y/N] " ask;
+        if [[ $ask != y ]]; then
+            exit 50;
+        fi
+        cower -ddf -t "$pkgbuilds" $1
+    fi
+    cower -dd -t "$pkgbuilds" $1
+}
+
+case $1 in
+    repo-update)
+        shift
+        signrepos "$1"
+        ;;
+    build)
+        shift
+        if [[ -v $1 ]]; then
+            exit 68;
+        fi
+        for i in $@; do
+            build $i
+            packages[$incr]=$i
+            let incr++
+        done
+        signrepos "${packages[@]}"
+        $_pacman $pacman_options "${packages[@]}"
+        ;;
+    clean)
+        shift
+        if [[ -z $1 ]]; then
+            paccache -r -c $packagesrepo -k 3
+        fi
+        paccache -r -c $packagesrepo -k 2 $1
+        ;;
+    update)
+        shift
+        if [[ -z $1 ]]; then
+            cower -u $verbose
+            exit 0;
+        fi
+        cower -u $verbose $1
+        ;;
+    download)
+        shift
+        if [[ -z $1 ]]; then
+            exit 52;
+        fi
+        downloadpkg $1
+        ;;
+    info)
+        shift
+        if [[ -z $1 ]]; then
+            exit 51;
+        fi
+        pacman -Si $1
+        cower -i $1
+        ;;
+    -h|--help)
+        echo "Usage: mgitpkg [operation] <package(s)>"
+        echo -e "\toperation:\n\tbuild package(s)\tBuild a package in $pkgbuilds"
+        echo -e "\tclean <package>\t\tClean up the cache in $packagesrepo"
+        echo -e "\tupdate <package>\tCheck for updates usinc cower"
+        echo -e "\tcownload package\tDownload a package to $pkgbuilds using cower"
+        echo -e "\tinfo package\t\tReturn information for a package using pacman and cower"
+        echo -e "\t-h|--help\t\tPrint this help output"
+        exit 
+        ;;
+    *)
+        echo "maurpkg: perform operations on aur packages in $pkgbuilds and subdirectories."
+        echo -e "\t use --help for options"
+        ;;
+esac
