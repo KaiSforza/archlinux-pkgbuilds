@@ -34,25 +34,24 @@ source=('git://anongit.freedesktop.org/systemd/systemd.git'
         'use-split-usr-path.patch'
         'initcpio-hook-udev'
         'initcpio-install-udev'
-        'initcpio-install-timestamp')
-md5sums=('SKIP'
-         'fd5b5f04ab0a847373d357555129d4c0'
-         'e99e9189aa2f6084ac28b8ddf605aeb8'
-         'fb37e34ea006c79be1c54cbb0f803414'
-         'df69615503ad293c9ddf9d8b7755282d')
+        'initcpio-install-timestamp'
+        'use_username.patch')
 
 _gitname="systemd"
 
 pkgver() {
 	cd "$srcdir/$_gitname"
-	echo $(git describe | sed 's#-#_#g;s#v##')
+	echo $(git describe | sed 's#-#_#g')
 }
 
-build() {
+prepare() {
   cd "$srcdir/$_gitname"
 
   patch -Np1 <"$srcdir/use-split-usr-path.patch"
+  patch -Np1 <"$srcdir/use_username.patch"
 
+}
+build(){
   ./autogen.sh
   ./configure \
       PYTHON=python2 \
