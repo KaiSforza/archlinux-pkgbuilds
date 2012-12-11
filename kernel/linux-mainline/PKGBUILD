@@ -1,44 +1,40 @@
-# $Id: PKGBUILD 130991 2011-07-09 12:23:51Z thomas $
+# Original ArchLinux package
 # Maintainer: Tobias Powalowski <tpowa@archlinux.org>
 # Maintainer: Thomas Baechler <thomas@archlinux.org>
+# Mainline package
+# Maintainer: William Giokas <1007380@gmail.com>
+# NOTE: Only includes a 64-bit config. Please feel free to submit a 32-bit config.
 
 pkgbase=linux-mainline
 #pkgname=linux-mainline
 _gitver=v3.7-rc8
 pkgver=3.7.rc8.0.gb69f085
 pkgrel=1
-arch=('i686' 'x86_64')
+arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl')
 options=('!strip' '!ccache')
 PKGEXT='.pkg.tar.gz'
 source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_gitver"
-    	#"http://www.kernel.org/pub/linux/kernel/v3.x/testing/linux-${_gitver}.tar.xz"
         # the main kernel config files
-        'config' 'config.x86_64'
+        'config.x86_64'
         # standard config files for mkinitcpio ramdisk
         'linux.preset'
         'change-default-console-loglevel.patch'
-	    'fix-sandy-bridge.patch')
+	'fix-sandy-bridge.patch')
+
+md5sums=('SKIP'
+         '4223b8d15369b47208cd5b960057145d'
+         'eb14dcfd80c00852ef81ded6e826826a'
+         '9d3c56a4b999c8bfbd4018089a62f662'
+         '8ae40af8fc0577abb3c15e708717518e')
 
 _kernelname=${pkgbase#linux}
-
 pkgver() {
   cd "$srcdir/linux"
   echo "$(git describe --long | sed 's/-/./g;s/v//')"
 }
-
-# mainline: Rescued from _package()
-#pkgdesc="The ${pkgbase} kernel and modules"
-#depends=('coreutils' 'linux-firmware' 'kmod' 'mkinitcpio>=0.7')
-#optdepends=('crda: to set the correct wireless channels of your country')
-#provides=("kernel26${_kernelname}=${pkgver}")
-#conflicts=("kernel26${_kernelname}")
-#replaces=("kernel26${_kernelname}")
-#backup=("etc/mkinitcpio.d/${pkgbase}.preset")
-#install=linux.install
-
 
 prepare() {
   cd "$srcdir/linux"
@@ -50,11 +46,7 @@ prepare() {
   patch -Np1 -i "${srcdir}/fix-sandy-bridge.patch"
   cd "$srcdir/linux"
 
-  if [ "${CARCH}" = "x86_64" ]; then
-    cat "${srcdir}/config.x86_64" > ./.config
-  else
-    cat "${srcdir}/config" > ./.config
-  fi
+  cat "${srcdir}/config.x86_64" > ./.config
 
   if [ "${_kernelname}" != "" ]; then
     sed -i "s|CONFIG_LOCALVERSION=.*|CONFIG_LOCALVERSION=\"${_kernelname}\"|g" ./.config
@@ -79,9 +71,7 @@ prepare() {
   #make oldconfig # using old config from previous kernel version
   #yes ""|make oldconfig # Lazy version
   # ... or manually edit .config
-}
 
-build() {
   # rewrite configuration
   yes "" | make config >/dev/null
 
@@ -91,12 +81,10 @@ build() {
   else
     cat .config > "${startdir}/config.last"
   fi
+}
 
-  ####################
-  # stop here
-  # this is useful to configure the kernel
-  #msg "Stopping build"; return 1
-  ####################
+build() {
+  cd "$srcdir/linux"
 
   # build!
   make ${MAKEFLAGS} LOCALVERSION= bzImage modules
@@ -323,9 +311,3 @@ for _p in ${pkgname[@]}; do
 done
 
 # vim:set ts=8 sts=2 sw=2 et:
-md5sums=('SKIP'
-         '4c290383f1e05d150b70270e0011f57a'
-         '4223b8d15369b47208cd5b960057145d'
-         'eb14dcfd80c00852ef81ded6e826826a'
-         '9d3c56a4b999c8bfbd4018089a62f662'
-         '8ae40af8fc0577abb3c15e708717518e')
