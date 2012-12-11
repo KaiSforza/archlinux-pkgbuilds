@@ -8,8 +8,9 @@
 pkgbase=linux-mainline
 #pkgname=linux-mainline
 _gitver=v3.7-rc8
-pkgver=3.7.rc8.0.gb69f085
-pkgrel=1
+_rcnum=8
+pkgver=3.7.rc8
+pkgrel=2
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -33,7 +34,7 @@ md5sums=('SKIP'
 _kernelname=${pkgbase#linux}
 pkgver() {
   cd "$srcdir/linux"
-  echo "$(git describe --long | sed 's/-/./g;s/v//')"
+  echo "$(git describe | sed 's/-/./g;s/v//')"
 }
 
 prepare() {
@@ -55,6 +56,9 @@ prepare() {
 
   # set extraversion to pkgrel
   sed -ri "s|^(EXTRAVERSION =).*|\1 -${pkgrel}|" Makefile
+  # set sublevel to the rc number
+  sed -ri "s|^(SUBLEVEL =).*|\1 ${_rcnum}|" Makefile
+  # uname -r will look like: 3.7._rcnum-pkgrel-mainline
 
   # don't run depmod on 'make install'. We'll do this ourselves in packaging
   sed -i '2iexit 0' scripts/depmod.sh
@@ -73,14 +77,11 @@ prepare() {
   # ... or manually edit .config
 
   # rewrite configuration
-  yes "" | make config >/dev/null
+  #yes "" | make config >/dev/null
 
   # save configuration for later reuse
-  if [ "${CARCH}" = "x86_64" ]; then
-    cat .config > "${startdir}/config.x86_64.last"
-  else
-    cat .config > "${startdir}/config.last"
-  fi
+  mkdir -p "$srcdir/../configs"
+  cat .config > "$srcdir/../configs/config.x86_64.last"
 }
 
 build() {
