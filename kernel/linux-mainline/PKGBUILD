@@ -11,11 +11,12 @@ _srcname=linux-3.7-rc8
 _gitver=3.7-rc8
 pkgver=3.7rc8
 pkgrel=1
-arch=('i686' 'x86_64')
+arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl')
 options=('!strip' '!ccache')
+#options=('!strip')
 PKGEXT='.pkg.tar.gz'
 source=("http://www.kernel.org/pub/linux/kernel/v3.x/testing/linux-${_gitver}.tar.xz"
         # the main kernel config files

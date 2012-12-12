@@ -4,7 +4,7 @@
 # Contributor: extcake < extcake@gmail.com >
 
 pkgname=mplayer2-git
-pkgver=297.93bb531
+pkgver=298.62ff536
 pkgrel=1
 pkgdesc="An advanced general-purpose video player."
 url="http://www.mplayer2.org"
