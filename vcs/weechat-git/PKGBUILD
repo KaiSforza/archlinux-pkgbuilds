@@ -4,6 +4,7 @@
 # Contributor: Tim Zebulla <amon at faumrahrer dot de>
 
 pkgname=weechat-git
+pkgbase=weechat
 pkgver=v0.3.9.96.g9db5682
 pkgrel=1
 pkgdesc="Fast, light & extensible IRC client (curses UI)"
@@ -18,18 +19,17 @@ conflicts=('weechat')
 options=(!libtool)
 source=("git://git.sv.gnu.org/weechat.git")
 md5sums=('SKIP')
-_gitname="weechat"
 
 pkgver() {
-    cd "$srcdir/$_gitname"
-    echo "$(git describe --tags | sed 's#-#.#g')"
+  cd "$srcdir/$pkgbase"
+  echo "$(git describe --tags | sed 's#-#.#g')"
 }
 
 build() {
   rm -rf "$srcdir/build"
   mkdir -p "$srcdir/build"
   pushd "$srcdir/build"
-  cmake "$srcdir/$_gitname" -DPREFIX=/usr \
+  cmake "$srcdir/$pkgbase" -DPREFIX=/usr \
         -DPYTHON_EXECUTABLE=/usr/bin/python2 \
         -DPYTHON_LIBRARY=/usr/lib/libpython2.7.so
 }

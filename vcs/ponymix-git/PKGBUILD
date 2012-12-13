@@ -1,6 +1,7 @@
 # Maintainer: Dave Reisner <d@falconindy.com>
 
 pkgname=ponymix-git
+pkgbase=ponymix
 epoch=1
 pkgver=9c64dce
 pkgrel=1
@@ -16,21 +17,20 @@ replaces=('pulsemix-git')
 
 source=("git://github.com/falconindy/ponymix.git")
 md5sums=('SKIP')
-_gitname="ponymix"
 
 pkgver() {
-  cd $srcdir/$_gitname
+  cd $srcdir/$pkgbase
   echo $(git describe --always)
 }
 
 build() {
-  cd "$srcdir/$_gitname"
+  cd "$srcdir/$pkgbase"
 
   make
 }
 
 package() {
-  make -C "$_gitname" DESTDIR="$pkgdir" install
+  make -C "$pkgbase" DESTDIR="$pkgdir" install
 }
 
 # vim: ft=sh syn=sh et
