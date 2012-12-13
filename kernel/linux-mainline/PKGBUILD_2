@@ -5,21 +5,18 @@
 # Maintainer: William Giokas <1007380@gmail.com>
 # NOTE: Only includes a 64-bit config. Please feel free to submit a 32-bit config.
 
-pkgbase=linux-mainline
-#pkgname=linux-mainline
-#_gitver=v3.8-rc1
+pkgbase=linux-mainline-bisect
 _gitver=v3.7-rc8
 _rcnum=8
-pkgver=3.7.rc8.0.gb69f085
+pkgver=3.7.rc8.1.g8d45169
 pkgrel=1
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl')
-options=('!strip' '!ccache')
-#options=('!strip')
+options=('!strip')
 PKGEXT='.pkg.tar.gz'
-source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_gitver"
+source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#commit=8d45169"
         # the main kernel config files
         'config.x86_64'
         # standard config files for mkinitcpio ramdisk
@@ -60,7 +57,7 @@ prepare() {
   sed -ri "s|^(EXTRAVERSION =).*|\1 -${pkgrel}|" Makefile
   # set sublevel to the rc number
   sed -ri "s|^(SUBLEVEL =).*|\1 ${_rcnum}|" Makefile
-  # uname -r will look like: 3.7._rcnum-pkgrel-mainline
+  # uname -r will look like: 3.7._rcnum-pkgrel-_kernelname
 
   # don't run depmod on 'make install'. We'll do this ourselves in packaging
   sed -i '2iexit 0' scripts/depmod.sh
