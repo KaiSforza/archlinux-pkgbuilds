@@ -323,3 +323,8 @@ for _p in ${pkgname[@]}; do
 done
 
 # vim:set ts=8 sts=2 sw=2 et:
+md5sums=('SKIP'
+         '4223b8d15369b47208cd5b960057145d'
+         '6a8a28db0c8d3ec0bffff749cd4fa5cb'
+         '9d3c56a4b999c8bfbd4018089a62f662'
+         '8ae40af8fc0577abb3c15e708717518e')
