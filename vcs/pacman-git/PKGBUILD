@@ -4,7 +4,8 @@
 # Contributor: Andres Perera <aepd87@gmail.com>
 
 pkgname=pacman-git
-pkgver=4.0.3.507.g3a470ee
+pkgbase=pacman
+pkgver=4.0.3.505.gb5d855c
 pkgrel=1
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
 arch=('i686' 'x86_64')
@@ -19,20 +20,18 @@ conflicts=('pacman' 'pacman-contrib')
 options=('!libtool' '!strip')
 backup=(etc/pacman.conf
         etc/makepkg.conf)
-source=('pacman::git+file:///home/wgiokas/git/archlinux/pacman#branch=makepkg-version-output')
+source=('pacman::git+file:///home/wgiokas/git/archlinux/pacman#branch=makepkg-final-logprint')
 #source=('pacman::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working')
 #source=('pacman-official::git+git://projects.archlinux.org/pacman.git')
 sha1sums=('SKIP')
 
 pkgver() {
-  cd "$srcdir/pacman"
-  #git describe orign-allan/working | sed 's/-/./g'
+  cd "$srcdir/$pkgbase"
   echo $(git describe | sed 's#-#.#g;s#v##')
 }
 
 build() {
-  cd "$srcdir/pacman"
-  #git checkout -b makepkg
+  cd "$srcdir/$pkgbase"
 
   ./autogen.sh
   ./configure \
@@ -49,15 +48,12 @@ build() {
 }
 
 check() {
-  cd "$srcdir/pacman"
-  #git checkout makepkg
   cd "$srcdir"
-  make -C "pacman" check
+  make -C "$pkgbase" check
 }
 
 package() {
-  cd "$srcdir/pacman"
-  #git checkout makepkg
+  cd "$srcdir/$pkgbase"
 
   make DESTDIR="$pkgdir" install
 

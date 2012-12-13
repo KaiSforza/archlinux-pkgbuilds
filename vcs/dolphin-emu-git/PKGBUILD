@@ -6,6 +6,7 @@
 # Special thanks to Zhou Xin <soul916@hotmail.com> for rewriting this to use cmake
 
 pkgname=dolphin-emu-git
+pkgbase=dolphin-emu
 pkgver=3.0.873.g43d673b
 pkgrel=1
 pkgdesc="A GameCube and Wii emulator (Dev tree Git version)"
@@ -28,30 +29,29 @@ optdepends=('wiiuse: for use of real wiimote'
 
 source=('dolphin-emu.desktop'
 	'Dolphin_Logo.png'
-    'git+http://code.google.com/p/dolphin-emu/'
+    "git+http://code.google.com/p/$pkgbase/"
 )
 
 sha256sums=('1cf1cc034ad03cf068d39fd3bac0103dfb663695966a6846e530d8b8cb363470'
             '4ef79175305df7bb9201931870c4bedc5eda9c94b65311973dfd41c1128784d1'
             'SKIP'
             )
-_gitname=dolphin-emu
 
 pkgver() {
-    cd "$srcdir/$_gitname"
+    cd "$srcdir/$pkgbase"
     git describe --always | sed 's/-/./g'
 }
 
 
 build() {
-  cd "${srcdir}/${_gitname}"
+  cd "${srcdir}/${pkgbase}"
 
-  cmake ../${_gitname} -DCMAKE_INSTALL_PREFIX=/usr
+  cmake ../${pkgbase} -DCMAKE_INSTALL_PREFIX=/usr
   make
 
 }
 package() {
-	cd "${srcdir}/${_gitname}"
+	cd "${srcdir}/${pkgbase}"
 
 	make DESTDIR=${pkgdir} install
 

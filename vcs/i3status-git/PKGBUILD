@@ -2,6 +2,7 @@
 # Contributor: William Giokas <1007380@gmail.com>
 
 pkgname=i3status-git
+pkgbase=i3status
 pkgver=2.6.20.g0a608d4
 pkgrel=1
 pkgdesc="Generates status bar to use with dzen2 or wmii"
@@ -19,22 +20,20 @@ groups=('i3-vcs')
 source=(git://code.i3wm.org/i3status)
 sha1sums=('SKIP')
 
-_gitname="i3status"
-
 pkgver() {
-  cd "$srcdir/$_gitname"
+  cd "$srcdir/$pkgbase"
   git describe --tags | sed 's/-/./g'
 }
 
 build() {
-  cd "$_gitname"
+  cd "$pkgbase"
   # Remove comment if you want to use i3status with wmii
   # sed -i "s/CFLAGS+=-DDZEN/#CFLAGS+=-DDZEN/g" Makefile
   make
 }
 
 package() {
-  cd "${_gitname}"
+  cd "${pkgbase}"
 
   make DESTDIR="${pkgdir}" install
 
