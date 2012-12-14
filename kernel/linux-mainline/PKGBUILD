@@ -11,13 +11,12 @@ pkgbase=linux-mainline
 _gitver=v3.7-rc8
 _rcnum=8
 pkgver=3.7.rc8.0.gb69f085
-pkgrel=1
+pkgrel=2
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl')
-options=('!strip' '!ccache')
-#options=('!strip')
+options=('!strip')
 PKGEXT='.pkg.tar.gz'
 source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_gitver"
         # the main kernel config files
