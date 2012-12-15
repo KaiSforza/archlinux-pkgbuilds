@@ -5,7 +5,7 @@
 
 pkgname=git-git
 pkgbase=git
-pkgver=1.8.1.rc1.20.g24a62db
+pkgver=1.8.1.rc1.30.g790c83c
 pkgrel=1
 pkgdesc="The fast distributed version control system - Git version"
 arch=('i686' 'x86_64')

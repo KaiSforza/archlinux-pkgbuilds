@@ -2,8 +2,8 @@
 
 pkgname=luakit-git
 pkgbase=luakit
-pkgver=2012.09.13.r1.27.g1244230
-pkgrel=2
+pkgver=2012.09.13.r1.28.g58a29d4
+pkgrel=1
 pkgdesc="A fast, small, webkit-gtk based browser extensible by Lua"
 arch=('i686' 'x86_64')
 url="http://www.luakit.org/projects/luakit" 
