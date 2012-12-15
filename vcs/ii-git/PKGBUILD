@@ -2,6 +2,7 @@
 # Contributor: Chris Brannon <cmbrannon79 (at) gmail.com>
 
 pkgname=ii-git
+pkgbase=ii
 pkgver=1.6.7.g7a99152
 pkgrel=1
 pkgdesc="A minimalist FIFO and filesystem-based IRC client"
@@ -19,20 +20,20 @@ md5sums=('17d6db42d3297691e4a8e98598065f59'
          'SKIP')
 
 pkgver() {
-    cd "$srcdir/ii"
+    cd "$srcdir/$pkgbase"
     echo $(git describe --tags | sed 's/-/./g')
 }
 
 build() {
-    cd "$srcdir/ii"
+    cd "$srcdir/$pkgbase"
     sed -i "s|%CFLAGS%|$CFLAGS|g" config.mk
     sed -i "s|%LDFLAGS%|$LDFLAGS|g" config.mk
 
-    make || return 1
+    make
 }
 
 package() {
-    cd "$srcdir/ii"
+    cd "$srcdir/$pkgbase"
     make DESTDIR="$pkgdir" install
 
     install -m755 -d  "$pkgdir/usr/share/licenses/ii-git"

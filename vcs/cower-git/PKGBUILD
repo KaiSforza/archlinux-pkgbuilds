@@ -1,6 +1,7 @@
 # Maintainer: Dave Reisner <d@falconindy.com>
 
 pkgname=cower-git
+pkgbase=cower
 pkgver=7.7.g17aee7c
 pkgrel=1
 pkgdesc="A simple AUR agent with a pretentious name"
@@ -14,20 +15,19 @@ provides=('cower')
 
 source=("git://github.com/falconindy/cower.git#branch=pacman41")
 md5sums=('SKIP')
-_gitname="cower"
 
 pkgver() {
-        cd $srcdir/$_gitname
-        git describe | sed 's/-/./g'
+  cd $srcdir/$pkgbase
+  git describe | sed 's/-/./g'
 }
 
 build() {
-  cd "$srcdir/$_gitname"
+  cd $srcdir/$pkgbase
   make
 }
 
 package() {
-  make -C "$srcdir/$_gitname" PREFIX=/usr DESTDIR="$pkgdir" install
+  make -C "$srcdir/$pkgbase" PREFIX=/usr DESTDIR="$pkgdir" install
 }
 
 # vim: ft=sh syn=sh et

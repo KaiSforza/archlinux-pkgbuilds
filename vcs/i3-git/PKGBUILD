@@ -2,6 +2,7 @@
 # Contributor: William Giokas <1007380@gmail.com>
 
 pkgname=i3-git
+pkgbase=i3
 pkgver=4.4.2.gff4950a
 pkgrel=5
 pkgdesc="An improved dynamic tiling window manager"
@@ -23,21 +24,19 @@ options=('docs' '!strip')
 source=(git://code.i3wm.org/i3#branch=next)
 sha1sums=('SKIP')
 
-_gitname="i3"
-
 pkgver() {
-  cd "$srcdir/$_gitname"
+  cd "$srcdir/$pkgbase"
   echo "$(git describe --tags | tr - .)"
 }
 
 build() {
-  cd "$_gitname"
+  cd "$pkgbase"
   make
   make -C man
 }
 
 package() {
-  cd "$_gitname"
+  cd "$pkgbase"
   make DESTDIR="$pkgdir/" install
 
   install -Dm644 LICENSE \

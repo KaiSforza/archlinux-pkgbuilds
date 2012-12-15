@@ -1,6 +1,7 @@
 # Contributor: Dave Reisner <d@falconindy.com>
 
 pkgname=expac-git
+pkgbase=expac
 pkgver=1.4.g4ff7b89
 pkgrel=1
 pkgdesc="pacman database extraction utility"
@@ -14,20 +15,19 @@ provides=('expac')
 
 source=("git://github.com/falconindy/expac.git#branch=pacman41")
 md5sums=('SKIP')
-_gitname="expac"
 
 pkgver() {
-    cd "$srcdir/$_gitname"
-    echo $(git describe | sed 's/-/./g')
+  cd "$srcdir/$pkgbase"
+  echo $(git describe | sed 's/-/./g')
 }
-build() {
-  cd "$srcdir/$_gitname"
 
+build() {
+  cd "$srcdir/$pkgbase"
   make
 }
 
 package() {
-  cd "$srcdir/$_gitname"
+  cd "$srcdir/$pkgbase"
   make PREFIX=/usr DESTDIR="$pkgdir" install
 }
 

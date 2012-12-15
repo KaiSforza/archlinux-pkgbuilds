@@ -4,7 +4,7 @@
 
 pkgname=sic
 pkgver=1.1
-pkgrel=2
+pkgrel=3
 pkgdesc='An extremely simple IRC client.'
 license=('MIT')
 arch=('i686' 'x86_64')
@@ -15,13 +15,12 @@ md5sums=('856d0e5faa151ae9602713ee7d34a2d5')
 
 build() {
   cd $pkgname-$pkgver
-
   sed -i "s/CFLAGS = /CFLAGS = ${CFLAGS} /" config.mk
-
-  make clean PREFIX=/usr MANPREFIX=/usr/share/man DESTDIR="$pkgdir" install || return 1
+  make clean PREFIX=/usr MANPREFIX=/usr/share/man DESTDIR="$pkgdir"
 }
 
 package() {
   cd $pkgname-$pkgver
-  install -Dm644 LICENSE $pkgdir/usr/share/licenses/$pkgname/LICENSE || return 1
+  make install PREFIX=/usr MANPREFIX=/usr/share/man DESTDIR="$pkgdir"
+  install -Dm644 LICENSE $pkgdir/usr/share/licenses/$pkgname/LICENSE
 }

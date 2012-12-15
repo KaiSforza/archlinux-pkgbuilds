@@ -1,7 +1,8 @@
 # Maintainer: Dave Reisner <dreisner@archlinux.org>
 
 pkgname=systemd-git
-pkgver=196_105_gdecd634
+pkgbase=systemd
+pkgver=v196.107.g6b2b6f3
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
@@ -37,21 +38,20 @@ source=('git://anongit.freedesktop.org/systemd/systemd.git'
         'initcpio-install-timestamp'
         'use_username.patch')
 
-_gitname="systemd"
-
 pkgver() {
-	cd "$srcdir/$_gitname"
-	echo $(git describe | sed 's#-#_#g')
+	cd "$srcdir/$pkgbase"
+	echo $(git describe | sed 's#-#.#g')
 }
 
 prepare() {
-  cd "$srcdir/$_gitname"
+  cd "$srcdir/$pkgbase"
 
   patch -Np1 <"$srcdir/use-split-usr-path.patch"
   patch -Np1 <"$srcdir/use_username.patch"
 
 }
 build(){
+  cd "$srcdir/$pkgbase"
   ./autogen.sh
   ./configure \
       PYTHON=python2 \
@@ -71,7 +71,7 @@ build(){
 }
 
 package() {
-  make -C "$_gitname" DESTDIR="$pkgdir" install
+  make -C "$pkgbase" DESTDIR="$pkgdir" install
 
   printf "d /run/console 0755 root root\n" >"$pkgdir/usr/lib/tmpfiles.d/console.conf"
 
@@ -115,3 +115,9 @@ package() {
   install -Dm644 "$srcdir/initcpio-install-udev" "$pkgdir/usr/lib/initcpio/install/udev"
   install -Dm644 "$srcdir/initcpio-hook-udev" "$pkgdir/usr/lib/initcpio/hooks/udev"
 }
+md5sums=('SKIP'
+         'fd5b5f04ab0a847373d357555129d4c0'
+         'e99e9189aa2f6084ac28b8ddf605aeb8'
+         'fb37e34ea006c79be1c54cbb0f803414'
+         'df69615503ad293c9ddf9d8b7755282d'
+         '9d83dbd080579a16a6446a938c501700')
