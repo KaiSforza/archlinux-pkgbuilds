@@ -13,7 +13,7 @@ conflicts=('ompload')
 source=("git://git.omp.am/omploader.git")
 md5sums=('SKIP') 
 
-build() {
+package() {
   cd $srcdir/omploader
   install -D -m755 ompload ${pkgdir}/usr/bin/ompload
 } 
