@@ -2,18 +2,22 @@
 ## TODO: Add in flags that change config options
 #maurpkg
 
-## Source the users makepkg.conf file for some variables. 
-if [[ ! -f $HOME/.makepkg.conf ]]; then
-    source_safe ~/.makepkg.conf
-else 
-    source_safe /etc/makepkg.conf
-fi
+source_safe(){ ## Taken from makepkg.sh for reading in files
+    shopt -u extglob
+    if ! source "$@"; then
+        echo "Failed to source $1"
+        exit 1
+    fi
+    shopt -s extglob
+}
 ## Some sane defaults
 pkgbuilds="$HOME/aur/"
-packagesrepo=$PKGDEST
+packagesrepo="$pkglocation"
+packagesrepo="/home/wgiokas/.cache/pacman/pkg"
 verbose="-v"
 reponame="personal"
 moreinfo="-i"
+packageext=".pkg.tar.gz"
 if [[ $UID != 0 ]]; then
     _pacman="sudo pacman"
 else 
@@ -24,9 +28,9 @@ pacman_options="-Syu --needed"
 
 ## Read config file
 if [[ ! -f ~/.config/maurpkg/maurpkg.conf ]]; then
-    safe_source /usr/share/maurpkg/maurpkg.conf.example
+    source_safe /usr/share/maurpkg/maurpkg.conf.example
 else
-    safe_source ~/.config/maurpkg/maurpkg.conf
+    source_safe ~/.config/maurpkg/maurpkg.conf
 fi
 
 if [[ $verbose == no ]]; then
@@ -57,8 +61,8 @@ signrepos(){
             gpg --detach-sign "$f"
         fi
     done
-    repo-add --sign -q "$packagesrepo/$reponame.db.tar.gz" "$packagesrepo/$1"*$PKGEXT
-    repo-add --sign -f -q "$packagesrepo/$reponame.files.tar.gz" "$packagesrepo/$1"*$PKGEXT
+    repo-add --sign -q "$packagesrepo/$reponame.db.tar.gz" "$packagesrepo/$1"*$packageext
+    repo-add --sign -f -q "$packagesrepo/$reponame.files.tar.gz" "$packagesrepo/$1"*$packageext
 }
 downloadpkg(){
     if [[ -e $pkgbuilds/$1 ]]; then
@@ -73,14 +77,6 @@ downloadpkg(){
     if [[ $ask != n ]]; then
         $EDITOR "$pkgbuilds/$1/PKGBUILD"
     fi
-}
-source_safe(){ ## Taken from makepkg.sh
-    shopt -u extglob
-    if ! source "$@"; then
-        echo "Failed to source $1"
-        exit 1
-    fi
-    shopt -s extglob
 }
 showhelp(){
 cat << EOF
