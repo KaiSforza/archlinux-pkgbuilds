@@ -52,11 +52,12 @@ build() {
         exit 67;
     fi
     paccache -r -c $packagesrepo -k 1 $1
-    makepkg -sLc || exit 70
+    makepkg -sLc #|| exit 70
 }
 signrepos(){
     pushd "$packagesrepo"
     for f in $1*.pkg.tar.gz; do
+        paccache -r -c "$packagesrepo" -k 1 $1
         if [[ ! -f "${f}.sig" ]]; then
             gpg --detach-sign "$f"
         fi
