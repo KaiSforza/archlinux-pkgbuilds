@@ -19,7 +19,7 @@ _hgrepo="dwb"
 
 pkgver() {
   cd ${srcdir}/${_hgrepo}
-  hg summary | grep 'parent: ' | sed 's/parent: //;s/:/./;s/ tip//'
+  hg summary | awk 'BEGIN{OFS=".";} {print $2,$1}'
 }
 
 build() {
