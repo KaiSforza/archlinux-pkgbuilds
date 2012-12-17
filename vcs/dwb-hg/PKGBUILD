@@ -19,7 +19,7 @@ _hgrepo="dwb"
 
 pkgver() {
   cd ${srcdir}/${_hgrepo}
-  hg summary | awk 'BEGIN{OFS=".";} {print $2,$1}'
+  hg identify -ni | awk 'BEGIN{OFS=".";} {print $2,$1}'
 }
 
 build() {
