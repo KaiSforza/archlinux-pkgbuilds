@@ -24,7 +24,8 @@ source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#ta
         # standard config files for mkinitcpio ramdisk
         'linux.preset'
         'change-default-console-loglevel.patch'
-    	'fix-sandy-bridge.patch')
+    	'fix-sandy-bridge.patch'
+        'watchdog_lenovo.patch')
 
 md5sums=('SKIP'
          '4223b8d15369b47208cd5b960057145d'
@@ -46,7 +47,8 @@ prepare() {
   patch -Np1 -i "${srcdir}/change-default-console-loglevel.patch"
   # Patch hoping to fix the {c,g}pu scaling issues encountered since 3.6.x.
   patch -Np1 -i "${srcdir}/fix-sandy-bridge.patch"
-  cd "$srcdir/linux"
+  # revert the change made causing kernel oops when introducing power supply
+  patch -Np1 -i "${srcdir}/watchdog_lenovo.patch"
 
   cat "${srcdir}/config.x86_64" > ./.config
 
