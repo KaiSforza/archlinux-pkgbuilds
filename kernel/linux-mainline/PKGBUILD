@@ -7,16 +7,16 @@
 
 pkgbase=linux-mainline
 #pkgname=linux-mainline
-#_gitver=v3.8-rc1
-_gitver=v3.7-rc8
-_rcnum=8
-pkgver=3.7.rc8.0.gb69f085
-pkgrel=2
+_gitver=v3.8-rc1
+_rcnum=1
+pkgver=
+pkgrel=1
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
-makedepends=('xmlto' 'docbook-xsl')
+makedepends=('xmlto' 'docbook-xsl' 'git')
 options=('!strip')
+# Use gz compression as we don't care about size
 PKGEXT='.pkg.tar.gz'
 source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_gitver"
         # the main kernel config files
@@ -24,14 +24,15 @@ source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#ta
         # standard config files for mkinitcpio ramdisk
         'linux.preset'
         'change-default-console-loglevel.patch'
-    	'fix-sandy-bridge.patch'
+        'fix-sandy-bridge.patch'
         'watchdog_lenovo.patch')
 
 md5sums=('SKIP'
-         '4223b8d15369b47208cd5b960057145d'
+         '1dbfb35085ab452e0e4e038f9ac2786e'
          '6a8a28db0c8d3ec0bffff749cd4fa5cb'
          '9d3c56a4b999c8bfbd4018089a62f662'
-         '8ae40af8fc0577abb3c15e708717518e')
+         '8ae40af8fc0577abb3c15e708717518e'
+         'db1b67d4f1fbbc8dc02f3f9233d75478')
 
 _kernelname=${pkgbase#linux}
 pkgver() {
@@ -44,11 +45,11 @@ prepare() {
   # set DEFAULT_CONSOLE_LOGLEVEL to 4 (same value as the 'quiet' kernel param)
   # remove this when a Kconfig knob is made available by upstream
   # (relevant patch sent upstream: https://lkml.org/lkml/2011/7/26/227)
-  patch -Np1 -i "${srcdir}/change-default-console-loglevel.patch"
+  git apply -v "${srcdir}/change-default-console-loglevel.patch"
   # Patch hoping to fix the {c,g}pu scaling issues encountered since 3.6.x.
-  patch -Np1 -i "${srcdir}/fix-sandy-bridge.patch"
-  # revert the change made causing kernel oops when introducing power supply
-  patch -Np1 -i "${srcdir}/watchdog_lenovo.patch"
+  git apply -v "${srcdir}/fix-sandy-bridge.patch"
+  ## revert the change made causing kernel oops when introducing power supply
+  git apply -v "${srcdir}/watchdog_lenovo.patch"
 
   cat "${srcdir}/config.x86_64" > ./.config
 
@@ -66,7 +67,7 @@ prepare() {
   sed -i '2iexit 0' scripts/depmod.sh
 
   # get kernel version
-  make prepare
+  #make prepare
 
   # load configuration
   # Configure the kernel. Replace the line below with one of your choice.
@@ -323,13 +324,3 @@ for _p in ${pkgname[@]}; do
 done
 
 # vim:set ts=8 sts=2 sw=2 et:
-md5sums=('SKIP'
-         '4223b8d15369b47208cd5b960057145d'
-         '6a8a28db0c8d3ec0bffff749cd4fa5cb'
-         '9d3c56a4b999c8bfbd4018089a62f662'
-         '8ae40af8fc0577abb3c15e708717518e')
-md5sums=('SKIP'
-         '392b776ed5af93662e76d1ec1210c330'
-         '6a8a28db0c8d3ec0bffff749cd4fa5cb'
-         '9d3c56a4b999c8bfbd4018089a62f662'
-         '8ae40af8fc0577abb3c15e708717518e')

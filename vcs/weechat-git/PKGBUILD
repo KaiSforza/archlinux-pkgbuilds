@@ -5,7 +5,7 @@
 
 pkgname=weechat-git
 pkgbase=weechat
-pkgver=v0.3.9.103.ga64dad2
+pkgver=v0.3.9.108.g491e31f
 pkgrel=1
 pkgdesc="Fast, light & extensible IRC client (curses UI)"
 arch=('i686' 'x86_64')
