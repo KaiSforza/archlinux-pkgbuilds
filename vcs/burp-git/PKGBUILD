@@ -1,0 +1,32 @@
+# Contributor: Dave Reisner <d@falconindy.com>
+
+pkgname=burp-git
+pkgver=2.1.ga245105
+pkgrel=1
+pkgdesc="A simple AUR uploader"
+arch=('i686' 'x86_64')
+url="http://github.com/falconindy/burp"
+license=('MIT')
+depends=('curl')
+makedepends=('git' 'perl')
+provides=('burp')
+conflicts=('burp')
+
+source=(git://github.com/falconindy/burp.git)
+md5sums=('SKIP')
+_gitname="burp"
+
+pkgver() {
+  cd "$srcdir/$_gitname"
+  git describe | tr - .
+}
+
+build() {
+  cd "$srcdir/$_gitname"
+  make
+}
+
+package() {
+  cd "$srcdir/$_gitname"
+  make DESTDIR="$pkgdir" PREFIX=/usr install
+}
