@@ -9,7 +9,7 @@ pkgbase=linux-mainline
 #pkgname=linux-mainline
 _gitver=v3.8-rc1
 _rcnum=1
-pkgver=
+pkgver=3.8.rc1.0.ga49f0d1
 pkgrel=1
 arch=('x86_64')
 url="http://www.kernel.org/"
@@ -45,11 +45,14 @@ prepare() {
   # set DEFAULT_CONSOLE_LOGLEVEL to 4 (same value as the 'quiet' kernel param)
   # remove this when a Kconfig knob is made available by upstream
   # (relevant patch sent upstream: https://lkml.org/lkml/2011/7/26/227)
+  msg "applying patch 1"
   git apply -v "${srcdir}/change-default-console-loglevel.patch"
   # Patch hoping to fix the {c,g}pu scaling issues encountered since 3.6.x.
-  git apply -v "${srcdir}/fix-sandy-bridge.patch"
+  #msg "applying patch 2"
+  #git apply -v "${srcdir}/fix-sandy-bridge.patch"
   ## revert the change made causing kernel oops when introducing power supply
-  git apply -v "${srcdir}/watchdog_lenovo.patch"
+  #msg "applying patch 3"
+  #git apply -v "${srcdir}/watchdog_lenovo.patch"
 
   cat "${srcdir}/config.x86_64" > ./.config
 
