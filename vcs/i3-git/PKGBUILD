@@ -26,7 +26,7 @@ sha1sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$pkgbase"
-  echo "$(git describe --tags | tr - .)"
+  echo "$(git describe --tags --long | tr - .)"
 }
 
 build() {

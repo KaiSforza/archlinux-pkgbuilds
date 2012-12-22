@@ -18,7 +18,7 @@ md5sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$pkgbase"
-  echo $(git describe | sed 's/-/./g')
+  echo $(git describe --long | sed 's/-/./g')
 }
 
 build() {

@@ -37,7 +37,7 @@ md5sums=('8e2648910fd5dd4f1c41d3c7fa9e9156'
 
 pkgver() {
   cd "$srcdir/$pkgbase"
-  echo $(git describe | sed 's/-/./g;s/v//g')
+  echo $(git describe --long | sed 's/-/./g;s/v//g')
 }
 
 build() {

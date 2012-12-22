@@ -21,7 +21,7 @@ md5sums=('17d6db42d3297691e4a8e98598065f59'
 
 pkgver() {
     cd "$srcdir/$pkgbase"
-    echo $(git describe --tags | sed 's/-/./g')
+    echo $(git describe --tags --long | sed 's/-/./g')
 }
 
 build() {
