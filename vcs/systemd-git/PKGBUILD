@@ -2,7 +2,7 @@
 
 pkgname=systemd-git
 pkgbase=systemd
-pkgver=v196.107.g6b2b6f3
+pkgver=v196.126.g5bbbe46
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
@@ -40,14 +40,14 @@ source=('git://anongit.freedesktop.org/systemd/systemd.git'
 
 pkgver() {
 	cd "$srcdir/$pkgbase"
-	echo $(git describe | sed 's#-#.#g')
+	echo $(git describe --long | sed 's#-#.#g')
 }
 
 prepare() {
   cd "$srcdir/$pkgbase"
 
-  patch -Np1 <"$srcdir/use-split-usr-path.patch"
-  patch -Np1 <"$srcdir/use_username.patch"
+  git apply -v "$srcdir/use-split-usr-path.patch"
+  #git apply -v "$srcdir/use_username.patch"
 
 }
 build(){

@@ -5,7 +5,7 @@
 
 pkgname=weechat-git
 pkgbase=weechat
-pkgver=v0.3.9.96.g9db5682
+pkgver=v0.3.9.124.g0c15dee
 pkgrel=1
 pkgdesc="Fast, light & extensible IRC client (curses UI)"
 arch=('i686' 'x86_64')
@@ -17,12 +17,14 @@ optdepends=('perl' 'python2' 'lua' 'tcl' 'ruby' 'aspell')
 provides=('weechat')
 conflicts=('weechat')
 options=(!libtool)
+#source=("git://git.sv.gnu.org/weechat.git")
+#source=("git+http://git.savannah.gnu.org/r/weechat.git")
 source=("git://git.sv.gnu.org/weechat.git")
 md5sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$pkgbase"
-  echo "$(git describe --tags | sed 's#-#.#g')"
+  echo "$(git describe --tags --long | sed 's#-#.#g')"
 }
 
 build() {
@@ -37,4 +39,3 @@ build() {
 package() {
   make -C "$srcdir/build" DESTDIR="${pkgdir}/" install
 }
-

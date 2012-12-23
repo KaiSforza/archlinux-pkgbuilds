@@ -1,0 +1,23 @@
+# Maintainer: mutlu_inek <mutlu_inek@yahoo.de>
+pkgname=tpacpi-bat-mainline
+pkgver=9.09ef082
+pkgrel=1
+pkgdesc="A Perl script with ACPI calls for recent ThinkPads (such as T420 and W520) whose battery thresholds are not supported by tp_smapi for the mainline kernel"
+url="https://github.com/teleshoes/tpbattstat-applet"
+arch=('x86_64' 'i686')
+license=('GPLv3')
+depends=('tp_smapi-mainline' 'perl' 'acpi_call-git')
+source=("git://github.com/teleshoes/tpacpi-bat.git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/tpacpi-bat"
+  echo "$(git shortlog | grep -c '^\s\+').$(git describe --always)"
+}
+# build() {}
+
+package() {
+  cd "$srcdir/tpacpi-bat"
+  install -d "$pkgdir/usr/lib/perl5/vendor_perl/"
+  install -Dm322 tpacpi-bat "$pkgdir/usr/lib/perl5/vendor_perl/"
+}

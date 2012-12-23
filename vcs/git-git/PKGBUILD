@@ -5,7 +5,7 @@
 
 pkgname=git-git
 pkgbase=git
-pkgver=1.8.1.rc1.30.g790c83c
+pkgver=1.8.1.rc2.38.gb10c4ad
 pkgrel=1
 pkgdesc="The fast distributed version control system - Git version"
 arch=('i686' 'x86_64')
@@ -37,7 +37,7 @@ md5sums=('8e2648910fd5dd4f1c41d3c7fa9e9156'
 
 pkgver() {
   cd "$srcdir/$pkgbase"
-  echo $(git describe | sed 's/-/./g;s/v//g')
+  echo $(git describe --long | sed 's/-/./g;s/v//g')
 }
 
 build() {

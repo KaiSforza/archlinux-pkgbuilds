@@ -20,7 +20,7 @@ md5sums=('SKIP')
 
 pkgver() {
   cd $srcdir/$pkgbase
-  echo $(git describe --always)
+  echo $(git describe --always --long)
 }
 
 build() {

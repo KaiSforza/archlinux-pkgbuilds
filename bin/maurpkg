@@ -1,18 +1,42 @@
 #!/bin/bash
+## TODO: Add in flags that change config options
 #maurpkg
 
+source_safe(){ ## Taken from makepkg.sh for reading in files
+    shopt -u extglob
+    if ! source "$@"; then
+        echo "Failed to source $1"
+        exit 1
+    fi
+    shopt -s extglob
+}
+## Some sane defaults
 pkgbuilds="$HOME/aur/"
-packagesrepo="$HOME/.cache/pacman/pkg"
+packagesrepo="$pkglocation"
+packagesrepo="/home/wgiokas/.cache/pacman/pkg"
 verbose="-v"
-reponame="WST420"
+reponame="personal"
+moreinfo="-i"
+packageext=".pkg.tar.gz"
 if [[ $UID != 0 ]]; then
     _pacman="sudo pacman"
 else 
     echo "You should not be running any of these operations as root!"
-    echo "But if you want to, pacman won't use sudo for you."
     _pacman="pacman"
 fi
 pacman_options="-Syu --needed"
+
+## Read config file
+if [[ ! -f ~/.config/maurpkg/maurpkg.conf ]]; then
+    source_safe /usr/share/maurpkg/maurpkg.conf.example
+else
+    source_safe ~/.config/maurpkg/maurpkg.conf
+fi
+
+if [[ $verbose == no ]]; then
+    verbose=""
+    moreinfo=""
+fi
 
 declare -a packages
 declare -i incr
@@ -28,19 +52,18 @@ build() {
         exit 67;
     fi
     paccache -r -c $packagesrepo -k 1 $1
-    if [[ ! $(makepkg -sLc) ]]; then
-        exit 70;
-    fi
+    makepkg -sLc #|| exit 70
 }
 signrepos(){
     pushd "$packagesrepo"
-    for f in $1*.pkg.tar.xz; do
+    for f in $1*.pkg.tar.gz; do
+        paccache -r -c "$packagesrepo" -k 1 $1
         if [[ ! -f "${f}.sig" ]]; then
             gpg --detach-sign "$f"
         fi
     done
-    repo-add --sign -q "$packagesrepo/$reponame.db.tar.gz" "$packagesrepo/$1"*.pkg.tar.[gx]z
-    repo-add --sign -f -q "$packagesrepo/$reponame.files.tar.gz" "$packagesrepo/$1"*.pkg.tar.[gx]z
+    repo-add --sign -q "$packagesrepo/$reponame.db.tar.gz" "$packagesrepo/$1"*$packageext
+    repo-add --sign -f -q "$packagesrepo/$reponame.files.tar.gz" "$packagesrepo/$1"*$packageext
 }
 downloadpkg(){
     if [[ -e $pkgbuilds/$1 ]]; then
@@ -51,16 +74,34 @@ downloadpkg(){
         cower -ddf -t "$pkgbuilds" $1
     fi
     cower -dd -t "$pkgbuilds" $1
+    read -p "Review pkgbuild for $1?" ask;
+    if [[ $ask != n ]]; then
+        $EDITOR "$pkgbuilds/$1/PKGBUILD"
+    fi
+}
+showhelp(){
+cat << EOF
+Usage: mgitpkg [operation] <package(s)>
+  operation:
+    build package(s)  Build a package in $pkgbuilds or subdirectories
+    clean <package>   Clean up the cache in $packagesrepo
+    update <package>  Check for updates usinc cower
+    download package  Download a package to $pkgbuilds using cower
+    info package      Return information for a package using pacman and cower
+    repo-update <package>   Update the repo located at $packagesrepo
+    -h, --help        Print this help output
+EOF
+return 0
 }
 
-case $1 in
+case "$1" in
     repo-update)
         shift
         signrepos "$1"
         ;;
     build)
         shift
-        if [[ -v $1 ]]; then
+        if [[ -z $1 ]]; then
             exit 68;
         fi
         for i in $@; do
@@ -82,7 +123,7 @@ case $1 in
         shift
         if [[ -z $1 ]]; then
             cower -u $verbose
-            exit 0;
+            return 0;
         fi
         cower -u $verbose $1
         ;;
@@ -101,18 +142,8 @@ case $1 in
         pacman -Si $1
         cower -i $1
         ;;
-    -h|--help)
-        echo "Usage: mgitpkg [operation] <package(s)>"
-        echo -e "\toperation:\n\tbuild package(s)\tBuild a package in $pkgbuilds"
-        echo -e "\tclean <package>\t\tClean up the cache in $packagesrepo"
-        echo -e "\tupdate <package>\tCheck for updates usinc cower"
-        echo -e "\tcownload package\tDownload a package to $pkgbuilds using cower"
-        echo -e "\tinfo package\t\tReturn information for a package using pacman and cower"
-        echo -e "\t-h|--help\t\tPrint this help output"
-        exit 
+    -h|--help)  showhelp
         ;;
-    *)
-        echo "maurpkg: perform operations on aur packages in $pkgbuilds and subdirectories."
-        echo -e "\t use --help for options"
+    *)          showhelp
         ;;
 esac

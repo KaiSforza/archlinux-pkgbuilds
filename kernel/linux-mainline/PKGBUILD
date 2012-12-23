@@ -7,30 +7,30 @@
 
 pkgbase=linux-mainline
 #pkgname=linux-mainline
-_srcname=linux-3.7-rc8
-_gitver=3.7-rc8
-pkgver=3.7rc8
+_srcname=linux-3.8-rc1
+_gitver=v3.8-rc1
+pkgver=3.8.rc1.0.ga49f0d1
 pkgrel=1
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
-makedepends=('xmlto' 'docbook-xsl')
+makedepends=('xmlto' 'docbook-xsl' 'git')
 options=('!strip')
+# Use gz compression locally as we don't care about size
 PKGEXT='.pkg.tar.gz'
 source=("http://www.kernel.org/pub/linux/kernel/v3.x/testing/linux-${_gitver}.tar.xz"
         # the main kernel config files
         'config.x86_64'
         # standard config files for mkinitcpio ramdisk
         'linux.preset'
-        'change-default-console-loglevel.patch'
-    	'fix-sandy-bridge.patch')
+        'change-default-console-loglevel.patch')
 
 md5sums=('SKIP'
-         '4223b8d15369b47208cd5b960057145d'
+         '1dbfb35085ab452e0e4e038f9ac2786e'
          '6a8a28db0c8d3ec0bffff749cd4fa5cb'
-         '9d3c56a4b999c8bfbd4018089a62f662'
-         '8ae40af8fc0577abb3c15e708717518e')
+         '9d3c56a4b999c8bfbd4018089a62f662')
 
+_rcnum=${_gitver#*-}
 _kernelname=${pkgbase#linux}
 
 build() {
@@ -39,25 +39,28 @@ build() {
   # set DEFAULT_CONSOLE_LOGLEVEL to 4 (same value as the 'quiet' kernel param)
   # remove this when a Kconfig knob is made available by upstream
   # (relevant patch sent upstream: https://lkml.org/lkml/2011/7/26/227)
-  patch -Np1 -i "${srcdir}/change-default-console-loglevel.patch"
-  # Patch hoping to fix the {c,g}pu scaling issues encountered since 3.6.x.
-  patch -Np1 -i "${srcdir}/fix-sandy-bridge.patch"
-  cd "$srcdir/linux"
+  git apply -v "${srcdir}/change-default-console-loglevel.patch"
 
   cat "${srcdir}/config.x86_64" > ./.config
 
   if [ "${_kernelname}" != "" ]; then
-    sed -i "s|CONFIG_LOCALVERSION=.*|CONFIG_LOCALVERSION=\"${_kernelname}\"|g" ./.config
+    sed -i "s|CONFIG_LOCALVERSION=.*|CONFIG_LOCALVERSION=\"-${_rcnum}${_kernelname}\"|g" ./.config
   fi
 
   # set extraversion to pkgrel
   sed -ri "s|^(EXTRAVERSION =).*|\1 -${pkgrel}|" Makefile
-  # set sublevel to the rc number
-  sed -ri "s|^(SUBLEVEL =).*|\1 ${_rcnum}|" Makefile
-  # uname -r will look like: 3.7._rcnum-pkgrel-mainline
+  # uname -r will look like: 3.X.0-$_rcnum-$pkgrel-mainline
 
   # don't run depmod on 'make install'. We'll do this ourselves in packaging
   sed -i '2iexit 0' scripts/depmod.sh
+
+  # Don't have the kernel say we're dirty unless there have been more patches
+  # than the change-default-console-loglevel patch.
+  git commit -am 'wgiokas mainline kernel build non-dirty commit'
+
+  #####################################
+  # Other patches go here #############
+  #####################################
 
   # get kernel version
   #make prepare
@@ -66,6 +69,7 @@ build() {
   # Configure the kernel. Replace the line below with one of your choice.
   #make menuconfig # CLI menu for configuration
   #make nconfig # new CLI menu for configuration
+  make nconfig # new CLI menu for configuration
   #make xconfig # qt-based configuration
   #make gconfig # gtk-based configuration
   #make oldconfig # using old config from previous kernel version
@@ -313,8 +317,3 @@ for _p in ${pkgname[@]}; do
 done
 
 # vim:set ts=8 sts=2 sw=2 et:
-md5sums=('SKIP'
-         '4223b8d15369b47208cd5b960057145d'
-         '6a8a28db0c8d3ec0bffff749cd4fa5cb'
-         '9d3c56a4b999c8bfbd4018089a62f662'
-         '8ae40af8fc0577abb3c15e708717518e')

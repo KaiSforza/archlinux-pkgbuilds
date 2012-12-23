@@ -22,7 +22,7 @@ sha1sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$pkgbase"
-  git describe --tags | sed 's/-/./g'
+  git describe --tags --long | sed 's/-/./g'
 }
 
 build() {

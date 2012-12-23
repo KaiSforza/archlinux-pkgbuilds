@@ -5,7 +5,7 @@
 
 pkgname=pacman-git
 pkgbase=pacman
-pkgver=4.0.3.512.ga96b7d7
+pkgver=4.0.3.517.g8800ae2
 pkgrel=1
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
 arch=('i686' 'x86_64')
@@ -20,14 +20,14 @@ conflicts=('pacman' 'pacman-contrib')
 options=('!libtool' '!strip')
 backup=(etc/pacman.conf
         etc/makepkg.conf)
-source=('pacman::git+file:///home/wgiokas/git/archlinux/pacman#branch=working')
-#source=('pacman::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working')
+#source=('pacman::git+file:///home/wgiokas/git/archlinux/pacman#branch=working')
+source=('pacman::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working')
 #source=('pacman-official::git+git://projects.archlinux.org/pacman.git')
 sha1sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$pkgbase"
-  echo $(git describe | sed 's#-#.#g;s#v##')
+  git describe --long | sed 's#-#.#g;s#^v##'
 }
 
 build() {
