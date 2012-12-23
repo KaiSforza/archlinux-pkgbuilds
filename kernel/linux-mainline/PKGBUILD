@@ -16,23 +16,21 @@ url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'git')
 options=('!strip')
-# Use gz compression as we don't care about size
+# Use gz compression locally as we don't care about size
 PKGEXT='.pkg.tar.gz'
+# Uncomment if you want to upload or save a tiny amount of space
+#PKGEXT='.pkg.tar.xz'
 source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_gitver"
         # the main kernel config files
         'config.x86_64'
         # standard config files for mkinitcpio ramdisk
         'linux.preset'
-        'change-default-console-loglevel.patch'
-        'fix-sandy-bridge.patch'
-        'watchdog_lenovo.patch')
+        'change-default-console-loglevel.patch')
 
 md5sums=('SKIP'
          '1dbfb35085ab452e0e4e038f9ac2786e'
          '6a8a28db0c8d3ec0bffff749cd4fa5cb'
-         '9d3c56a4b999c8bfbd4018089a62f662'
-         '8ae40af8fc0577abb3c15e708717518e'
-         'db1b67d4f1fbbc8dc02f3f9233d75478')
+         '9d3c56a4b999c8bfbd4018089a62f662')
 
 _kernelname=${pkgbase#linux}
 pkgver() {
@@ -45,14 +43,7 @@ prepare() {
   # set DEFAULT_CONSOLE_LOGLEVEL to 4 (same value as the 'quiet' kernel param)
   # remove this when a Kconfig knob is made available by upstream
   # (relevant patch sent upstream: https://lkml.org/lkml/2011/7/26/227)
-  msg "applying patch 1"
   git apply -v "${srcdir}/change-default-console-loglevel.patch"
-  # Patch hoping to fix the {c,g}pu scaling issues encountered since 3.6.x.
-  #msg "applying patch 2"
-  #git apply -v "${srcdir}/fix-sandy-bridge.patch"
-  ## revert the change made causing kernel oops when introducing power supply
-  #msg "applying patch 3"
-  #git apply -v "${srcdir}/watchdog_lenovo.patch"
 
   cat "${srcdir}/config.x86_64" > ./.config
 
@@ -75,8 +66,8 @@ prepare() {
   # load configuration
   # Configure the kernel. Replace the line below with one of your choice.
   #make menuconfig # CLI menu for configuration
-  #make nconfig # new CLI menu for configuration
-  make xconfig # qt-based configuration
+  make nconfig # new CLI menu for configuration
+  #make xconfig # qt-based configuration
   #make gconfig # gtk-based configuration
   #make oldconfig # using old config from previous kernel version
   #yes ""|make oldconfig # Lazy version

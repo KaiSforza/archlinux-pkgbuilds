@@ -17,6 +17,8 @@ optdepends=('perl' 'python2' 'lua' 'tcl' 'ruby' 'aspell')
 provides=('weechat')
 conflicts=('weechat')
 options=(!libtool)
+#source=("git://git.sv.gnu.org/weechat.git")
+#source=("git+http://git.savannah.gnu.org/r/weechat.git")
 source=("git://git.sv.gnu.org/weechat.git")
 md5sums=('SKIP')
 
@@ -37,4 +39,3 @@ build() {
 package() {
   make -C "$srcdir/build" DESTDIR="${pkgdir}/" install
 }
-
