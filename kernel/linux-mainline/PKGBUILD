@@ -54,7 +54,6 @@ prepare() {
 
   # set extraversion to pkgrel
   sed -ri "s|^(EXTRAVERSION =).*|\1 -${pkgrel}|" Makefile
-  # uname -r will look like: 3.X.0-$_rcnum-$pkgrel-mainline
 
   # don't run depmod on 'make install'. We'll do this ourselves in packaging
   sed -i '2iexit 0' scripts/depmod.sh
@@ -73,8 +72,8 @@ prepare() {
   # load configuration
   # Configure the kernel. Replace the line below with one of your choice.
   #make menuconfig # CLI menu for configuration
-  make nconfig # new CLI menu for configuration
-  #make xconfig # qt-based configuration
+  #make nconfig # new CLI menu for configuration
+  make xconfig # qt-based configuration
   #make gconfig # gtk-based configuration
   #make oldconfig # using old config from previous kernel version
   #yes ""|make oldconfig # Lazy version
