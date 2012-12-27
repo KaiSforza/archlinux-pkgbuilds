@@ -1,9 +1,9 @@
 pkgname=dwmstatus-git
 _pkgname=dwmstatus
-pkgver=cc99322
+pkgver=17.f2e29e2
 pkgver() {
   cd "$srcdir/$_pkgname"
-  git describe --tags --long --always | tr - .
+  echo "$(git shortlog | grep -c '^\s\+').$(git describe --tags --long --always | tr - .)"
 }
 pkgrel=1
 pkgdesc="A simple C status bar for dwm"
@@ -15,7 +15,7 @@ makedepends=('git')
 provides=('dwmstatus')
 conflicts=('dwmstatus')
 #source=(git+http://git.suckless.org/dwmstatus)
-source=(git+file:///home/wgiokas/git/KaiSforza/dwmstatus)
+source=(git+file:///home/wgiokas/git/KaiSforza/dwmstatus#branch=master)
 md5sums=('SKIP')
 
 build() {

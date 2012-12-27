@@ -1,10 +1,17 @@
 /* See LICENSE file for copyright and license details. */
 
+/* William Giokas's dwm config.h
+ * semi-i3 like keybinds, i3 colors
+ * no border
+ * top bar
+ * a few pre-set windows
+ */
+
 /* appearance */
 static const char font[]            = "-*-proggytinysz-medium-*-*-*-10-*-*-*-*-*-*-*";
 static const char normbordercolor[] = "#333333";
 static const char normbgcolor[]     = "#5f676a";
-static const char normfgcolor[]     = "#bbbbbb";
+static const char normfgcolor[]     = "#cccccc";
 static const char selbordercolor[]  = "#4c7899";
 static const char selbgcolor[]      = "#285577";
 static const char selfgcolor[]      = "#eeeeee";
@@ -13,22 +20,19 @@ static const unsigned int snap      = 16;       /* snap pixel */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
 
-/* tagging */
-                            /* 0       1      2       3        4        5        6       7*/
-static const char *tags[] = { "term", "web", "web2", "image", "comic", "video", "game", "misc" };
+/* tagging                     0       1      2       3        4        5        6       7       8     */
+static const char *tags[] = { "term", "web", "web2", "image", "comic", "video", "game", "misc", "hide" };
 
 static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Dwb",      NULL,       NULL,       1 << 1,       False,       -1 },
+	{ "Gimp",     NULL,       NULL,       1 << 3,       False,       -1 },
 	{ "URxvt",    NULL,       "download_dwb", 1 << 1,   True,        -1 },
 	{ "luakit",   NULL,       NULL,       1 << 2,       False,       -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 2,       False,       -1 },
 	{ "Mcomix",   NULL,       NULL,       1 << 4,       False,       -1 },
 	{ "Steam",    NULL,       NULL,       1 << 6,       True,        -1 },
-	{ "Mplayer",  NULL,       NULL,       1 << 5,       True,        -1 },
-	{ "Gimp",     NULL,       "gimp-image-window", 1 << 4, False,    -1 },
-	{ "Gimp",     NULL,       "gimp-toolbox", 1 << 4,   True,        -1 },
-	{ "Gimp",     NULL,       "gimp-dock",  1 << 4,     True,        -1 },
+	{ "mplayer2", NULL,       NULL,       1 << 5,       True,        -1 },
 };
 
 /* layout(s) */
@@ -40,7 +44,7 @@ static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
 	{ "<>-",      NULL },    /* no layout function means floating behavior */
-	{ "()+",      monocle },
+	{ "(M)",      monocle },
 };
 
 /* key definitions */
@@ -55,16 +59,18 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-/* Spawning windows */
+/* dmenu */
 static const char *dmenucmd[]    = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+/* Spawning windows */
 static const char *termcmd[]     = { "urxvtc", NULL };
 static const char *dwbcmd[]      = { "systemctl", "--user", "start", "dwb@:0",    NULL};
 static const char *luakitcmd[]   = { "systemctl", "--user", "start", "luakit@:0", NULL};
 static const char *mcomixcmd[]   = { "systemctl", "--user", "start", "mcomix@:0", NULL};
 
 /* Systemd --user stuff */
-static const char *killcmd[]     = { "systemctl", "--user", "exit",           NULL };
-static const char *restartcmd[]  = { "systemctl", "--user", "restart", "dwm", NULL };
+static const char *killcmd[]        = { "systemctl", "--user", "exit",                  NULL };
+static const char *restartcmd[]     = { "systemctl", "--user", "restart", "dwm",        NULL };
+static const char *barrestartcmd[]  = { "systemctl", "--user", "restart", "dwm-status", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -74,15 +80,17 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_r,      spawn,          {.v = restartcmd } },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_v,      togglebar,      {0} },
+	{ MODKEY|ShiftMask,             XK_v,      spawn,          {.v = barrestartcmd } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_u,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = -1 } },
+    /* Resize main window left and right                                */
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-    /* Layout Keys: e = tiling, w = floating, s = follscreen            */
+    /* Layout Keys:                                                     */
 	{ MODKEY,                       XK_e,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_w,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_s,      setlayout,      {.v = &layouts[2]} },
@@ -110,7 +118,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_6,                      5)
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
-	/*TAGKEYS(                        XK_9,                      8)*/
+	TAGKEYS(                        XK_9,                      8)
 };
 
 /* button definitions */
