@@ -1,11 +1,11 @@
 pkgname=dwm-git
 _pkgname=dwm
-pkgver=6.0.27.gaafeaf7
+pkgver=6.0.29.g3288f35
 pkgver() {
   cd "$srcdir/$_pkgname"
   git describe --tags --long | tr - .
 }
-pkgrel=7
+pkgrel=2
 pkgdesc="A dynamic window manager for X"
 url="http://dwm.suckless.org"
 arch=('i686' 'x86_64')
@@ -18,11 +18,14 @@ provides=('dwm')
 conflicts=('dwm')
 source=( config.h
 	dwm.desktop
-  git+http://git.suckless.org/dwm)
+  git+file:///home/wgiokas/git/KaiSforza/dwm#branch=clangtest)
+  #git+http://git.suckless.org/dwm)
 md5sums=('SKIP'
          '939f403a71b6e85261d09fc3412269ee'
          'SKIP')
+CFLAGS="${CFLAGS} -pedantic -std=c99"
 prepare() {
+  msg "CFLAGS = $CFLAGS"
   cd "$srcdir/$_pkgname"
   cp $srcdir/config.h config.h
   sed -i "s/VERSION = .*/VERSION = ${pkgver}-${pkgrel}/g" config.mk
@@ -31,6 +34,9 @@ prepare() {
   sed -i 's/^#CFLAGS = -std/CFLAGS += -std/g' config.mk
   sed -i 's/^LDFLAGS = -g/#LDFLAGS += -g/g' config.mk
   sed -i 's/^#LDFLAGS = -s/LDFLAGS += -s/g' config.mk
+  sed -i 's/^CC =/#CC =/' config.mk
+  sed -i 's/^CFLAGS/#CFLAGS/g' config.mk
+  sed -i 's/^CPPFLAGS/#CPPFLAGS/g' config.mk
 }
 
 build() {

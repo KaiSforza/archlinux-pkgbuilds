@@ -10,18 +10,18 @@
 /* appearance */
 static const char font[]            = "-*-proggytinysz-medium-*-*-*-10-*-*-*-*-*-*-*";
 static const char normbordercolor[] = "#333333";
-static const char normbgcolor[]     = "#5f676a";
+static const char normbgcolor[]     = "#111111";
 static const char normfgcolor[]     = "#cccccc";
 static const char selbordercolor[]  = "#4c7899";
-static const char selbgcolor[]      = "#285577";
+static const char selbgcolor[]      = "#444444";
 static const char selfgcolor[]      = "#eeeeee";
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 16;       /* snap pixel */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
 
-/* tagging                     0       1      2       3        4        5        6       7       8     */
-static const char *tags[] = { "term", "web", "web2", "image", "comic", "video", "game", "misc", "hide" };
+/* tagging                    0    1    2    3    4    5    6    7    8  */
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "_" };
 
 static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
@@ -31,7 +31,7 @@ static const Rule rules[] = {
 	{ "luakit",   NULL,       NULL,       1 << 2,       False,       -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 2,       False,       -1 },
 	{ "Mcomix",   NULL,       NULL,       1 << 4,       False,       -1 },
-	{ "Steam",    NULL,       NULL,       1 << 6,       True,        -1 },
+	{ "Steam",    NULL,       NULL,       1 << 7,       True,        -1 },
 	{ "mplayer2", NULL,       NULL,       1 << 5,       True,        -1 },
 };
 
@@ -42,9 +42,9 @@ static const Bool resizehints = True; /* True means respect size hints in tiled 
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "<>-",      NULL },    /* no layout function means floating behavior */
-	{ "(M)",      monocle },
+	{ "[|]",      tile },    /* first entry is default */
+	{ "><>",      NULL },    /* no layout function means floating behavior */
+	{ "[M]",      monocle },
 };
 
 /* key definitions */
@@ -88,6 +88,7 @@ static Key keys[] = {
     /* Resize main window left and right                                */
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+    /* Move window into master position                                 */
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
     /* Layout Keys:                                                     */
@@ -96,11 +97,9 @@ static Key keys[] = {
 	{ MODKEY,                       XK_s,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-    /* Move window into master position                                 */
-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
     /* See all tags                                                     */
+	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-    /* I think these 4 are broken...                                    */
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },

@@ -1,6 +1,6 @@
 pkgname=dwmstatus-git
 _pkgname=dwmstatus
-pkgver=17.f2e29e2
+pkgver=27.18a7cf4
 pkgver() {
   cd "$srcdir/$_pkgname"
   echo "$(git shortlog | grep -c '^\s\+').$(git describe --tags --long --always | tr - .)"
