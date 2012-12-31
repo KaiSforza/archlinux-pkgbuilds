@@ -17,6 +17,8 @@ static const char selbgcolor[]      = "#444444";
 static const char selfgcolor[]      = "#eeeeee";
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 16;       /* snap pixel */
+static const unsigned int systrayspacing = 2;   /* systray spacing */
+static const Bool showsystray       = True;     /* False means no systray */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
 
@@ -32,7 +34,7 @@ static const Rule rules[] = {
 	{ "Firefox",  NULL,       NULL,       1 << 2,       False,       -1 },
 	{ "Mcomix",   NULL,       NULL,       1 << 4,       False,       -1 },
 	{ "Steam",    NULL,       NULL,       1 << 7,       True,        -1 },
-	{ "mplayer2", NULL,       NULL,       1 << 5,       True,        -1 },
+	{ "mplayer2", NULL,       NULL,       1 << 7,       True,        -1 },
 };
 
 /* layout(s) */

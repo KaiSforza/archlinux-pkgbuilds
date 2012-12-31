@@ -1,9 +1,9 @@
 pkgname=dwmstatus-git
 _pkgname=dwmstatus
-pkgver=27.18a7cf4
+pkgver=v0.1.0.g13df690
 pkgver() {
   cd "$srcdir/$_pkgname"
-  echo "$(git shortlog | grep -c '^\s\+').$(git describe --tags --long --always | tr - .)"
+  git describe --tags --long --always | tr - .
 }
 pkgrel=1
 pkgdesc="A simple C status bar for dwm"

@@ -2,8 +2,7 @@
 
 pkgname=ponymix-git
 pkgbase=ponymix
-epoch=1
-pkgver=9c64dce
+pkgver=109.211029f
 pkgrel=1
 pkgdesc="CLI PulseAudio Volume Control"
 arch=('i686' 'x86_64')
@@ -20,7 +19,7 @@ md5sums=('SKIP')
 
 pkgver() {
   cd $srcdir/$pkgbase
-  echo $(git describe --always --long)
+  echo "$(git shortlog | grep -c '^\s\+').$(git describe --always --long)"
 }
 
 build() {
