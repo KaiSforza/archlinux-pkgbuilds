@@ -14,8 +14,8 @@ options=(zipman)
 makedepends=('git')
 provides=('dwmstatus')
 conflicts=('dwmstatus')
-#source=(git+http://git.suckless.org/dwmstatus)
-source=(git+file:///home/wgiokas/git/KaiSforza/dwmstatus#branch=master)
+#source=(git+file:///home/wgiokas/git/KaiSforza/dwmstatus#branch=master)
+source=(git@bitbucket.org:KaiSforza/dwmstatus.git)
 md5sums=('SKIP')
 
 build() {
