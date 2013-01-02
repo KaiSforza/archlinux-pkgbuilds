@@ -1,6 +1,6 @@
 pkgname=dwm-git
 _pkgname=dwm
-pkgver=6.0.30.g297845f
+pkgver=6.0.34.ge855cd8
 pkgver() {
   cd "$srcdir/$_pkgname"
   git describe --tags --long | tr - .
@@ -18,7 +18,7 @@ provides=('dwm')
 conflicts=('dwm')
 source=( config.h
 	dwm.desktop
-  git+file:///home/wgiokas/git/KaiSforza/dwm#branch=systray)
+  git+file:///home/wgiokas/git/KaiSforza/dwm#branch=patched)
   #git+http://git.suckless.org/dwm)
 md5sums=('SKIP'
          '939f403a71b6e85261d09fc3412269ee'

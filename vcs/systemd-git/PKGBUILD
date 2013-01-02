@@ -2,7 +2,7 @@
 
 pkgname=systemd-git
 pkgbase=systemd
-pkgver=v196.154.g94f5bbc
+pkgver=v196.162.g9b41366
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')

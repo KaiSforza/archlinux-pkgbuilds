@@ -1,6 +1,6 @@
 pkgname=dwmstatus-git
 _pkgname=dwmstatus
-pkgver=v0.1.0.g13df690
+pkgver=v0.2.2.gae1ea47
 pkgver() {
   cd "$srcdir/$_pkgname"
   git describe --tags --long --always | tr - .
@@ -14,8 +14,8 @@ options=(zipman)
 makedepends=('git')
 provides=('dwmstatus')
 conflicts=('dwmstatus')
-#source=(git+file:///home/wgiokas/git/KaiSforza/dwmstatus#branch=master)
-source=(git@bitbucket.org:KaiSforza/dwmstatus.git)
+source=(git+file:///home/wgiokas/git/KaiSforza/dwmstatus#branch=master)
+#source=(git@bitbucket.org:KaiSforza/dwmstatus.git)
 md5sums=('SKIP')
 
 build() {
