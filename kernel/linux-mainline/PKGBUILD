@@ -7,8 +7,8 @@
 
 pkgbase=linux-mainline
 #pkgname=linux-mainline
-_gitver=v3.8-rc1
-pkgver=3.8.rc1.0.ga49f0d1
+_gitver=v3.8-rc2
+pkgver=3.8.rc2.0.gd1c3ed6
 pkgrel=1
 arch=('x86_64')
 url="http://www.kernel.org/"
@@ -60,7 +60,7 @@ prepare() {
 
   # Don't have the kernel say we're dirty unless there have been more patches
   # than the change-default-console-loglevel patch.
-  git commit -am 'wgiokas mainline kernel build non-dirty commit'
+  #git commit -am 'wgiokas mainline kernel build non-dirty commit'
 
   #####################################
   # Other patches go here #############

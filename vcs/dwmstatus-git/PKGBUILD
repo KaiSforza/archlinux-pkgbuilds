@@ -5,9 +5,9 @@ pkgver() {
   cd "$srcdir/$_pkgname"
   git describe --tags --long --always | tr - .
 }
-pkgrel=1
+pkgrel=2
 pkgdesc="A simple C status bar for dwm"
-url="http://dwmstatus.suckless.org"
+url="http://dwm.suckless.org/dwmstatus/"
 arch=('i686' 'x86_64')
 license=('MIT')
 options=(zipman)

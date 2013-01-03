@@ -36,6 +36,7 @@ static const Rule rules[] = {
 	{ "Mcomix",   NULL,       NULL,       1 << 4,       False,       -1 },
 	{ "Steam",    NULL,       NULL,       1 << 7,       True,        -1 },
 	{ "mplayer2", NULL,       NULL,       1 << 7,       True,        -1 },
+	{ "Zathura",  NULL,       NULL,       1 << 5,       False,       -1 },
 };
 
 /* layout(s) */
@@ -69,6 +70,7 @@ static const char *termcmd[]     = { "urxvtc", NULL };
 static const char *dwbcmd[]      = { "systemctl", "--user", "start", "dwb@:0",    NULL};
 static const char *luakitcmd[]   = { "systemctl", "--user", "start", "luakit@:0", NULL};
 static const char *mcomixcmd[]   = { "systemctl", "--user", "start", "mcomix@:0", NULL};
+static const char *zathuracmd[]  = { "systemctl", "--user", "start", "zathura@:0", NULL};
 
 /* Systemd --user stuff */
 static const char *killcmd[]        = { "systemctl", "--user", "exit",                  NULL };
@@ -112,6 +114,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_n,      spawn,          {.v = luakitcmd } },
     { MODKEY|ShiftMask,             XK_b,      spawn,          {.v = dwbcmd } },
     { MODKEY|ShiftMask,             XK_m,      spawn,          {.v = mcomixcmd } },
+    { MODKEY|ShiftMask,             XK_z,      spawn,          {.v = zathuracmd } },
     /* Workspace Tags                                                   */
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
