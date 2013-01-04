@@ -1,0 +1,86 @@
+pkgname=vim-hg
+pkgver=4016.b89e2bdcc6e5
+pkgrel=2
+pkgdesc='Vi Improved, a highly configurable, improved version of the vi text editor'
+arch=(i686 x86_64)
+license=('custom:vim')
+url="http://www.vim.org"
+depends=('gpm' 'perl' 'python' 'python2')
+makedepends=('wget' 'sed' 'grep' 'gettext' 'mercurial')
+conflicts=(vim vim-runtime)
+provides=(vim=7.3)
+source=("vimrc"
+        "archlinux.vim"
+        "vim::hg+https://vim.googlecode.com/hg/")
+md5sums=('6228d36c3702d4e9afc4d2a1edcc3aff'
+         '10353a61aadc3f276692d0e17db1478e'
+         'SKIP')
+backup=(etc/vimrc)
+
+_hgrepo="vim"
+
+pkgver() {
+  cd "${srcdir}/${_hgrepo}"
+  hg identify -ni | awk 'BEGIN{OFS=".";} {print $2,$1}'
+}
+
+build()
+{
+  cd "$srcdir/$_hgrepo"
+
+  sed -i 's|set dummy python;|set dummy python2;|g' src/auto/configure
+  sed -i 's|^.*\(#define SYS_.*VIMRC_FILE.*"\) .*$|\1|' src/feature.h
+  sed -i 's|^.*\(#define VIMRC_FILE.*"\) .*$|\1|' src/feature.h
+  # build party
+  ./configure \
+    --prefix=/usr \
+    --localstatedir=/var/lib/vim \
+    --mandir=/usr/share/man \
+    --with-compiledby=ArchLinux \
+    --with-features=big \
+    --enable-gpm \
+    --enable-acl \
+    --with-x=yes \
+    --disable-gui \
+    --enable-multibyte \
+    --enable-cscope \
+    --disable-netbeans \
+    --enable-perlinterp \
+    --disable-pythoninterp \
+    --enable-python3interp \
+    --disable-rubyinterp \
+    --disable-luainterp
+
+  make || return 1
+}
+
+package() {
+  cd "$srcdir/$_hgrepo"
+  make VIMRCLOC=/etc DESTDIR=${pkgdir} install
+
+  cd "$pkgdir/usr/bin"
+  rm ex view                # provided by (n)vi in core
+
+  # delete some manpages
+  cd ${pkgdir}/usr/share/man
+  rm -f {*/,}man1/ex.1 {*/,}man1/view.1      # provided by (n)vi
+  rm -f {*/,}man1/evim.1                     # this does not make sense in the console version
+
+  # patch runtime
+  cd $pkgdir/usr/share/vim/vim73/
+  sed -i "s/rpmsave/pacsave/;s/rpmnew/pacnew/;s/,\*\.ebuild/\0,PKGBUILD*,*.install/" filetype.vim
+
+  # fix FS#17216
+  sed -i 's|messages,/var|messages,/var/log/messages.log,/var|' \
+    ${pkgdir}/usr/share/vim/vim73/filetype.vim
+
+
+  install -Dm644 ${srcdir}/vimrc  ${pkgdir}/etc/vimrc
+  install -Dm644 ${srcdir}/archlinux.vim  \
+                 ${pkgdir}/usr/share/vim/vimfiles/archlinux.vim
+  install -dm755 ${pkgdir}/usr/share/licenses/$pkgname
+  cd ${pkgdir}/usr/share/licenses/$pkgname
+  ln -s ../../vim/vim73/doc/uganda.txt license.txt
+}
+
+# vim:set ts=2 sw=2 et:

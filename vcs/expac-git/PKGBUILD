@@ -2,7 +2,7 @@
 
 pkgname=expac-git
 pkgbase=expac
-pkgver=1.4.g4ff7b89
+pkgver=1.7.gbd8e738
 pkgrel=1
 pkgdesc="pacman database extraction utility"
 arch=('i686' 'x86_64')

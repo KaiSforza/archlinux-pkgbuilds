@@ -7,9 +7,9 @@
 
 pkgbase=linux-mainline
 #pkgname=linux-mainline
-_srcname=linux-3.8-rc1
-_gitver=v3.8-rc1
-pkgver=3.8.rc1.0.ga49f0d1
+_srcname=linux-3.8-rc2
+_gitver=v3.8-rc2
+pkgver=3.8.rc2.0.gd1c3ed6
 pkgrel=1
 arch=('x86_64')
 url="http://www.kernel.org/"
@@ -26,7 +26,7 @@ source=("http://www.kernel.org/pub/linux/kernel/v3.x/testing/linux-${_gitver}.ta
         'change-default-console-loglevel.patch')
 
 md5sums=('SKIP'
-         '1dbfb35085ab452e0e4e038f9ac2786e'
+         '9d983dff4255c50720ac080b632bfddb'
          '6a8a28db0c8d3ec0bffff749cd4fa5cb'
          '9d3c56a4b999c8bfbd4018089a62f662')
 
@@ -49,14 +49,13 @@ build() {
 
   # set extraversion to pkgrel
   sed -ri "s|^(EXTRAVERSION =).*|\1 -${pkgrel}|" Makefile
-  # uname -r will look like: 3.X.0-$_rcnum-$pkgrel-mainline
 
   # don't run depmod on 'make install'. We'll do this ourselves in packaging
   sed -i '2iexit 0' scripts/depmod.sh
 
   # Don't have the kernel say we're dirty unless there have been more patches
   # than the change-default-console-loglevel patch.
-  git commit -am 'wgiokas mainline kernel build non-dirty commit'
+  #git commit -am 'wgiokas mainline kernel build non-dirty commit'
 
   #####################################
   # Other patches go here #############
@@ -69,8 +68,7 @@ build() {
   # Configure the kernel. Replace the line below with one of your choice.
   #make menuconfig # CLI menu for configuration
   #make nconfig # new CLI menu for configuration
-  make nconfig # new CLI menu for configuration
-  #make xconfig # qt-based configuration
+  make xconfig # qt-based configuration
   #make gconfig # gtk-based configuration
   #make oldconfig # using old config from previous kernel version
   yes ""|make oldconfig # Lazy version

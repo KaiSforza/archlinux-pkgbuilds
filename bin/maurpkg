@@ -62,8 +62,8 @@ signrepos(){
             gpg --detach-sign "$f"
         fi
     done
-    repo-add --sign -q "$packagesrepo/$reponame.db.tar.gz" "$packagesrepo/$1"*$packageext
-    repo-add --sign -f -q "$packagesrepo/$reponame.files.tar.gz" "$packagesrepo/$1"*$packageext
+    repo-add --sign -n -q "$packagesrepo/$reponame.db.tar.gz" "$packagesrepo/$1"*$packageext
+    repo-add --sign -n -f -q "$packagesrepo/$reponame.files.tar.gz" "$packagesrepo/$1"*$packageext
 }
 downloadpkg(){
     if [[ -e $pkgbuilds/$1 ]]; then
@@ -97,6 +97,7 @@ return 0
 case "$1" in
     repo-update)
         shift
+        paccache -r -c $packagesrepo -k 1
         signrepos "$1"
         ;;
     build)

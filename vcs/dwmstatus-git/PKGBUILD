@@ -1,0 +1,31 @@
+pkgname=dwmstatus-git
+_pkgname=dwmstatus
+pkgver=v0.2.2.gae1ea47
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  git describe --tags --long --always | tr - .
+}
+pkgrel=2
+pkgdesc="A simple C status bar for dwm"
+url="http://dwm.suckless.org/dwmstatus/"
+arch=('i686' 'x86_64')
+license=('MIT')
+options=(zipman)
+makedepends=('git')
+provides=('dwmstatus')
+conflicts=('dwmstatus')
+source=(git+file:///home/wgiokas/git/KaiSforza/dwmstatus#branch=master)
+#source=(git@bitbucket.org:KaiSforza/dwmstatus.git)
+md5sums=('SKIP')
+
+build() {
+  cd "$srcdir/$_pkgname"
+  make PREFIX=/usr
+}
+
+package() {
+  cd "$srcdir/$_pkgname"
+  make PREFIX=/usr DESTDIR=$pkgdir install
+}
+
+# vim:set ts=2 sw=2 et:
