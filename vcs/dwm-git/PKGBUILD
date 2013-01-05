@@ -23,9 +23,8 @@ source=( config.h
 md5sums=('SKIP'
          '939f403a71b6e85261d09fc3412269ee'
          'SKIP')
-CFLAGS="${CFLAGS} -pedantic -std=c99"
+#CFLAGS="${CFLAGS} -pedantic -std=c99"
 prepare() {
-  msg "CFLAGS = $CFLAGS"
   cd "$srcdir/$_pkgname"
   cp $srcdir/config.h config.h
   sed -i "s/VERSION = .*/VERSION = ${pkgver}-${pkgrel}/g" config.mk
@@ -37,6 +36,7 @@ prepare() {
   sed -i 's/^CC =/#CC =/' config.mk
   sed -i 's/^CFLAGS/#CFLAGS/g' config.mk
   sed -i 's/^CPPFLAGS/#CPPFLAGS/g' config.mk
+  msg "CFLAGS = $CFLAGS"
 }
 
 build() {
