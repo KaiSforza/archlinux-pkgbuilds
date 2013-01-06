@@ -1,11 +1,11 @@
 pkgname=dwmstatus-git
 _pkgname=dwmstatus
-pkgver=v0.2.2.gae1ea47
+pkgver=v0.2.1.1.gd522fac
 pkgver() {
   cd "$srcdir/$_pkgname"
   git describe --tags --long --always | tr - .
 }
-pkgrel=2
+pkgrel=1
 pkgdesc="A simple C status bar for dwm"
 url="http://dwm.suckless.org/dwmstatus/"
 arch=('i686' 'x86_64')
