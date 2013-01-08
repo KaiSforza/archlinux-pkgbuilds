@@ -64,7 +64,9 @@ static const Layout layouts[] = {
 
 /* commands */
 /* dmenu */
-static const char *dmenucmd[]    = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[]    = { "dmenu_run", "-fn", font, "-nb",
+    normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+
 /* Spawning windows */
 static const char *termcmd[]     = { "urxvtc", NULL };
 static const char *dwbcmd[]      = { "systemctl", "--user", "start", "dwb@:0",    NULL};
