@@ -34,6 +34,7 @@ static const Rule rules[] = {
 	{ "luakit",   NULL,       NULL,       1 << 2,       False,       -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 2,       False,       -1 },
 	{ "Mcomix",   NULL,       NULL,       1 << 4,       False,       -1 },
+	{ NULL,       NULL,       "Steam",    1 << 7,       True,        -1 },
 	{ "Steam",    NULL,       NULL,       1 << 7,       True,        -1 },
 	{ "mplayer2", NULL,       NULL,       1 << 7,       True,        -1 },
 	{ "Zathura",  NULL,       NULL,       1 << 5,       False,       -1 },
