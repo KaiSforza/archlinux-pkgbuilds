@@ -26,8 +26,8 @@ source=("http://www.kernel.org/pub/linux/kernel/v3.x/testing/linux-${_gitver#v}.
         'change-default-console-loglevel.patch'
         'linux.install')
 
-md5sums=('SKIP'
-         '9d983dff4255c50720ac080b632bfddb'
+md5sums=('857cdea84f3affa12e598024f9735dc3'
+         '1dbfb35085ab452e0e4e038f9ac2786e'
          '6a8a28db0c8d3ec0bffff749cd4fa5cb'
          '9d3c56a4b999c8bfbd4018089a62f662'
          '2ff28ee507f744e820265f817ce14af9')
