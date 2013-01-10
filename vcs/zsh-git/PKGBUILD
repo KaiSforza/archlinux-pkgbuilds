@@ -4,8 +4,8 @@
 
 pkgname=zsh-git
 _pkgname=zsh
-pkgver=5.0.2.0.gdaa828b
-pkgrel=2
+pkgver=5.0.2.6.g3ed9e4d
+pkgrel=1
 pkgdesc='A very advanced and programmable command interpreter (shell) for UNIX'
 arch=('i686' 'x86_64')
 url='http://www.zsh.org/'

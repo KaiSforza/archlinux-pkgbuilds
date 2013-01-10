@@ -24,7 +24,7 @@ static const Bool topbar            = True;     /* False means bottom bar */
 /* static const Bool focusonwheelscroll = True;    False means scrollwheel doesn't change focus */
 
 /* tagging                    0    1    2    3    4    5    6    7    8  */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "_" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
@@ -34,8 +34,10 @@ static const Rule rules[] = {
 	{ "luakit",   NULL,       NULL,       1 << 2,       False,       -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 2,       False,       -1 },
 	{ "Mcomix",   NULL,       NULL,       1 << 4,       False,       -1 },
+	{ NULL,       NULL,       "Steam",    1 << 7,       True,        -1 },
 	{ "Steam",    NULL,       NULL,       1 << 7,       True,        -1 },
-	{ "mplayer2", NULL,       NULL,       1 << 7,       True,        -1 },
+	{ "mplayer2", NULL,       NULL,       1 << 6,       True,        -1 },
+	{ "Gvbam",    NULL,       NULL,       1 << 7,       True,        -1 },
 	{ "Zathura",  NULL,       NULL,       1 << 5,       False,       -1 },
 };
 
@@ -64,7 +66,9 @@ static const Layout layouts[] = {
 
 /* commands */
 /* dmenu */
-static const char *dmenucmd[]    = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[]    = { "dmenu_run", "-fn", font, "-nb",
+    normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+
 /* Spawning windows */
 static const char *termcmd[]     = { "urxvtc", NULL };
 static const char *dwbcmd[]      = { "systemctl", "--user", "start", "dwb@:0",    NULL};

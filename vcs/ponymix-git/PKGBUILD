@@ -2,7 +2,7 @@
 
 pkgname=ponymix-git
 pkgbase=ponymix
-pkgver=109.211029f
+pkgver=154.597ef6c
 pkgrel=1
 pkgdesc="CLI PulseAudio Volume Control"
 arch=('i686' 'x86_64')

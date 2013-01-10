@@ -2,7 +2,7 @@
 
 pkgname=systemd-git
 pkgbase=systemd
-pkgver=v196.162.g9b41366
+pkgver=v197.15.g988d77e
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
@@ -16,8 +16,8 @@ optdepends=('cryptsetup: required for encrypted block devices'
             'python2-cairo: systemd-analyze'
             'python2-gobject: systemd-analyze'
             'quota-tools: kernel-level quota management')
-provides=('systemd' 'libsystemd' 'systemd-sysvcompat' 'systemd-tools' 'udev=999')
-conflicts=('systemd' 'libsystemd' 'systemd-sysvcompat' 'systemd-tools' 'sysvinit' 'initscripts' 'udev')
+provides=('systemd' 'libsystemd' 'systemd-sysvcompat' 'systemd-tools' 'udev=999' 'nss-myhostname')
+conflicts=('systemd' 'libsystemd' 'systemd-sysvcompat' 'systemd-tools' 'sysvinit' 'initscripts' 'udev' 'nss-myhostname')
 groups=('systemd')
 options=('!libtool')
 backup=(etc/dbus-1/system.d/org.freedesktop.systemd1.conf
@@ -35,8 +35,7 @@ source=('git://anongit.freedesktop.org/systemd/systemd.git'
         'use-split-usr-path.patch'
         'initcpio-hook-udev'
         'initcpio-install-udev'
-        'initcpio-install-timestamp'
-        'use_username.patch')
+        'initcpio-install-timestamp')
 
 pkgver() {
 	cd "$srcdir/$pkgbase"
@@ -63,9 +62,10 @@ build(){
       --enable-gtk-doc \
       --disable-audit \
       --disable-ima \
-      --with-distro=arch \
-      --with-sysvinit-path= \
-      --with-sysvrcd-path=
+      --with-distro=arch
+
+      #--with-sysvinit-path= \
+      #--with-sysvrcd-path=
 
   make
 }
@@ -119,5 +119,4 @@ md5sums=('SKIP'
          'fd5b5f04ab0a847373d357555129d4c0'
          'e99e9189aa2f6084ac28b8ddf605aeb8'
          'fb37e34ea006c79be1c54cbb0f803414'
-         'df69615503ad293c9ddf9d8b7755282d'
-         '9d83dbd080579a16a6446a938c501700')
+         'df69615503ad293c9ddf9d8b7755282d')

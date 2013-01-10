@@ -14,7 +14,6 @@ pkgver() {
   cd "$srcdir/tpacpi-bat"
   echo "$(git shortlog | grep -c '^\s\+').$(git describe --always)"
 }
-# build() {}
 
 package() {
   cd "$srcdir/tpacpi-bat"

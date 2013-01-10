@@ -5,14 +5,15 @@
 
 pkgname=git-git
 pkgbase=git
-pkgver=1.8.1.44.g298caa7
+pkgver=1.8.1.151.g32238ae
 pkgrel=1
 pkgdesc="The fast distributed version control system - Git version"
 arch=('i686' 'x86_64')
 url="http://git-scm.com/"
 license=('GPL2')
 depends=('curl' 'expat>=2.0' 'perl-error' 'perl>=5.14.0' 'openssl' 'pcre')
-makedepends=('git' 'asciidoc' 'xmlto' 'docbook-xsl' 'python2' 'emacs')
+#makedepends=('git' 'asciidoc' 'xmlto' 'docbook-xsl' 'python2' 'emacs')
+makedepends=('git' 'asciidoc' 'xmlto' 'docbook-xsl' 'python2')
 optdepends=('tk: gitk and git gui'
             'perl-libwww: git svn'
             'perl-term-readkey: git svn'
@@ -49,8 +50,8 @@ build() {
     USE_LIBPCRE=1 \
     NO_CROSS_DIRECTORY_HARDLINKS=1 all man
 
-  cd contrib/emacs
-  make prefix=/usr
+  #cd contrib/emacs
+  #make prefix=/usr
 }
     
 package() {
@@ -74,8 +75,8 @@ package() {
     "$pkgdir"/usr/share/git/gitview/gitview
 
   # emacs interface
-  cd contrib/emacs
-  make prefix=/usr DESTDIR="$pkgdir" install
+  #cd contrib/emacs
+  #make prefix=/usr DESTDIR="$pkgdir" install
 
   # remove perllocal.pod, .packlist, and empty directories.
   rm -rf "$pkgdir"/usr/lib/perl5
