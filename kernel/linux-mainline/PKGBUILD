@@ -7,8 +7,8 @@
 
 pkgbase=linux-mainline
 #pkgname=linux-mainline
-_gitver=v3.8-rc2
-pkgver=3.8.rc2.0.gd1c3ed6
+_gitver=v3.8-rc3
+pkgver=3.8.rc3.0.g9931fac
 pkgrel=1
 arch=('x86_64')
 url="http://www.kernel.org/"

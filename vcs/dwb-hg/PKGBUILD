@@ -1,7 +1,7 @@
 # Contributor: portix <portix@gmx.net>
 
 pkgname=dwb-hg
-pkgver=1710.222b383d73ad
+pkgver=1712.9fe6ba9a80a8
 pkgrel=1
 pkgdesc="A webkit web browser with vi-like keyboard shortcuts, latest hg-pull" 
 url="http://portix.bitbucket.org/dwb/"

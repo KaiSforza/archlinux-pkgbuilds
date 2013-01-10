@@ -36,7 +36,8 @@ static const Rule rules[] = {
 	{ "Mcomix",   NULL,       NULL,       1 << 4,       False,       -1 },
 	{ NULL,       NULL,       "Steam",    1 << 7,       True,        -1 },
 	{ "Steam",    NULL,       NULL,       1 << 7,       True,        -1 },
-	{ "mplayer2", NULL,       NULL,       1 << 7,       True,        -1 },
+	{ "mplayer2", NULL,       NULL,       1 << 6,       True,        -1 },
+	{ "Gvbam",    NULL,       NULL,       1 << 7,       True,        -1 },
 	{ "Zathura",  NULL,       NULL,       1 << 5,       False,       -1 },
 };
 
