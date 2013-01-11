@@ -4,7 +4,7 @@
 
 pkgname=zsh-git
 _pkgname=zsh
-pkgver=5.0.2.6.g3ed9e4d
+pkgver=5.0.2.7.geac4352
 pkgrel=1
 pkgdesc='A very advanced and programmable command interpreter (shell) for UNIX'
 arch=('i686' 'x86_64')

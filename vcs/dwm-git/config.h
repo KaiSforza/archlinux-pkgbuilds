@@ -8,7 +8,7 @@
  */
 
 /* appearance */
-static const char font[]            = "-*-proggytinysz-medium-*-*-*-10-*-*-*-*-*-*-*";
+static const char font[]            = "-*-proggyoptis-medium-*-*-*-10-*-*-*-*-*-*-*";
 static const char normbordercolor[] = "#333333";
 static const char normbgcolor[]     = "#111111";
 static const char normfgcolor[]     = "#cccccc";
@@ -32,13 +32,14 @@ static const Rule rules[] = {
 	{ "Gimp",     NULL,       NULL,       1 << 3,       False,       -1 },
 	{ "URxvt",    NULL,       "download_dwb", 1 << 1,   True,        -1 },
 	{ "luakit",   NULL,       NULL,       1 << 2,       False,       -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 2,       False,       -1 },
+	{ "Firefox",  NULL,       NULL,       1 << 8,       False,       -1 },
 	{ "Mcomix",   NULL,       NULL,       1 << 4,       False,       -1 },
 	{ NULL,       NULL,       "Steam",    1 << 7,       True,        -1 },
 	{ "Steam",    NULL,       NULL,       1 << 7,       True,        -1 },
 	{ "mplayer2", NULL,       NULL,       1 << 6,       True,        -1 },
 	{ "Gvbam",    NULL,       NULL,       1 << 7,       True,        -1 },
 	{ "Zathura",  NULL,       NULL,       1 << 5,       False,       -1 },
+	{ "Display",  NULL,       NULL,       0,            True,        -1 },
 };
 
 /* layout(s) */
