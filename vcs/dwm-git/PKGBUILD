@@ -1,11 +1,7 @@
 pkgname=dwm-git
 _pkgname=dwm
 pkgver=6.0.34.ge855cd8
-pkgver() {
-  cd "$srcdir/$_pkgname"
-  git describe --tags --long | tr - .
-}
-pkgrel=1
+pkgrel=2
 pkgdesc="A dynamic window manager for X"
 url="http://dwm.suckless.org"
 arch=('i686' 'x86_64')
@@ -20,10 +16,10 @@ source=( config.h
 	dwm.desktop
   git+file:///home/wgiokas/git/KaiSforza/dwm#branch=patched)
   #git+http://git.suckless.org/dwm)
-md5sums=('SKIP'
+md5sums=('7b50790c6ba63213df33f07707faaa05'
          '939f403a71b6e85261d09fc3412269ee'
          'SKIP')
-#CFLAGS="${CFLAGS} -pedantic -std=c99"
+
 prepare() {
   cd "$srcdir/$_pkgname"
   cp $srcdir/config.h config.h
@@ -37,6 +33,11 @@ prepare() {
   sed -i 's/^CFLAGS/#CFLAGS/g' config.mk
   sed -i 's/^CPPFLAGS/#CPPFLAGS/g' config.mk
   msg "CFLAGS = $CFLAGS"
+}
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  git describe --tags --long | tr - .
 }
 
 build() {

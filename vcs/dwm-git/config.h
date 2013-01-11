@@ -1,11 +1,5 @@
-/* See LICENSE file for copyright and license details. */
-
-/* William Giokas's dwm config.h
- * semi-i3 like keybinds, i3 colors
- * no border
- * top bar
- * a few pre-set windows
- */
+/* See LICENSE file for copyright and license details.
+   William Giokas's dwm config.h */
 
 /* appearance */
 static const char font[]            = "-*-proggyoptis-medium-*-*-*-10-*-*-*-*-*-*-*";
@@ -16,34 +10,45 @@ static const char selbordercolor[]  = "#4c7899";
 static const char selbgcolor[]      = "#444444";
 static const char selfgcolor[]      = "#eeeeee";
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
-static const unsigned int snap      = 5;        /* snap pixel */
+static const unsigned int snap      = 10;       /* snap pixel */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const Bool showsystray       = True;     /* False means no systray */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
-/* static const Bool focusonwheelscroll = True;    False means scrollwheel doesn't change focus */
 
-/* tagging                    0    1    2    3    4    5    6    7    8  */
+/* preset tags
+ * 1: terms
+ * 2: browser 1 (dwb)
+ * 3: browser 2 (luakit)
+ * 4: gimp
+ * 5: comics
+ * 6: pdf/documents
+ * 7: videos
+ * 8: games/steam
+ * 9: firefox/downloads */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Dwb",      NULL,       NULL,       1 << 1,       False,       -1 },
-	{ "Gimp",     NULL,       NULL,       1 << 3,       False,       -1 },
-	{ "URxvt",    NULL,       "download_dwb", 1 << 1,   True,        -1 },
-	{ "luakit",   NULL,       NULL,       1 << 2,       False,       -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       False,       -1 },
-	{ "Mcomix",   NULL,       NULL,       1 << 4,       False,       -1 },
-	{ NULL,       NULL,       "Steam",    1 << 7,       True,        -1 },
-	{ "Steam",    NULL,       NULL,       1 << 7,       True,        -1 },
-	{ "mplayer2", NULL,       NULL,       1 << 6,       True,        -1 },
-	{ "Gvbam",    NULL,       NULL,       1 << 7,       True,        -1 },
-	{ "Zathura",  NULL,       NULL,       1 << 5,       False,       -1 },
-	{ "Display",  NULL,       NULL,       0,            True,        -1 },
+	/* class      instance    title           tags mask  isfloating  monitor */
+    /* browsers */
+	{ "Dwb",      NULL,       NULL,           1 << 1,       False,       -1 },
+	{ "URxvt",    NULL,       "download_dwb", 1 << 1,       True,        -1 },
+	{ "luakit",   NULL,       NULL,           1 << 2,       False,       -1 },
+	{ "Firefox",  NULL,       NULL,           1 << 8,       False,       -1 },
+    /* miscelaneous */
+	{ "Gimp",     NULL,       NULL,           1 << 3,       False,       -1 },
+	{ "Mcomix",   NULL,       NULL,           1 << 4,       False,       -1 },
+	{ "Zathura",  NULL,       NULL,           1 << 5,       False,       -1 },
+	{ "mplayer2", NULL,       NULL,           1 << 6,       True,        -1 },
+	{ NULL,       NULL,       "Steam",        1 << 7,       True,        -1 },
+	{ "Steam",    NULL,       NULL,           1 << 7,       True,        -1 },
+	{ "Gvbam",    NULL,       NULL,           1 << 7,       True,        -1 },
+    /* Set 'display' windows to the tag they're spawned on. */
+	{ "Display",  NULL,       NULL,           0,            True,        -1 },
 };
 
 /* layout(s) */
-static const float mfact      = 0.60; /* factor of master area size [0.05..0.95] */
+static const float mfact      = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster      = 1;    /* number of clients in master area */
 static const Bool resizehints = True; /* True means respect size hints in tiled resizals */
 
@@ -71,11 +76,11 @@ static const char *dmenucmd[]    = { "dmenu_run", "-fn", font, "-nb",
     normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 
 /* Spawning windows */
-static const char *termcmd[]     = { "urxvtc", NULL };
-static const char *dwbcmd[]      = { "systemctl", "--user", "start", "dwb@:0",    NULL};
-static const char *luakitcmd[]   = { "systemctl", "--user", "start", "luakit@:0", NULL};
-static const char *mcomixcmd[]   = { "systemctl", "--user", "start", "mcomix@:0", NULL};
-static const char *zathuracmd[]  = { "systemctl", "--user", "start", "zathura@:0", NULL};
+static const char *termcmd[]      = { "urxvtc", NULL };
+static const char *dwbcmd[]       = { "systemctl", "--user", "start", "dwb@:0",     NULL};
+static const char *luakitcmd[]    = { "systemctl", "--user", "start", "luakit@:0",  NULL};
+static const char *mcomixcmd[]    = { "systemctl", "--user", "start", "mcomix@:0",  NULL};
+static const char *zathuracmd[]   = { "systemctl", "--user", "start", "zathura@:0", NULL};
 
 /* Systemd --user stuff */
 static const char *killcmd[]        = { "systemctl", "--user", "exit",                  NULL };
@@ -88,7 +93,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_e,      spawn,          {.v = killcmd } },
 	{ MODKEY|ShiftMask,             XK_r,      spawn,          {.v = restartcmd } },
-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_v,      togglebar,      {0} },
 	{ MODKEY|ShiftMask,             XK_v,      spawn,          {.v = barrestartcmd } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -108,7 +113,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
     /* See all tags
-     * Take this out. Just makes terms get tiny as hell.
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },*/
     { MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
