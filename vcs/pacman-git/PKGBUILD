@@ -4,7 +4,7 @@
 # Contributor: Andres Perera <aepd87@gmail.com>
 
 pkgname=pacman-git
-pkgbase=pacman
+_pkgname=pacman
 pkgver=4.0.3.526.g9803983
 pkgrel=1
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
@@ -26,12 +26,12 @@ source=('pacman::git+git://projects.archlinux.org/users/allan/pacman.git#branch=
 sha1sums=('SKIP')
 
 pkgver() {
-  cd "$srcdir/$pkgbase"
+  cd "$srcdir/$_pkgname"
   git describe --long | sed 's#-#.#g;s#^v##'
 }
 
 build() {
-  cd "$srcdir/$pkgbase"
+  cd "$srcdir/$_pkgname"
 
   ./autogen.sh
   ./configure \
@@ -49,11 +49,11 @@ build() {
 
 check() {
   cd "$srcdir"
-  make -C "$pkgbase" check
+  make -C "$_pkgname" check
 }
 
 package() {
-  cd "$srcdir/$pkgbase"
+  cd "$srcdir/$_pkgname"
 
   make DESTDIR="$pkgdir" install
 

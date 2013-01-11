@@ -1,7 +1,7 @@
 # Contributer: Piotr Husiatyński <phusiatynski@gmail.com>
 
 pkgname=python2-pyflakes_ast-git
-pkgbase=pyflakes
+_pkgname=pyflakes
 pkgver=43.06e149a
 pkgrel=1
 pkgdesc="faster smurfier pyflakes using _ast instead of compiler"
@@ -13,15 +13,15 @@ conflicts=("pyflakes" "pyflakes_ast-git")
 arch=("i686" "x86_64")
 license=("custom")
 
-source=("$pkgbase::git://github.com/kevinw/pyflakes.git")
+source=("$_pkgname::git://github.com/kevinw/pyflakes.git")
 md5sums=('SKIP')
 
 pkgver() {
-    cd "$srcdir/$pkgbase"
+    cd "$srcdir/$_pkgname"
     echo "$(git shortlog | grep -c '^\s\+').$(git describe --always)"
 }
 package() {
-	cd "$srcdir/$pkgbase"
+	cd "$srcdir/$_pkgname"
 	python2 setup.py install --root=${pkgdir}
-	install -D -m644 LICENSE ${pkgdir}/usr/share/licenses/${pkgbase}/LICENSE
+	install -D -m644 LICENSE ${pkgdir}/usr/share/licenses/${_pkgname}/LICENSE
 }

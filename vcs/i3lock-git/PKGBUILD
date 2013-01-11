@@ -2,7 +2,7 @@
 # Contributor: William Giokas <1007380@gmail.com>
 
 pkgname=i3lock-git
-pkgbase=i3lock
+_pkgname=i3lock
 pkgver=2.4.1.11.g2c9e46d
 pkgrel=1
 pkgdesc="An improved screenlocker based upon XCB and PAM"
@@ -18,19 +18,19 @@ source=(git://code.i3wm.org/i3lock)
 sha1sums=('SKIP')
 
 pkgver() {
-  cd "$srcdir/$pkgbase"
+  cd "$srcdir/$_pkgname"
   git describe --tags --long | sed 's/-/./g'
 }
 
 build() {
-  cd "$pkgbase"
+  cd "$_pkgname"
   make
   gzip i3lock.1
 }
 
 
 package() {  
-  cd "$pkgbase"
+  cd "$_pkgname"
 
   make DESTDIR="$pkgdir" install
   

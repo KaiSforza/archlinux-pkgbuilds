@@ -4,8 +4,8 @@
 # Based on [extra]'s git
 
 pkgname=git-git
-pkgbase=git
-pkgver=1.8.1.227.g44fe835
+_pkgname=git
+pkgver=1.8.1.290.ga27d83a
 pkgrel=1
 pkgdesc="The fast distributed version control system - Git version"
 arch=('i686' 'x86_64')
@@ -37,12 +37,12 @@ md5sums=('8e2648910fd5dd4f1c41d3c7fa9e9156'
 
 
 pkgver() {
-  cd "$srcdir/$pkgbase"
+  cd "$srcdir/$_pkgname"
   echo $(git describe --long | sed 's/-/./g;s/v//g')
 }
 
 build() {
-  cd "$srcdir/"$pkgbase
+  cd "$srcdir/"$_pkgname
 	
   export PYTHON_PATH='/usr/bin/python2'
   make prefix=/usr gitexecdir=/usr/lib/git-core \
@@ -57,7 +57,7 @@ build() {
 package() {
   export PYTHON_PATH='/usr/bin/python2'
 
-  cd "$srcdir/"$pkgbase
+  cd "$srcdir/"$_pkgname
   make prefix=/usr gitexecdir=/usr/lib/git-core \
     CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" \
     USE_LIBPCRE=1 \

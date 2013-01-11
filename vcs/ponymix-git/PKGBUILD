@@ -1,7 +1,7 @@
 # Maintainer: Dave Reisner <d@falconindy.com>
 
 pkgname=ponymix-git
-pkgbase=ponymix
+_pkgname=ponymix
 pkgver=154.597ef6c
 pkgrel=1
 pkgdesc="CLI PulseAudio Volume Control"
@@ -18,18 +18,18 @@ source=("git://github.com/falconindy/ponymix.git")
 md5sums=('SKIP')
 
 pkgver() {
-  cd $srcdir/$pkgbase
+  cd $srcdir/$_pkgname
   echo "$(git shortlog | grep -c '^\s\+').$(git describe --always --long)"
 }
 
 build() {
-  cd "$srcdir/$pkgbase"
+  cd "$srcdir/$_pkgname"
 
   make
 }
 
 package() {
-  make -C "$pkgbase" DESTDIR="$pkgdir" install
+  make -C "$_pkgname" DESTDIR="$pkgdir" install
 }
 
 # vim: ft=sh syn=sh et

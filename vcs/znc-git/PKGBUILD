@@ -1,6 +1,6 @@
 pkgname=znc-git
-pkgbase=znc
-pkgver=1.0.28.gf621627
+_pkgname=znc
+pkgver=1.0.45.gef59c23
 pkgrel=1
 pkgdesc='An IRC bouncer with modules & scripts support'
 url='http://znc.in/'
@@ -18,11 +18,11 @@ source=("git://github.com/znc/znc.git")
 md5sums=('SKIP')
 
 pkgver() {
-  cd $srcdir/$pkgbase
+  cd $srcdir/$_pkgname
   git describe | sed 's/-/./g;s/znc.//'
 }
 build() {
-  cd "$srcdir/$pkgbase"
+  cd "$srcdir/$_pkgname"
   ./autogen.sh
   ./configure --prefix=/usr \
     --enable-cyrus
@@ -33,6 +33,6 @@ build() {
 }
 
 package() {
-  cd "$srcdir/$pkgbase"
+  cd "$srcdir/$_pkgname"
   make DESTDIR="$pkgdir" install
 }
