@@ -14,6 +14,7 @@ source_safe(){ ## Taken from makepkg.sh for reading in files
 pkgbuilds="$HOME/aur/"
 packagesrepo="$pkglocation"
 packagesrepo="/home/wgiokas/.cache/pacman/pkg"
+archiverepo="/home/wgiokas/.cache/pacman/pkg/old"
 verbose="-v"
 reponame="personal"
 moreinfo="-i"
@@ -51,13 +52,13 @@ build() {
     if [[ ! -f PKGBUILD ]]; then
         exit 67;
     fi
-    paccache -r -c $packagesrepo -k 1 $1
+    paccache -m "$archiverepo" -c "$packagesrepo" -k 1 $1
     makepkg -sLc #|| exit 70
 }
 signrepos(){
     pushd "$packagesrepo"
     for f in $1*.pkg.tar.gz; do
-        paccache -r -c "$packagesrepo" -k 1 $1
+        paccache -m "$archiverepo" -c "$packagesrepo" -k 1 $1
         if [[ ! -f "${f}.sig" ]]; then
             gpg --detach-sign "$f"
         fi
@@ -97,7 +98,7 @@ return 0
 case "$1" in
     repo-update)
         shift
-        paccache -r -c $packagesrepo -k 1
+        paccache -m "$archiverepo" -c "$packagesrepo" -k 1
         signrepos "$1"
         ;;
     build)
@@ -116,9 +117,9 @@ case "$1" in
     clean)
         shift
         if [[ -z $1 ]]; then
-            paccache -r -c $packagesrepo -k 3
+            paccache -m "$archiverepo" -c "$packagesrepo" -k 1
         fi
-        paccache -r -c $packagesrepo -k 2 $1
+        paccache -m "$archiverepo" -c "$packagesrepo" -k 1 $1
         ;;
     update)
         shift
