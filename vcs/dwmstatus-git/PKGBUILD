@@ -1,13 +1,13 @@
 pkgname=dwmstatus-git
 _pkgname=dwmstatus
-pkgver=v0.2.2.0.gde7ebc8
+pkgver=v0.2.3.0.g7543fd3
 pkgrel=1
 pkgdesc="A simple C status bar for dwm"
 url="http://dwm.suckless.org/dwmstatus/"
 arch=('i686' 'x86_64')
 license=('MIT')
 options=(zipman)
-makedepends=('git')
+makedepends=('git' 'clang')
 provides=('dwmstatus')
 conflicts=('dwmstatus')
 source=(git+file:///home/wgiokas/git/KaiSforza/dwmstatus#branch=master
@@ -15,6 +15,7 @@ source=(git+file:///home/wgiokas/git/KaiSforza/dwmstatus#branch=master
 #source=(git@bitbucket.org:KaiSforza/dwmstatus.git)
 md5sums=('SKIP'
          '3616c0be3cdd8f8071256db2a89cbb73')
+
 
 pkgver() {
   cd "$srcdir/$_pkgname"
@@ -27,7 +28,7 @@ prepare() {
 
 build() {
   cd "$srcdir/$_pkgname"
-  make PREFIX=/usr
+  make CC=clang PREFIX=/usr
 }
 
 package() {
