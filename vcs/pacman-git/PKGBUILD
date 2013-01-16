@@ -20,18 +20,18 @@ conflicts=('pacman' 'pacman-contrib')
 options=('!libtool' '!strip')
 backup=(etc/pacman.conf
         etc/makepkg.conf)
-#source=('pacman::git+file:///home/wgiokas/git/archlinux/pacman#branch=working')
-source=('pacman::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working')
+#source=('pacman::git+file:///home/wgiokas/git/archlinux/pacman#branch=srcinfo-output')
+source=('pacman-allan::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working')
 #source=('pacman-official::git+git://projects.archlinux.org/pacman.git')
 sha1sums=('SKIP')
 
 pkgver() {
-  cd "$srcdir/$_pkgname"
+  cd "$srcdir/$_pkgname-allan"
   git describe --long | sed 's#-#.#g;s#^v##'
 }
 
 build() {
-  cd "$srcdir/$_pkgname"
+  cd "$srcdir/$_pkgname-allan"
 
   ./autogen.sh
   ./configure \
@@ -49,11 +49,11 @@ build() {
 
 check() {
   cd "$srcdir"
-  make -C "$_pkgname" check
+  make -C "$_pkgname-allan" check
 }
 
 package() {
-  cd "$srcdir/$_pkgname"
+  cd "$srcdir/$_pkgname-allan"
 
   make DESTDIR="$pkgdir" install
 
