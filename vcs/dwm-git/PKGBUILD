@@ -16,7 +16,7 @@ source=( config.h
 	dwm.desktop
   git+file:///home/wgiokas/git/KaiSforza/dwm#branch=patched)
   #git+http://git.suckless.org/dwm)
-md5sums=('7b50790c6ba63213df33f07707faaa05'
+md5sums=('f42710dd3144402db537162864f7c7d4'
          '939f403a71b6e85261d09fc3412269ee'
          'SKIP')
 
@@ -32,7 +32,6 @@ prepare() {
   sed -i 's/^CC =/#CC =/' config.mk
   sed -i 's/^CFLAGS/#CFLAGS/g' config.mk
   sed -i 's/^CPPFLAGS/#CPPFLAGS/g' config.mk
-  msg "CFLAGS = $CFLAGS"
 }
 
 pkgver() {
@@ -43,12 +42,12 @@ pkgver() {
 build() {
   cd "$srcdir/$_pkgname"
 
-  make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11
+  make CC=clang X11INC=/usr/include/X11 X11LIB=/usr/lib/X11
 }
 
 package() {
   cd "$srcdir/$_pkgname"
-  make PREFIX=/usr DESTDIR=$pkgdir install
+  make CC=clang PREFIX=/usr DESTDIR=$pkgdir install
   install -m644 -D LICENSE $pkgdir/usr/share/licenses/$pkgname/LICENSE
   install -m644 -D README $pkgdir/usr/share/doc/$pkgname/README
   install -m644 -D $srcdir/dwm.desktop $pkgdir/usr/share/xsessions/dwm.desktop
