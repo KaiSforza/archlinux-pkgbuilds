@@ -1,6 +1,6 @@
 pkgname=dwmstatus-git
 _pkgname=dwmstatus
-pkgver=v0.2.3.0.g7543fd3
+pkgver=v0.3.0.0.gd5cfad3
 pkgrel=1
 pkgdesc="A simple C status bar for dwm"
 url="http://dwm.suckless.org/dwmstatus/"
@@ -14,7 +14,7 @@ source=(git+file:///home/wgiokas/git/KaiSforza/dwmstatus#branch=master
         config.h)
 #source=(git@bitbucket.org:KaiSforza/dwmstatus.git)
 md5sums=('SKIP'
-         '3616c0be3cdd8f8071256db2a89cbb73')
+         '178b8860c6d5bc5c8297f7b36895e718')
 
 
 pkgver() {
