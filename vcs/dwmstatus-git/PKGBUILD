@@ -1,6 +1,6 @@
 pkgname=dwmstatus-git
 _pkgname=dwmstatus
-pkgver=v0.3.0.0.gd5cfad3
+pkgver=v0.3.0.1.gc0edd41
 pkgrel=1
 pkgdesc="A simple C status bar for dwm"
 url="http://dwm.suckless.org/dwmstatus/"
@@ -24,6 +24,7 @@ pkgver() {
 
 prepare() {
   cp "$srcdir/config.h" "$srcdir/$_pkgname"
+  sed -i "s/VERSION = .*/VERSION = ${pkgver}-${pkgrel}/g" ${srcdir}/${_pkgname}/config.mk
 }
 
 build() {
