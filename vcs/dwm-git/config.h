@@ -32,7 +32,7 @@ static const Rule rules[] = {
 	{ "Gimp",     NULL,       NULL,       1 << 3,       False,       -1 },
 	{ "URxvt",    NULL,       "download_dwb", 1 << 1,   True,        -1 },
 	{ "luakit",   NULL,       NULL,       1 << 2,       False,       -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 2,       False,       -1 },
+	{ "Firefox",  NULL,       NULL,       1 << 8,       False,       -1 },
 	{ "Mcomix",   NULL,       NULL,       1 << 4,       False,       -1 },
 	{ NULL,       NULL,       "Steam",    1 << 7,       True,        -1 },
 	{ "Steam",    NULL,       NULL,       1 << 7,       True,        -1 },
