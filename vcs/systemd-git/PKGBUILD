@@ -2,7 +2,7 @@
 
 pkgname=systemd-git
 _pkgname=systemd
-pkgver=v197.156.g46d785c
+pkgver=v197.161.gc3e31c7
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
@@ -30,7 +30,7 @@ backup=(etc/dbus-1/system.d/org.freedesktop.systemd1.conf
         etc/systemd/logind.conf
         etc/systemd/journald.conf
         etc/udev/udev.conf)
-install='systemd.install'
+install=systemd.install
 source=('git://anongit.freedesktop.org/systemd/systemd.git'
         'use-split-usr-path.patch'
         'initcpio-hook-udev'
