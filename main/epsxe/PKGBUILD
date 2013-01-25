@@ -20,14 +20,14 @@ license=('custom')
 install=epsxe.install
 options=(!strip)
 
-source=(http://www.epsxe.com/files/epsxe160lin.zip \
-        http://www.epsxe.com/files/epsxe152lin.zip \
-        epsxe.desktop \
+source=(http://www.epsxe.com/files/epsxe160lin.zip
+        http://www.epsxe.com/files/epsxe152lin.zip
+        epsxe.desktop
         epsxe.png) 
 
-md5sums=('32704cfc77939b9a1bd047f22b70eca2' \
-         '5834f34cb904b08d95abda057eff3981' \
-         '087234e20ae9147f83df24b69fc93bca' \
+md5sums=('32704cfc77939b9a1bd047f22b70eca2'
+         '5834f34cb904b08d95abda057eff3981'
+         '087234e20ae9147f83df24b69fc93bca'
          'eb0c46b8ae1355c589792f6be1835e47')
 
 package() {
@@ -51,8 +51,8 @@ package() {
 
   # installing files
   cp $srcdir/docs/* $pkgdir/usr/share/licenses/epsxe/
-  install -D -m644 $startdir/epsxe.desktop ${pkgdir}/usr/share/applications/epsxe.desktop || return 1
-  install -D -m644 $startdir/epsxe.png ${pkgdir}/usr/share/pixmaps/epsxe.png || return 1
+  install -D -m644 $srcdir/epsxe.desktop ${pkgdir}/usr/share/applications/epsxe.desktop
+  install -D -m644 $srcdir/epsxe.png ${pkgdir}/usr/share/pixmaps/epsxe.png
 
   # permissions
   if [ -z `egrep -i "^games" /etc/group` ]; then
