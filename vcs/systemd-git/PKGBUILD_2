@@ -1,8 +1,8 @@
 # Maintainer: Dave Reisner <dreisner@archlinux.org>
 
-pkgname=systemd-git
+pkgname=systemd-bisect-git
 _pkgname=systemd-personal
-pkgver=v197.196.gea6e477
+pkgver=v197.168.g11bf3c3
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
@@ -31,24 +31,24 @@ backup=(etc/dbus-1/system.d/org.freedesktop.systemd1.conf
         etc/systemd/journald.conf
         etc/udev/udev.conf)
 install=systemd.install
-source=('systemd-personal::git+file:///home/wgiokas/git/KaiSforza/systemd#branch=analyze-c'
-        #'systemd::git://anongit.freedesktop.org/systemd/systemd.git#tag=v197'
-        #'use-split-usr-path.patch'
+source=('systemd-personal::git+file:///home/wgiokas/git/KaiSforza/systemd#commit='
+        #'systemd::git://anongit.freedesktop.org/systemd/systemd.git'
+        'use-split-usr-path.patch'
         'initcpio-hook-udev'
         'initcpio-install-udev'
         'initcpio-install-timestamp')
 
 pkgver() {
 	cd "$srcdir/$_pkgname"
-	echo $(git describe --long --always | sed 's#-#.#g')
+	echo $(git describe --long | sed 's#-#.#g')
 }
 
-#prepare() {
-#  cd "$srcdir/$_pkgname"
-#
-#  git apply -v "$srcdir/use-split-usr-path.patch"
-#
-#}
+prepare() {
+  cd "$srcdir/$_pkgname"
+
+  #git apply -v "$srcdir/use-split-usr-path.patch"
+
+}
 build(){
   cd "$srcdir/$_pkgname"
   ./autogen.sh
@@ -62,8 +62,10 @@ build(){
       --enable-gtk-doc \
       --disable-audit \
       --disable-ima \
-      --with-sysvinit-path= \
-      --with-sysvrcnd-path= 
+      --with-distro=arch
+
+      #--with-sysvinit-path= \
+      #--with-sysvrcd-path=
 
   make
 }
@@ -86,9 +88,9 @@ package() {
 
   # move bash-completion and symlink for loginctl
   install -Dm644 "$pkgdir/etc/bash_completion.d/systemd-bash-completion.sh" \
-    "$pkgdir/usr/share/bash-completion/completions/systemctl"
-  for ctl in {login,journal,timedate,locale,hostname,systemd-coredump}ctl udevadm; do
-    ln -s systemctl "$pkgdir/usr/share/bash-completion/completions/$ctl"
+      "$pkgdir/usr/share/bash-completion/completions/systemctl"
+  for b in {login,journal,locale,timedate,hostname}ctl; do
+    ln -s systemctl "$pkgdir/usr/share/bash-completion/completions/$b"
   done
   rm -rf "$pkgdir/etc/bash_completion.d"
 
@@ -99,36 +101,18 @@ package() {
   # get rid of RPM macros
   rm -r "$pkgdir/etc/rpm"
 
-  # the path to udevadm is hardcoded in some places
-  install -d "$pkgdir/sbin"
-  ln -s ../usr/bin/udevadm "$pkgdir/sbin/udevadm"
-
-  # udevd is no longer udevd because systemd. why isn't udevadm now udevctl?
-  ln -s ../lib/systemd/systemd-udevd "$pkgdir/usr/bin/udevd"
-
-  # add back tmpfiles.d/legacy.conf
-  install -m644 "$_pkgname/tmpfiles.d/legacy.conf" "$pkgdir/usr/lib/tmpfiles.d"
-
   # Replace dialout/tape/cdrom group in rules with uucp/storage/optical group
-  sed -i 's#GROUP="dialout"#GROUP="uucp"#g;
-          s#GROUP="tape"#GROUP="storage"#g;
-          s#GROUP="cdrom"#GROUP="optical"#g' "$pkgdir"/usr/lib/udev/rules.d/*.rules
+  sed -i -e 's#GROUP="dialout"#GROUP="uucp"#g' \
+         -e 's#GROUP="tape"#GROUP="storage"#g' \
+         -e 's#GROUP="cdrom"#GROUP="optical"#g' "$pkgdir"/usr/lib/udev/rules.d/*.rules
 
   # add mkinitcpio hooks
+  install -Dm644 "$srcdir/initcpio-install-timestamp" "$pkgdir/usr/lib/initcpio/install/timestamp"
   install -Dm644 "$srcdir/initcpio-install-udev" "$pkgdir/usr/lib/initcpio/install/udev"
   install -Dm644 "$srcdir/initcpio-hook-udev" "$pkgdir/usr/lib/initcpio/hooks/udev"
-  install -Dm644 "$srcdir/initcpio-install-timestamp" "$pkgdir/usr/lib/initcpio/install/timestamp"
-
-  ### split out manpages for sysvcompat
-  rm -rf "$srcdir/_sysvcompat"
-  install -dm755 "$srcdir"/_sysvcompat/usr/share/man/man8/
-  mv "$pkgdir"/usr/share/man/man8/{telinit,halt,reboot,poweroff,runlevel,shutdown}.8 \
-     "$srcdir"/_sysvcompat/usr/share/man/man8
-
-  # create /var/log/journal. users can control the actual log destination via journald.conf
-  install -dm755 "$pkgdir/var/log/journal"
 }
 md5sums=('SKIP'
+         'fd5b5f04ab0a847373d357555129d4c0'
          'e99e9189aa2f6084ac28b8ddf605aeb8'
          'fb37e34ea006c79be1c54cbb0f803414'
          'df69615503ad293c9ddf9d8b7755282d')

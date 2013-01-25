@@ -5,8 +5,8 @@
 
 pkgname=pacman-git
 _pkgname=pacman
-pkgver=4.0.3.529.g2a35e60
-pkgrel=1
+pkgver=4.0.3.540.g97b37c1
+pkgrel=3
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
 arch=('i686' 'x86_64')
 url="http://www.archlinux.org/pacman/"
@@ -14,7 +14,7 @@ license=('GPL')
 depends=('bash' 'curl' 'gpgme' 'libarchive' 'pacman-mirrorlist')
 makedepends=('git' 'asciidoc')
 optdepends=('fakeroot: for makepkg usage as normal user')
-checkdepends=('python2')
+checkdepends=('python2' 'fakechroot')
 provides=('pacman' 'pacman-contrib' 'libalpm.so')
 conflicts=('pacman' 'pacman-contrib')
 options=('!libtool' '!strip')
@@ -41,7 +41,7 @@ build() {
     --enable-doc \
     --enable-git-version \
     --enable-debug \
-    --with-scriptlet-shell=bash
+    --with-scriptlet-shell=/bin/bash
 
   make
   make -C contrib
