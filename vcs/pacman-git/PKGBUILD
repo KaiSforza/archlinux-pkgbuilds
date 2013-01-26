@@ -5,8 +5,8 @@
 
 pkgname=pacman-git
 _pkgname=pacman
-pkgver=4.0.3.540.g97b37c1
-pkgrel=3
+pkgver=4.0.3.540.g7b327c4
+pkgrel=1
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
 arch=('i686' 'x86_64')
 url="http://www.archlinux.org/pacman/"
