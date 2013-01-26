@@ -7,8 +7,8 @@
 
 pkgbase=linux-mainline
 #pkgname=linux-mainline
-_gitver=v3.8-rc4
-pkgver=3.8.rc4.0.g7d1f9ae
+_gitver=v3.8-rc5
+pkgver=3.8.rc5.0.g949db15
 pkgrel=2
 arch=('x86_64')
 url="http://www.kernel.org/"
@@ -31,7 +31,7 @@ md5sums=('SKIP'
          '9d983dff4255c50720ac080b632bfddb'
          '6a8a28db0c8d3ec0bffff749cd4fa5cb'
          '9d3c56a4b999c8bfbd4018089a62f662'
-         'eb410ba1a47fb84a67b718d42e9ef016')
+         '3cf2ce220f8a82d51b4dd0b75614b5a7')
 
 _rcnum=${_gitver#*-}
 _kernelname=${pkgbase#linux}
@@ -79,13 +79,6 @@ prepare() {
   # save configuration for later reuse
   mkdir -p "$srcdir/../configs"
   cat .config > "$srcdir/../configs/config.x86_64.last"
-
-  # Change some things outside of the repository
-  # set correct depmod command for install
-  sed \
-    -e  "s/KERNEL_NAME=.*/KERNEL_NAME=${_kernelname}/" \
-    -e  "s/KERNEL_VERSION=.*/KERNEL_VERSION=${_kernver}/" \
-    -i "${srcdir}/linux.install"
 }
 
 build() {
@@ -113,7 +106,6 @@ _package() {
 
   # get kernel version
   _kernver="$(make LOCALVERSION= kernelrelease)"
-  msg "$_kernver"
   _basekernel=${_kernver%%-*}
   _basekernel=${_basekernel%.*}
 
@@ -126,6 +118,13 @@ _package() {
 
   # install fallback mkinitcpio.conf file and preset file for kernel
   install -D -m644 "${srcdir}/linux.preset" "${pkgdir}/etc/mkinitcpio.d/${pkgbase}.preset"
+
+  # Change some things outside of the repository
+  # set correct depmod command for install
+  sed \
+    -e  "s/KERNEL_NAME=.*/KERNEL_NAME=${_kernelname}/" \
+    -e  "s/KERNEL_VERSION=.*/KERNEL_VERSION=${_kernver}/" \
+    -i "${srcdir}/linux.install"
 
   # Set up the preset for mkinitcpio
   sed \

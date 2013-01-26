@@ -1,6 +1,6 @@
 pkgname=dwmstatus-git
 _pkgname=dwmstatus
-pkgver=v0.3.0.2.ga9f74c7
+pkgver=v0.4.0.0.g9c2f70b
 pkgrel=1
 pkgdesc="A simple C status bar for dwm"
 url="http://dwm.suckless.org/dwmstatus/"
