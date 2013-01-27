@@ -9,7 +9,7 @@ pkgbase=linux-mainline
 #pkgname=linux-mainline
 _gitver=v3.8-rc5
 pkgver=3.8.rc5.0.g949db15
-pkgrel=2
+pkgrel=3
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -28,7 +28,7 @@ source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#ta
         'linux.install')
 
 md5sums=('SKIP'
-         '9d983dff4255c50720ac080b632bfddb'
+         '7e87d8206baaf7696306b925f034382e'
          '6a8a28db0c8d3ec0bffff749cd4fa5cb'
          '9d3c56a4b999c8bfbd4018089a62f662'
          '3cf2ce220f8a82d51b4dd0b75614b5a7')
@@ -77,8 +77,7 @@ prepare() {
   #yes "" | make config >/dev/null
 
   # save configuration for later reuse
-  mkdir -p "$srcdir/../configs"
-  cat .config > "$srcdir/../configs/config.x86_64.last"
+  cat .config > "$srcdir/config.x86_64.last"
 }
 
 build() {

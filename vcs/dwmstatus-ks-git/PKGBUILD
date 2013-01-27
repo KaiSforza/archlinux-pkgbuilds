@@ -1,37 +1,34 @@
-pkgname=dwmstatus-git
-_pkgname=dwmstatus
-pkgver=v0.4.0.0.g9c2f70b
-pkgrel=1
-pkgdesc="A simple C status bar for dwm"
-url="http://dwm.suckless.org/dwmstatus/"
+# Maintainer: William Giokas <1007380@gmail.com>
+
+pkgname=dwmstatus-ks-git
+_pkgname=dwmstatus-ks
+pkgver=0.4.0.0.g9c2f70b
+pkgrel=2
+pkgdesc="A simple C status bar, fork by KaiSforza, git version"
+url="https://bitbucket.org/KaiSforza/dwmstatus"
 arch=('i686' 'x86_64')
 license=('MIT')
 options=(zipman)
-makedepends=('git' 'clang')
+makedepends=('git' 'pacman>4.0.3')
 provides=('dwmstatus')
 conflicts=('dwmstatus')
-source=(git+file:///home/wgiokas/git/KaiSforza/dwmstatus#branch=working
-        config.h)
-#source=(git@bitbucket.org:KaiSforza/dwmstatus.git)
+source=('dwmstatus-ks::git+https://bitbucket.org/KaiSforza/dwmstatus.git#branch=working'
+        'config.h')
 md5sums=('SKIP'
          'SKIP')
 
-
 pkgver() {
   cd "$srcdir/$_pkgname"
-  git describe --tags --long --always | tr - .
+  git describe --tags --long --always | sed 's/-/./g;s/v//'
 }
-
 prepare() {
   cp "$srcdir/config.h" "$srcdir/$_pkgname"
   sed -i "s/VERSION = .*/VERSION = ${pkgver}-${pkgrel}/g" ${srcdir}/${_pkgname}/config.mk
 }
-
 build() {
   cd "$srcdir/$_pkgname"
-  make CC=clang PREFIX=/usr
+  make PREFIX=/usr
 }
-
 package() {
   cd "$srcdir/$_pkgname"
   make PREFIX=/usr DESTDIR=$pkgdir install
