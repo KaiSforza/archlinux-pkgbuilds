@@ -77,10 +77,10 @@ static const char *dmenucmd[]    = { "dmenu_run", "-fn", font, "-nb",
 
 /* Spawning windows */
 static const char *termcmd[]      = { "urxvtc", NULL };
-static const char *dwbcmd[]       = { "systemctl", "--user", "start", "dwb@:0",     NULL};
-static const char *luakitcmd[]    = { "systemctl", "--user", "start", "luakit@:0",  NULL};
-static const char *mcomixcmd[]    = { "systemctl", "--user", "start", "mcomix@:0",  NULL};
-static const char *zathuracmd[]   = { "systemctl", "--user", "start", "zathura@:0", NULL};
+static const char *dwbcmd[]       = { "systemctl", "--user", "start", "dwb",     NULL};
+static const char *luakitcmd[]    = { "systemctl", "--user", "start", "luakit",  NULL};
+static const char *mcomixcmd[]    = { "systemctl", "--user", "start", "mcomix",  NULL};
+static const char *zathuracmd[]   = { "systemctl", "--user", "start", "zathura", NULL};
 
 /* Systemd --user stuff */
 static const char *killcmd[]        = { "systemctl", "--user", "exit",                  NULL };
