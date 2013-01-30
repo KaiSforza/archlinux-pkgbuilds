@@ -1,7 +1,7 @@
 # Maintainer: Jouke Witteveen <j.witteveen@gmail.com>
 
 pkgname=netctl-git
-pkgver=0.2.5.g07f7d82
+pkgver=0.3
 pkgver() {
     cd "$srcdir/netctl"
     git describe | tr - .

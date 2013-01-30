@@ -1,14 +1,14 @@
 pkgname=vim-hg
-pkgver=4038.990d0f9400dc
+pkgver=4062.274c841f033a
 pkgrel=1
 pkgdesc='Vi Improved, a highly configurable, improved version of the vi text editor'
 arch=(i686 x86_64)
 license=('custom:vim')
 url="http://www.vim.org"
 depends=('gpm' 'perl' 'python' 'python2')
-makedepends=('wget' 'sed' 'grep' 'gettext' 'mercurial')
+makedepends=('sed' 'grep' 'gettext' 'mercurial')
 conflicts=(vim vim-runtime)
-provides=(vim=7.3)
+provides=(vim=7.3 vim-runtime=7.3)
 source=("vimrc"
         "archlinux.vim"
         "vim::hg+https://vim.googlecode.com/hg/")
