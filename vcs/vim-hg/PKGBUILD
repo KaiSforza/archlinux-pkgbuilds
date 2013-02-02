@@ -1,5 +1,5 @@
 pkgname=vim-hg
-pkgver=4062.274c841f033a
+pkgver=4089.30b3b1da0350
 pkgrel=1
 pkgdesc='Vi Improved, a highly configurable, improved version of the vi text editor'
 arch=(i686 x86_64)

@@ -3,7 +3,7 @@
 # Maintainer: Thomas Bächler <thomas@archlinux.org> ([core] package)
 
 pkgname=mkinitcpio-git
-pkgver=0.12.0.18.g0ca6cc5
+pkgver=0.13.0.0.g0cc488d
 pkgrel=1
 pkgdesc="Modular initramfs image creation utility - git checkout"
 arch=('any')

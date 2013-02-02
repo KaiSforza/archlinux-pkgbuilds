@@ -10,7 +10,7 @@
 
 pkgname=tp_smapi-mainline
 pkgver=0.41
-pkgrel=6
+pkgrel=7
 pkgdesc="Modules for ThinkPad's SMAPI functionality, mainline kernel"
 arch=('i686' 'x86_64')
 url='https://github.com/evgeni/tp_smapi'

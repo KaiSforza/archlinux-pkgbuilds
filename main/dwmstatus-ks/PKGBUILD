@@ -3,11 +3,12 @@
 pkgname=dwmstatus-ks
 _pkgname=dwmstatus
 pkgver=0.4.0
-pkgrel=2
+pkgrel=3
 pkgdesc="A simple C status bar for dwm, fork by KaiSforza"
 url=("https://bitbucket.org/KaiSforza/dwmstatus")
 arch=('i686' 'x86_64')
 license=('MIT')
+makedepends=('libx11')
 provides=('dwmstatus')
 conflicts=('dwmstatus')
 source=("https://bitbucket.org/KaiSforza/dwmstatus/downloads/${_pkgname}-${pkgver}.tar.gz"
