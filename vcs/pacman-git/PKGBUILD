@@ -5,7 +5,7 @@
 
 pkgname=pacman-git
 _pkgname=pacman
-pkgver=4.0.3.551.ga4936b3
+pkgver=4.0.3.553.gd16ce5f
 pkgrel=1
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
 arch=('i686' 'x86_64')
