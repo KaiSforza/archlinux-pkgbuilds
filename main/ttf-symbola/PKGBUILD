@@ -19,7 +19,5 @@ package()
     install -m 644 -D "${srcdir}/Symbola.pdf" "${pkgdir}/usr/share/doc/${pkgname}/Symbola.pdf"
 }
 
-md5sums=('ffd4b75d02e9bdc9a8c8737971f287c7'
-         'bc1709dc3b1f6a7545ab366923e01a1c')
 md5sums=('11c305555e9c7659cbb0db0b181cf9a7'
          'bc1709dc3b1f6a7545ab366923e01a1c')
