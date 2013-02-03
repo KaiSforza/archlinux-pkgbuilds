@@ -4,7 +4,7 @@
 # Contributor: William Giokas <1007380@gmail.com>
 pkgname=ii
 pkgver=1.7
-pkgrel=1
+pkgrel=2
 pkgdesc="A minimalist FIFO and filesystem-based IRC client"
 license=(MIT)
 arch=(i686 x86_64)
@@ -23,6 +23,4 @@ build() {
 package() {
 	cd "$srcdir/$pkgname-$pkgver"
 	make PREFIX=/usr MANDIR=/usr/share/man DESTDIR="$pkgdir" install
-	chmod 755 "$pkgdir/usr/bin/ii"
-	install -m644 -D LICENSE "$pkgdir/usr/share/licenses/$pkgname/COPYING"
 }
