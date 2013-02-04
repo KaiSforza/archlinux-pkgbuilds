@@ -1,7 +1,7 @@
 # Contributor: Evan Gates    <evan.gates@gmail.com>
 # Contributor: Dag  Odenhall <dag.odenhall@gmail.com>
 # Contributor: Chris Brannon <cmbrannon@cox.net>
-# Contributor: William Giokas <1007380@gmail.com>
+# Maintainer: William Giokas <1007380@gmail.com>
 pkgname=ii
 pkgver=1.7
 pkgrel=2
