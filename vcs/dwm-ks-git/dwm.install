@@ -1,0 +1,5 @@
+post_install() {
+  echo "-- Clone the repository and edit the files to change the configuration."
+  echo "--  # git clone git@bitbucket.org:KaiSforza/dwm.git"
+  echo "-- See \`man dwm\` for keybindings."
+}
