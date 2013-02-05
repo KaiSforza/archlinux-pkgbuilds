@@ -1,0 +1,46 @@
+# Maintainer: Dmitry Korzhevin <dkorzhevin AT gmail DOT com>
+# Contributor:  C.Coutinho <kikijump[at]gmail[dot]com>
+# Contributor: Grigorios Bouzakis <grbzks[at]gmail[dot]com>, TDY <tdy@gmx.com>
+
+pkgname=tmux-git
+pkgver=1.7.55.g675c6b3
+pkgrel=1
+pkgdesc="A terminal multiplexer"
+url="http://tmux.sourceforge.net/"
+arch=('i686' 'x86_64')
+license=('BSD')
+depends=('ncurses' 'libevent')
+makedepends=('git')
+provides=('tmux')
+conflicts=('tmux')
+
+source=(LICENSE
+        git://tmux.git.sourceforge.net/gitroot/tmux/tmux)
+md5sums=('71601bc37fa44e4395580b321963018e'
+         'SKIP')
+_gitname=tmux
+
+pkgver() {
+  cd "$srcdir/$_gitname"
+  git describe --tags --always --long | tr - .
+}
+
+build() {
+  cd "$srcdir/$_gitname"
+  ./autogen.sh
+  ./configure --prefix=/usr
+  make
+}
+
+package() {
+  cd "$srcdir/$_gitname"
+  make install DESTDIR=$pkgdir
+  install -Dm644 ../LICENSE "$pkgdir/usr/share/licenses/tmux/LICENSE"
+
+  install -dm755 "$pkgdir/usr/share/tmux/"
+  install -m644 examples/* "$pkgdir/usr/share/tmux/"
+  install -Dm644 examples/tmux.vim "$pkgdir/usr/share/vim/vimfiles/syntax/tmux.vim"
+
+  install -d $pkgdir/usr/share/bash-completion/completions/
+  mv $pkgdir/usr/share/tmux/bash_completion_tmux.sh $pkgdir/usr/share/bash-completion/completions/tmux
+}

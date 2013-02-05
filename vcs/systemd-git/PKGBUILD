@@ -2,7 +2,7 @@
 
 pkgname=systemd-git
 _pkgname=systemd-personal
-pkgver=v197.243.gb26ee6d
+pkgver=v197.248.g1fa4dd9
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
@@ -31,7 +31,7 @@ backup=(etc/dbus-1/system.d/org.freedesktop.systemd1.conf
         etc/systemd/journald.conf
         etc/udev/udev.conf)
 install=systemd.install
-source=('systemd-personal::git+file:///home/wgiokas/git/KaiSforza/systemd#branch=analyze-c'
+source=('systemd-personal::git+file:///home/wgiokas/git/KaiSforza/systemd#branch=working'
         #'systemd::git://anongit.freedesktop.org/systemd/systemd.git'
         #'use-split-usr-path.patch'
         'initcpio-hook-udev'

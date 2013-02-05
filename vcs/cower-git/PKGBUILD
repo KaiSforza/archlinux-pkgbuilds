@@ -2,7 +2,7 @@
 
 pkgname=cower-git
 _pkgname=cower
-pkgver=7.10.ga9a6a20
+pkgver=8.1.g2a6f071
 pkgrel=1
 pkgdesc="A simple AUR agent with a pretentious name"
 arch=('i686' 'x86_64')
