@@ -1,0 +1,27 @@
+pkgname=minetest
+pkgver=0.4.4
+pkgrel=0
+pkgdesc='An Infiniminer/Minecraft inspired game'
+arch=('i686' 'x86_64')
+url='http://minetest.net/'
+license=('GPL')
+depends=('bzip2' 'sqlite3' 'libgl' 'libxxf86vm' 'openal' 'libvorbis')
+makedepends=('cmake' 'irrlicht' 'mesa' 'libpng' 'zlib')
+conflicts=('minetest-hg')
+source=($pkgname-$pkgver.tar.gz::https://github.com/celeron55/$pkgname/tarball/$pkgver
+	${pkgname}_game-$pkgver.tar.gz::https://github.com/celeron55/${pkgname}_game/tarball/$pkgver)
+md5sums=('c41363d05ab32a45baf3fbb1d55f524a'
+         'eab0ba2963d1f80815177b0f36081644')
+
+build() {
+	cd "$srcdir"/celeron55-minetest-*
+	cmake . -DCMAKE_INSTALL_PREFIX=/usr
+	make
+}
+
+package() {
+	cd "$srcdir"/celeron55-minetest-*
+	make DESTDIR="$pkgdir" install
+
+	mv "$srcdir"/celeron55-minetest_game-* "$pkgdir"/usr/share/minetest/games/minetest
+}

@@ -3,8 +3,8 @@
 
 pkgname=i3-git
 _pkgname=i3
-pkgver=4.4.81.g7d9c207
-pkgrel=3
+pkgver=4.4.120.g0a0d66d
+pkgrel=1
 pkgdesc="An improved dynamic tiling window manager"
 arch=('i686' 'x86_64')
 url="http://i3wm.org/"

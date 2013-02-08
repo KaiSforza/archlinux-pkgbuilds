@@ -1,0 +1,34 @@
+# Maintainer: Daniel Micay <danielmicay@gmail.com>
+
+pkgname=vim-youcompleteme-git
+pkgver=20130205
+pkgrel=1
+pkgdesc='A code-completion engine for Vim'
+arch=(i686 x86_64)
+url='http://valloric.github.com/YouCompleteMe/'
+license=(GPL3)
+groups=(vim-plugins)
+depends=(vim clang)
+makedepends=(git)
+provides=(vim-youcompleteme)
+conflicts=(vim-youcompleteme)
+install=vimdoc.install
+
+source=(git+https://github.com/Valloric/YouCompleteMe.git)
+_gitname=YouCompleteMe
+
+build() {
+  cd "$srcdir/$_gitname"
+
+  cd cpp
+
+  cmake -G "Unix Makefiles" -DEXTERNAL_LIBCLANG_PATH=/usr/lib/llvm/libclang.so
+  make ycm_core
+}
+
+package() {
+  cd "$srcdir/$_gitname"
+  mkdir -p "$pkgdir/usr/share/vim/vimfiles"
+  cp -a autoload doc plugin python "$pkgdir/usr/share/vim/vimfiles"
+  ln -s /usr/lib/llvm/libclang.so "$pkgdir/usr/share/vim/vimfiles/python/"
+}
