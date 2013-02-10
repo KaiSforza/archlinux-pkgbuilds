@@ -1,17 +1,18 @@
 # Contributor: portix <portix@gmx.net>
 
+export CC=clang
 pkgname=dwb-hg
-pkgver=1751.fd59b6aa170d
+pkgver=1752.d7b97b8988ad
 pkgrel=1
 pkgdesc="A webkit web browser with vi-like keyboard shortcuts, latest hg-pull" 
 url="http://portix.bitbucket.org/dwb/"
 arch=('i686' 'x86_64')
 license=('GPL')
+makedepends=('mercurial')
 depends=('webkitgtk2' 'desktop-file-utils')
 provides=(dwb)
 install=dwb.install
 conflicts=('dwb' 'dwb-gtk3-hg' 'dwb-gtk3')
-makedepends=('mercurial')
 
 source=("hg+https://bitbucket.org/portix/dwb")
 md5sums=('SKIP')

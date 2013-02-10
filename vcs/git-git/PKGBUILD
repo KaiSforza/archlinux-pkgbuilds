@@ -3,9 +3,10 @@
 # Contributor: Michael Rosset <mrosset@uarch.org>
 # Based on [extra]'s git
 
+export CC=clang
 pkgname=git-git
 _pkgname=git
-pkgver=1.8.1.3.535.ga923c31
+pkgver=1.8.1.3.556.gb3310b5
 pkgrel=1
 pkgdesc="The fast distributed version control system - Git version"
 arch=('i686' 'x86_64')
