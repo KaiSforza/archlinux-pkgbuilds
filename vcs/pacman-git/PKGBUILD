@@ -3,9 +3,11 @@
 # Contributor: godane <slaxemulator@gmail.com.com>
 # Contributor: Andres Perera <aepd87@gmail.com>
 
+export CC=clang
+export CXX=clang
 pkgname=pacman-git
 _pkgname=pacman
-pkgver=4.0.3.562.gb36826c
+pkgver=4.0.3.565.g5cf3704
 pkgrel=1
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
 arch=('i686' 'x86_64')
