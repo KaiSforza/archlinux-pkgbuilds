@@ -4,11 +4,10 @@
 # Contributor: Andres Perera <aepd87@gmail.com>
 
 export CC=clang
-export CXX=clang
 pkgname=pacman-git
 _pkgname=pacman
-pkgver=4.0.3.565.g5cf3704
-pkgrel=1
+pkgver=4.0.3.570.g3944584
+pkgrel=3
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
 arch=('i686' 'x86_64')
 url="http://www.archlinux.org/pacman/"
@@ -43,7 +42,7 @@ build() {
     --enable-doc \
     --enable-git-version \
     --enable-debug \
-    --with-scriptlet-shell=/bin/bash
+    --with-scriptlet-shell=/usr/bin/bash
 
   make
   make -C contrib
