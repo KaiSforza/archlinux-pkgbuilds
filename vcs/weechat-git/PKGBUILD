@@ -3,22 +3,21 @@
 # Contributor: Licia Todd <tigrmesh at aol dot com>
 # Contributor: Tim Zebulla <amon at faumrahrer dot de>
 
+export CC=clang
 pkgname=weechat-git
 _pkgname=weechat
 pkgver=v0.4.0.52.gf7811b0
-pkgrel=1
+pkgrel=2
 pkgdesc="Fast, light & extensible IRC client (curses UI)"
 arch=('i686' 'x86_64')
 url="http://www.weechat.org/"
 license=('GPL3')
 depends=('gnutls')
-makedepends=('git' 'cmake' 'pkgconfig' 'perl' 'python2' 'lua' 'tcl' 'ruby' 'aspell')
+makedepends=('git' 'cmake' 'pkgconfig' 'perl' 'python2' 'lua' 'tcl' 'ruby' 'aspell' 'clang')
 optdepends=('perl' 'python2' 'lua' 'tcl' 'ruby' 'aspell')
 provides=('weechat')
 conflicts=('weechat')
 options=(!libtool)
-#source=("git://git.sv.gnu.org/weechat.git")
-#source=("git+http://git.savannah.gnu.org/r/weechat.git")
 source=("git://git.sv.gnu.org/weechat.git")
 md5sums=('SKIP')
 
@@ -28,15 +27,12 @@ pkgver() {
 }
 
 build() {
-  rm -rf "$srcdir/build"
-  mkdir -p "$srcdir/build"
-  pushd "$srcdir/build"
-  export CC=clang
+  cd "$srcdir/$_pkgname"
   cmake "$srcdir/$_pkgname" -DPREFIX=/usr \
         -DPYTHON_EXECUTABLE=/usr/bin/python2 \
         -DPYTHON_LIBRARY=/usr/lib/libpython2.7.so
 }
 
 package() {
-  make -C "$srcdir/build" DESTDIR="${pkgdir}/" install
+  make -C "$srcdir/$_pkgname" DESTDIR="${pkgdir}/" install
 }

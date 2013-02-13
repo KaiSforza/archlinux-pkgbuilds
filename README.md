@@ -2,8 +2,6 @@
 
 Note, these are not all my work. Most are simply modified by me.
 
-The `mangle-git`, `dwmstatus-ks` and `tp_smapi-mainline`.
-
 Also, the `*-git` ones only work with `pacman-git`, so beware. (the `linux-mainline` one does too.)
 
 If you want to use any of these pkgbuilds, I cannot be responsible for anything they might do, and all that nonsense. 
