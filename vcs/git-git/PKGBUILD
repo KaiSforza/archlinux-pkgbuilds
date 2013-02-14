@@ -6,14 +6,13 @@
 export CC=clang
 pkgname=git-git
 _pkgname=git
-pkgver=1.8.1.3.566.gaa39828
+pkgver=1.8.1.3.568.g5bf72ed
 pkgrel=1
 pkgdesc="The fast distributed version control system - Git version"
 arch=('i686' 'x86_64')
 url="http://git-scm.com/"
 license=('GPL2')
 depends=('curl' 'expat>=2.0' 'perl-error' 'perl>=5.14.0' 'openssl' 'pcre')
-#makedepends=('git' 'asciidoc' 'xmlto' 'docbook-xsl' 'python2' 'emacs')
 makedepends=('git' 'asciidoc' 'xmlto' 'docbook-xsl' 'python2')
 optdepends=('tk: gitk and git gui'
             'perl-libwww: git svn'
@@ -36,7 +35,7 @@ source=('git-daemon'
 
 md5sums=('8e2648910fd5dd4f1c41d3c7fa9e9156'
          '2e42bf97779a1c6411d89043334c9e78'
-         'ec6d23d14e4b2286c4c7c9a855386ea4'
+         '579f698a6d49d72ce9894b8d36369261'
          'f67869315c2cc112e076f0c73f248002'
          'SKIP')
 
@@ -54,9 +53,6 @@ build() {
     CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" \
     USE_LIBPCRE=1 \
     NO_CROSS_DIRECTORY_HARDLINKS=1 all man
-
-  #cd contrib/emacs
-  #make prefix=/usr
 }
     
 package() {
@@ -78,10 +74,6 @@ package() {
   sed -i 's|#![ ]*/usr/bin/env python|#!/usr/bin/env python2|' \
     $(find "$pkgdir" -name '*.py') \
     "$pkgdir"/usr/share/git/gitview/gitview
-
-  # emacs interface
-  #cd contrib/emacs
-  #make prefix=/usr DESTDIR="$pkgdir" install
 
   # remove perllocal.pod, .packlist, and empty directories.
   rm -rf "$pkgdir"/usr/lib/perl5

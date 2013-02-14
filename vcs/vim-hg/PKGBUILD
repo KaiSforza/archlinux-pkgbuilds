@@ -1,6 +1,7 @@
+export CC=clang
 pkgname=vim-hg
-pkgver=4106.ba8835947b8b
-pkgrel=1
+pkgver=4128.80ffecafc8f9
+pkgrel=2
 pkgdesc='Vi Improved, a highly configurable, improved version of the vi text editor'
 arch=(i686 x86_64)
 license=('custom:vim')
@@ -51,7 +52,7 @@ build()
     --disable-rubyinterp \
     --disable-luainterp
 
-  make || return 1
+  make
 }
 
 package() {

@@ -1,7 +1,7 @@
 pkgname=dwm-ks-git
 _pkgname=dwm
 pkgver=6.0.59.g77f5ede
-pkgrel=1
+pkgrel=2
 pkgdesc="A dynamic window manager for X - config by KaiSforza"
 url="http://dwm.suckless.org"
 arch=('i686' 'x86_64')
@@ -15,7 +15,7 @@ provides=('dwm')
 conflicts=('dwm')
 source=(git+file:///home/wgiokas/git/KaiSforza/dwm#branch=patched)
 md5sums=('SKIP')
-         
+
 pkgver() {
   cd "$srcdir/$_pkgname"
   git describe --tags --long | tr - .
