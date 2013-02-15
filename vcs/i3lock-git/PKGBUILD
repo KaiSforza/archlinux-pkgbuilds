@@ -3,7 +3,7 @@
 
 pkgname=i3lock-git
 _pkgname=i3lock
-pkgver=2.4.1.12.gb1a6e2e
+pkgver=2.4.1.13.g006f9d3
 pkgrel=1
 pkgdesc="An improved screenlocker based upon XCB and PAM"
 arch=('i686' 'x86_64')

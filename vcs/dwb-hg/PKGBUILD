@@ -2,7 +2,7 @@
 
 export CC=clang
 pkgname=dwb-hg
-pkgver=1752.d7b97b8988ad
+pkgver=1780.f25d2a9b2a5c
 pkgrel=1
 pkgdesc="A webkit web browser with vi-like keyboard shortcuts, latest hg-pull" 
 url="http://portix.bitbucket.org/dwb/"

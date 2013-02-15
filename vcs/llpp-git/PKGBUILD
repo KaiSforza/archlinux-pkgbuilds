@@ -19,7 +19,7 @@ _install=yes
 ######################################################################
 
 pkgname=llpp-git
-pkgver=v13.44.g53e41f6
+pkgver=v13.95.g9ef5e70
 pkgrel=1
 pkgdesc="Lightweight but fast and featureful PDF viewer based on MuPDF"
 

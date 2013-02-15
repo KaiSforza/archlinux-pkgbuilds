@@ -1,6 +1,6 @@
 pkgname=znc-git
 _pkgname=znc
-pkgver=1.0.45.gef59c23
+pkgver=1.0.57.gf32db92
 pkgrel=1
 pkgdesc='An IRC bouncer with modules & scripts support'
 url='http://znc.in/'

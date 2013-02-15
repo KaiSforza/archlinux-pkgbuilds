@@ -2,7 +2,7 @@
 
 pkgname=python2-pyflakes_ast-git
 _pkgname=pyflakes
-pkgver=43.06e149a
+pkgver=48.c812587
 pkgrel=1
 pkgdesc="faster smurfier pyflakes using _ast instead of compiler"
 url="http://github.com/kevinw/pyflakes/tree/master"
