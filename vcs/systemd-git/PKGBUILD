@@ -2,8 +2,8 @@
 
 pkgname=systemd-git
 _pkgname=systemd-personal
-pkgver=v197.377.ge57b477
-pkgrel=1
+pkgver=v197.391.gddb5bee
+pkgrel=2
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
 url="http://www.freedesktop.org/wiki/Software/systemd"
@@ -13,8 +13,6 @@ makedepends=('docbook-xsl' 'git' 'gobject-introspection' 'gperf'
              'gtk-doc' 'intltool' 'libxslt' 'python2')
 optdepends=('cryptsetup: required for encrypted block devices'
             'python2: systemd library bindings'
-            'python2-cairo: systemd-analyze'
-            'python2-gobject: systemd-analyze'
             'quota-tools: kernel-level quota management')
 provides=('systemd' 'libsystemd' 'systemd-sysvcompat' 'systemd-tools' 'udev=999' 'nss-myhostname')
 conflicts=('systemd' 'libsystemd' 'systemd-sysvcompat' 'systemd-tools' 'sysvinit' 'initscripts' 'udev' 'nss-myhostname')
