@@ -2,8 +2,8 @@
 
 pkgname=systemd-git
 _pkgname=systemd-personal
-pkgver=v197.391.gddb5bee
-pkgrel=2
+pkgver=197.400.g9f31636
+pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
 url="http://www.freedesktop.org/wiki/Software/systemd"
@@ -39,7 +39,7 @@ source=('systemd-personal::git+file:///home/wgiokas/git/KaiSforza/systemd#branch
 
 pkgver() {
 	cd "$srcdir/$_pkgname"
-	echo $(git describe --long --always | sed 's#-#.#g')
+	echo $(git describe --long --always | sed 's#-#.#g;s#v##')
 }
 
 #prepare() {

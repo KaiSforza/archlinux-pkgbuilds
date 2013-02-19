@@ -7,9 +7,9 @@
 
 pkgbase=linux-mainline
 #pkgname=linux-mainline
-_gitver=v3.8-rc7
-pkgver=3.8.rc7.0.g836dc9e
-pkgrel=2
+_gitver=v3.8
+pkgver=3.8.0.g19f949f
+pkgrel=3
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -31,9 +31,10 @@ md5sums=('SKIP'
          '7e87d8206baaf7696306b925f034382e'
          '6a8a28db0c8d3ec0bffff749cd4fa5cb'
          '9d3c56a4b999c8bfbd4018089a62f662'
-         'd04c14624c57771e8ad8b6780b616e12')
+         '1174d001cac0ea99497b2b85488e8e37')
 
-_rcnum=${_gitver#*-}
+#_rcnum=${_gitver#*-}
+_rcnum=""
 _kernelname=${pkgbase#linux}
 pkgver() {
   cd "$srcdir/linux"

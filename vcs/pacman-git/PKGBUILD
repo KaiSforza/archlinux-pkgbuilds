@@ -6,7 +6,7 @@
 export CC=clang
 pkgname=pacman-git
 _pkgname=pacman
-pkgver=4.0.3.580.gb4fe929
+pkgver=4.0.3.580.g1b7c2ed
 pkgrel=1
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
 arch=('i686' 'x86_64')

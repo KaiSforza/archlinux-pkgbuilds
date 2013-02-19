@@ -1,6 +1,6 @@
 export CC=clang
 pkgname=vim-hg
-pkgver=4136.c6107b4575a4
+pkgver=4140.2876c01edbad
 pkgrel=1
 pkgdesc='Vi Improved, a highly configurable, improved version of the vi text editor'
 arch=(i686 x86_64)
@@ -42,7 +42,7 @@ build()
     --enable-gpm \
     --enable-acl \
     --with-x=yes \
-    --disable-gui \
+    --enable-gui \
     --enable-multibyte \
     --enable-cscope \
     --disable-netbeans \
