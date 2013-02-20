@@ -1,0 +1,20 @@
+pkgname=systemd-aurd
+_pkgname=aurctl
+pkgver=8
+pkgrel=1
+pkgdesc="A simple AUR agent with a pretentious name. Just a renamed 'cower'"
+arch=('i686' 'x86_64')
+url="http://github.com/falconindy/cower"
+license=('MIT')
+depends=('curl' 'yajl' 'pacman')
+makedepends=('perl')
+source=("http://sakuscans.com/${_pkgname}-${pkgver}-1-g443c437.tar.gz")
+md5sums=('be9fd22d73ea38c8bf602644bd475d0f')
+
+build() {
+  make -C "$_pkgname-$pkgver-1-g443c437"
+}
+
+package() {
+  make -C "$_pkgname-$pkgver-1-g443c437" PREFIX=/usr DESTDIR="$pkgdir" install
+}

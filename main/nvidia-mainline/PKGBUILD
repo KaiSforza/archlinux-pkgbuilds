@@ -1,0 +1,48 @@
+# Maintainer: Cian Mc Govern <cian@cianmcgovern.com>
+# Contributor: Mikael Eriksson <mikael_eriksson@miffe.org>
+# Original arch package by:
+# Thomas Baechler <thomas@archlinux.org>
+
+pkgname=nvidia-mainline
+pkgver=310.32
+pkgrel=1
+pkgdesc="NVIDIA drivers for linux-mainline."
+read _ _kernver < <(file -b "/boot/vmlinuz-linux-mainline" | grep -o 'version [^ ]\+')
+_kernpkgver=$(pacman -Q linux-mainline|cut -d' ' -f 2)
+_extramodules=$_kernver/extramodules
+arch=('i686' 'x86_64')
+url="http://www.nvidia.com/"
+depends=('linux-mainline' "nvidia-utils=${pkgver}")
+conflicts=('nvidia-96xx' 'nvidia-173xx')
+license=('custom')
+install=nvidia.install
+options=(!strip)
+
+_arch='x86_64'
+_pkg="NVIDIA-Linux-${_arch}-${pkgver}-no-compat32"
+source=("ftp://download.nvidia.com/XFree86/Linux-${_arch}/${pkgver}/${_pkg}.run")
+
+source=(${source[@]})
+source=(${source[@]} "buildfix_kernel_3.8.patch")
+
+build() {
+    msg "Building for kernel version $_kernver"
+    cd "${srcdir}"
+    sh "${_pkg}.run" --extract-only
+    cd "${_pkg}/kernel"
+#    patch < "${srcdir}/buildfix_kernel_3.8.patch"
+    make SYSSRC=/usr/src/"linux-${_kernver}/" module
+}
+
+package() {
+    install -D -m644 "${srcdir}/${_pkg}/kernel/nvidia.ko" \
+        "${pkgdir}/lib/modules/${_extramodules}/nvidia.ko"
+    install -d -m755 "${pkgdir}/etc/modprobe.d"
+    echo "blacklist nouveau" >> "${pkgdir}/etc/modprobe.d/nvidia.conf"
+    echo "blacklist nvidiafb" >> "${pkgdir}/etc/modprobe.d/nvidia.conf"
+    sed -i -e "s,EXTRAMODULES='.*',EXTRAMODULES='${_extramodules}'," "${startdir}/nvidia.install"
+    gzip "${pkgdir}/lib/modules/${_extramodules}/nvidia.ko"
+    eval pkgrel="${pkgrel}_${_kernpkgver/-/_}"
+}
+md5sums=('2e9a8aeb74c17df70376fd59ff1c4125'
+         '40a37e29716a1eadb54a6db7e599b171')
