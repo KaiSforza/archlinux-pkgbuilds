@@ -1,6 +1,6 @@
 pkgname=dwm-ks-git
 _pkgname=dwm
-pkgver=6.0.61.g945e08c
+pkgver=6.0.62.gdcace73
 pkgrel=1
 pkgdesc="A dynamic window manager for X - config by KaiSforza"
 url="http://dwm.suckless.org"
@@ -24,7 +24,6 @@ pkgver() {
 prepare() {
   cd "$srcdir/$_pkgname"
   sed -i "s/VERSION = .*/VERSION = ${pkgver}-${pkgrel}/g" config.mk
-  sed -i "s/VERSION .*/VERSION \"${pkgver}-${pkgrel}\"/g" config.def.h
 }
 build() {
   cd "$srcdir/$_pkgname"
