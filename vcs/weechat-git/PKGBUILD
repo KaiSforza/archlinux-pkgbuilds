@@ -6,7 +6,7 @@
 export CC=clang
 pkgname=weechat-git
 _pkgname=weechat
-pkgver=v0.4.0.70.g9857b44
+pkgver=v0.4.0.77.g87b5096
 pkgrel=1
 pkgdesc="Fast, light & extensible IRC client (curses UI)"
 arch=('i686' 'x86_64')

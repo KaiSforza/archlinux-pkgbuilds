@@ -15,7 +15,7 @@ replaces=('ii-hg')
 provides=('ii')
 conflicts=('ii')
 source=('config.mk'
-	'ii::git+http://git.suckless.org/ii')
+	'ii::git+http://git.suckless.org/ii#branch=master')
 md5sums=('17d6db42d3297691e4a8e98598065f59'
          'SKIP')
 
