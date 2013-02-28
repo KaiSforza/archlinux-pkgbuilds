@@ -8,8 +8,8 @@
 pkgbase=linux-mainline
 #pkgname=linux-mainline
 _gitver=v3.8
-pkgver=3.8.0.g19f949f
-pkgrel=3
+pkgver=3.8.9301.g6515925
+pkgrel=1
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -19,7 +19,8 @@ options=('!strip')
 PKGEXT='.pkg.tar.gz'
 # Uncomment if you want to upload or save a tiny amount of space
 #PKGEXT='.pkg.tar.xz'
-source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_gitver"
+#source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_gitver"
+source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#branch=master"
         # the main kernel config files
         'config.x86_64'
         # standard config files for mkinitcpio ramdisk
@@ -69,7 +70,7 @@ prepare() {
   #make menuconfig # CLI menu for configuration
   #make nconfig # new CLI menu for configuration
   #make xconfig # qt-based configuration
-  make gconfig # gtk-based configuration
+  #make gconfig # gtk-based configuration
   #make oldconfig # using old config from previous kernel version
   #yes ""|make oldconfig # Lazy version
   # ... or manually edit .config

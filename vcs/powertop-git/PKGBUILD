@@ -5,8 +5,8 @@
 
 pkgname=powertop-git
 _pkgname=powertop
-pkgver=v2.2.26.g3681033
-pkgrel=2
+pkgver=2.2.30.g1d5fad6
+pkgrel=1
 pkgdesc='A tool to diagnose issues with power consumption and power management, git version'
 arch=('i686' 'x86_64')
 url='https://01.org/powertop/'
@@ -19,7 +19,7 @@ sha256sums=('SKIP')
 
 pkgver() {
   cd ${srcdir}/$_pkgname
-  git describe --long --always | tr - .
+  git describe --long --always | sed 's/-/./g;s/v//'
 }
 
 build() {

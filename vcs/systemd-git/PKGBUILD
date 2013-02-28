@@ -3,8 +3,8 @@
 pkgname=systemd-git
 _pkgname=systemd
 _gitname=systemd-personal
-pkgver=197.416.g855f6f0
-pkgrel=3
+pkgver=197.462.g54c31a7
+pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
 url="http://www.freedesktop.org/wiki/Software/systemd"
