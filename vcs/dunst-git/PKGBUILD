@@ -1,7 +1,7 @@
 # Maintainer: Army
 # Contributor: William Giokas (KaiSforza) <1007380@gmail.com>
 pkgname=dunst-git
-pkgver=0.5.0.1.g70231fe
+pkgver=0.5.0.109.gc2a5b52
 pkgrel=1
 pkgdesc="A lightweight replacement for the notification-daemons provided by most desktop environments"
 arch=('i686' 'x86_64')

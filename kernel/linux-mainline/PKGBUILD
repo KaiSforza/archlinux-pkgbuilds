@@ -7,9 +7,9 @@
 
 pkgbase=linux-mainline
 #pkgname=linux-mainline
-_gitver=v3.8
-pkgver=3.8.9301.g6515925
-pkgrel=1
+_gitver=v3.9-rc1
+pkgver=3.9.rc1.0.g6dbe51c
+pkgrel=2
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -19,8 +19,8 @@ options=('!strip')
 PKGEXT='.pkg.tar.gz'
 # Uncomment if you want to upload or save a tiny amount of space
 #PKGEXT='.pkg.tar.xz'
-#source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_gitver"
-source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#branch=master"
+#source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#branch=master"
+source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_gitver"
         # the main kernel config files
         'config.x86_64'
         # standard config files for mkinitcpio ramdisk
@@ -32,7 +32,7 @@ md5sums=('SKIP'
          '7e87d8206baaf7696306b925f034382e'
          '6a8a28db0c8d3ec0bffff749cd4fa5cb'
          '9d3c56a4b999c8bfbd4018089a62f662'
-         '1174d001cac0ea99497b2b85488e8e37')
+         'aed91bf3534b55e80c12a6db9eea7aa1')
 
 #_rcnum=${_gitver#*-}
 _rcnum=""
@@ -69,7 +69,7 @@ prepare() {
   # Configure the kernel. Replace the line below with one of your choice.
   #make menuconfig # CLI menu for configuration
   #make nconfig # new CLI menu for configuration
-  #make xconfig # qt-based configuration
+  make xconfig # qt-based configuration
   #make gconfig # gtk-based configuration
   #make oldconfig # using old config from previous kernel version
   #yes ""|make oldconfig # Lazy version
@@ -125,7 +125,7 @@ _package() {
   sed \
     -e  "s/KERNEL_NAME=.*/KERNEL_NAME=${_kernelname}/" \
     -e  "s/KERNEL_VERSION=.*/KERNEL_VERSION=${_kernver}/" \
-    -i "${srcdir}/linux.install"
+    -i "${startdir}/linux.install"
 
   # Set up the preset for mkinitcpio
   sed \
@@ -246,8 +246,8 @@ _package-headers() {
   cp drivers/media/dvb-core/*.h "${pkgdir}/usr/src/linux-${_kernver}/drivers/media/dvb-core/"
   # and...
   # http://bugs.archlinux.org/task/11194
-  mkdir -p "${pkgdir}/usr/src/linux-${_kernver}/include/config/dvb/"
-  cp include/config/dvb/*.h "${pkgdir}/usr/src/linux-${_kernver}/include/config/dvb/"
+  #mkdir -p "${pkgdir}/usr/src/linux-${_kernver}/include/config/dvb/"
+  #cp include/config/dvb/*.h "${pkgdir}/usr/src/linux-${_kernver}/include/config/dvb/"
 
   # add dvb headers for http://mcentral.de/hg/~mrec/em28xx-new
   # in reference to:

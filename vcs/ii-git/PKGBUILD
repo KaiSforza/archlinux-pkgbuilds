@@ -4,7 +4,7 @@
 pkgname=ii-git
 _pkgname=ii
 pkgver=1.6.7.g7a99152
-pkgrel=1
+pkgrel=5
 pkgdesc="A minimalist FIFO and filesystem-based IRC client"
 arch=(i686 x86_64)
 url="http://wmii.de/index.php/WMII/ii"

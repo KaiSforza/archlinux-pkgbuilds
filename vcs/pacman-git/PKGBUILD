@@ -6,7 +6,7 @@
 export CC=clang
 pkgname=pacman-git
 _pkgname=pacman
-pkgver=4.0.3.589.g8e2648b
+pkgver=4.0.3.605.gb833123
 pkgrel=1
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
 arch=('i686' 'x86_64')
@@ -21,17 +21,18 @@ conflicts=('pacman' 'pacman-contrib')
 options=('!libtool' '!strip')
 backup=(etc/pacman.conf
         etc/makepkg.conf)
-source=('pacman-allan::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working')
+#source=('pacman-allan::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working')
 #source=('pacman-official::git+git://projects.archlinux.org/pacman.git')
+source=('pacman-local::git+file:///home/wgiokas/git/archlinux/pacman#branch=color')
 sha1sums=('SKIP')
 
 pkgver() {
-  cd "$srcdir/$_pkgname-allan"
-  git describe --long | sed 's#-#.#g;s#^v##'
+  cd "$srcdir/$_pkgname-local"
+  echo "$(git describe --long | sed 's#-#.#g;s#^v##')"
 }
 
 build() {
-  cd "$srcdir/$_pkgname-allan"
+  cd "$srcdir/$_pkgname-local"
 
   ./autogen.sh
   ./configure \
@@ -49,11 +50,11 @@ build() {
 
 check() {
   cd "$srcdir"
-  make -C "$_pkgname-allan" check
+  make -C "$_pkgname-local" check
 }
 
 package() {
-  cd "$srcdir/$_pkgname-allan"
+  cd "$srcdir/$_pkgname-local"
 
   make DESTDIR="$pkgdir" install
 
