@@ -6,7 +6,7 @@
 export CC=clang
 pkgname=pacman-git
 _pkgname=pacman
-pkgver=4.0.3.605.gb833123
+pkgver=4.0.3.622.ge2e8b06
 pkgrel=1
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
 arch=('i686' 'x86_64')
@@ -23,7 +23,7 @@ backup=(etc/pacman.conf
         etc/makepkg.conf)
 #source=('pacman-allan::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working')
 #source=('pacman-official::git+git://projects.archlinux.org/pacman.git')
-source=('pacman-local::git+file:///home/wgiokas/git/archlinux/pacman#branch=color')
+source=('pacman-local::git+file:///home/wgiokas/git/archlinux/pacman#branch=script-color-split-3')
 sha1sums=('SKIP')
 
 pkgver() {
