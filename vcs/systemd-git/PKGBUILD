@@ -3,7 +3,7 @@
 pkgname=systemd-git
 _pkgname=systemd
 _gitname=systemd-personal
-pkgver=197.462.g54c31a7
+pkgver=197.577.g646614a
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
@@ -90,13 +90,13 @@ package() {
       -exec sed -ri '1s|^\.so (.*)\.([0-9]+)|.so man\2/\1.\2|' {} +
 
   # move bash-completion and symlink for loginctl
-  install -Dm644 "$pkgdir/etc/bash_completion.d/systemd-bash-completion.sh" \
-    "$pkgdir/usr/share/bash-completion/completions/systemctl"
-  for ctl in {login,journal,timedate,locale,hostname,systemd-coredump}ctl udevadm; do
-    ln -s systemctl "$pkgdir/usr/share/bash-completion/completions/$ctl"
-  done
+  #install -Dm644 "$pkgdir/etc/bash_completion.d/systemd-bash-completion.sh" \
+  #  "$pkgdir/usr/share/bash-completion/completions/systemctl"
+  #for ctl in {login,journal,timedate,locale,hostname,systemd-coredump}ctl udevadm; do
+  #  ln -s systemctl "$pkgdir/usr/share/bash-completion/completions/$ctl"
+  #done
   rm -rf "$pkgdir/etc/bash_completion.d"
-  install -Dm644 "$srcdir/${source[0]%::*}/shell-completion/${_pkgname}-zsh-completion.zsh" \
+  install -Dm644 "$srcdir/${_gitname}/shell-completion/${_pkgname}-zsh-completion.zsh" \
       "$pkgdir/usr/share/zsh/site-functions/_${_pkgname}"
 
   # don't write units to /etc by default
