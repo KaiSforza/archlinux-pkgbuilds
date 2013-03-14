@@ -17,9 +17,9 @@ arch=('any')
 package() {
 	cd $srcdir/$pkgname
 
+	sed -i 's/python/python2/g' $srcdir/$pkgname/arm
 	mkdir -p $pkgdir/{usr/bin,usr/share/man/man1,usr/share/doc/arm,usr/share/arm}
 	install arm $pkgdir/usr/bin/
-	sed -i 's/python/python2/g' $pkgdir/usr/bin/arm
 
 	cp -Rp src/* $pkgdir/usr/share/arm/
 

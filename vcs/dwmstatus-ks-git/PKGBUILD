@@ -1,8 +1,8 @@
 # Maintainer: William Giokas <1007380@gmail.com>
 
 pkgname=dwmstatus-ks-git
-_pkgname=dwmstatus-ks
-pkgver=0.4.0.6.ga34eae8
+_pkgname=dwmstatus-ks-local
+pkgver=0.5.0.4.g4b961ee
 pkgrel=1
 pkgdesc="A simple C status bar, fork by KaiSforza, git version"
 url="https://bitbucket.org/KaiSforza/dwmstatus"
@@ -12,10 +12,10 @@ options=(zipman)
 makedepends=('git' 'pacman>4.0.3')
 provides=('dwmstatus')
 conflicts=('dwmstatus')
-source=('dwmstatus-ks::git+https://bitbucket.org/KaiSforza/dwmstatus.git#branch=working'
+source=('dwmstatus-ks-local::git+file:///home/wgiokas/git/KaiSforza/dwmstatus#branch=noleaks'
         'config.h')
 md5sums=('SKIP'
-         'SKIP')
+         'a2e12c4af866f4f0883213cf3d109e67')
 
 pkgver() {
   cd "$srcdir/$_pkgname"

@@ -3,7 +3,7 @@
 pkgname=systemd-git
 _pkgname=systemd
 _gitname=systemd-personal
-pkgver=197.577.g646614a
+pkgver=198.30.ge75dcf5
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')

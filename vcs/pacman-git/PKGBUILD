@@ -4,35 +4,30 @@
 # Contributor: Andres Perera <aepd87@gmail.com>
 
 export CC=clang
-pkgname=pacman-git
+pkgname=(pacman-git pacman-contrib-git)
+pkgbase=pacman-git
 _pkgname=pacman
-pkgver=4.0.3.622.ge2e8b06
+pkgver=4.1.0rc1.0.g312e925
 pkgrel=1
-pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
 arch=('i686' 'x86_64')
+pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
 url="http://www.archlinux.org/pacman/"
 license=('GPL')
-depends=('bash' 'curl' 'gpgme' 'libarchive' 'pacman-mirrorlist')
 makedepends=('git' 'asciidoc')
-optdepends=('fakeroot: for makepkg usage as normal user')
 checkdepends=('python2' 'fakechroot')
-provides=("pacman=$pkgver" 'pacman-contrib' 'libalpm.so')
-conflicts=('pacman' 'pacman-contrib')
 options=('!libtool' '!strip')
-backup=(etc/pacman.conf
-        etc/makepkg.conf)
 #source=('pacman-allan::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working')
-#source=('pacman-official::git+git://projects.archlinux.org/pacman.git')
-source=('pacman-local::git+file:///home/wgiokas/git/archlinux/pacman#branch=script-color-split-3')
+source=('pacman-official::git+git://projects.archlinux.org/pacman.git')
+#source=('pacman-local::git+file:///home/wgiokas/git/archlinux/pacman#branch=script-color-split-3')
 sha1sums=('SKIP')
 
 pkgver() {
-  cd "$srcdir/$_pkgname-local"
+  cd "$srcdir/$_pkgname-official"
   echo "$(git describe --long | sed 's#-#.#g;s#^v##')"
 }
 
 build() {
-  cd "$srcdir/$_pkgname-local"
+  cd "$srcdir/$_pkgname-official"
 
   ./autogen.sh
   ./configure \
@@ -42,19 +37,27 @@ build() {
     --enable-doc \
     --enable-git-version \
     --enable-debug \
+    --disable-doxygen \
+    --disable-nls \
     --with-scriptlet-shell=/usr/bin/bash
 
-  make
-  make -C contrib
+  time make
+  time make -C contrib
 }
 
 check() {
   cd "$srcdir"
-  make -C "$_pkgname-local" check
+  make -C "$_pkgname-official" check
 }
 
-package() {
-  cd "$srcdir/$_pkgname-local"
+package_pacman-git() {
+  depends=('bash' 'curl' 'gpgme' 'libarchive' 'pacman-mirrorlist')
+  optdepends=('fakeroot: for makepkg usage as normal user')
+  backup=(etc/pacman.conf
+          etc/makepkg.conf)
+  provides=("pacman=$pkgver" 'libalpm.so')
+  conflicts=('pacman')
+  cd "$srcdir/$_pkgname-official"
 
   make DESTDIR="$pkgdir" install
 
@@ -73,8 +76,15 @@ package() {
     -e "s|@CARCH[@]|$CARCH|g" \
     -e "s|@CHOST[@]|$mychost|g" \
     -e "s|@CARCHFLAGS[@]|$myflags|g"
+}
 
+package_pacman-contrib-git() {
+  provides=("pacman-contrib=$pkgver")
+  conflicts=('pacman-contrib')
+  depends=('pacman')
+  arch=('any')
   # contrib
+  cd "$srcdir/$_pkgname-official"
   make DESTDIR="$pkgdir" -C contrib install
 
   install -Dm644 "contrib/PKGBUILD.vim" "$pkgdir/usr/share/vim/vimfiles/syntax/PKGBUILD.vim"
