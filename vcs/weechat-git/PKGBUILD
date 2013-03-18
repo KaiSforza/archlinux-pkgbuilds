@@ -4,16 +4,17 @@
 # Contributor: Tim Zebulla <amon at faumrahrer dot de>
 
 export CC=clang
+CFLAGS="$CFLAGS -g"
 pkgname=weechat-git
 _pkgname=weechat
-pkgver=0.4.0.104.g3fb1235
-pkgrel=1
+pkgver=0.4.0.115.gbbd080e
+pkgrel=3
 pkgdesc="Fast, light & extensible IRC client (curses UI)"
 arch=('i686' 'x86_64')
 url="http://www.weechat.org/"
 license=('GPL3')
 depends=('gnutls')
-makedepends=('git' 'cmake' 'pkgconfig' 'perl' 'python2' 'lua' 'tcl' 'ruby' 'aspell' 'clang')
+makedepends=('git' 'cmake' 'pkgconfig' 'perl' 'python2' 'lua' 'tcl' 'aspell' 'clang')
 optdepends=('perl' 'python2' 'lua' 'tcl' 'ruby' 'aspell')
 provides=('weechat')
 conflicts=('weechat')
@@ -31,8 +32,10 @@ build() {
   cmake "$srcdir/$_pkgname" -DPREFIX=/usr \
         -DPYTHON_EXECUTABLE=/usr/bin/python2 \
         -DPYTHON_LIBRARY=/usr/lib/libpython2.7.so
+  make
 }
 
 package() {
-  make -C "$srcdir/$_pkgname" DESTDIR="${pkgdir}/" install
+  cd "$srcdir/$_pkgname"
+  make DESTDIR="${pkgdir}/" install
 }

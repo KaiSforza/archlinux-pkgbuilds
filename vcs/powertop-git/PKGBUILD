@@ -6,7 +6,7 @@
 pkgname=powertop-git
 _pkgname=powertop
 pkgver=2.2.30.g1d5fad6
-pkgrel=2
+pkgrel=3
 pkgdesc='A tool to diagnose issues with power consumption and power management, git version'
 arch=('i686' 'x86_64')
 url='https://01.org/powertop/'

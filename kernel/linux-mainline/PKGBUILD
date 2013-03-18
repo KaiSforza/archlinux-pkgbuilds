@@ -7,9 +7,9 @@
 
 pkgbase=linux-mainline
 #pkgname=linux-mainline
-_gitver=v3.9-rc2
-pkgver=3.9.rc2.0.gf6161aa
-pkgrel=4
+_gitver=v3.9-rc3
+pkgver=3.9.rc3.0.ga937536
+pkgrel=1
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -29,10 +29,10 @@ source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#ta
         'linux.install')
 
 md5sums=('SKIP'
-         '2a3ddbc81d28a6d0d47f70e592fc8f67'
+         '0524efc71367d505a549da9b9b69c807'
          '6a8a28db0c8d3ec0bffff749cd4fa5cb'
          '9d3c56a4b999c8bfbd4018089a62f662'
-         '98f244b0a05319a3b5411bd81eb35d1a')
+         '0fd53f8b81e822ca4114d7167e0635a8')
 
 _rcnum=${_gitver#*-}
 #_rcnum=""
@@ -61,6 +61,10 @@ prepare() {
 
   # don't run depmod on 'make install'. We'll do this ourselves in packaging
   sed -i '2iexit 0' scripts/depmod.sh
+}
+
+build() {
+  cd "$srcdir/linux"
 
   # get kernel version
   #make prepare
@@ -79,11 +83,7 @@ prepare() {
   #yes "" | make config >/dev/null
 
   # save configuration for later reuse
-  cat .config > "$srcdir/config.x86_64.last"
-}
-
-build() {
-  cd "$srcdir/linux"
+  #cat .config > "$srcdir/config.x86_64.last"
 
   # build!
   time make ${MAKEFLAGS} LOCALVERSION= bzImage modules

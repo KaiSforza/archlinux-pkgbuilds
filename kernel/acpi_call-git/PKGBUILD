@@ -1,8 +1,8 @@
 # Contributor: fnord0 <fnord0 AT riseup DOT net>
 
 pkgname=acpi_call-git
-pkgver=342a3d2
-pkgrel=4
+pkgver=78.342a3d2
+pkgrel=1
 pkgdesc="kernel module that enables calls to ACPI methods through /proc/acpi/call. e.g. to turn off discrete graphics card in a dual graphics environment (like NVIDIA Optimus) kernel $(uname -r)"
 arch=('i686' 'x86_64')
 url=("http://github.com/mkottman/acpi_call")
@@ -18,7 +18,7 @@ _gitname=("acpi_call")
 
 pkgver() {
 	cd ${srcdir}/$_gitname
-	git describe --always | sed 's/-/./g'
+  echo "$(git rev-list --count HEAD)"."$(git describe --always | sed 's/-/./g')"
 }
 build() {
   cd ${srcdir}/$_gitname

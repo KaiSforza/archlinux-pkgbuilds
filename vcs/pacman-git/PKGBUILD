@@ -7,8 +7,8 @@ export CC=clang
 pkgname=(pacman-git pacman-contrib-git)
 pkgbase=pacman-git
 _pkgname=pacman
-pkgver=4.1.0rc1.0.g312e925
-pkgrel=1
+pkgver=4.1.0rc1.27.g66fe80f
+pkgrel=3
 arch=('i686' 'x86_64')
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
 url="http://www.archlinux.org/pacman/"
@@ -51,7 +51,7 @@ check() {
 }
 
 package_pacman-git() {
-  depends=('bash' 'curl' 'gpgme' 'libarchive' 'pacman-mirrorlist')
+  depends=('glibc>=2.15' 'bash' 'curl>=7.19.4' 'libarchive>=3.1.2' 'gpgme' 'pacman-mirrorlist' 'archlinux-keyring')
   optdepends=('fakeroot: for makepkg usage as normal user')
   backup=(etc/pacman.conf
           etc/makepkg.conf)

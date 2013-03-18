@@ -1,7 +1,7 @@
 # Maintainer: mutlu_inek <mutlu_inek@yahoo.de>
 pkgname=tpacpi-bat-mainline
-pkgver=1.0.2.gd0c77ee
-pkgrel=2
+pkgver=1.0.22.g6e5baa8
+pkgrel=1
 pkgdesc="A Perl script with ACPI calls for recent ThinkPads (such as T420 and W520) whose battery thresholds are not supported by tp_smapi for the mainline kernel"
 url="https://github.com/teleshoes/tpbattstat-applet"
 arch=('x86_64' 'i686')
