@@ -7,8 +7,8 @@ export CC=clang
 pkgname=(pacman-git pacman-contrib-git)
 pkgbase=pacman-git
 _pkgname=pacman
-pkgver=4.1.0rc1.27.g66fe80f
-pkgrel=3
+pkgver=4.1.0rc1.30.g26018ca
+pkgrel=1
 arch=('i686' 'x86_64')
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
 url="http://www.archlinux.org/pacman/"
@@ -16,18 +16,18 @@ license=('GPL')
 makedepends=('git' 'asciidoc')
 checkdepends=('python2' 'fakechroot')
 options=('!libtool' '!strip')
-#source=('pacman-allan::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working')
-source=('pacman-official::git+git://projects.archlinux.org/pacman.git')
+source=('pacman-allan::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working')
+#source=('pacman-official::git+git://projects.archlinux.org/pacman.git')
 #source=('pacman-local::git+file:///home/wgiokas/git/archlinux/pacman#branch=script-color-split-3')
 sha1sums=('SKIP')
 
 pkgver() {
-  cd "$srcdir/$_pkgname-official"
+  cd "$srcdir/$_pkgname-allan"
   echo "$(git describe --long | sed 's#-#.#g;s#^v##')"
 }
 
 build() {
-  cd "$srcdir/$_pkgname-official"
+  cd "$srcdir/$_pkgname-allan"
 
   ./autogen.sh
   ./configure \
@@ -38,7 +38,6 @@ build() {
     --enable-git-version \
     --enable-debug \
     --disable-doxygen \
-    --disable-nls \
     --with-scriptlet-shell=/usr/bin/bash
 
   time make
@@ -47,7 +46,7 @@ build() {
 
 check() {
   cd "$srcdir"
-  make -C "$_pkgname-official" check
+  make -C "$_pkgname-allan" check
 }
 
 package_pacman-git() {
@@ -57,7 +56,7 @@ package_pacman-git() {
           etc/makepkg.conf)
   provides=("pacman=$pkgver" 'libalpm.so')
   conflicts=('pacman')
-  cd "$srcdir/$_pkgname-official"
+  cd "$srcdir/$_pkgname-allan"
 
   make DESTDIR="$pkgdir" install
 
@@ -84,7 +83,7 @@ package_pacman-contrib-git() {
   depends=('pacman')
   arch=('any')
   # contrib
-  cd "$srcdir/$_pkgname-official"
+  cd "$srcdir/$_pkgname-allan"
   make DESTDIR="$pkgdir" -C contrib install
 
   install -Dm644 "contrib/PKGBUILD.vim" "$pkgdir/usr/share/vim/vimfiles/syntax/PKGBUILD.vim"
