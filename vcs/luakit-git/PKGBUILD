@@ -3,7 +3,7 @@
 pkgname=luakit-git
 _pkgname=luakit
 pkgver=2012.09.13.r1.32.g993d814
-pkgrel=2
+pkgrel=3
 pkgdesc="A fast, small, webkit-gtk based browser extensible by Lua"
 arch=('i686' 'x86_64')
 url="http://www.luakit.org/projects/luakit" 
@@ -28,9 +28,9 @@ pkgver() {
 
 build() {
   cd "$srcdir/$_pkgname"
-  makeopts="PREFIX=/usr DEVELOPMENT_PATHS=0 USE_LUAJIT=1"
+#  makeopts="PREFIX=/usr DEVELOPMENT_PATHS=0 USE_LUAJIT=1"
 # if you want to use luajit2, comment the above line and uncomment the following
-# makeopts="PREFIX=/usr DESTDIR="${pkgdir}" DEVELOPMENT_PATHS=0 USE_LUAJIT=1"  
+  makeopts="PREFIX=/usr DESTDIR="${pkgdir}" DEVELOPMENT_PATHS=0 USE_LUAJIT=1"
   make ${makeopts} all
 }
 
