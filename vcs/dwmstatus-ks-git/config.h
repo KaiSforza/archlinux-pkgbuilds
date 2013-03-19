@@ -17,5 +17,7 @@
 #define BATT_PATH "/sys/class/power_supply/BAT0"
 
 /* Specify your temperature sensor information. */
-#define TEMP_SENSOR_PATH "/sys/devices/platform/coretemp.0"
-#define TEMP_SENSOR_UNIT "temp1_input"
+//#define TEMP_SENSOR_PATH "/sys/devices/platform/coretemp.0"
+//#define TEMP_SENSOR_UNIT "temp1_input"
+#define TEMP_SENSOR_PATH "/sys/devices/virtual/thermal/thermal_zone0"
+#define TEMP_SENSOR_UNIT "temp"
