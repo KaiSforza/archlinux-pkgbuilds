@@ -4,8 +4,8 @@
 pkgname=systemd-git
 _pkgname=systemd
 _gitname=systemd-personal
-pkgver=198.88.g6ec0ac4
-pkgrel=2
+pkgver=198.194.g4ad61fd
+pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
 url="http://www.freedesktop.org/wiki/Software/systemd"
@@ -35,7 +35,6 @@ backup=(etc/dbus-1/system.d/org.freedesktop.systemd1.conf
 install=systemd.install
 #source=('systemd::git://anongit.freedesktop.org/systemd/systemd.git'
 source=("$_gitname::git+file:///home/wgiokas/git/KaiSforza/systemd#branch=master"
-        #'use-split-usr-path.patch'
         'initcpio-hook-udev'
         'initcpio-install-udev'
         'initcpio-install-timestamp')

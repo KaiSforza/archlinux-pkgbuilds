@@ -2,7 +2,7 @@
 
 pkgname=dwmstatus-ks-git
 _pkgname=dwmstatus-ks-local2
-pkgver=0.5.0.11.g3bd7e41
+pkgver=0.5.0.18.g81e5640
 pkgrel=1
 pkgdesc="A simple C status bar, fork by KaiSforza, git version"
 url="https://bitbucket.org/KaiSforza/dwmstatus"
