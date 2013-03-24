@@ -7,9 +7,9 @@
 
 pkgbase=linux-mainline
 #pkgname=linux-mainline
-_gitver=v3.9-rc3
-pkgver=3.9.rc3.0.ga937536
-pkgrel=1
+_gitver=v3.9-rc4
+pkgver=3.9.rc4.0.g8bb9660
+pkgrel=2
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -25,14 +25,14 @@ source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#ta
         'config.x86_64'
         # standard config files for mkinitcpio ramdisk
         'linux.preset'
-        'change-default-console-loglevel.patch'
+        'change-default-console-loglevel-2.patch'
         'linux.install')
 
 md5sums=('SKIP'
-         '0524efc71367d505a549da9b9b69c807'
+         'faf192fe62f5bcd9abdc3c506f58e7c5'
          '6a8a28db0c8d3ec0bffff749cd4fa5cb'
-         '9d3c56a4b999c8bfbd4018089a62f662'
-         '0fd53f8b81e822ca4114d7167e0635a8')
+         'cf26f47deab79e07ade19188d6bf450e'
+         'd541c9a55f81334f03b00c876c4ceead')
 
 _rcnum=${_gitver#*-}
 #_rcnum=""
@@ -48,7 +48,7 @@ prepare() {
   # set DEFAULT_CONSOLE_LOGLEVEL to 4 (same value as the 'quiet' kernel param)
   # remove this when a Kconfig knob is made available by upstream
   # (relevant patch sent upstream: https://lkml.org/lkml/2011/7/26/227)
-  git apply -v "${srcdir}/change-default-console-loglevel.patch"
+  git apply -v "${srcdir}/change-default-console-loglevel-2.patch"
 
   cat "${srcdir}/config.x86_64" > ./.config
 
@@ -73,7 +73,7 @@ build() {
   # Configure the kernel. Replace the line below with one of your choice.
   #make menuconfig # CLI menu for configuration
   #make nconfig # new CLI menu for configuration
-  make xconfig # qt-based configuration
+  #make xconfig # qt-based configuration
   #make gconfig # gtk-based configuration
   #make oldconfig # using old config from previous kernel version
   #yes ""|make oldconfig # Lazy version
