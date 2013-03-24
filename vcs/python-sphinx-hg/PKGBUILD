@@ -3,8 +3,8 @@
 
 pkgbase=python-sphinx-hg
 pkgname=('python-sphinx-hg' 'python2-sphinx-hg')
-pkgver=4003.81fd253ea88e
-pkgrel=2
+pkgver=4061.8ec0b3a74e79
+pkgrel=1
 pkgdesc="development version of Sphinx, *the* documentation generator"
 url="http://sphinx.pocoo.org/latest/"
 license=('GPL')
