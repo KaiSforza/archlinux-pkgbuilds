@@ -7,7 +7,7 @@ export CC=clang
 pkgname=(pacman-git pacman-contrib-git)
 pkgbase=pacman-git
 _pkgname=pacman
-pkgver=4.1.0rc1.34.g4459dc9
+pkgver=4.1.0rc1.38.g8c2a0fb
 pkgrel=1
 arch=('i686' 'x86_64')
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
@@ -16,18 +16,19 @@ license=('GPL')
 makedepends=('git' 'asciidoc')
 checkdepends=('python2' 'fakechroot')
 options=('!libtool' '!strip')
-source=('pacman-allan::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working')
+#source=('pacman-allan::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working')
 #source=('pacman-official::git+git://projects.archlinux.org/pacman.git')
-#source=('pacman-local::git+file:///home/wgiokas/git/archlinux/pacman#branch=script-color-split-3')
+source=('pacman-local::git+file:///home/wgiokas/git/archlinux/pacman#branch=vodik-2')
+_pkgnamedir="${source[0]%%::*}"
 sha1sums=('SKIP')
 
 pkgver() {
-  cd "$srcdir/$_pkgname-allan"
+  cd "$srcdir/$_pkgnamedir"
   echo "$(git describe --long | sed 's#-#.#g;s#^v##')"
 }
 
 build() {
-  cd "$srcdir/$_pkgname-allan"
+  cd "$srcdir/$_pkgnamedir"
 
   ./autogen.sh
   ./configure \
@@ -46,7 +47,7 @@ build() {
 
 check() {
   cd "$srcdir"
-  make -C "$_pkgname-allan" check
+  make -C "$_pkgnamedir" check
 }
 
 package_pacman-git() {
@@ -56,7 +57,7 @@ package_pacman-git() {
           etc/makepkg.conf)
   provides=("pacman=$pkgver" 'libalpm.so')
   conflicts=('pacman')
-  cd "$srcdir/$_pkgname-allan"
+  cd "$srcdir/$_pkgnamedir"
 
   make DESTDIR="$pkgdir" install
 
@@ -83,7 +84,7 @@ package_pacman-contrib-git() {
   depends=('pacman')
   arch=('any')
   # contrib
-  cd "$srcdir/$_pkgname-allan"
+  cd "$srcdir/$_pkgnamedir"
   make DESTDIR="$pkgdir" -C contrib install
 
   install -Dm644 "contrib/PKGBUILD.vim" "$pkgdir/usr/share/vim/vimfiles/syntax/PKGBUILD.vim"
