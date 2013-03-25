@@ -2,7 +2,7 @@
 # Based on the mplayer2-lite-git PKGBUILD
 
 pkgname=mpv-git
-pkgver=0.34672.ad000fb
+pkgver=0.34701.840c98d
 pkgrel=1
 pkgdesc="A movie player and encoder for linux (uses dynamically linked ffmpeg; git version)"
 arch=('i686' 'x86_64')
@@ -23,7 +23,7 @@ _gitname="mpv"
 
 pkgver() {
   cd "$srcdir/$_gitname"
-  microver="$(git log -1 --pretty=format:%h)"
+  microver="$(git log -1 --pretty=format:%h )"
   minorver="$(git rev-list --count HEAD)"
   echo "0.$minorver.$microver"
 }

@@ -4,7 +4,6 @@
 # Contributor: Tim Zebulla <amon at faumrahrer dot de>
 
 export CC=clang
-CFLAGS="$CFLAGS -g"
 pkgname=weechat-git
 _pkgname=weechat
 pkgver=0.4.0.130.gd654fca
