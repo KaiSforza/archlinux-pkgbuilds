@@ -7,7 +7,7 @@ export CC=clang
 pkgname=(pacman-git pacman-contrib-git)
 pkgbase=pacman-git
 _pkgname=pacman
-pkgver=4.1.0rc1.38.g8c2a0fb
+pkgver=4.1.0rc1.39.gf89f460
 pkgrel=1
 arch=('i686' 'x86_64')
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
@@ -16,9 +16,9 @@ license=('GPL')
 makedepends=('git' 'asciidoc')
 checkdepends=('python2' 'fakechroot')
 options=('!libtool' '!strip')
-#source=('pacman-allan::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working')
+source=('pacman-allan::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working')
 #source=('pacman-official::git+git://projects.archlinux.org/pacman.git')
-source=('pacman-local::git+file:///home/wgiokas/git/archlinux/pacman#branch=vodik-2')
+#source=('pacman-local::git+file:///home/wgiokas/git/archlinux/pacman#branch=vodik-2')
 _pkgnamedir="${source[0]%%::*}"
 sha1sums=('SKIP')
 

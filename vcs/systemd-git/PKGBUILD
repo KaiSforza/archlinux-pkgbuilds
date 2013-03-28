@@ -3,8 +3,7 @@
 #export CC=clang
 pkgname=systemd-git
 _pkgname=systemd
-_gitname=systemd-personal
-pkgver=198.216.g2fd9ae2
+pkgver=199.8.g49e5de6
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
@@ -34,7 +33,9 @@ backup=(etc/dbus-1/system.d/org.freedesktop.systemd1.conf
         etc/udev/udev.conf)
 install=systemd.install
 #source=('systemd::git://anongit.freedesktop.org/systemd/systemd.git'
-source=("$_gitname::git+file:///home/wgiokas/git/KaiSforza/systemd#branch=master"
+#source=("systemd-tags::git+file:///home/wgiokas/git/KaiSforza/systemd#commit=c20d829"
+# Bad commit: 168f22
+source=("systemd-personal::git+file:///home/wgiokas/git/KaiSforza/systemd#branch=master"
         'initcpio-hook-udev'
         'initcpio-install-udev'
         'initcpio-install-timestamp')
@@ -42,6 +43,7 @@ md5sums=('SKIP'
          'e99e9189aa2f6084ac28b8ddf605aeb8'
          'fb37e34ea006c79be1c54cbb0f803414'
          'df69615503ad293c9ddf9d8b7755282d')
+_gitname="${source[0]%%::*}"
 
 pkgver() {
   cd "$srcdir/$_gitname"
@@ -71,6 +73,11 @@ build(){
       --with-sysvrcnd-path= 
 
   time make
+}
+
+check() {
+  cd "$srcdir/$_gitname"
+  make check
 }
 
 package() {
