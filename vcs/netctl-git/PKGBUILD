@@ -1,12 +1,12 @@
 # Maintainer: Jouke Witteveen <j.witteveen@gmail.com>
 
 pkgname=netctl-git
-pkgver=0.7
+pkgver=0.8
 pkgver() {
     cd "$srcdir/netctl"
     git describe | tr - .
 }
-pkgrel=2
+pkgrel=1
 pkgdesc="Network configuration and profile scripts"
 url="http://archlinux.org/netctl/"
 license=("GPL")
