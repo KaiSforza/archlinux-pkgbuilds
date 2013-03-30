@@ -3,7 +3,7 @@
 #export CC=clang
 pkgname=systemd-git
 _pkgname=systemd
-pkgver=200.16.g1dda524
+pkgver=200.36.g11c4c24
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
