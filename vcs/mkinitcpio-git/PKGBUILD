@@ -4,7 +4,7 @@
 
 pkgname=mkinitcpio-git
 pkgver=0.13.0.12.g366bb18
-pkgrel=1
+pkgrel=2
 pkgdesc="Modular initramfs image creation utility - git checkout"
 arch=('any')
 url="http://www.archlinux.org/"

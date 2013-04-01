@@ -6,7 +6,7 @@
 export CC=clang
 pkgname=git-git
 _pkgname=git
-pkgver=1.8.2.279.g631bc94
+pkgver=1.8.2.282.ga32a0c2
 pkgrel=1
 pkgdesc="The fast distributed version control system - Git version"
 arch=('i686' 'x86_64')

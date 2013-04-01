@@ -3,7 +3,7 @@
 pkgname=cower-git
 _pkgname=cower
 pkgver=8.7.g2264ff0
-pkgrel=1
+pkgrel=2
 pkgdesc="A simple AUR agent with a pretentious name"
 arch=('i686' 'x86_64')
 url="http://github.com/falconindy/cower"

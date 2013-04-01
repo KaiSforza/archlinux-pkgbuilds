@@ -4,7 +4,7 @@
 
 pkgname=tmux-git
 pkgver=1.7.55.g675c6b3
-pkgrel=1
+pkgrel=2
 pkgdesc="A terminal multiplexer"
 url="http://tmux.sourceforge.net/"
 arch=('i686' 'x86_64')

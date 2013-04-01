@@ -3,8 +3,8 @@
 
 pkgname=i3-git
 _pkgname=i3
-pkgver=4.5.25.gc488bf7
-pkgrel=1
+pkgver=4.5.1.23.g82b5978
+pkgrel=3
 pkgdesc="An improved dynamic tiling window manager"
 arch=('i686' 'x86_64')
 url="http://i3wm.org/"
@@ -18,7 +18,7 @@ optdepends=('rxvt-unicode: The terminal emulator used in the default config.'
             'dmenu: As menu.'
             'i3lock: For locking your screen.'
             'i3status: To display system information with a bar.')
-options=('docs' '!strip')
+options=('docs')
 
 source=(git://code.i3wm.org/i3#branch=next)
 sha1sums=('SKIP')
