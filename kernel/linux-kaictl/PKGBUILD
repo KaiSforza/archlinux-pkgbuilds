@@ -5,11 +5,11 @@
 # Maintainer: William Giokas <1007380@gmail.com>
 # NOTE: Only includes a 64-bit config. Please feel free to submit a 32-bit config.
 
-pkgbase=linux-mainline
+pkgbase=linux-kaictl
 #pkgname=linux-mainline
-_gitver=v3.9-rc4
-pkgver=3.9.rc4.0.g8bb9660
-pkgrel=2
+_gitver=v3.9-rc5
+pkgver=3.9.rc5.0.g07961ac
+pkgrel=3
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -32,7 +32,7 @@ md5sums=('SKIP'
          'faf192fe62f5bcd9abdc3c506f58e7c5'
          '6a8a28db0c8d3ec0bffff749cd4fa5cb'
          'cf26f47deab79e07ade19188d6bf450e'
-         'd541c9a55f81334f03b00c876c4ceead')
+         'b52acaad3ab3c33832598388e9d16575')
 
 _rcnum=${_gitver#*-}
 #_rcnum=""
@@ -73,7 +73,7 @@ build() {
   # Configure the kernel. Replace the line below with one of your choice.
   #make menuconfig # CLI menu for configuration
   #make nconfig # new CLI menu for configuration
-  #make xconfig # qt-based configuration
+  make xconfig # qt-based configuration
   #make gconfig # gtk-based configuration
   #make oldconfig # using old config from previous kernel version
   #yes ""|make oldconfig # Lazy version
@@ -94,7 +94,7 @@ _package() {
   [ "${pkgbase}" = "linux" ] && groups=('base')
   depends=('coreutils' 'linux-firmware' 'kmod' 'mkinitcpio>=0.7')
   optdepends=('crda: to set the correct wireless channels of your country')
-  provides=("kernel26${_kernelname}=${pkgver}")
+  provides=("kernel26${_kernelname}=${pkgver}" "linux-mainline=${pkgver}")
   conflicts=("kernel26${_kernelname}")
   replaces=("kernel26${_kernelname}")
   backup=("etc/mkinitcpio.d/${pkgbase}.preset")
@@ -157,7 +157,7 @@ _package() {
 _package-headers() {
   KARCH=x86
   pkgdesc="Header files and scripts for building modules for ${pkgbase} kernel"
-  provides=("kernel26${_kernelname}-headers=${pkgver}")
+  provides=("kernel26${_kernelname}-headers=${pkgver}" "linux-mainline-headers=${pkgver}")
   conflicts=("kernel26${_kernelname}-headers")
   replaces=("kernel26${_kernelname}-headers")
 
@@ -298,7 +298,7 @@ _package-headers() {
 
 _package-docs() {
   pkgdesc="Kernel hackers manual - HTML documentation that comes with the ${pkgbase} kernel"
-  provides=("kernel26${_kernelname}-docs=${pkgver}")
+  provides=("kernel26${_kernelname}-docs=${pkgver}" "linux-mainline-docs=${pkgver}")
   conflicts=("kernel26${_kernelname}-docs")
   replaces=("kernel26${_kernelname}-docs")
 
