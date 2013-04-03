@@ -8,6 +8,8 @@ If you want to use any of these pkgbuilds, I cannot be responsible for anything 
 
 There is a separate branch, `linux-mainline-non-git`, that has a linux-mainline PKGBUILD for non-pacman-git users.
 
+pacman-git
+
 [Repo with some packages][1]
 
 (Currently linux-mailine and pacman-git)

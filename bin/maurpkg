@@ -46,19 +46,27 @@ build() {
     if [[ ! -f PKGBUILD ]]; then
         exit 67;
     fi
-    paccache -m "$archiverepo" -c "$packagesrepo" -k 1 $1
+    cleanrepos $1
     makepkg -sLc
 }
+cleanrepos() {
+    paccache -m "$archiverepo" -c "$packagesrepo" -k 1 $1
+    paccache -m "$archiverepo" -c "$packagesrepo/debug" -k 1 $1
+}
+    
 signrepos(){
     pushd "$packagesrepo"
-    paccache -m "$archiverepo" -c "$packagesrepo" -k 1
+    mv *-debug-* "$packagesrepo/debug"
+    cleanrepos
     for f in $1*.pkg.tar.gz; do
         if [[ ! -f "${f}.sig" ]]; then
             gpg --detach-sign "$f"
         fi
     done
     repo-add --sign -n "$packagesrepo/$reponame.db.tar.gz" "$packagesrepo/$1"*$packageext
+    repo-add --sign -n "$packagesrepo/debug/$reponame-debug.db.tar.gz" "$packagesrepo/debug/$1"*-debug-*$packageext
     repo-add --sign -n -f "$packagesrepo/$reponame.files.tar.gz" "$packagesrepo/$1"*$packageext
+    repo-add --sign -n -f "$packagesrepo/debug/$reponame-debug.files.tar.gz" "$packagesrepo/debug/$1"*-debug-*$packageext
 }
 downloadpkg(){
     if [[ -e $pkgbuilds/$1 ]]; then
@@ -108,11 +116,7 @@ case "$1" in
         $_pacman $pacman_options "${packages[@]}"
         ;;
     clean)
-        shift
-        if [[ -z $1 ]]; then
-            paccache -m "$archiverepo" -c "$packagesrepo" -k 1
-        fi
-        paccache -m "$archiverepo" -c "$packagesrepo" -k 1 $1
+        cleanrepos $1
         ;;
     update)
         shift

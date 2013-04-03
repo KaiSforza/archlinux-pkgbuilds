@@ -8,7 +8,7 @@ pkgname=(pacman-git pacman-contrib-git)
 pkgbase=pacman-git
 _pkgname=pacman
 pkgver=4.1.0.0.g5caf143
-pkgrel=2
+pkgrel=5
 arch=('i686' 'x86_64')
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
 url="http://www.archlinux.org/pacman/"
@@ -16,11 +16,17 @@ license=('GPL')
 makedepends=('git' 'asciidoc')
 checkdepends=('python2' 'fakechroot')
 options=('!libtool')
-source=('pacman-allan::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working')
+source=('pacman-allan::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working'
+        '0001-Remove-pacman.d-references.patch')
 #source=('pacman-official::git+git://projects.archlinux.org/pacman.git')
 #source=('pacman-local::git+file:///home/wgiokas/git/archlinux/pacman#branch=vodik-2')
 _pkgnamedir="${source[0]%%::*}"
-sha1sums=('SKIP')
+sha1sums=('SKIP'
+          '2e97531fb84652738095b25ed209e5ee7e40bbb1')
+prepare() {
+  cd "$srcdir/$_pkgnamedir"
+  #git apply -v "$srcdir/${source[1]}"
+}
 
 pkgver() {
   cd "$srcdir/$_pkgnamedir"

@@ -8,15 +8,16 @@
 # Contributor: Stefan Rupp <archlinux ð stefanrupp đ de>
 # Contributor: Ignas Anikevicius <anikevicius ð gmail đ com>
 
-pkgname=tp_smapi-mainline
+pkgname=tp_smapi-kaictl
 pkgver=0.41
-pkgrel=16
-pkgdesc="Modules for ThinkPad's SMAPI functionality, mainline kernel"
+pkgrel=17
+pkgdesc="Modules for ThinkPad's SMAPI functionality, kaictl kernel"
 arch=('i686' 'x86_64')
 url='https://github.com/evgeni/tp_smapi'
 license=('GPL')
-depends=('linux-mainline>=3.9' 'linux-mainline<3.10')
-makedepends=('linux-mainline-headers>=3.9' 'linux-mainline-headers<3.10')
+depends=('linux-kaictl>=3.9' 'linux-kaictl<3.10')
+makedepends=('linux-kaictl-headers>=3.9' 'linux-kaictl-headers<3.10')
+conflicts=('tp_smapi' 'tp_smapi-mainline')
 install="${pkgname}.install"
 source=("https://github.com/downloads/evgeni/tp_smapi/tp_smapi-${pkgver}.tar.gz")
 md5sums=('63c683415c764568f6bf17c7eabe4752')

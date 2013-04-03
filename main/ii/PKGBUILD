@@ -2,6 +2,10 @@
 # Contributor: Dag  Odenhall <dag.odenhall@gmail.com>
 # Contributor: Chris Brannon <cmbrannon@cox.net>
 # Maintainer: William Giokas <1007380@gmail.com>
+#SRCDEST=$startdir/sourcedest
+#PKGDEST=$startdir/packagedest
+#BUILDDIR=$startdir/builddir
+
 pkgname=ii
 pkgver=1.7
 pkgrel=4
@@ -10,9 +14,11 @@ license=(MIT)
 arch=(i686 x86_64)
 url=http://tools.suckless.org/ii
 depends=(glibc)
-source=("http://dl.suckless.org/tools/${pkgname}-${pkgver}.tar.gz")
+source=("http://dl.suckless.org/tools/${pkgname}-${pkgver}.tar.gz"
+"mutt-1.5.21.tar.gz")
 
-md5sums=('6191008ca09770873d84f40270493d0e')
+md5sums=('6191008ca09770873d84f40270493d0e'
+         'a29db8f1d51e2f10c070bf88e8a553fd')
 
 build() {
 	cd "$srcdir/$pkgname-$pkgver"
