@@ -11,6 +11,7 @@ pkgdesc='A tool to diagnose issues with power consumption and power management, 
 arch=('i686' 'x86_64')
 url='https://01.org/powertop/'
 license=('GPL2')
+makedepends=('git')
 depends=('gcc-libs' 'libnl' 'ncurses' 'pciutils')
 provides=("$_pkgname")
 conflicts=("$_pkgname")
