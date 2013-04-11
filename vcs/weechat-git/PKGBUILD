@@ -4,10 +4,11 @@
 # Contributor: Tim Zebulla <amon at faumrahrer dot de>
 
 export CC=clang
+DEBUG_CFLAGS="-g"
 pkgname=weechat-git
 _pkgname=weechat
-pkgver=0.4.0.136.gaa10e20
-pkgrel=2
+pkgver=0.4.0.137.g67f6668
+pkgrel=1
 pkgdesc="Fast, light & extensible IRC client (curses UI)"
 arch=('i686' 'x86_64')
 url="http://www.weechat.org/"

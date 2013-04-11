@@ -2,8 +2,8 @@
 
 pkgname=expac-git
 _pkgname=expac
-pkgver=1.7.gbd8e738
-pkgrel=3
+pkgver=2.0.g37ee252
+pkgrel=1
 pkgdesc="pacman database extraction utility"
 arch=('i686' 'x86_64')
 url="http://github.com/falconindy/expac"
@@ -13,7 +13,7 @@ makedepends=('git' 'perl')
 conflicts=('expac')
 provides=('expac')
 
-source=("git://github.com/falconindy/expac.git#branch=pacman41")
+source=("git://github.com/falconindy/expac.git#branch=master")
 md5sums=('SKIP')
 
 pkgver() {

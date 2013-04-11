@@ -2,7 +2,7 @@
 # Based on the mplayer2-lite-git PKGBUILD
 
 pkgname=mpv-git
-pkgver=0.34741.c80c6fa
+pkgver=0.34763.a95a5bc
 pkgrel=1
 pkgdesc="A movie player and encoder for linux (uses dynamically linked ffmpeg; git version)"
 arch=('i686' 'x86_64')

@@ -17,13 +17,14 @@ md5sums=('7c8ea8beba5b4e7fe0c215e4ebaa26ed'
          '5c7dbcac530ec6efdf1979a256289c7d'
          'e3cfa4ca3d6590eb92adc0aa77c5f91e')
 
-build() {
+prepare() {
   cd ${srcdir}/${pkgname}-${pkgver}/etc
 
   # Apply patch to remove the RedHat style init script from being installed
-  patch < ${srcdir}/yum0.patch || return 1
+  patch < ${srcdir}/yum0.patch
+}
 
-
+build() {
   msg 'Patching python2 shebangs'
   sed -i -e "s|#![ ]*/usr/bin/python$|#!/usr/bin/python2|" -e "s|#![ ]*/usr/bin/env python$|#!/usr/bin/env python2|" $(find ${srcdir} -name '*.py')
 
@@ -34,11 +35,11 @@ build() {
   cd ${srcdir}/${pkgname}-${pkgver}
   make
 }
+
 package() {
   cd ${srcdir}/${pkgname}-${pkgver}
   make DESTDIR=${pkgdir} install
 
   # Install the ArchLinux specific init script
-  #mkdir ${pkgdir}/etc/rc.d || return 1
   install -m 755 ${srcdir}/yum-updatesd.init ${pkgdir}/etc/rc.d/yum-updatesd
 }

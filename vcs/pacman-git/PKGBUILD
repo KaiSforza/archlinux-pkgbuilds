@@ -4,11 +4,12 @@
 # Contributor: Andres Perera <aepd87@gmail.com>
 
 export CC=clang
+DEBUG_CFLAGS="-g"
 pkgname=(pacman-git pacman-contrib-git)
 pkgbase=pacman-git
 _pkgname=pacman
-pkgver=4.1.0.0.g5caf143
-pkgrel=5
+pkgver=4.1.0.10.g2bf2700
+pkgrel=2
 arch=('i686' 'x86_64')
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
 url="http://www.archlinux.org/pacman/"
@@ -16,13 +17,10 @@ license=('GPL')
 makedepends=('git' 'asciidoc')
 checkdepends=('python2' 'fakechroot')
 options=('!libtool')
-source=('pacman-allan::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working'
-        '0001-Remove-pacman.d-references.patch')
-#source=('pacman-official::git+git://projects.archlinux.org/pacman.git')
-#source=('pacman-local::git+file:///home/wgiokas/git/archlinux/pacman#branch=vodik-2')
+source=('pacman::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working-maint')
 _pkgnamedir="${source[0]%%::*}"
-sha1sums=('SKIP'
-          '2e97531fb84652738095b25ed209e5ee7e40bbb1')
+sha1sums=('SKIP')
+
 prepare() {
   cd "$srcdir/$_pkgnamedir"
   #git apply -v "$srcdir/${source[1]}"
@@ -68,16 +66,8 @@ package_pacman-git() {
   make DESTDIR="$pkgdir" install
 
   # set things correctly in the default conf file
-  case $CARCH in
-    i686)
-      mychost="i686-pc-linux-gnu"
-      myflags="-march=i686 "
-      ;;
-    x86_64)
-      mychost="x86_64-unknown-linux-gnu"
-      myflags="-march=x86-64 "
-      ;;
-  esac
+  mychost="$CARCH-pc-linux-gnu"
+  myflags="-march=$CARCH"
   sed -i "$pkgdir/etc/makepkg.conf" \
     -e "s|@CARCH[@]|$CARCH|g" \
     -e "s|@CHOST[@]|$mychost|g" \

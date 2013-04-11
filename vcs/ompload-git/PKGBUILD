@@ -1,6 +1,6 @@
 # Contributor: FallenWizard <fallenwizard@archlinux.us>
 pkgname=ompload-git
-pkgver=20121020
+pkgver=0.r565.g09e0636
 pkgrel=1
 pkgdesc="Script to upload files to omploader.org"
 arch=("any")
@@ -10,8 +10,13 @@ depends=('ruby' 'curl')
 makedepends=('git')
 provides=('ompload')
 conflicts=('ompload')
-source=("git://git.omp.am/omploader.git")
+source=("git://git.omp.am/omploader.git#branch=master")
 md5sums=('SKIP') 
+
+pkgver() {
+  cd $srcdir/omploader
+  echo "0.r$(git rev-list --count master).g$(git describe --always )"
+}
 
 package() {
   cd $srcdir/omploader

@@ -5,11 +5,12 @@
 # Maintainer: William Giokas <1007380@gmail.com>
 # NOTE: Only includes a 64-bit config. Please feel free to submit a 32-bit config.
 
+BUILDDIR=~/.cache/pacman/build
 pkgbase=linux-kaictl
 #pkgname=linux-mainline
-_gitver=v3.9-rc5
-pkgver=3.9.rc5.0.g07961ac
-pkgrel=3
+_gitver=v3.9-rc6
+pkgver=3.9.rc6.0.g31880c3
+pkgrel=1
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -32,7 +33,7 @@ md5sums=('SKIP'
          'faf192fe62f5bcd9abdc3c506f58e7c5'
          '6a8a28db0c8d3ec0bffff749cd4fa5cb'
          'cf26f47deab79e07ade19188d6bf450e'
-         'b52acaad3ab3c33832598388e9d16575')
+         '91d71ed2f72898f222a51a600c4bab25')
 
 _rcnum=${_gitver#*-}
 #_rcnum=""

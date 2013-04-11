@@ -6,7 +6,7 @@
 export CC=clang
 pkgname=git-git
 _pkgname=git
-pkgver=1.8.2.282.ga32a0c2
+pkgver=1.8.2.444.g8d994db
 pkgrel=1
 pkgdesc="The fast distributed version control system - Git version"
 arch=('i686' 'x86_64')
@@ -27,14 +27,12 @@ optdepends=('tk: gitk and git gui'
 provides=('git')
 conflicts=('git')
 backup=('etc/conf.d/git-daemon.conf')
-source=('git-daemon'
-        'git-daemon.conf'
+source=('git-daemon.conf'
         'git-daemon.service'
         'git-daemon.socket'
         'git://git.kernel.org/pub/scm/git/git.git#branch=master')
 
-md5sums=('8e2648910fd5dd4f1c41d3c7fa9e9156'
-         '2e42bf97779a1c6411d89043334c9e78'
+md5sums=('2e42bf97779a1c6411d89043334c9e78'
          '579f698a6d49d72ce9894b8d36369261'
          'f67869315c2cc112e076f0c73f248002'
          'SKIP')
@@ -78,11 +76,8 @@ package() {
   # remove perllocal.pod, .packlist, and empty directories.
   rm -rf "$pkgdir"/usr/lib/perl5
 
-  # git daemon script
-  install -D -m755 "$srcdir"/git-daemon "$pkgdir"/etc/rc.d/git-daemon
+  # git daemon
   install -D -m644 "$srcdir"/git-daemon.conf "$pkgdir"/etc/conf.d/git-daemon.conf
-
-  # systemd stuff
   install -D -m 644 "$srcdir"/git-daemon.service "$pkgdir"/usr/lib/systemd/system/git-daemon.service
   install -D -m 644 "$srcdir"/git-daemon.socket "$pkgdir"/usr/lib/systemd/system/git-daemon.socket
 

@@ -3,7 +3,7 @@
 #export CC=clang
 pkgname=systemd-git
 _pkgname=systemd
-pkgver=200.78.gae7a718
+pkgver=201.10.gb8b4d3d
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
@@ -32,10 +32,8 @@ backup=(etc/dbus-1/system.d/org.freedesktop.systemd1.conf
         etc/systemd/bootchart.conf
         etc/udev/udev.conf)
 install=systemd.install
-#source=('systemd::git://anongit.freedesktop.org/systemd/systemd.git'
-#source=("systemd-tags::git+file:///home/wgiokas/git/KaiSforza/systemd#commit=c20d829"
-# Bad commit: 168f22
-source=("systemd-personal::git+file:///home/wgiokas/git/KaiSforza/systemd#branch=master"
+#source=("systemd-personal::git+file:///home/wgiokas/git/KaiSforza/systemd#branch=master"
+source=('systemd-personal::git://anongit.freedesktop.org/systemd/systemd.git'
         'initcpio-hook-udev'
         'initcpio-install-udev'
         'initcpio-install-timestamp')
