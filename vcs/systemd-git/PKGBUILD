@@ -3,7 +3,7 @@
 #export CC=clang
 pkgname=systemd-git
 _pkgname=systemd
-pkgver=201.10.gb8b4d3d
+pkgver=201.59.gd378991
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
@@ -33,7 +33,7 @@ backup=(etc/dbus-1/system.d/org.freedesktop.systemd1.conf
         etc/udev/udev.conf)
 install=systemd.install
 #source=("systemd-personal::git+file:///home/wgiokas/git/KaiSforza/systemd#branch=master"
-source=('systemd-personal::git://anongit.freedesktop.org/systemd/systemd.git'
+source=('systemd-personal::git://anongit.freedesktop.org/systemd/systemd.git#branch=master'
         'initcpio-hook-udev'
         'initcpio-install-udev'
         'initcpio-install-timestamp')

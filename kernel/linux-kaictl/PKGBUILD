@@ -10,12 +10,11 @@ pkgbase=linux-kaictl
 #pkgname=linux-mainline
 _gitver=v3.9-rc6
 pkgver=3.9.rc6.0.g31880c3
-pkgrel=1
+pkgrel=2
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
-makedepends=('xmlto' 'docbook-xsl' 'git')
-options=('!strip')
+makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git')
 # Use gz compression locally as we don't care about size
 PKGEXT='.pkg.tar.gz'
 # Uncomment if you want to upload or save a tiny amount of space

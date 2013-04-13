@@ -8,8 +8,8 @@ DEBUG_CFLAGS="-g"
 pkgname=(pacman-git pacman-contrib-git)
 pkgbase=pacman-git
 _pkgname=pacman
-pkgver=4.1.0.10.g2bf2700
-pkgrel=2
+pkgver=4.1.0.13.g597286e
+pkgrel=1
 arch=('i686' 'x86_64')
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
 url="http://www.archlinux.org/pacman/"
@@ -66,7 +66,9 @@ package_pacman-git() {
   make DESTDIR="$pkgdir" install
 
   # set things correctly in the default conf file
-  mychost="$CARCH-pc-linux-gnu"
+  if [[ $CARCH == 'x86_64' ]]; then mychost="$CARCH-unknown-linux-gnu";
+  else                              mychost="$CARCH-pc-linux-gnu"; fi
+
   myflags="-march=$CARCH"
   sed -i "$pkgdir/etc/makepkg.conf" \
     -e "s|@CARCH[@]|$CARCH|g" \
