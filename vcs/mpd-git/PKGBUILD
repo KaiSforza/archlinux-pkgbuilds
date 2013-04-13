@@ -1,0 +1,85 @@
+#  Maintainer: sudokode <sudokode@gmail.com>
+# Contributor: graysky <graysky AT archlinux DOT us>
+# Contributor: Slash <demodevil5[at]yahoo[dot]com>
+# Contributor: Gaetan Bisson <bisson@archlinux.org>
+# Contributor: Angel Velasquez <angvp@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+# Contributor: Damir Perisa <damir.perisa@bluewin.ch>
+# Contributor: Ben <ben@benmazer.net>
+
+pkgname=mpd-git
+pkgver=0.17.3.661.g1729388
+pkgrel=1
+epoch=1
+pkgdesc='Flexible, powerful, server-side application for playing music'
+url='http://mpd.wikia.com/wiki/Server'
+license=('GPL')
+arch=('i686' 'x86_64')
+depends=('libao' 'ffmpeg' 'mpg123' 'libmodplug' 'audiofile' 'libshout' 'libmad' 'curl' 'faad2'
+         'sqlite' 'jack' 'libmms' 'wavpack' 'libmpcdec' 'avahi' 'libid3tag' 'opus')
+conflicts=('mpd')
+makedepends=('git')
+source=("$pkgname::git://git.musicpd.org/master/mpd.git"
+        'mpd.tmpfile' 'mpd.service' 'mpd-system.socket' 'mpd-user.socket' 'CdioParanoiaInputPlugin.cxx.patch')
+sha256sums=('SKIP'
+            'c1683ba35774c85e16c70e89f7e2ed1c09619512b1a273daabbd5e34d40439bd'
+            'ecb4caedf02dacdb9b71040794145d7547d7ee8349eaea200cbddab85d67ee95'
+            'a05936116d59d442a5f94858f30e759389719ed2ac6dbef25a512d952a156658'
+            'a650e25f9e4490e6dc7172ff95bfb7a1df28175d365741c3d98af3849c4b5428'
+            '514d6d7c77f9d71147903e37fe3ac71236c7cf5820e62c960926a29dd63d7aeb')
+backup=('etc/mpd.conf')
+install=mpd.install
+
+pkgver() {
+  cd "$srcdir"/$pkgname
+  git describe | sed 's/^release-//; s/-/./g'
+}
+
+prepare() {
+  cd "$srcdir"/$pkgname
+  # Patch CdioParanoiaInputPlugin.cxx because of wrong path to cdio-paranoia header
+  patch -p0 -i "$srcdir"/CdioParanoiaInputPlugin.cxx.patch src/input/CdioParanoiaInputPlugin.cxx
+}
+
+build() {
+  cd "$srcdir"/$pkgname
+
+  # Configure Source
+  ./autogen.sh \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --disable-lastfm \
+    --disable-jack \
+    --enable-pulse \
+    --enable-opus \
+    --disable-sidplay \
+    --with-systemdsystemunitdir=/usr/lib/systemd/system
+
+  make
+}
+
+package() {
+  cd "$srcdir"/$pkgname
+
+  make DESTDIR="$pkgdir" install
+
+  sed \
+    -e '/^#playlist_directory/c playlist_directory "/var/lib/mpd/playlists"' \
+    -e '/^#db_file/c db_file "/var/lib/mpd/mpd.db"' \
+    -e '/^#pid_file/c pid_file "/run/mpd/mpd.pid"' \
+    -e '/^#state_file/c state_file "/var/lib/mpd/mpdstate"' \
+    -e '/^#user/c user "mpd"' \
+    -i doc/mpdconf.example
+
+  install -d -g 45 -o 45 "$pkgdir"/var/lib/mpd
+  install -d -g 45 -o 45 "$pkgdir"/var/lib/mpd/playlists
+  install -Dm644 doc/mpdconf.example "$pkgdir"/etc/mpd.conf
+  install -Dm644 "$srcdir"/mpd.tmpfile "$pkgdir"/usr/lib/tmpfiles.d/mpd.conf
+  install -Dm644 "$srcdir"/mpd.service "$pkgdir"/usr/lib/systemd/user/mpd.service
+  install -Dm644 "$srcdir"/mpd-system.socket "$pkgdir"/usr/lib/systemd/system/mpd.socket
+  install -Dm644 "$srcdir"/mpd-user.socket "$pkgdir"/usr/lib/systemd/user/mpd.socket
+
+  find "$pkgdir" -type d -name '.git' -exec rm -r '{}' +
+}
+
+# vim:set ts=2 sw=2 et:
