@@ -2,7 +2,7 @@
 
 pkgname=netctl-git
 epoch=1
-pkgver=0.8.3.g9ff7256
+pkgver=0.8.14.g748fed6
 pkgver() {
     cd "$srcdir/netctl"
     git describe | tr - .
