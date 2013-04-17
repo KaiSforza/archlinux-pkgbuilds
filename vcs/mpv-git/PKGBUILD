@@ -2,8 +2,8 @@
 # Based on the mplayer2-lite-git PKGBUILD
 
 pkgname=mpv-git
-pkgver=0.34763.a95a5bc
-pkgrel=1
+pkgver=0.34787.22d53fb
+pkgrel=2
 pkgdesc="A movie player and encoder for linux (uses dynamically linked ffmpeg; git version)"
 arch=('i686' 'x86_64')
 license=('GPL')
@@ -74,4 +74,7 @@ package() {
 
   # file association
   install -Dm644 "${srcdir}/mpv.desktop" "${pkgdir}/usr/share/applications/mpv.desktop"
+
+  # Fix fontconfig bug
+  install -Dm644 "${srcdir}/${_gitname}/sub/osd_font.pfb" "${pkgdir}/usr/share/fonts/Type1/osd_font.pfb"
 }
