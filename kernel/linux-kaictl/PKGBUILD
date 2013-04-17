@@ -8,9 +8,9 @@
 BUILDDIR=~/.cache/pacman/build
 pkgbase=linux-kaictl
 #pkgname=linux-mainline
-_gitver=v3.9-rc6
-pkgver=3.9.rc6.0.g31880c3
-pkgrel=2
+_gitver=v3.9-rc7
+pkgver=3.9.rc7.0.g41ef2d5
+pkgrel=1
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -32,7 +32,7 @@ md5sums=('SKIP'
          'faf192fe62f5bcd9abdc3c506f58e7c5'
          '6a8a28db0c8d3ec0bffff749cd4fa5cb'
          'cf26f47deab79e07ade19188d6bf450e'
-         '91d71ed2f72898f222a51a600c4bab25')
+         'e833f239e81f7f4c5734fa7e2b34ac77')
 
 _rcnum=${_gitver#*-}
 #_rcnum=""
