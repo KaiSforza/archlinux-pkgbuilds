@@ -2,7 +2,7 @@
 
 pkgname=cower-git
 _pkgname=cower
-pkgver=9.0.g5fe1e4e
+pkgver=9.r0.g5fe1e4e
 pkgrel=1
 pkgdesc="A simple AUR agent with a pretentious name"
 arch=('i686' 'x86_64')
@@ -18,7 +18,7 @@ md5sums=('SKIP')
 
 pkgver() {
   cd $srcdir/$_pkgname
-  git describe --long | sed 's/-/./g'
+  git describe --always --long | sed -E 's/([^-]*-g)/r\1/;s/-/./g'
 }
 
 build() {

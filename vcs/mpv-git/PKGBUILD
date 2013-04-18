@@ -1,14 +1,15 @@
 # Maintainer: RudolfPolzer <divVerent@xonotic.org>
 # Based on the mplayer2-lite-git PKGBUILD
 
+export CC=clang
 pkgname=mpv-git
-pkgver=0.34787.22d53fb
-pkgrel=2
+pkgver=0.r34788.9a6e6b2
+pkgrel=4
 pkgdesc="A movie player and encoder for linux (uses dynamically linked ffmpeg; git version)"
 arch=('i686' 'x86_64')
 license=('GPL')
 url="https://github.com/mpv-player/mpv"
-depends=('libcaca' 'portaudio' 'ffmpeg' 'lcms2' 'libdvdread' 'libmng' 'libbluray' 'libcdio-paranoia' 'libxinerama' 'lirc-utils' 'libxss' 'desktop-file-utils' 'libvdpau' 'libass' 'libquvi' 'mpg123')
+depends=('libcaca' 'portaudio' 'ffmpeg' 'lcms2' 'libdvdread' 'libmng' 'libbluray' 'libcdio-paranoia' 'libxinerama' 'libxss' 'desktop-file-utils' 'libvdpau' 'libass' 'libquvi' 'mpg123')
 makedepends=('git' 'mesa' 'python-docutils')
 provides=('mpv')
 conflicts=('mpv')
@@ -25,7 +26,7 @@ pkgver() {
   cd "$srcdir/$_gitname"
   microver="$(git log -1 --pretty=format:%h )"
   minorver="$(git rev-list --count HEAD)"
-  echo "0.$minorver.$microver"
+  echo "0.r$minorver.$microver"
 }
 
 build() {
@@ -34,7 +35,6 @@ build() {
   unset LDFLAGS
   cd "$srcdir/$_gitname"
 
-  msg "Starting configure..."
   ./configure --prefix=/usr \
       --disable-smb \
       --disable-lirc \
@@ -55,7 +55,6 @@ build() {
       --disable-coreaudio \
       --disable-sdl2
 
-  msg "Starting make..."
   make
 }
 

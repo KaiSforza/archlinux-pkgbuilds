@@ -3,8 +3,8 @@
 # Contributor: Grigorios Bouzakis <grbzks[at]gmail[dot]com>, TDY <tdy@gmx.com>
 
 pkgname=tmux-git
-pkgver=1.7.55.g675c6b3
-pkgrel=2
+pkgver=1.7.r55.g675c6b3
+pkgrel=1
 pkgdesc="A terminal multiplexer"
 url="http://tmux.sourceforge.net/"
 arch=('i686' 'x86_64')
@@ -22,7 +22,7 @@ _gitname=tmux
 
 pkgver() {
   cd "$srcdir/$_gitname"
-  git describe --tags --always --long | tr - .
+  git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
 }
 
 build() {

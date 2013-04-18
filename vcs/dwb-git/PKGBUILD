@@ -3,7 +3,7 @@
 export CC=clang
 pkgname=dwb-git
 _gitname=dwb
-pkgver=2013.04.13.gb6697bf
+pkgver=2013.04.18.gfe6f25e
 pkgrel=1
 pkgdesc="A webkit web browser with vi-like keyboard shortcuts, latest git-pull" 
 url="http://portix.bitbucket.org/dwb"

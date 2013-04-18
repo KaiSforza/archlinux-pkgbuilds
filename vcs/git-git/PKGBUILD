@@ -6,7 +6,7 @@
 export CC=clang
 pkgname=git-git
 _pkgname=git
-pkgver=1.8.2.1.418.gaec3f77
+pkgver=1.8.2.1.r422.gdcd8c09
 pkgrel=1
 pkgdesc="The fast distributed version control system - Git version"
 arch=('i686' 'x86_64')
@@ -40,7 +40,7 @@ md5sums=('2e42bf97779a1c6411d89043334c9e78'
 
 pkgver() {
   cd "$srcdir/$_pkgname"
-  echo $(git describe --long | sed 's/-/./g;s/v//g')
+  git describe --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
 }
 
 build() {

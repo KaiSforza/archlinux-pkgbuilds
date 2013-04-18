@@ -3,7 +3,7 @@
 
 pkgname=i3status-git
 _pkgname=i3status
-pkgver=2.7.8.g13ebebe
+pkgver=2.7.r8.g13ebebe
 pkgrel=1
 pkgdesc="Generates status bar to use with dzen2 or wmii"
 arch=('i686' 'x86_64')
@@ -22,7 +22,7 @@ sha1sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$_pkgname"
-  git describe --tags --long | sed 's/-/./g'
+  git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
 }
 
 build() {

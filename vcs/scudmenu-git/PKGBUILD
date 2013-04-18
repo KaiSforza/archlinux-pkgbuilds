@@ -2,7 +2,7 @@
 
 pkgname=scudmenu-git
 _pkgname=scudmenu
-pkgver=0.4.f2e392d
+pkgver=0.r5.973c708
 pkgrel=1
 pkgdesc="A script combining systemctl --user and dmenu"
 arch=('any')
@@ -18,7 +18,7 @@ md5sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$_pkgname"
-  echo "0.$(git rev-list --count master).$(git describe --always )"
+  echo "0.r$(git rev-list --count master).$(git describe --always )"
 }
 
 package() {

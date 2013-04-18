@@ -3,7 +3,7 @@
 #export CC=clang
 pkgname=systemd-git
 _pkgname=systemd
-pkgver=201.137.g90cf049
+pkgver=201.r168.g4befe2e
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
@@ -45,7 +45,7 @@ _gitname="${source[0]%%::*}"
 
 pkgver() {
   cd "$srcdir/$_gitname"
-  echo $(git describe --long --always | sed 's#-#.#g;s#v##')
+  git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
 }
 
 #prepare() {

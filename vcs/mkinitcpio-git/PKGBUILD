@@ -3,8 +3,8 @@
 # Maintainer: Thomas Bächler <thomas@archlinux.org> ([core] package)
 
 pkgname=mkinitcpio-git
-pkgver=0.13.0.12.g366bb18
-pkgrel=2
+pkgver=0.13.0.r12.g366bb18
+pkgrel=1
 pkgdesc="Modular initramfs image creation utility - git checkout"
 arch=('any')
 url="http://www.archlinux.org/"
@@ -23,7 +23,7 @@ source=('git://projects.archlinux.org/mkinitcpio.git')
 
 pkgver() {
 	cd mkinitcpio/
-	git describe --tags --long | sed 's|^[^0-9]*||;s|-|.|g'
+  git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
 }
 
 package() {

@@ -3,8 +3,8 @@
 
 pkgname=ii-git
 _pkgname=ii
-pkgver=1.6.7.g7a99152
-pkgrel=5
+pkgver=1.6.r7.g7a99152
+pkgrel=1
 pkgdesc="A minimalist FIFO and filesystem-based IRC client"
 arch=(i686 x86_64)
 url="http://wmii.de/index.php/WMII/ii"
@@ -21,7 +21,7 @@ md5sums=('17d6db42d3297691e4a8e98598065f59'
 
 pkgver() {
     cd "$srcdir/$_pkgname"
-    echo $(git describe --tags --long | sed 's/-/./g')
+    git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
 }
 
 build() {

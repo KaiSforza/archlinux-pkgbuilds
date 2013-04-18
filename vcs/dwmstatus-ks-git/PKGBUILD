@@ -2,7 +2,7 @@
 
 pkgname=dwmstatus-ks-git
 _pkgname=dwmstatus-ks-local2
-pkgver=0.5.0.19.g33cc9b9
+pkgver=0.5.0.r19.g33cc9b9
 pkgrel=1
 pkgdesc="A simple C status bar, fork by KaiSforza, git version"
 url="https://bitbucket.org/KaiSforza/dwmstatus"
@@ -19,7 +19,7 @@ md5sums=('SKIP'
 
 pkgver() {
   cd "$srcdir/$_pkgname"
-  git describe --tags --long --always | sed 's/-/./g;s/v//'
+  git describe --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
 }
 prepare() {
   cp "$srcdir/config.h" "$srcdir/$_pkgname"

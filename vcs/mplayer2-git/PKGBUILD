@@ -33,7 +33,7 @@ options=(!emptydirs)
 
 pkgver() {
     cd "$srcdir/$pkgname"
-    echo "$(git shortlog | grep -c '^\s\+').$(git describe --always)"
+    echo "0.r$(git rev-list --count master).$(git describe --always )"
 }
 build()
 {

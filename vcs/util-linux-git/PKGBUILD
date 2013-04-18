@@ -1,8 +1,8 @@
 # Contributor: Dave Reisner <d@falconindy.com>
 
 pkgname=util-linux-git
-pkgver=2.23.rc2.7.g320173e
-pkgrel=2
+pkgver=2.23.rc2.r23.gc0d14b0
+pkgrel=1
 pkgdesc="Miscellaneous system utilities for Linux - the GIT version"
 url="http://userweb.kernel.org/~kzak/util-linux/"
 arch=('i686' 'x86_64')
@@ -28,7 +28,7 @@ md5sums=('SKIP'
 
 pkgver() {
   cd util-linux
-  git describe | sed 's/v//;s/-/./g'
+  git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
 }
 
 build() {

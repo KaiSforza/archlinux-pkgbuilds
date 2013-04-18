@@ -8,7 +8,7 @@ DEBUG_CFLAGS="-g"
 pkgname=(pacman-git pacman-contrib-git)
 pkgbase=pacman-git
 _pkgname=pacman
-pkgver=4.1.0.13.g597286e
+pkgver=4.1.0.r14.g769facc
 pkgrel=1
 arch=('i686' 'x86_64')
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
@@ -28,7 +28,7 @@ prepare() {
 
 pkgver() {
   cd "$srcdir/$_pkgnamedir"
-  echo "$(git describe --long | sed 's#-#.#g;s#^v##')"
+  git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
 }
 
 build() {

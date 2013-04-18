@@ -2,10 +2,10 @@
 
 pkgname=netctl-git
 epoch=1
-pkgver=0.8.14.g748fed6
+pkgver=0.8.r21.ge01b395
 pkgver() {
     cd "$srcdir/netctl"
-    git describe | tr - .
+    git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
 }
 pkgrel=1
 pkgdesc="Network configuration and profile scripts"
