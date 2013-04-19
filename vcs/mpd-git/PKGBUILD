@@ -8,7 +8,7 @@
 # Contributor: Ben <ben@benmazer.net>
 
 pkgname=mpd-git
-pkgver=release.0.17.4.r675.gb2d3d15
+pkgver=0.17.4.r675.gb2d3d15
 pkgrel=1
 epoch=1
 pkgdesc='Flexible, powerful, server-side application for playing music'
@@ -32,7 +32,7 @@ install=mpd.install
 
 pkgver() {
   cd "$srcdir"/$pkgname
-  git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
+  git describe --tags --always --long | sed -E 's/release-//;s/([^-]*-g)/r\1/;s/-/./g'
 }
 
 prepare() {
