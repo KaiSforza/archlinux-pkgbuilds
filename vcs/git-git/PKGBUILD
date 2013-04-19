@@ -1,13 +1,14 @@
-# Maintainer:  Christoph Vigano <mail at cvigano dot de>
+# Maintainer:  William Giokas <1007380@gmail.com>
+# Contributor: Christoph Vigano <mail at cvigano dot de>
 # Contributor: Marcin Karpezo <sirmacik at gmail dot com>
 # Contributor: Michael Rosset <mrosset@uarch.org>
 # Based on [extra]'s git
 
-export CC=clang
 pkgname=git-git
 _pkgname=git
-pkgver=1.8.2.1.r422.gdcd8c09
-pkgrel=1
+epoch=1
+pkgver=1.8.2.1.r478.g1468a58
+pkgrel=2
 pkgdesc="The fast distributed version control system - Git version"
 arch=('i686' 'x86_64')
 url="http://git-scm.com/"
@@ -21,11 +22,11 @@ optdepends=('tk: gitk and git gui'
             'perl-net-smtp-ssl: git send-email TLS support'
             'perl-authen-sasl: git send-email TLS support'
             'python2: various helper scripts'
-            'emacs: emacs interface'
             'subversion: git svn'
             'cvsps: git cvsimport')
 provides=('git')
 conflicts=('git')
+install=git.install
 backup=('etc/conf.d/git-daemon.conf')
 source=('git-daemon.conf'
         'git-daemon.service'
@@ -78,7 +79,6 @@ package() {
 
   # git daemon
   install -D -m644 "$srcdir"/git-daemon.conf "$pkgdir"/etc/conf.d/git-daemon.conf
-  install -D -m 644 "$srcdir"/git-daemon.service "$pkgdir"/usr/lib/systemd/system/git-daemon.service
-  install -D -m 644 "$srcdir"/git-daemon.socket "$pkgdir"/usr/lib/systemd/system/git-daemon.socket
-
+  install -D -m644 "$srcdir"/git-daemon.service "$pkgdir"/usr/lib/systemd/system/git-daemon.service
+  install -D -m644 "$srcdir"/git-daemon.socket "$pkgdir"/usr/lib/systemd/system/git-daemon.socket
 }
