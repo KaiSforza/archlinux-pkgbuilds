@@ -1,0 +1,53 @@
+# Maintainer: Sam S. <smls75@gmail.com>
+
+pkgname=torchlight-hib
+pkgver=1.15_20120926
+_hibver=2012-09-26
+pkgrel=0
+pkgdesc='A hack and slash action role-playing game (Humble Bundle version)'
+url='http://www.torchlightgame.com/'
+arch=('i686' 'x86_64')
+license=('custom:commercial')
+depends=('libgl' 'mesa' 'freeglut' 'libxrandr' 'expat' 'libxaw' 'libxft'
+         'libxinerama' 'freeimage' 'util-linux' 'zziplib' 'pcre' 'libtxc_dxtn')
+_installer="Torchlight-${_hibver}.sh"
+source=('torchlight-hib.desktop'
+        "$_installer")
+md5sums=('36903fc0f19910870440b68ac4cd22a4'
+         'eff02cb27a818b4d29e399bc8a293d7f')
+options=('!strip' '!upx')
+PKGEXT='.pkg.tar.gz'
+
+package() {
+  cd $srcdir
+  # Execute installer (it validates its own checksum)
+  msg "Starting setup..."
+  [[ -d "./temp" ]] && rm -r "./temp"
+  sh "$srcdir/${_installer}" --unattended --no-register --packager pacman \
+                       --keep --overwrite --accept-license \
+                       --target  "${srcdir}/temp" \
+                       --bindir  "${srcdir}/bin" \
+                       --datadir "${pkgdir}/opt"
+  # Remove bundled libraries & helper binaries (use system packages instead)
+  rm -rf "${pkgdir}/opt/Torchlight/xdg-"*
+
+  # Fix permissions
+  find "${pkgdir}" -type f -exec chmod 644 "{}" +
+
+  # Install desktop entry
+  install -Dm644 "${pkgname}.desktop" \
+                 "${pkgdir}/usr/share/applications/${pkgname}.desktop"
+
+  # Install icon
+  install -Dm644 "${pkgdir}/opt/Torchlight/Torchlight.png" \
+                 "${pkgdir}/usr/share/pixmaps/torchlight.png"
+
+  # Install launcher symlink
+  case $CARCH in i686) _arch=x86;; x86_64) _arch=x86_64;; esac
+  chmod 755 "${pkgdir}/opt/Torchlight/Torchlight.bin.${_arch}"
+  install -d "${pkgdir}/usr/bin"
+  ln -s "/opt/Torchlight/Torchlight.bin.${_arch}" "${pkgdir}/usr/bin/torchlight"
+
+  # Install license file
+  install -Dm644 "temp/config/license" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}
