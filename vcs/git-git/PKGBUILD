@@ -7,8 +7,8 @@
 pkgname=git-git
 _pkgname=git
 epoch=1
-pkgver=1.8.2.1.r478.g1468a58
-pkgrel=2
+pkgver=1.8.2.1.r501.gd2949c7
+pkgrel=1
 pkgdesc="The fast distributed version control system - Git version"
 arch=('i686' 'x86_64')
 url="http://git-scm.com/"
