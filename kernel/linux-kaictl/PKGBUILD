@@ -8,38 +8,32 @@
 BUILDDIR=~/.cache/pacman/build
 pkgbase=linux-kaictl
 #pkgname=linux-mainline
-_gitver=v3.9-rc7
-pkgver=3.9.rc7.0.g41ef2d5
+_gitver=v3.9-rc8
+pkgver=3.9.rc8.r0.g60d509f
 pkgrel=1
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git')
-# Use gz compression locally as we don't care about size
+_rcnum=${_gitver#*-}
+_kernelname=${pkgbase#linux}
 PKGEXT='.pkg.tar.gz'
-# Uncomment if you want to upload or save a tiny amount of space
-#PKGEXT='.pkg.tar.xz'
-#source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#branch=master"
 source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_gitver"
         # the main kernel config files
         'config.x86_64'
         # standard config files for mkinitcpio ramdisk
         'linux.preset'
-        'change-default-console-loglevel-2.patch'
-        'linux.install')
+        'change-default-console-loglevel-2.patch')
 
 md5sums=('SKIP'
-         'faf192fe62f5bcd9abdc3c506f58e7c5'
+         'bb6f36d39c42e63a3cd05ddca01de723'
          '6a8a28db0c8d3ec0bffff749cd4fa5cb'
-         'cf26f47deab79e07ade19188d6bf450e'
-         'e833f239e81f7f4c5734fa7e2b34ac77')
+         'cf26f47deab79e07ade19188d6bf450e')
+options=('!strip')
 
-_rcnum=${_gitver#*-}
-#_rcnum=""
-_kernelname=${pkgbase#linux}
 pkgver() {
   cd "$srcdir/linux"
-  echo "$(git describe --long | sed 's/-/./g;s/v//')"
+  git describe --long | sed -E 's/([^-]*-g)/r\1/;s/-/./g;s/v//'
 }
 
 prepare() {
