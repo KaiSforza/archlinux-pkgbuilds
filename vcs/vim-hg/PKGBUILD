@@ -1,7 +1,7 @@
 export CC=clang
 pkgname=vim-hg
-pkgver=4249.acf7368a2acc
-pkgrel=2
+pkgver=7.3.905.r4312
+pkgrel=1
 pkgdesc='Vi Improved, a highly configurable, improved version of the vi text editor'
 arch=(i686 x86_64)
 license=('custom:vim')
@@ -22,7 +22,9 @@ _hgrepo="vim"
 
 pkgver() {
   cd "${srcdir}/${_hgrepo}"
-  hg identify -ni | awk 'BEGIN{OFS=".";} {print $2,$1}'
+  _mainver="$(hg log -r "$(hg id -n)" --template '{latesttag}' | sed -E 's/v//;s/-/./g')"
+  _revno="$(hg id -n)"
+  echo "${_mainver}.r${_revno}"
 }
 
 build()
