@@ -1,83 +1,50 @@
-# Maintainer: Jonas Haag <jonas@lophus.org>
-# Original contributor: Mineo <the_mineo at web dot de>
+# Contributor: Jonas Haag <jonas@lophus.org>
+# Contributor: Mineo <the_mineo at web dot de>
+# Maintainer: William Giokas <1007380@gmail.com>
 
-pkgbase=python-sphinx-hg
-pkgname=('python-sphinx-hg' 'python2-sphinx-hg')
-pkgver=4114.af279417087d
+pkgname=python-sphinx-hg
+_pkgname="sphinx"
+epoch=1
+pkgver=1.2b1.r4160
 pkgrel=1
-pkgdesc="development version of Sphinx, *the* documentation generator"
+pkgdesc='Python3 documentation generator'
 url="http://sphinx.pocoo.org/latest/"
 license=('GPL')
 arch=('i686' 'x86_64')
-makedepends=(
-  'python-distribute'
-  'python-docutils'
-  'python-jinja'
-  'python-pygments'
-  'python2-distribute'
-  'python2-docutils'
-  'python2-jinja'
-  'python2-pygments'
-)
-checkdepends=(
-  'python-nose'
-  'python2-nose'
-  'texlive-latexextra'
-)
+depends=('python-jinja' 'python-pygments' 'python-docutils')
+optdepends=('texlive-latexextra: for generation of PDF documentation')
+makedepends=('python-distribute' 'python-sphinx')
+provides=('python-sphinx')
+conflicts=('python-sphinx' 'python3-sphinx-hg')
+
+# Not used right now, the test suite fails marvelously with python 3
+checkdepends=('python-nose' 'texlive-latexextra')
 
 source=("hg+http://bitbucket.org/birkenfeld/sphinx")
-_hgname="sphinx"
 md5sums=('SKIP')
 
 pkgver() {
-  cd ${srcdir}/${_hgname}
-  hg identify -ni | awk 'BEGIN{OFS=".";} {print $2,$1}'
+  cd ${srcdir}/${_pkgname}
+  _revno="$(hg identify -n)"
+  _mainver="$(hg log -r "$_revno" --template '{latesttag}' | sed -E 's/v//;s/-/./g')"
+  echo "${_mainver}.r${_revno}"
 }
 
 build() {
-  cd ${srcdir}/${_hgname}
-  # remove build directory (avoid sed issues)
-  [[ -e build ]] && rm -rf build
+  cd "$srcdir/$_pkgname"
   # python builds
-  python setup.py build --build-lib=build/python
-  python2 setup.py build --build-lib=build/python2
-  # change python2 interpreter
-  find build/python2 -type f -exec \
-    sed -i '1s,^#! \?/usr/bin/\(env \|\)python$,#!/usr/bin/python2,' {} \;
-  # change sphinx-binaries name in source code
-  find build/python2 -type f -name '*.py' -exec \
-    sed -ri 's,(sphinx-(:?build|apidoc|autogen|quickstart)),\12,' {} \;
+  make build
+  # Build docs using sphinx (hence the requirment for python-sphinx)
+  sphinx-build -b man doc doc/_build/man
 }
 
-check() {
-  #(cd Sphinx-$pkgver/build/python/ && python ../../tests/run.py -d)
-  (cd $_hgname/build/python2/ && python2 ../../tests/run.py -d)
-}
+package() {
+  cd $srcdir/$_pkgname
+  python setup.py install --root="$pkgdir" --optimize=1
 
-package_python-sphinx-hg() {
-  pkgdesc='Python3 documentation generator'
-  depends=('python-jinja' 'python-pygments' 'python-docutils')
-  optdepends=('texlive-latexextra: for generation of PDF documentation')
-  provides=('python-sphinx')
-  conflicts=('python-sphinx')
-  
-  cd $srcdir/$_hgname
-  python setup.py build --build-lib=build/python \
-                  install --root="$pkgdir" --optimize=1
-}
-
-package_python2-sphinx-hg() {
-  pkgdesc='Python2 documentation generator'
-  depends=('python2-jinja' 'python2-pygments' 'python2-docutils')
-  optdepends=('texlive-latexextra: for generation of PDF documentation')
-  provides=('python2-sphinx')
-  conflicts=('python2-sphinx')
-
-  cd $srcdir/$_hgname
-  python2 setup.py build --build-lib=build/python2 \
-                   install --root="$pkgdir" --optimize=1
-  # fix python3 conflict
-  for _f in "$pkgdir"/usr/bin/*; do
-      mv -v "$_f" "${_f}2"
+  # Install the manual pages to man1
+  mkdir -p "$pkgdir"/usr/share/man/man1
+  for i in "$srcdir/$_pkgname"/doc/_build/man/*.1; do
+    install -D -m644 "$i" "$pkgdir"/usr/share/man/man1/"$(basename $i)"
   done
 }
