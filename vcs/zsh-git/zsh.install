@@ -1,5 +1,5 @@
 post_install() {
-	grep -q '/bin/zsh' etc/shells || echo '/bin/zsh' >> etc/shells
+	grep -q '/usr/bin/zsh' etc/shells || echo '/usr/bin/zsh' >> etc/shells
 }
 
 post_upgrade() {
@@ -7,5 +7,5 @@ post_upgrade() {
 }
 
 pre_remove() {
-	sed -i '/^\/bin\/zsh/d' etc/shells
+	sed -i '/^\/usr/bin\/zsh/d' etc/shells
 }

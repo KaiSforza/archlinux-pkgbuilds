@@ -5,8 +5,8 @@
 pkgname=zsh-git
 _pkgname=zsh
 epoch=1
-pkgver=5.0.2.r25.gdd3b050
-pkgrel=1
+pkgver=5.0.2.r73.g2ea9cd4
+pkgrel=4
 pkgdesc='A very advanced and programmable command interpreter (shell) for UNIX'
 arch=('i686' 'x86_64')
 url='http://www.zsh.org/'
@@ -17,21 +17,18 @@ provides=("zsh=$pkgver")
 makedepends=('yodl')
 install=zsh.install
 source=('zprofile'
-        'git://zsh.git.sf.net/gitroot/zsh/zsh')
+        "$_pkgname::git://git.code.sf.net/p/zsh/code")
 backup=('etc/zsh/zprofile')
 md5sums=('24a9335edf77252a7b5f52e079f7aef7'
          'SKIP')
 
-
-_gitname="$_pkgname"
-
 pkgver() {
-    cd "$srcdir/$_gitname"
+    cd "$srcdir/$_pkgname"
     git describe --tags --always --long | sed -E 's/zsh.//;s/([^-]*-g)/r\1/;s/-/./g'
 }
 
 build() {
-    cd "$srcdir/$_gitname"
+    cd "$srcdir/$_pkgname"
 
     ./Util/preconfig
     
@@ -49,7 +46,6 @@ build() {
 	rm -f  Completion/Unix/Command/_osc
 
 	./configure --prefix=/usr \
-		--bindir=/bin \
 		--enable-etcdir=/etc/zsh \
 		--enable-zshenv=/etc/zsh/zshenv \
 		--enable-zlogin=/etc/zsh/zlogin \
@@ -70,12 +66,12 @@ build() {
 }
 
 check() {
-	cd "${srcdir}/$_gitname"
+	cd "${srcdir}/$_pkgname"
 	HOME="${srcdir}" make check
 }
 
 package() {
-	cd "${srcdir}/$_gitname"
+	cd "${srcdir}/$_pkgname"
 	make DESTDIR="${pkgdir}/" install
 	install -D -m644 "${srcdir}/zprofile" "${pkgdir}/etc/zsh/zprofile"
 	install -D -m644 LICENCE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
