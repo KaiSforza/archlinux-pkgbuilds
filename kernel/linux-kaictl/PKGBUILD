@@ -5,17 +5,18 @@
 # Maintainer: William Giokas <1007380@gmail.com>
 # NOTE: Only includes a 64-bit config. Please feel free to submit a 32-bit config.
 
-BUILDDIR=~/.cache/pacman/build
+#BUILDDIR=~/.cache/pacman/build/
 pkgbase=linux-kaictl
 #pkgname=linux-mainline
-_gitver=v3.9-rc8
-pkgver=3.9.rc8.r0.g60d509f
+_gitver=v3.9
+pkgver=3.9.0.r0.gc1be5a5
 pkgrel=1
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git')
-_rcnum=${_gitver#*-}
+#_rcnum=${_gitver#*-}
+_rcnum=""
 _kernelname=${pkgbase#linux}
 PKGEXT='.pkg.tar.gz'
 source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_gitver"
@@ -33,7 +34,11 @@ options=('!strip')
 
 pkgver() {
   cd "$srcdir/linux"
-  git describe --long | sed -E 's/([^-]*-g)/r\1/;s/-/./g;s/v//'
+  if [[ -z $_rcnum ]]; then
+    git describe --long | sed -E 's/([^-]*-g)/0.r\1/;s/-/./g;s/v//'
+  else
+    git describe --long | sed -E 's/([^-]*-g)/r\1/;s/-/./g;s/v//'
+  fi
 }
 
 prepare() {
