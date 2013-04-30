@@ -3,7 +3,7 @@
 #export CC=clang
 pkgname=systemd-git
 _pkgname=systemd
-pkgver=202.r12.gfcdfc15
+pkgver=202.r86.ga432cb6
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
@@ -48,12 +48,6 @@ pkgver() {
   git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
 }
 
-#prepare() {
-#  cd "$srcdir/$_gitname"
-#
-#  git apply -v "$srcdir/use-split-usr-path.patch"
-#
-#}
 build(){
   cd "$srcdir/$_gitname"
   ./autogen.sh
