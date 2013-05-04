@@ -1,6 +1,6 @@
 export CC=clang
 pkgname=vim-hg
-pkgver=7.3.905.r4312
+pkgver=7.3.923.r4349
 pkgrel=1
 pkgdesc='Vi Improved, a highly configurable, improved version of the vi text editor'
 arch=(i686 x86_64)
@@ -49,7 +49,7 @@ build()
     --enable-cscope \
     --disable-netbeans \
     --enable-perlinterp \
-    --disable-pythoninterp \
+    --enable-pythoninterp \
     --enable-python3interp \
     --disable-rubyinterp \
     --disable-luainterp
