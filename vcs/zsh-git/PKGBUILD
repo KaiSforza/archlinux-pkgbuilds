@@ -5,8 +5,8 @@
 pkgname=zsh-git
 _pkgname=zsh
 epoch=1
-pkgver=5.0.2.r73.g2ea9cd4
-pkgrel=4
+pkgver=5.0.2.r0.gdaa828b
+pkgrel=1
 pkgdesc='A very advanced and programmable command interpreter (shell) for UNIX'
 arch=('i686' 'x86_64')
 url='http://www.zsh.org/'
@@ -24,7 +24,7 @@ md5sums=('24a9335edf77252a7b5f52e079f7aef7'
 
 pkgver() {
     cd "$srcdir/$_pkgname"
-    git describe --tags --always --long | sed -E 's/zsh.//;s/([^-]*-g)/r\1/;s/-/./g'
+    git describe --tags --always --long | sed -E 's/^zsh.//;s/([^-]*-g)/r\1/;s/-/./g'
 }
 
 build() {
