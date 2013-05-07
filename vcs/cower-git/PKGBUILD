@@ -3,7 +3,7 @@
 pkgname=cower-git
 _pkgname=cower
 pkgver=9.r0.g5fe1e4e
-pkgrel=1
+pkgrel=2
 pkgdesc="A simple AUR agent with a pretentious name"
 arch=('i686' 'x86_64')
 url="http://github.com/falconindy/cower"
@@ -29,5 +29,3 @@ build() {
 package() {
   make -C "$srcdir/$_pkgname" PREFIX=/usr DESTDIR="$pkgdir" install
 }
-
-# vim: ft=sh syn=sh et
