@@ -3,7 +3,7 @@
 # Maintainer: Thomas Bächler <thomas@archlinux.org> ([core] package)
 
 pkgname=mkinitcpio-git
-pkgver=0.13.0.r12.g366bb18
+pkgver=0.14.0.r0.g5294b46
 pkgrel=1
 pkgdesc="Modular initramfs image creation utility - git checkout"
 arch=('any')
@@ -18,7 +18,6 @@ optdepends=('xz: Use lzma or xz compression for the initramfs image'
 provides=("mkinitcpio=$pkgver")
 conflicts=('mkinitcpio')
 backup=('etc/mkinitcpio.conf')
-#source=('mkinitcpio-personal::git+file:///home/wgiokas/git/archlinux/mkinitcpio#branch=fixlib64')
 source=('git://projects.archlinux.org/mkinitcpio.git')
 
 pkgver() {
