@@ -90,7 +90,7 @@ build() {
 
 _package() {
   pkgdesc="The ${pkgbase} kernel and modules"
-  [ "${pkgbase}" = "linux" ] && groups=('base')
+  [ "${pkgbase}" = "linux-kaictl" ] && groups=('kernel-kaictl')
   depends=('coreutils' 'linux-firmware' 'kmod' 'mkinitcpio>=0.7')
   optdepends=('crda: to set the correct wireless channels of your country')
   provides=("kernel26${_kernelname}=${pkgver}" "linux-mainline=${pkgver}")
@@ -155,6 +155,7 @@ _package() {
 
 _package-headers() {
   KARCH=x86
+  [ "${pkgbase}" = "linux-kaictl" ] && groups=('kernel-kaictl')
   pkgdesc="Header files and scripts for building modules for ${pkgbase} kernel"
   provides=("kernel26${_kernelname}-headers=${pkgver}" "linux-mainline-headers=${pkgver}")
   conflicts=("kernel26${_kernelname}-headers")
@@ -296,6 +297,7 @@ _package-headers() {
 }
 
 _package-docs() {
+  [ "${pkgbase}" = "linux-kaictl" ] && groups=('kernel-kaictl')
   pkgdesc="Kernel hackers manual - HTML documentation that comes with the ${pkgbase} kernel"
   provides=("kernel26${_kernelname}-docs=${pkgver}" "linux-mainline-docs=${pkgver}")
   conflicts=("kernel26${_kernelname}-docs")
