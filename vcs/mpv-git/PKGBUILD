@@ -3,8 +3,8 @@
 
 export CC=clang
 pkgname=mpv-git
-pkgver=0.r34788.9a6e6b2
-pkgrel=4
+pkgver=0.r34925.2c6c842
+pkgrel=1
 pkgdesc="A movie player and encoder for linux (uses dynamically linked ffmpeg; git version)"
 arch=('i686' 'x86_64')
 license=('GPL')
@@ -75,5 +75,5 @@ package() {
   install -Dm644 "${srcdir}/mpv.desktop" "${pkgdir}/usr/share/applications/mpv.desktop"
 
   # Fix fontconfig bug
-  install -Dm644 "${srcdir}/${_gitname}/sub/osd_font.pfb" "${pkgdir}/usr/share/fonts/Type1/osd_font.pfb"
+  install -Dm644 "${srcdir}/${_gitname}/sub/osd_font.otf" "${pkgdir}/usr/share/fonts/Type1/osd_font.otf"
 }
