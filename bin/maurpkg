@@ -12,6 +12,7 @@ archiverepo="/home/wgiokas/.cache/pacman/pkg/old"
 verbose="-v"
 reponame="personal"
 moreinfo="-i"
+_sign=""
 packageext=".pkg.tar.gz"
 if [[ $UID != 0 ]]; then
     _pacman="sudo pacman"
@@ -63,10 +64,10 @@ signrepos(){
             gpg --detach-sign "$f"
         fi
     done
-    repo-add --sign -n "$packagesrepo/$reponame.db.tar.gz" "$packagesrepo/$1"*$packageext
-    repo-add --sign -n "$packagesrepo/debug/$reponame-debug.db.tar.gz" "$packagesrepo/debug/$1"*-debug-*$packageext
-    repo-add --sign -n -f "$packagesrepo/$reponame.files.tar.gz" "$packagesrepo/$1"*$packageext
-    repo-add --sign -n -f "$packagesrepo/debug/$reponame-debug.files.tar.gz" "$packagesrepo/debug/$1"*-debug-*$packageext
+    repo-add ${_sign} -n "$packagesrepo/$reponame.db.tar.gz" "$packagesrepo/$1"*$packageext
+    repo-add ${_sign} -n "$packagesrepo/debug/$reponame-debug.db.tar.gz" "$packagesrepo/debug/$1"*-debug-*$packageext
+    repo-add ${_sign} -n -f "$packagesrepo/$reponame.files.tar.gz" "$packagesrepo/$1"*$packageext
+    repo-add ${_sign} -n -f "$packagesrepo/debug/$reponame-debug.files.tar.gz" "$packagesrepo/debug/$1"*-debug-*$packageext
 }
 downloadpkg(){
     if [[ -e $pkgbuilds/$1 ]]; then
