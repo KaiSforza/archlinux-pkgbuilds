@@ -1,0 +1,22 @@
+pkgname=nsudoku
+pkgver=1.2
+pkgrel=1
+pkgdesc="The Sudoku puzzle game in ncurses"
+arch=(i686 x86_64)
+url="http://www.tbmatuka.com/nsudoku/"
+license=('MIT')
+depends=('ncurses')
+source=(http://www.tbmatuka.com/$pkgname/$pkgname-$pkgver.c
+        http://www.tbmatuka.com/$pkgname/LICENSE-$pkgver)
+
+md5sums=('6569177ea48ed4c2193150964ccb7d5c'
+         'ac8467d00b02b56bf9a5679b8bddc6a0')
+
+build() {
+  cd "$srcdir"
+  gcc -lncurses -o $pkgname $pkgname-$pkgver.c
+}
+package() {
+  install -Dm755 $pkgname $pkgdir/usr/bin/$pkgname
+  install -Dm644 LICENSE-$pkgver $pkgdir/usr/share/licenses/$pkgname/LICENSE
+}
