@@ -12,16 +12,16 @@ url="http://isync.sourceforge.net/"
 arch=(i686 x86_64)
 license=(GPL)
 depends=(openssl)
-source=(http://downloads.sourceforge.net/sourceforge/isync/$pkgname-$pkgver.tar.gz)
+source=("http://downloads.sourceforge.net/sourceforge/isync/$pkgname-$pkgver.tar.gz")
 sha256sums=('e543767a5e36574256e8c25ba43acd6666df060fdf5f6a7029b127560d87632f')
 
 build() {
-  cd $srcdir/$pkgname-$pkgver
+  cd "$srcdir/$pkgname-$pkgver"
   ./configure --prefix=/usr
   make
 }
 
 package() {
-  cd $srcdir/$pkgname-$pkgver
-  make DESTDIR=$pkgdir install
+  cd "$srcdir/$pkgname-$pkgver"
+  make DESTDIR="$pkgdir" install
 }
