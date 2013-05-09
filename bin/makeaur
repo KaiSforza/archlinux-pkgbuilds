@@ -1,0 +1,43 @@
+#!/bin/bash
+
+AURDIR=$HOME/aur
+LOGFILE=$AURDIR/makeaur.log
+
+if [[ -z $1 ]]; then
+  echo "Please specify a subdir"
+  exit 1
+fi
+
+getlogdate() {
+  echo -ne "[$(date "+%F %T")] "
+}
+
+for dir in "$@"; do
+  echo "==> Build for $dir starting at $(date) {{{" >> "$LOGFILE"
+  startdate="$(date +%s)"
+  for pkgbuilds in "$AURDIR/$dir/"*/PKGBUILD; do
+    pkgs=${pkgbuilds%%/PKGBUILD}
+    _makeaurpkgname=${pkgs##*/}
+    pushd $pkgs &>/dev/null
+    _status=0
+    makepkg -sLcr || _status=1
+    . PKGBUILD
+    case $_status in
+      0)
+        echo "  $(getlogdate)Package built:        $dir/$_makeaurpkgname-$pkgver-$pkgrel" >> "$LOGFILE"
+        ;;
+      1)
+        makepkg -eoc
+        echo "  $(getlogdate)Package build FAILED: $dir/$_makeaurpkgname-$pkgver-$pkgrel" >> "$LOGFILE"
+        ;;
+      *)
+        makepkg -eoc
+        echo "  $(getlogdate)Unknown error:        $dir/$_makeaurpkgname-$pkgver-$pkgrel" >> "$LOGFILE"
+    esac
+    popd &>/dev/null
+  done
+  enddate="$(date +%s)"
+  let totaltime=$enddate-$startdate
+  echo "==> Build for $dir took $totaltime seconds" >> "$LOGFILE"
+  echo "==> Build for $dir ended at $(date) }}}" >> "$LOGFILE"
+done
