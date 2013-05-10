@@ -61,11 +61,22 @@ getlogdate() {
   echo -ne "[$(date "+%F %T")] "
 }
 
-for dir in "$@"; do
-  echo "==> Build for $dir starting at $(date) {{{" >> "$LOGFILE"
+for i in $*; do
+  case $i in
+    -*)
+      _makepkg_opts=(${_makepkg_opts[@]} $i)
+      ;;
+    *)
+      _dir=(${_dir[@]} $i)
+      ;;
+  esac
+done
+
+for subdir in "${_dir[@]}"; do
+  echo "==> Build for $subdir starting at $(date) {{{" >> "$LOGFILE"
   # Get a starting date to measure total time taken
   startdate="$(date +%s)"
-  for pkgbuilds in "$AURDIR/$dir/"*/PKGBUILD; do
+  for pkgbuilds in "$AURDIR/$subdir/"*/PKGBUILD; do
     # Unset all variables and functions that will be set
     unset epoch _status _pkgverfunc epoch pkgs pkgname 
     unset -f pkgver
@@ -88,7 +99,10 @@ for dir in "$@"; do
     fi #}}}
     # Only run makepkg if there is a pkgverfunc or no file already made {{{
     if [[ ! -f "$PKGDEST/$pkgname-$_fullpkgver-$CARCH$PKGEXT" || $_pkgverfunc == 1 ]]; then
-      makepkg -sLcr || _status=1
+      makepkg ${_makepkg_opts[@]} || _status=1
+      if [[ -f "$PKGDEST/$pkgname-$_fullpkgver-$CARCH$PKGEXT" ]]; then
+        _status=2
+      fi
     else
       error "Package $pkgname $_fullpkgver already built"
       _status=2
@@ -96,23 +110,24 @@ for dir in "$@"; do
     # Write log lines {{{
     case $_status in
       0)
-        echo "  $(getlogdate)Package built:         $dir/$pkgname-$_fullpkgver" >> "$LOGFILE"
+        echo "  $(getlogdate)Package built:         $subdir/$pkgname-$_fullpkgver" >> "$LOGFILE"
         ;;
       1)
         makepkg -eoc
-        echo "  $(getlogdate)Package build FAILED:  $dir/$pkgname-$_fullpkgver" >> "$LOGFILE"
+        echo "  $(getlogdate)Package build FAILED:  $subdir/$pkgname-$_fullpkgver" >> "$LOGFILE"
         ;;
       2)
-        echo "  $(getlogdate)Package already built: $dir/$pkgname-$_fullpkgver" >> "$LOGFILE"
+        echo "  $(getlogdate)Package already built: $subdir/$pkgname-$_fullpkgver" >> "$LOGFILE"
         ;;
       *)
         makepkg -eoc
-        echo "  $(getlogdate)Unknown error:         $dir/$pkgname-$_fullpkgver" >> "$LOGFILE"
+        echo "  $(getlogdate)Unknown error:         $subdir/$pkgname-$_fullpkgver" >> "$LOGFILE"
     esac #}}}
     popd &>/dev/null
   done
   enddate="$(date +%s)"
+  # Calculate the time it took to run stuff for this subdir
   let totaltime=$enddate-$startdate
-  echo "==> Build for $dir took $totaltime seconds" >> "$LOGFILE"
-  echo "==> Build for $dir ended at $(date) }}}" >> "$LOGFILE"
+  echo "==> Build for $subdir took $totaltime seconds" >> "$LOGFILE"
+  echo "==> Build for $subdir ended at $(date) }}}" >> "$LOGFILE"
 done
