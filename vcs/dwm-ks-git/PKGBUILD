@@ -1,6 +1,6 @@
 pkgname=dwm-ks-git
 _pkgname=dwm
-pkgver=90591fe
+pkgver=6.0.r89.g4bce023
 pkgrel=1
 pkgdesc="A dynamic window manager for X - config by KaiSforza"
 url="http://dwm.suckless.org"
@@ -19,7 +19,7 @@ export CC=clang
 
 pkgver() {
   cd "$srcdir/$_pkgname"
-  git describe --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
+  git describe --always --long --tags | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
 }
 prepare() {
   cd "$srcdir/$_pkgname"
