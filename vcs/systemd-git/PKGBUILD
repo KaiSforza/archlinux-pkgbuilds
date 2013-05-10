@@ -1,9 +1,9 @@
 # Maintainer: Dave Reisner <dreisner@archlinux.org>
 
-#export CC=clang
+export CC=gcc
 pkgname=systemd-git
 _pkgname=systemd
-pkgver=203.r5.g1210bc6
+pkgver=204.r15.gc238497
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
