@@ -61,6 +61,23 @@ getlogdate() {
   echo -ne "[$(date "+%F %T")] "
 }
 
+in_array() {
+  local needle=$1; shift
+  
+  local i opt
+  for (( i = $#; i > 0; i-- )); do
+    opt=${!i}
+    if [[ $opt = "$needle" ]]; then
+      # is in array
+      echo 0
+      return 0
+    else
+      #not in array
+      echo 1
+    fi
+  done
+}
+
 for i in $*; do
   case $i in
     -*)
@@ -78,7 +95,7 @@ for subdir in "${_dir[@]}"; do
   startdate="$(date +%s)"
   for pkgbuilds in "$AURDIR/$subdir/"*/PKGBUILD; do
     # Unset all variables and functions that will be set
-    unset epoch _status _pkgverfunc epoch pkgs pkgname 
+    unset epoch _status _pkgverfunc epoch pkgs pkgname CC _cleanup arch _buildarch
     unset -f pkgver
     _pkgverfunc=0
     # get the path of the dir, not of the PKGBUILD
@@ -97,11 +114,18 @@ for subdir in "${_dir[@]}"; do
     else
       _fullpkgver="$epoch:$pkgver-$pkgrel"
     fi #}}}
+    # Architecture settings:
+    _use_any=$(in_array "any" ${arch[@]})
+    case $_use_any in
+      0) _buildarch=any ;;
+      *) _buildarch=$CARCH ;;
+    esac
     # Only run makepkg if there is a pkgverfunc or no file already made {{{
-    if [[ ! -f "$PKGDEST/$pkgname-$_fullpkgver-$CARCH$PKGEXT" || $_pkgverfunc == 1 ]]; then
+    if [[ ! -f "$PKGDEST/$pkgname-$_fullpkgver-$_buildarch$PKGEXT" || $_pkgverfunc == 1 ]]; then
       makepkg ${_makepkg_opts[@]} || _status=1
-      if [[ -f "$PKGDEST/$pkgname-$_fullpkgver-$CARCH$PKGEXT" ]]; then
+      if [[ $_status == 1 && -f "$PKGDEST/$pkgname-$_fullpkgver-$_buildarch$PKGEXT" ]]; then
         _status=2
+        _cleanup=1
       fi
     else
       error "Package $pkgname $_fullpkgver already built"
@@ -110,18 +134,19 @@ for subdir in "${_dir[@]}"; do
     # Write log lines {{{
     case $_status in
       0)
-        echo "  $(getlogdate)Package built:         $subdir/$pkgname-$_fullpkgver" >> "$LOGFILE"
+        echo "  $(getlogdate)Package built:         $subdir/$pkgname-$_fullpkgver-$_buildarch" >> "$LOGFILE"
         ;;
       1)
         makepkg -eoc
-        echo "  $(getlogdate)Package build FAILED:  $subdir/$pkgname-$_fullpkgver" >> "$LOGFILE"
+        echo "  $(getlogdate)Package build FAILED:  $subdir/$pkgname-$_fullpkgver-$_buildarch" >> "$LOGFILE"
         ;;
       2)
-        echo "  $(getlogdate)Package already built: $subdir/$pkgname-$_fullpkgver" >> "$LOGFILE"
+        (( _cleanup )) && makepkg -eoc
+        echo "  $(getlogdate)Package already built: $subdir/$pkgname-$_fullpkgver-$_buildarch" >> "$LOGFILE"
         ;;
       *)
         makepkg -eoc
-        echo "  $(getlogdate)Unknown error:         $subdir/$pkgname-$_fullpkgver" >> "$LOGFILE"
+        echo "  $(getlogdate)Unknown error:         $subdir/$pkgname-$_fullpkgver-$_buildarch" >> "$LOGFILE"
     esac #}}}
     popd &>/dev/null
   done
