@@ -13,22 +13,15 @@ license=('custom:commercial')
 depends=('libgl' 'mesa' 'sdl' 'sdl_mixer' 'sdl_image')
 optdepends=('catalyst: AMD Proprietary 3D driver'
 			'nvidia: NVIDIA Proprietary 3D driver')
-source=('eufloria-hib.desktop')
-sha256sums=('637790aa33b43d2d2ef3178c07ff882f7c5f85f0b89ad46b971ceed5133c8783')
-options=("!upx")
-PKGEXT='.pkg.tar.gz'
-
 _gamepkg="EufloriaHD-Linux-${_gamepkgver}.sh"
-
+source=('eufloria-hib.desktop'
+        "$_gamepkg")
+sha256sums=('637790aa33b43d2d2ef3178c07ff882f7c5f85f0b89ad46b971ceed5133c8783'
+            '40271b57827d55f70818f85d8c0c9e1091cf8726119e3a99a59d07630f72a8fb')
+options=("!upx")
 
 package() {
   cd $srcdir
-
-  # Get installer
-  _get_humblebundle_source "${_gamepkg}" || {
-    error "Unable to find the game archive. Please download it from your Humble
-           Bundle page, and place it into one of the above locations."
-    exit 1; }
 
   # Execute installer
   msg "Starting setup..."
@@ -63,26 +56,4 @@ package() {
 
   # Install license file
   install -Dm644 "temp/config/license" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
-}
-
-
-# Locate a game archive from one of the Humble Bundles, and symlink it into $srcdir
-_get_humblebundle_source() {
-  _get_local_source "$1" || return 1;
-  # TODO: Implement automatic downloading from Humble Bundle site
-}
-
-# Locate a file or folder provided by the user, and symlink it into $srcdir
-_get_local_source() {
-  msg "Looking for '$1'..."
-  declare -A _search=(['build dir']="$startdir"
-                      ['$LOCAL_PACKAGE_SOURCES']="$LOCAL_PACKAGE_SOURCES")
-  for _key in "${!_search[@]}"; do local _dir="${_search["$_key"]}"
-    if [ -z "$_dir" ]; then _dir="<undefined>"; fi
-    echo -n "    - in $_key ['$_dir'] ... ";
-    if [ -e "$_dir/$1" ]; then
-      echo "FOUND"; ln -sfT "$(readlink -f "$_dir/$1")" "$srcdir/$1"; break; fi
-    echo "NOT FOUND"
-  done
-  if [ ! -e "$srcdir/$1" ]; then return 1; fi
 }
