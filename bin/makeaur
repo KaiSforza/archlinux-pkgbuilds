@@ -1,14 +1,40 @@
 #!/bin/bash
+#
+#   MIT/X Consortium License
+#
+#   Copyright (c) 2013 William Giokas <1007380@gmail.com>
+#
+#   Permission is hereby granted, free of charge, to any person obtaining a
+#   copy of this software and associated documentation files (the "Software"),
+#   to deal in the Software without restriction, including without limitation
+#   the rights to use, copy, modify, merge, publish, distribute, sublicense,
+#   and/or sell copies of the Software, and to permit persons to whom the
+#   Software is furnished to do so, subject to the following conditions:
+#
+#   The above copyright notice and this permission notice shall be included in
+#   all copies or substantial portions of the Software.
+#
+#   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+#   THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+#   FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+#   DEALINGS IN THE SOFTWARE.
 
-AURDIR=$HOME/aur
-LOGFILE=$AURDIR/makeaur.log
+# TODO: User configuration file? Man page?
+# TODO: (maybe) have dependency ordered building of packages
 
-. ~/.makepkg.conf
+PACKAGEDIR=${PACKAGEDIR:-$HOME/aur}
+LOGFILE=${LOGFILE:-$PACKAGEDIR/makeaur.log}
 
-if [[ -z $1 ]]; then
-  echo "Please specify a subdir"
-  exit 1
+# Get some variables from makepkg.conf {{{
+if [[ -r /etc/makepkg.conf ]]; then
+  . /etc/makepkg.conf
 fi
+if [[ -r "$HOME/.makepkg.conf" ]]; then
+  . ~/.makepkg.conf
+fi #}}}
 
 # Use colored messages {{{
 plain() {
@@ -57,11 +83,37 @@ if [[ -t 2 && ! $USE_COLOR = "n" ]]; then
 fi
 readonly ALL_OFF BOLD BLUE GREEN RED YELLOW #}}}
 
-getlogdate() {
-  echo -ne "[$(date "+%F %T")] "
-}
+usage() { #{{{
+  cat << EOF
+${BOLD}Usage: $(basename $0) [makepkg opts] subdir [subdir]${ALL_OFF}
+    For makepkg options, see makepkg(8).
+    Dirctories should be organized like so:
+      subdir
+       |- package1
+       |+ - PKGBUILD
+       +- package2
+        + - PKGBUILD
+        ...
+    You can specify multiple subdirectories for makeaur to go through, the
+    logs will create a separate section for each subdirectory.
 
-in_array() {
+  Environment Variables:
+    ${BLUE}PACKAGEDIR${ALL_OFF}: specifies the path to 'subdir.' Example to build ABS packages:
+                    PACKAGEDIR=/var/abs makeaur core
+                Default: $PACKAGEDIR
+    ${BLUE}LOGFILE${ALL_OFF}:    Normally a log is placed in PACKAGEDIR/LOGFILE, this allows
+                the user to specify an alternat location.
+                Default: $PACKAGEDIR/makeaur.log
+
+    Based off of abs's 'makeworld.'
+EOF
+} #}}}
+
+getlogdate() { #{{{
+  echo -ne "[$(date "+%F %T")] "
+} #}}}
+
+in_array() { #{{{
   local needle=$1; shift
   
   local i opt
@@ -76,10 +128,15 @@ in_array() {
       echo 1
     fi
   done
-}
+} #}}}
 
+unset _dir _makepkg_opts
 for i in $*; do
   case $i in
+    -h|--help)
+      usage
+      exit 0
+      ;;
     -*)
       _makepkg_opts=(${_makepkg_opts[@]} $i)
       ;;
@@ -89,11 +146,21 @@ for i in $*; do
   esac
 done
 
+if [[ ${#_dir} -lt 1 ]]; then
+  error "Please specify a directory containing packages."
+  usage
+  exit 1
+fi
+
 for subdir in "${_dir[@]}"; do
-  echo "==> Build for $subdir starting at $(date) {{{" >> "$LOGFILE"
+  if [[ ! -d "$PACKAGEDIR/$subdir" ]]; then
+    error "$PACKAGEDIR/$subdir does not exist"
+    exit 1
+  fi
+  echo "==> Build for $subdir starting at $(date)" >> "$LOGFILE"
   # Get a starting date to measure total time taken
   startdate="$(date +%s)"
-  for pkgbuilds in "$AURDIR/$subdir/"*/PKGBUILD; do
+  for pkgbuilds in "$PACKAGEDIR/$subdir/"*/PKGBUILD; do
     # Unset all variables and functions that will be set
     unset epoch _status _pkgverfunc epoch pkgs pkgname CC _cleanup arch _buildarch
     unset -f pkgver
@@ -105,10 +172,10 @@ for subdir in "${_dir[@]}"; do
     # source the pkgbuild to get some variables and a function set
     . PKGBUILD
     # Setting the full pkgver {{{
-    epoch=${epoch:-0}
     if declare -f pkgver >/dev/null; then
       _pkgverfunc=1
     fi
+    epoch=${epoch:-0}
     if [[ $epoch ]] && (( ! $epoch )); then
       _fullpkgver="$pkgver-$pkgrel"
     else
@@ -128,7 +195,7 @@ for subdir in "${_dir[@]}"; do
         _cleanup=1
       fi
     else
-      error "Package $pkgname $_fullpkgver already built"
+      error "Package $pkgname $_fullpkgver already built. (use -f to overwrite)"
       _status=2
     fi #}}}
     # Write log lines {{{
@@ -138,7 +205,7 @@ for subdir in "${_dir[@]}"; do
         ;;
       1)
         makepkg -eoc
-        echo "  $(getlogdate)Package build FAILED:  $subdir/$pkgname-$_fullpkgver-$_buildarch" >> "$LOGFILE"
+        echo "  $(getlogdate)ERROR: build failure:  $subdir/$pkgname-$_fullpkgver-$_buildarch" >> "$LOGFILE"
         ;;
       2)
         (( _cleanup )) && makepkg -eoc
@@ -154,5 +221,5 @@ for subdir in "${_dir[@]}"; do
   # Calculate the time it took to run stuff for this subdir
   let totaltime=$enddate-$startdate
   echo "==> Build for $subdir took $totaltime seconds" >> "$LOGFILE"
-  echo "==> Build for $subdir ended at $(date) }}}" >> "$LOGFILE"
+  echo "==> Build for $subdir ended at $(date)" >> "$LOGFILE"
 done
