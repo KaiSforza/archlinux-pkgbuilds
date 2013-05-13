@@ -3,7 +3,7 @@
 
 pkgname=ii-git
 _pkgname=ii
-pkgver=1.6.r7.g7a99152
+pkgver=1.7.r1.g28feb9a
 pkgrel=1
 pkgdesc="A minimalist FIFO and filesystem-based IRC client"
 arch=(i686 x86_64)
@@ -19,10 +19,12 @@ source=('config.mk'
 md5sums=('17d6db42d3297691e4a8e98598065f59'
          'SKIP')
 
+# template start; name=git-pkgver-r; version=1.0;
 pkgver() {
-    cd "$srcdir/$_pkgname"
-    git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
+  cd "$srcdir/$_pkgname"
+  git describe --tags --long | sed -E 's/([^-]+-g)/r\1/;s/-/./g;s/^v//g'
 }
+# template end;
 
 build() {
     cd "$srcdir/$_pkgname"
