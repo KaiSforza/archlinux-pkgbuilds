@@ -7,12 +7,8 @@
 
 _pkgname=cgit
 pkgname=cgit-git
-pkgver=0.9.1.86.g8bf4a04
-epoch=1
-pkgver () {
-  cd $srcdir/$_pkgname
-  echo $(git describe --always | sed 's/-/./g;s/^v//')
-}
+pkgver=0.9.1.r88.g7966fd9
+epoch=2
 pkgrel=1
 pkgdesc="A web interface for git written in plain C"
 arch=('i686' 'x86_64')
@@ -25,6 +21,13 @@ install=$_pkgname.install
 source=("apache.example.conf"
         "$_pkgname.install"
         "$_pkgname::git://git.zx2c4.com/cgit/")
+
+# template start; name=git-pkgver-r; version=1.0;
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  git describe --tags --long | sed -E 's/([^-]+-g)/r\1/;s/-/./g;s/^v//g'
+}
+# template end;
 
 prepare() {
   cd "$srcdir"/"$_pkgname"
