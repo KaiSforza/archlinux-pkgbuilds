@@ -3,6 +3,7 @@
 
 export CC=clang
 pkgname=mpv-git
+_pkgname="mpv"
 pkgver=0.r35014.3edb563
 pkgrel=1
 pkgdesc="A movie player and encoder for linux (uses dynamically linked ffmpeg; git version)"
@@ -20,20 +21,18 @@ source=('git://github.com/mpv-player/mpv#branch=master'
 md5sums=('SKIP'
         'afa04e3bdb3ef16b78804760c63a3d9a')
 
-_gitname="mpv"
-
+# template start; name=git-pkgver-notags; version=1.0;
 pkgver() {
-  cd "$srcdir/$_gitname"
-  microver="$(git log -1 --pretty=format:%h )"
-  minorver="$(git rev-list --count HEAD)"
-  echo "0.r$minorver.$microver"
+  cd "$srcdir/$_pkgname"
+  echo "0.$(git rev-list --count HEAD).g$(git log -1 --format="%h")"
 }
+# template end;
 
 build() {
   # Custom CFLAGS break the mpv build
   unset CFLAGS
   unset LDFLAGS
-  cd "$srcdir/$_gitname"
+  cd "$srcdir/$_pkgname"
 
   ./configure --prefix=/usr \
       --disable-smb \
@@ -58,21 +57,21 @@ build() {
 }
 
 package() {
-  cd "${srcdir}/${_gitname}"
+  cd "${srcdir}/${_pkgname}"
 
   make -j1 DESTDIR="${pkgdir}" install
 
   install -d ${pkgdir}/usr/share/doc/mpv/examples
 
   # some extra useful stuff "make install" doesn't install
-  install -m644 ${srcdir}/${_gitname}/etc/{input,example,encoding-example-profiles}.conf "${pkgdir}/usr/share/doc/mpv/examples"
-  install -m644 ${srcdir}/${_gitname}/DOCS/{encoding.rst,tech-overview.txt} "${pkgdir}/usr/share/doc/mpv"
-  install -m755 ${srcdir}/${_gitname}/TOOLS/mpv_identify.sh "${pkgdir}/usr/bin"
-  install -Dm644 "${srcdir}/${_gitname}/etc/mplayer.xpm" "${pkgdir}/usr/share/pixmaps/mpv.xpm"
+  install -m644 ${srcdir}/${_pkgname}/etc/{input,example,encoding-example-profiles}.conf "${pkgdir}/usr/share/doc/mpv/examples"
+  install -m644 ${srcdir}/${_pkgname}/DOCS/{encoding.rst,tech-overview.txt} "${pkgdir}/usr/share/doc/mpv"
+  install -m755 ${srcdir}/${_pkgname}/TOOLS/mpv_identify.sh "${pkgdir}/usr/bin"
+  install -Dm644 "${srcdir}/${_pkgname}/etc/mplayer.xpm" "${pkgdir}/usr/share/pixmaps/mpv.xpm"
 
   # file association
   install -Dm644 "${srcdir}/mpv.desktop" "${pkgdir}/usr/share/applications/mpv.desktop"
 
   # Fix fontconfig bug
-  install -Dm644 "${srcdir}/${_gitname}/sub/osd_font.otf" "${pkgdir}/usr/share/fonts/Type1/osd_font.otf"
+  install -Dm644 "${srcdir}/${_pkgname}/sub/osd_font.otf" "${pkgdir}/usr/share/fonts/Type1/osd_font.otf"
 }

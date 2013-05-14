@@ -1,7 +1,7 @@
 pkgname=mal-gtk-git
 _pkgname=mal-gtk
 epoch=1
-pkgver=0.r45.g34dd78c
+pkgver=0.r58.g84f216e
 pkgrel=1
 pkgdesc="GTK+3 anime manager interface for MyAnimeList.net"
 arch=('i686' 'x86_64')
@@ -14,10 +14,12 @@ conflicts=('mal-gtk')
 source=("git://github.com/talisein/mal-gtk.git")
 md5sums=('SKIP')
 
+# template start; name=git-pkgver-notags; version=1.0;
 pkgver() {
   cd "$srcdir/$_pkgname"
-  echo "0.r$(git rev-list --count master).g$(git log -1 --format="%h" )"
+  echo "0.$(git rev-list --count HEAD).g$(git log -1 --format="%h")"
 }
+# template end;
 
 build() {
   cd "$srcdir/$_pkgname"

@@ -3,7 +3,7 @@
 
 pkgname=i3status-git
 _pkgname=i3status
-pkgver=2.7.r8.g13ebebe
+pkgver=2.7.r10.g6a84138
 pkgrel=1
 pkgdesc="Generates status bar to use with dzen2 or wmii"
 arch=('i686' 'x86_64')
@@ -20,10 +20,12 @@ groups=('i3-vcs')
 source=(git://code.i3wm.org/i3status)
 sha1sums=('SKIP')
 
+# template start; name=git-pkgver-r;
 pkgver() {
   cd "$srcdir/$_pkgname"
   git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
 }
+# template end;
 
 build() {
   cd "$_pkgname"

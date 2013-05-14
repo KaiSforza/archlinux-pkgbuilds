@@ -3,6 +3,7 @@
 # Maintainer: Thomas Bächler <thomas@archlinux.org> ([core] package)
 
 pkgname=mkinitcpio-git
+_pkgname=mkinitcpio
 pkgver=0.14.0.r0.g5294b46
 pkgrel=1
 pkgdesc="Modular initramfs image creation utility - git checkout"
@@ -20,13 +21,15 @@ conflicts=('mkinitcpio')
 backup=('etc/mkinitcpio.conf')
 source=('git://projects.archlinux.org/mkinitcpio.git')
 
+# template start; name=git-pkgver-r; version=1.0;
 pkgver() {
-	cd mkinitcpio/
-  git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
+  cd "$srcdir/$_pkgname"
+  git describe --tags --long | sed -E 's/([^-]+-g)/r\1/;s/-/./g;s/^v//g'
 }
+# template end;
 
 package() {
-	cd mkinitcpio/
+	cd "$_pkgname"
 	make DESTDIR="${pkgdir}" install
 }
 

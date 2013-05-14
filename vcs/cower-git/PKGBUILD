@@ -2,8 +2,8 @@
 
 pkgname=cower-git
 _pkgname=cower
-pkgver=9.r0.g5fe1e4e
-pkgrel=2
+pkgver=9.r7.ga7ebb5d
+pkgrel=1
 pkgdesc="A simple AUR agent with a pretentious name"
 arch=('i686' 'x86_64')
 url="http://github.com/falconindy/cower"
@@ -16,10 +16,12 @@ provides=('cower')
 source=("git://github.com/falconindy/cower.git#branch=master")
 md5sums=('SKIP')
 
+# template start; name=git-pkgver-r; version=1.0;
 pkgver() {
-  cd $srcdir/$_pkgname
-  git describe --always --long | sed -E 's/([^-]*-g)/r\1/;s/-/./g'
+  cd "$srcdir/$_pkgname"
+  git describe --tags --long | sed -E 's/([^-]+-g)/r\1/;s/-/./g;s/^v//g'
 }
+# template end;
 
 build() {
   cd $srcdir/$_pkgname

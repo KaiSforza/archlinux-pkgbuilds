@@ -8,8 +8,8 @@ DEBUG_CFLAGS="-g"
 pkgname=(pacman-git pacman-contrib-git)
 pkgbase=pacman-git
 _pkgname=pacman
-pkgver=4.1.0.r7.g9de3348
-pkgrel=2
+pkgver=4.1.1.r10.g984b68a
+pkgrel=1
 arch=('i686' 'x86_64')
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
 url="http://www.archlinux.org/pacman/"
@@ -18,21 +18,17 @@ makedepends=('git' 'asciidoc')
 checkdepends=('python2' 'fakechroot')
 options=('!libtool')
 source=('pacman::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working')
-_pkgnamedir="${source[0]%%::*}"
 sha1sums=('SKIP')
 
-prepare() {
-  cd "$srcdir/$_pkgnamedir"
-  #git apply -v "$srcdir/${source[1]}"
-}
-
+# template start; name=git-pkgver-r; version=1.0;
 pkgver() {
-  cd "$srcdir/$_pkgnamedir"
-  git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
+  cd "$srcdir/$_pkgname"
+  git describe --tags --long | sed -E 's/([^-]+-g)/r\1/;s/-/./g;s/^v//g'
 }
+# template end;
 
 build() {
-  cd "$srcdir/$_pkgnamedir"
+  cd "$srcdir/$_pkgname"
 
   ./autogen.sh
   ./configure \
@@ -51,7 +47,7 @@ build() {
 
 check() {
   cd "$srcdir"
-  make -C "$_pkgnamedir" check
+  make -C "$_pkgname" check
 }
 
 package_pacman-git() {
@@ -62,7 +58,7 @@ package_pacman-git() {
           etc/makepkg.conf)
   provides=("pacman=$pkgver" 'libalpm.so')
   conflicts=('pacman')
-  cd "$srcdir/$_pkgnamedir"
+  cd "$srcdir/$_pkgname"
 
   make DESTDIR="$pkgdir" install
 
@@ -84,7 +80,7 @@ package_pacman-contrib-git() {
   depends=('pacman')
   arch=('any')
   # contrib
-  cd "$srcdir/$_pkgnamedir"
+  cd "$srcdir/$_pkgname"
   make DESTDIR="$pkgdir" -C contrib install
 
   install -Dm644 "contrib/PKGBUILD.vim" "$pkgdir/usr/share/vim/vimfiles/syntax/PKGBUILD.vim"

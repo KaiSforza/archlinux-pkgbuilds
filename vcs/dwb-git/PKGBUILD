@@ -3,7 +3,8 @@
 export CC=clang
 pkgname=dwb-git
 _gitname=dwb
-pkgver=2013.04.18.gfe6f25e
+epoch=1
+pkgver=2006.ge2b36c4
 pkgrel=1
 pkgdesc="A webkit web browser with vi-like keyboard shortcuts, latest git-pull" 
 url="http://portix.bitbucket.org/dwb"
@@ -17,10 +18,12 @@ conflicts=('dwb' 'dwb-gtk3-git' 'dwb-gtk3' 'dwb-gtk3-hg' 'dwb-hg')
 makedepends=('git' 'json-c')
 md5sums=('SKIP')
 
+# template start; name=git-pkgver-notags; version=1.0;
 pkgver() {
-    cd "$srcdir"/$_gitname
-    git log -1 --format="%cd.g%h" --date=short | sed 's/-/./g'
+  cd "$srcdir/$_pkgname"
+  echo "0.$(git rev-list --count HEAD).g$(git log -1 --format="%h")"
 }
+# template end;
 build() {
   cd "$srcdir/$_gitname"
   make 

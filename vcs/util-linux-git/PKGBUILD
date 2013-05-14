@@ -1,7 +1,8 @@
 # Contributor: Dave Reisner <d@falconindy.com>
 
 pkgname=util-linux-git
-pkgver=2.23.r0.gd80aa81
+_pkgname=util-linux
+pkgver=2.23.r60.g84992b8
 pkgrel=1
 pkgdesc="Miscellaneous system utilities for Linux - the GIT version"
 url="http://userweb.kernel.org/~kzak/util-linux/"
@@ -26,10 +27,12 @@ md5sums=('SKIP'
          'a31374fef2cba0ca34dfc7078e2969e4'
          'a39554bfd65cccfd8254bb46922f4a67')
 
+# template start; name=git-pkgver-r; version=1.0;
 pkgver() {
-  cd util-linux
-  git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
+  cd "$srcdir/$_pkgname"
+  git describe --tags --long | sed -E 's/([^-]+-g)/r\1/;s/-/./g;s/^v//g'
 }
+# template end;
 
 build() {
   cd util-linux
@@ -40,7 +43,7 @@ build() {
       --prefix=/usr \
       --libdir=/usr/lib \
       --disable-wall \
-      --disable-kill \
+      --enable-kill \
       --enable-write \
       --enable-raw \
       --enable-fs-paths-extra="/usr/sbin:/usr/bin" \
@@ -72,5 +75,6 @@ package() {
 
   # tmpfiles
   install -Dm644 "$srcdir/uuidd.tmpfiles" "$pkgdir/usr/lib/tmpfiles.d/uuidd.conf"
+  ln -sv ../../bin/kill "$pkgdir/usr/bin/kill"
 }
 

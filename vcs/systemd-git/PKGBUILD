@@ -3,7 +3,7 @@
 export CC=gcc
 pkgname=systemd-git
 _pkgname=systemd
-pkgver=204.r15.gc238497
+pkgver=204.r29.gbc7fd8c
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
@@ -42,10 +42,12 @@ md5sums=('SKIP'
          'df69615503ad293c9ddf9d8b7755282d')
 _gitname="${source[0]%%::*}"
 
+# template start; name=git-pkgver-r; version=1.0;
 pkgver() {
-  cd "$srcdir/$_gitname"
-  git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
+  cd "$srcdir/$_pkgname"
+  git describe --tags --long | sed -E 's/([^-]+-g)/r\1/;s/-/./g;s/^v//g'
 }
+# template end;
 
 build(){
   cd "$srcdir/$_gitname"

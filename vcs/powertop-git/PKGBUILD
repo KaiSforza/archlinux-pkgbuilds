@@ -6,7 +6,7 @@
 
 pkgname=powertop-git
 _pkgname=powertop
-pkgver=2.3.r6.g6189b69
+pkgver=2.3.r16.gfa4cbd5
 pkgrel=1
 pkgdesc='A tool to diagnose issues with power consumption and power management, git version'
 arch=('i686' 'x86_64')
@@ -19,10 +19,12 @@ conflicts=("$_pkgname")
 source=(git+https://github.com/fenrus75/powertop.git)
 sha256sums=('SKIP')
 
+# template start; name=git-pkgver-r; version=1.0;
 pkgver() {
-  cd ${srcdir}/$_pkgname
-  git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
+  cd "$srcdir/$_pkgname"
+  git describe --tags --long | sed -E 's/([^-]+-g)/r\1/;s/-/./g;s/^v//g'
 }
+# template end;
 
 build() {
   cd ${srcdir}/$_pkgname

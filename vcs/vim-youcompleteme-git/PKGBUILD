@@ -1,10 +1,10 @@
 # Maintainer: Daniel Micay <danielmicay@gmail.com>
 
-_gitname=YouCompleteMe
+_pkgname=YouCompleteMe
 pkgname=vim-youcompleteme-git
-pkgver=564.7cef111
+pkgver=0.588.gd4ca726
 pkgrel=1
-epoch=1
+epoch=2
 pkgdesc='A code-completion engine for Vim'
 arch=(i686 x86_64)
 url='http://valloric.github.com/YouCompleteMe/'
@@ -18,19 +18,21 @@ install=vimdoc.install
 source=('git://github.com/Valloric/YouCompleteMe.git')
 md5sums=(SKIP)
 
+# template start; name=git-pkgver-notags; version=1.0;
 pkgver() {
-  cd $_gitname
-  echo $(git rev-list --count master).$(git rev-parse --short master)
+  cd "$srcdir/$_pkgname"
+  echo "0.$(git rev-list --count HEAD).g$(git log -1 --format="%h")"
 }
+# template end;
 
 build() {
-  cd $_gitname/cpp
+  cd $_pkgname/cpp
   cmake -G "Unix Makefiles" -DUSE_SYSTEM_LIBCLANG=ON
   make ycm_core
 }
 
 package() {
-  cd $_gitname
+  cd $_pkgname
   mkdir -p "$pkgdir/usr/share/vim/vimfiles"
   cp -a autoload doc plugin python "$pkgdir/usr/share/vim/vimfiles"
   ln -sf /usr/lib/llvm/libclang.so "$pkgdir/usr/share/vim/vimfiles/python/"

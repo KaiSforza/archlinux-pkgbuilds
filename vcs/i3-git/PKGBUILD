@@ -3,7 +3,7 @@
 
 pkgname=i3-git
 _pkgname=i3
-pkgver=4.5.1.r51.g06730f4
+pkgver=4.5.1.r57.gdc522b6
 pkgrel=1
 pkgdesc="An improved dynamic tiling window manager"
 arch=('i686' 'x86_64')
@@ -23,10 +23,12 @@ options=('docs')
 source=(git://code.i3wm.org/i3#branch=next)
 sha1sums=('SKIP')
 
+# template start; name=git-pkgver-r; version=1.0;
 pkgver() {
   cd "$srcdir/$_pkgname"
-  git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
+  git describe --tags --long | sed -E 's/([^-]+-g)/r\1/;s/-/./g;s/^v//g'
 }
+# template end;
 
 build() {
   cd "$_pkgname"

@@ -1,6 +1,7 @@
 export CC=clang
 pkgname=vim-hg
-pkgver=7.3.923.r4349
+_pkgname="vim"
+pkgver=7.3.944.r4392
 pkgrel=1
 pkgdesc='Vi Improved, a highly configurable, improved version of the vi text editor'
 arch=(i686 x86_64)
@@ -18,18 +19,17 @@ md5sums=('6228d36c3702d4e9afc4d2a1edcc3aff'
          'SKIP')
 backup=(etc/vimrc)
 
-_hgrepo="vim"
-
+# template start; name=hg-pkgver-tags; version=1.0;
 pkgver() {
-  cd "${srcdir}/${_hgrepo}"
-  _mainver="$(hg log -r "$(hg id -n)" --template '{latesttag}' | sed -E 's/v//;s/-/./g')"
+  cd "$srcdir/$_pkgname"
   _revno="$(hg id -n)"
-  echo "${_mainver}.r${_revno}"
+  echo "$(hg log -r "$_revno" --template '{latesttag}' | sed 's/^v//;s/-/./g').r${_revno}"
 }
+# template end;
 
 build()
 {
-  cd "$srcdir/$_hgrepo"
+  cd "$srcdir/$_pkgname"
 
   sed -i 's|set dummy python;|set dummy python2;|g' src/auto/configure
   sed -i 's|^.*\(#define SYS_.*VIMRC_FILE.*"\) .*$|\1|' src/feature.h
@@ -58,7 +58,7 @@ build()
 }
 
 package() {
-  cd "$srcdir/$_hgrepo"
+  cd "$srcdir/$_pkgname"
   make VIMRCLOC=/etc DESTDIR=${pkgdir} install
 
   cd "$pkgdir/usr/bin"

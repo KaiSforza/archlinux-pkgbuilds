@@ -3,7 +3,7 @@
 _pkgname=youtube-viewer
 pkgname=youtube-viewer-git
 pkgver=3.0.7.r10.gc18cfde
-pkgrel=5
+pkgrel=6
 pkgdesc="A command line utility for viewing youtube-videos in MPlayer."
 arch=('any')
 url="https://github.com/trizen/youtube-viewer"
@@ -27,10 +27,12 @@ optdepends=('mplayer: Default media player'
 source=('git://github.com/trizen/youtube-viewer.git')
 md5sums=('SKIP')
 
+# template start; name=git-pkgver-r; version=1.0;
 pkgver() {
-  cd $_pkgname
-  git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
+  cd "$srcdir/$_pkgname"
+  git describe --tags --long | sed -E 's/([^-]+-g)/r\1/;s/-/./g;s/^v//g'
 }
+# template end;
 
 build() {
   cd "$_pkgname/WWW-YoutubeViewer"

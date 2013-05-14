@@ -1,12 +1,9 @@
 # Maintainer: Jouke Witteveen <j.witteveen@gmail.com>
 
 pkgname=netctl-git
+_pkgname=netctl
 epoch=1
-pkgver=0.8.r21.ge01b395
-pkgver() {
-    cd "$srcdir/netctl"
-    git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
-}
+pkgver=1.0.r3.g711c464
 pkgrel=1
 pkgdesc="Network configuration and profile scripts"
 url="http://archlinux.org/netctl/"
@@ -30,8 +27,15 @@ source=(#git://github.com/joukewitteveen/netctl.git
 md5sums=('SKIP')
 arch=(any)
 
+# template start; name=git-pkgver-r; version=1.0;
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  git describe --tags --long | sed -E 's/([^-]+-g)/r\1/;s/-/./g;s/^v//g'
+}
+# template end;
+
 package() {
-  cd "$srcdir/netctl"
+  cd "$srcdir/$_pkgname"
   make DESTDIR="$pkgdir" install
 
   # Shell Completion

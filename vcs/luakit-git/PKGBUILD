@@ -3,7 +3,7 @@
 pkgname=luakit-git
 _pkgname=luakit
 pkgver=2012.09.13.r1.r32.g993d814
-pkgrel=1
+pkgrel=2
 pkgdesc="A fast, small, webkit-gtk based browser extensible by Lua"
 arch=('i686' 'x86_64')
 url="http://www.luakit.org/projects/luakit" 
@@ -20,10 +20,12 @@ install=$pkgname.install
 md5sums=('SKIP'
          '184069a7264115726f73204d1d708e2c')
 
+# template start; name=git-pkgver-r; version=1.0;
 pkgver() {
   cd "$srcdir/$_pkgname"
-  git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
+  git describe --tags --long | sed -E 's/([^-]+-g)/r\1/;s/-/./g;s/^v//g'
 }
+# template end;
 
 
 build() {

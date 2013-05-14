@@ -7,7 +7,7 @@ export CC=clang
 DEBUG_CFLAGS="-g"
 pkgname=weechat-git
 _pkgname=weechat
-pkgver=0.4.0.r149.g2a4e9ae
+pkgver=0.4.1.rc2.r2.g0c66b91
 pkgrel=1
 pkgdesc="Fast, light & extensible IRC client (curses UI)"
 arch=('i686' 'x86_64')
@@ -23,10 +23,12 @@ source=("git://git.sv.gnu.org/weechat.git")
 md5sums=('SKIP')
 _targets=("")
 
+# template start; name=git-pkgver-r; version=1.0;
 pkgver() {
   cd "$srcdir/$_pkgname"
-  git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
+  git describe --tags --long | sed -E 's/([^-]+-g)/r\1/;s/-/./g;s/^v//g'
 }
+# template end;
 
 build() {
   cd "$srcdir/$_pkgname"

@@ -3,6 +3,7 @@
 # Contributor: Grigorios Bouzakis <grbzks[at]gmail[dot]com>, TDY <tdy@gmx.com>
 
 pkgname=tmux-git
+_pkgname=tmux
 pkgver=1.7.r55.g675c6b3
 pkgrel=2
 pkgdesc="A terminal multiplexer"
@@ -18,22 +19,23 @@ source=(LICENSE
         git://tmux.git.sourceforge.net/gitroot/tmux/tmux)
 md5sums=('71601bc37fa44e4395580b321963018e'
          'SKIP')
-_gitname=tmux
 
+# template start; name=git-pkgver-r; version=1.0;
 pkgver() {
-  cd "$srcdir/$_gitname"
-  git describe --tags --always --long | sed -E 's/v//;s/([^-]*-g)/r\1/;s/-/./g'
+  cd "$srcdir/$_pkgname"
+  git describe --tags --long | sed -E 's/([^-]+-g)/r\1/;s/-/./g;s/^v//g'
 }
+# template end;
 
 build() {
-  cd "$srcdir/$_gitname"
+  cd "$srcdir/$_pkgname"
   ./autogen.sh
   ./configure --prefix=/usr
   make
 }
 
 package() {
-  cd "$srcdir/$_gitname"
+  cd "$srcdir/$_pkgname"
   make install DESTDIR=$pkgdir
   install -Dm644 "$srcdir/LICENSE" "$pkgdir/usr/share/licenses/tmux/LICENSE"
 
