@@ -2,13 +2,13 @@
 
 pkgname=makepkg-templates-ks-git
 _pkgname=makepkg-templates-ks
-pkgver=0.2.g50ffb79
+pkgver=0.5.gfe9b6f9
 pkgrel=1
-pkgdesc="A collection of templates for makepkg"
+pkgdesc="A collection of templates for makepkg-template"
 arch=('any')
 url="http://173.234.237.218/cgit/wgiokas/makepkg-templates.git"
-license=('custom:None')
-depends=('pacman')
+license=('MIT')
+optdepends=('pacman-git: makepkg-template is only in pacman-git at the moment')
 makedepends=('git')
 provides=('makepkg-templates-ks')
 conflicts=('makepkg-templates-ks')
