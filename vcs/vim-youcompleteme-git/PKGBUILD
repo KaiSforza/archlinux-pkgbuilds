@@ -2,7 +2,7 @@
 
 _pkgname=YouCompleteMe
 pkgname=vim-youcompleteme-git
-pkgver=0.588.gd4ca726
+pkgver=0.590.g4b433ba
 pkgrel=1
 epoch=2
 pkgdesc='A code-completion engine for Vim'
@@ -15,8 +15,10 @@ makedepends=(git cmake)
 provides=(vim-youcompleteme)
 conflicts=(vim-youcompleteme)
 install=vimdoc.install
-source=('git://github.com/Valloric/YouCompleteMe.git')
-md5sums=(SKIP)
+source=('git://github.com/Valloric/YouCompleteMe.git'
+        'git://github.com/davidhalter/jedi.git')
+md5sums=('SKIP'
+         'SKIP')
 
 # template start; name=git-pkgver-notags; version=1.0;
 pkgver() {
@@ -24,6 +26,14 @@ pkgver() {
   echo "0.$(git rev-list --count HEAD).g$(git log -1 --format="%h")"
 }
 # template end;
+
+prepare() {
+  cd "$srcdir/$_pkgname"
+  sed -i -e "s|https://github.com/davidhalter/jedi.git|../jedi|g" \
+    .gitmodules
+  git submodule init
+  git submodule update
+}
 
 build() {
   cd $_pkgname/cpp
