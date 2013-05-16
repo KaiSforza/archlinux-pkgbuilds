@@ -85,7 +85,7 @@ readonly ALL_OFF BOLD BLUE GREEN RED YELLOW #}}}
 
 usage() { #{{{
   cat << EOF
-${BOLD}Usage: $(basename $0) [makepkg opts] subdir [subdir]${ALL_OFF}
+${BOLD}Usage: $(basename $0) [makepkg opts] [options] subdir${ALL_OFF}
     For makepkg options, see makepkg(8).
     Dirctories should be organized like so:
       subdir
@@ -96,6 +96,13 @@ ${BOLD}Usage: $(basename $0) [makepkg opts] subdir [subdir]${ALL_OFF}
         ...
     You can specify multiple subdirectories for makeaur to go through, the
     logs will create a separate section for each subdirectory.
+
+    To specify a package to build in the directory use -P<pkgname> (with no
+    space.
+
+    options:
+      -P<pkgname>    Only build this package. Can be specified multiple times.
+      -h --help      Show this usage message.
 
   Environment Variables:
     ${BLUE}PACKAGEDIR${ALL_OFF}: specifies the path to 'subdir.' Example to build ABS packages:
@@ -130,96 +137,118 @@ in_array() { #{{{
   done
 } #}}}
 
-unset _dir _makepkg_opts
+log_status() { # Write log lines {{{
+  case $_status in
+    0)
+      echo "  $(getlogdate)Package built:         $subdir/$pkgname $_fullpkgver-$_buildarch" >> "$LOGFILE"
+      ;;
+    1)
+      makepkg -eoc
+      echo "  $(getlogdate)ERROR: build failure:  $subdir/$pkgname $_fullpkgver-$_buildarch" >> "$LOGFILE"
+      ;;
+    2)
+      (( _cleanup )) && makepkg -eoc
+      echo "  $(getlogdate)Package already built: $subdir/$pkgname $_fullpkgver-$_buildarch" >> "$LOGFILE"
+      ;;
+    *)
+      makepkg -eoc
+      echo "  $(getlogdate)Unknown error:         $subdir/$pkgname $_fullpkgver-$_buildarch" >> "$LOGFILE"
+  esac
+} #}}}
+
+makelist() { #{{{
+  local prefix suffix list _out
+  prefix=$1
+  suffix=$2
+  shift; shift
+  list=($*)
+  for i in ${list[@]};do
+    full="${prefix}${i}${suffix}"
+    _out=(${_out[@]} $full)
+  done
+  printf -- "%s " ${_out[@]}
+} #}}}
+
+unset subdir _makepkg_opts
 for i in $*; do
   case $i in
     -h|--help)
       usage
       exit 0
       ;;
+    -P*)
+      _pkgs=(${_pkgs[@]} ${i#-P})
+      ;;
     -*)
       _makepkg_opts=(${_makepkg_opts[@]} $i)
       ;;
     *)
-      _dir=(${_dir[@]} $i)
+      subdir=$i
       ;;
   esac
 done
 
-if [[ ${#_dir} -lt 1 ]]; then
+if [[ ${#subdir} -lt 1 ]]; then
   error "Please specify a directory containing packages."
   usage
   exit 1
 fi
 
-for subdir in "${_dir[@]}"; do
-  if [[ ! -d "$PACKAGEDIR/$subdir" ]]; then
-    error "$PACKAGEDIR/$subdir does not exist"
-    exit 1
+if [[ ! -d "$PACKAGEDIR/$subdir" ]]; then
+  error "$PACKAGEDIR/$subdir does not exist"
+  exit 1
+fi
+echo "==> Build for $subdir starting at $(date)" >> "$LOGFILE"
+# Get a starting date to measure total time taken
+startdate="$(date +%s)"
+if [[ -n $_pkgs ]]; then
+  listpkgs=($(makelist "$PACKAGEDIR/$subdir/" "/PKGBUILD" ${_pkgs[@]}))
+else
+  listpkgs=("$PACKAGEDIR/$subdir/"*/PKGBUILD)
+fi
+for pkgbuilds in ${listpkgs[@]}; do
+  # Unset all variables and functions that will be set
+  unset epoch _status _pkgverfunc epoch pkgs pkgname CC _cleanup arch _buildarch
+  unset -f pkgver
+  _pkgverfunc=0
+  # get the path of the dir, not of the PKGBUILD
+  pkgs=${pkgbuilds%%/PKGBUILD}
+  pushd $pkgs &>/dev/null
+  _status=0
+  # source the pkgbuild to get some variables and a function set
+  . PKGBUILD
+  # Setting the full pkgver {{{
+  if declare -f pkgver >/dev/null; then
+    _pkgverfunc=1
   fi
-  echo "==> Build for $subdir starting at $(date)" >> "$LOGFILE"
-  # Get a starting date to measure total time taken
-  startdate="$(date +%s)"
-  for pkgbuilds in "$PACKAGEDIR/$subdir/"*/PKGBUILD; do
-    # Unset all variables and functions that will be set
-    unset epoch _status _pkgverfunc epoch pkgs pkgname CC _cleanup arch _buildarch
-    unset -f pkgver
-    _pkgverfunc=0
-    # get the path of the dir, not of the PKGBUILD
-    pkgs=${pkgbuilds%%/PKGBUILD}
-    pushd $pkgs &>/dev/null
-    _status=0
-    # source the pkgbuild to get some variables and a function set
-    . PKGBUILD
-    # Setting the full pkgver {{{
-    if declare -f pkgver >/dev/null; then
-      _pkgverfunc=1
-    fi
-    epoch=${epoch:-0}
-    if [[ $epoch ]] && (( ! $epoch )); then
-      _fullpkgver="$pkgver-$pkgrel"
-    else
-      _fullpkgver="$epoch:$pkgver-$pkgrel"
-    fi #}}}
-    # Architecture settings:
-    _use_any=$(in_array "any" ${arch[@]})
-    case $_use_any in
-      0) _buildarch=any ;;
-      *) _buildarch=$CARCH ;;
-    esac
-    # Only run makepkg if there is a pkgverfunc or no file already made {{{
-    if [[ ! -f "$PKGDEST/$pkgname-$_fullpkgver-$_buildarch$PKGEXT" || $_pkgverfunc == 1 ]]; then
-      makepkg ${_makepkg_opts[@]} || _status=1
-      if [[ $_status == 1 && -f "$PKGDEST/$pkgname-$_fullpkgver-$_buildarch$PKGEXT" ]]; then
-        _status=2
-        _cleanup=1
-      fi
-    else
-      error "Package $pkgname $_fullpkgver already built. (use -f to overwrite)"
+  epoch=${epoch:-0}
+  if [[ $epoch ]] && (( ! $epoch )); then
+    _fullpkgver="$pkgver-$pkgrel"
+  else
+    _fullpkgver="$epoch:$pkgver-$pkgrel"
+  fi #}}}
+  # Architecture settings:
+  _use_any=$(in_array "any" ${arch[@]})
+  case $_use_any in
+    0) _buildarch=any ;;
+    *) _buildarch=$CARCH ;;
+  esac
+  # Only run makepkg if there is a pkgverfunc or no file already made {{{
+  if [[ ! -f "$PKGDEST/$pkgname-$_fullpkgver-$_buildarch$PKGEXT" || $_pkgverfunc == 1 ]]; then
+    makepkg ${_makepkg_opts[@]} || _status=1
+    if [[ $_status == 1 && -f "$PKGDEST/$pkgname-$_fullpkgver-$_buildarch$PKGEXT" ]]; then
       _status=2
-    fi #}}}
-    # Write log lines {{{
-    case $_status in
-      0)
-        echo "  $(getlogdate)Package built:         $subdir/$pkgname-$_fullpkgver-$_buildarch" >> "$LOGFILE"
-        ;;
-      1)
-        makepkg -eoc
-        echo "  $(getlogdate)ERROR: build failure:  $subdir/$pkgname-$_fullpkgver-$_buildarch" >> "$LOGFILE"
-        ;;
-      2)
-        (( _cleanup )) && makepkg -eoc
-        echo "  $(getlogdate)Package already built: $subdir/$pkgname-$_fullpkgver-$_buildarch" >> "$LOGFILE"
-        ;;
-      *)
-        makepkg -eoc
-        echo "  $(getlogdate)Unknown error:         $subdir/$pkgname-$_fullpkgver-$_buildarch" >> "$LOGFILE"
-    esac #}}}
-    popd &>/dev/null
-  done
-  enddate="$(date +%s)"
-  # Calculate the time it took to run stuff for this subdir
-  let totaltime=$enddate-$startdate
-  echo "==> Build for $subdir took $totaltime seconds" >> "$LOGFILE"
-  echo "==> Build for $subdir ended at $(date)" >> "$LOGFILE"
+      _cleanup=1
+    fi
+  else
+    error "Package $pkgname $_fullpkgver already built. (use -f to overwrite)"
+    _status=2
+  fi #}}}
+  log_status
+  popd &>/dev/null
 done
+enddate="$(date +%s)"
+# Calculate the time it took to run stuff for this subdir
+let totaltime=$enddate-$startdate
+echo "==> Build for $subdir took $totaltime seconds" >> "$LOGFILE"
+echo "==> Build for $subdir ended at $(date)" >> "$LOGFILE"
