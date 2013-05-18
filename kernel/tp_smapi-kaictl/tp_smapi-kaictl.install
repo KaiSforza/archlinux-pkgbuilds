@@ -1,4 +1,4 @@
-extramodules=/usr/lib/modules/extramodules-3.9-kaictl
+extramodules=/usr/lib/modules/extramodules-3.10-kaictl
 
 post_install() {
   depmod -v $(< "$extramodules/version") &>/dev/null

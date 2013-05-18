@@ -10,13 +10,13 @@
 
 pkgname=tp_smapi-kaictl
 pkgver=0.41
-pkgrel=17
+pkgrel=18
 pkgdesc="Modules for ThinkPad's SMAPI functionality, kaictl kernel"
 arch=('i686' 'x86_64')
 url='https://github.com/evgeni/tp_smapi'
 license=('GPL')
-depends=('linux-kaictl>=3.9' 'linux-kaictl<3.10')
-makedepends=('linux-kaictl-headers>=3.9' 'linux-kaictl-headers<3.10')
+depends=('linux-kaictl>=3.10' 'linux-kaictl<3.11')
+makedepends=('linux-kaictl-headers>=3.10' 'linux-kaictl-headers<3.11')
 conflicts=('tp_smapi' 'tp_smapi-mainline')
 install="${pkgname}.install"
 source=("https://github.com/downloads/evgeni/tp_smapi/tp_smapi-${pkgver}.tar.gz")
