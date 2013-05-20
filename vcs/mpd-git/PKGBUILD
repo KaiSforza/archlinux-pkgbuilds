@@ -8,6 +8,7 @@
 # Contributor: Ben <ben@benmazer.net>
 
 pkgname=mpd-git
+_pkgname=mpd
 pkgver=0.17.4.r675.gb2d3d15
 pkgrel=1
 epoch=1
@@ -19,7 +20,7 @@ depends=('libao' 'ffmpeg' 'mpg123' 'libmodplug' 'audiofile' 'libshout' 'libmad' 
          'sqlite' 'jack' 'libmms' 'wavpack' 'libmpcdec' 'avahi' 'libid3tag' 'opus')
 conflicts=('mpd')
 makedepends=('git')
-source=("$pkgname::git://git.musicpd.org/master/mpd.git"
+source=("$_pkgname::git://git.musicpd.org/master/mpd.git"
         'mpd.tmpfile' 'mpd.service' 'mpd-system.socket' 'mpd-user.socket' 'CdioParanoiaInputPlugin.cxx.patch')
 sha256sums=('SKIP'
             'c1683ba35774c85e16c70e89f7e2ed1c09619512b1a273daabbd5e34d40439bd'
@@ -31,18 +32,18 @@ backup=('etc/mpd.conf')
 install=mpd.install
 
 pkgver() {
-  cd "$srcdir"/$pkgname
-  git describe --tags --always --long | sed -E 's/release-//;s/([^-]*-g)/r\1/;s/-/./g'
+  cd "$srcdir/$_pkgname"
+  git describe --tags --long | sed -E 's/([^-]+-g)/r\1/;s/-/./g;s/^release\.//g'
 }
 
 prepare() {
-  cd "$srcdir"/$pkgname
+  cd "$srcdir"/$_pkgname
   # Patch CdioParanoiaInputPlugin.cxx because of wrong path to cdio-paranoia header
   patch -p0 -i "$srcdir"/CdioParanoiaInputPlugin.cxx.patch src/input/CdioParanoiaInputPlugin.cxx
 }
 
 build() {
-  cd "$srcdir"/$pkgname
+  cd "$srcdir"/$_pkgname
 
   # Configure Source
   ./autogen.sh \
@@ -59,7 +60,7 @@ build() {
 }
 
 package() {
-  cd "$srcdir"/$pkgname
+  cd "$srcdir"/$_pkgname
 
   make DESTDIR="$pkgdir" install
 
