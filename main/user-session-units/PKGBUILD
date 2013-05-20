@@ -1,13 +1,13 @@
 # Maintainer: Tom Gundersen <teg@jklm.no>
 pkgname="user-session-units"
-pkgver=v6
-pkgrel=2
+pkgver=v8
+pkgrel=1
 pkgdesc="units for launching systemd user sessions"
 url="https://github.com/sofar/user-session-units"
 license=('GPL2')
 arch=(any)
-depends=('xorg-launch-helper')
-source=("https://github.com/sofar/$pkgname/tarball/$pkgver")
+depends=('xorg-launch-helper-git')
+source=("usu-$pkgver.tar.gz::https://github.com/sofar/$pkgname/tarball/$pkgver")
 
 build() {
   cd "${srcdir}/"*
@@ -23,4 +23,4 @@ package() {
   cd "$srcdir/"*
   make DESTDIR="${pkgdir}" install
 }
-md5sums=('82db19811503344e03996a5bdf4d4ff3')
+md5sums=('532bab4107a0777d13da3ef35f0f0807')
