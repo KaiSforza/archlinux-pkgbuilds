@@ -3,7 +3,7 @@
 pkgname=cower-git
 _pkgname=cower
 pkgver=9.r7.ga7ebb5d
-pkgrel=1
+pkgrel=2
 pkgdesc="A simple AUR agent with a pretentious name"
 arch=('i686' 'x86_64')
 url="http://github.com/falconindy/cower"
@@ -25,7 +25,7 @@ pkgver() {
 
 build() {
   cd $srcdir/$_pkgname
-  make
+  CPPFLAGS+='-DPACMAN_CONFIG=\"/etc/pacman.conf\"' make
 }
 
 package() {
