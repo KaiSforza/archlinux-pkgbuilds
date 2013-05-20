@@ -140,19 +140,19 @@ in_array() { #{{{
 log_status() { # Write log lines {{{
   case $_status in
     0)
-      echo "  $(getlogdate)Package built:         $subdir/$pkgname $_fullpkgver-$_buildarch" >> "$LOGFILE"
+      echo "  $(getlogdate)Package built:         $subdir/$pkgname" >> "$LOGFILE"
       ;;
     1)
       makepkg -eoc
-      echo "  $(getlogdate)ERROR: build failure:  $subdir/$pkgname $_fullpkgver-$_buildarch" >> "$LOGFILE"
+      echo "  $(getlogdate)ERROR: build failure:  $subdir/$pkgname" >> "$LOGFILE"
       ;;
     2)
       (( _cleanup )) && makepkg -eoc
-      echo "  $(getlogdate)Package already built: $subdir/$pkgname $_fullpkgver-$_buildarch" >> "$LOGFILE"
+      echo "  $(getlogdate)Package already built: $subdir/$pkgname" >> "$LOGFILE"
       ;;
     *)
       makepkg -eoc
-      echo "  $(getlogdate)Unknown error:         $subdir/$pkgname $_fullpkgver-$_buildarch" >> "$LOGFILE"
+      echo "  $(getlogdate)Unknown error:         $subdir/$pkgname" >> "$LOGFILE"
   esac
 } #}}}
 
