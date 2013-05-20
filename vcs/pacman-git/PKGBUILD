@@ -8,7 +8,7 @@ DEBUG_CFLAGS="-g"
 pkgname=(pacman-git pacman-contrib-git)
 pkgbase=pacman-git
 _pkgname=pacman
-pkgver=4.1.1.r10.g984b68a
+pkgver=4.1.1.r21.gf620881
 pkgrel=1
 arch=('i686' 'x86_64')
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
@@ -17,6 +17,7 @@ license=('GPL')
 makedepends=('git' 'asciidoc')
 checkdepends=('python2' 'fakechroot')
 options=('!libtool')
+#source=('pacman-ks::git+file:///home/wgiokas/git/archlinux/pacman#branch=working')
 source=('pacman::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working')
 sha1sums=('SKIP')
 
@@ -33,7 +34,7 @@ build() {
   ./autogen.sh
   ./configure \
     --prefix=/usr \
-    --sysconfdir=/etc \
+    --sysconfdir=/etc/pacman \
     --localstatedir=/var \
     --enable-doc \
     --enable-git-version \
@@ -54,8 +55,8 @@ package_pacman-git() {
   pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
   depends=('glibc>=2.15' 'bash' 'curl>=7.19.4' 'libarchive>=3.1.2' 'gpgme' 'pacman-mirrorlist' 'archlinux-keyring')
   optdepends=('fakeroot: for makepkg usage as normal user')
-  backup=(etc/pacman.conf
-          etc/makepkg.conf)
+  backup=(etc/pacman/pacman.conf
+          etc/pacman/makepkg.conf)
   provides=("pacman=$pkgver" 'libalpm.so')
   conflicts=('pacman')
   cd "$srcdir/$_pkgname"
@@ -67,7 +68,7 @@ package_pacman-git() {
   else                              mychost="$CARCH-pc-linux-gnu"; fi
 
   myflags="-march=$CARCH"
-  sed -i "$pkgdir/etc/makepkg.conf" \
+  sed -i "$pkgdir/etc/pacman/makepkg.conf" \
     -e "s|@CARCH[@]|$CARCH|g" \
     -e "s|@CHOST[@]|$mychost|g" \
     -e "s|@CARCHFLAGS[@]|$myflags|g"
@@ -89,7 +90,7 @@ package_pacman-contrib-git() {
     >"$pkgdir/usr/share/vim/vimfiles/ftdetect/PKGBUILD.vim"
 
   # install completion files
-  rm -r "$pkgdir/etc/bash_completion.d"
+  rm -r "$pkgdir/etc/pacman/bash_completion.d"
   install -Dm644 contrib/bash_completion "$pkgdir/usr/share/bash-completion/completions/pacman"
   for f in makepkg pacman-key; do
     ln -s pacman "$pkgdir/usr/share/bash-completion/completions/$f"
