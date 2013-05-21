@@ -3,12 +3,13 @@
 _pkgname=youtube-viewer
 pkgname=youtube-viewer-git
 pkgver=3.0.7.r10.gc18cfde
-pkgrel=6
+pkgrel=8
 pkgdesc="A command line utility for viewing youtube-videos in MPlayer."
 arch=('any')
 url="https://github.com/trizen/youtube-viewer"
 license=('GPLv3')
 makedepends=('git')
+checkdepends=('perl-test-pod-coverage')
 
 conflicts=('youtube-viewer')
 provides=('youtube-viewer')
