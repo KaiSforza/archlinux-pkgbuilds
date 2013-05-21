@@ -2,7 +2,7 @@
 
 pkgname=scudmenu-git
 _pkgname=scudmenu
-pkgver=0.r5.973c708
+pkgver=0.5.g973c708
 pkgrel=1
 epoch=1
 pkgdesc="A script combining systemctl --user and dmenu"

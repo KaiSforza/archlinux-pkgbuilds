@@ -1,7 +1,7 @@
 pkgname=mal-gtk-git
 _pkgname=mal-gtk
 epoch=1
-pkgver=0.r58.g84f216e
+pkgver=0.66.g52fddbc
 pkgrel=1
 pkgdesc="GTK+3 anime manager interface for MyAnimeList.net"
 arch=('i686' 'x86_64')

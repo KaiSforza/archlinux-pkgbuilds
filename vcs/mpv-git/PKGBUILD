@@ -4,7 +4,7 @@
 export CC=clang
 pkgname=mpv-git
 _pkgname="mpv"
-pkgver=0.r35014.3edb563
+pkgver=0.35056.gb718f32
 pkgrel=1
 pkgdesc="A movie player and encoder for linux (uses dynamically linked ffmpeg; git version)"
 arch=('i686' 'x86_64')
