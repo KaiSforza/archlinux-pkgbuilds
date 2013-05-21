@@ -52,12 +52,10 @@ build() {
 }
 cleanrepos() {
     paccache -m "$archiverepo" -c "$packagesrepo" -k 1 $1
-    paccache -m "$archiverepo" -c "$packagesrepo/debug" -k 1 $1
 }
     
 signrepos(){
     pushd "$packagesrepo"
-    mv *-debug-* "$packagesrepo/debug"
     cleanrepos
     for f in $1*.pkg.tar.gz; do
         if [[ ! -f "${f}.sig" ]]; then
@@ -65,9 +63,7 @@ signrepos(){
         fi
     done
     repo-add ${_sign} -n "$packagesrepo/$reponame.db.tar.gz" "$packagesrepo/$1"*$packageext
-    repo-add ${_sign} -n "$packagesrepo/debug/$reponame-debug.db.tar.gz" "$packagesrepo/debug/$1"*-debug-*$packageext
     repo-add ${_sign} -n -f "$packagesrepo/$reponame.files.tar.gz" "$packagesrepo/$1"*$packageext
-    repo-add ${_sign} -n -f "$packagesrepo/debug/$reponame-debug.files.tar.gz" "$packagesrepo/debug/$1"*-debug-*$packageext
 }
 downloadpkg(){
     if [[ -e $pkgbuilds/$1 ]]; then
