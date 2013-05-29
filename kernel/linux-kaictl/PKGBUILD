@@ -8,9 +8,9 @@
 #BUILDDIR=~/.cache/pacman/build/
 pkgbase=linux-kaictl
 #pkgname=linux-mainline
-_gitver=v3.10-rc1
-pkgver=3.10.rc1.r0.gf722406
-pkgrel=1
+_gitver=v3.10-rc3
+pkgver=3.10.rc3.r0.ge4aa937
+pkgrel=2
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
