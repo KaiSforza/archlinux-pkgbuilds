@@ -7,7 +7,7 @@
 pkgname=powertop-git
 _pkgname=powertop
 pkgver=2.3.r16.gfa4cbd5
-pkgrel=1
+pkgrel=2
 pkgdesc='A tool to diagnose issues with power consumption and power management, git version'
 arch=('i686' 'x86_64')
 url='https://01.org/powertop/'
@@ -38,4 +38,5 @@ package() {
   cd ${srcdir}/$_pkgname
 
   make DESTDIR=${pkgdir} install
+  mv "$pkgdir/usr/sbin" "$pkgdir/usr/bin"
 }
