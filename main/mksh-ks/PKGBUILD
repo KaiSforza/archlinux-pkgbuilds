@@ -1,5 +1,6 @@
 # $Id$
-# Maintainer: Thorsten Töpper <atsutane-tu@freethoughts.de>
+# Maintainer: William Giokas <1007380@gmail.com>
+# Contributor: Thorsten Töpper <atsutane-tu@freethoughts.de>
 # Contributor: Daniel Hommel <dhommel@gmail.com>
 
 pkgname=mksh-ks
@@ -20,14 +21,15 @@ md5sums=('77c108d8143a6e7670954d77517d216d'
          'a231b325d5f2155a6c667a9323986718')
 
 build() {
-  cd "$srcdir/$pkgname"
-
+  cd "$srcdir/$_pkgname"
   sh Build.sh -r -c lto
+}
+check() {
+  cd "$srcdir/$_pkgname"
   ./test.sh
 }
-
 package() {
-  cd "$srcdir/$pkgname"
+  cd "$srcdir/$_pkgname"
   install -D -m 755 mksh "$pkgdir/usr/bin/mksh"
   install -D -m 644 mksh.1 "$pkgdir/usr/share/man/man1/mksh.1"
   install -D -m 644 dot.mkshrc "$pkgdir/etc/skel/.mkshrc"
