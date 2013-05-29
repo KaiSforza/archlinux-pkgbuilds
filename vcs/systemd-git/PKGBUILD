@@ -3,8 +3,8 @@
 export CC=gcc
 pkgname=systemd-git
 _pkgname=systemd
-pkgver=204.r29.gbc7fd8c
-pkgrel=1
+pkgver=204.r79.g98627dc
+pkgrel=2
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
 url="http://www.freedesktop.org/wiki/Software/systemd"
@@ -81,11 +81,10 @@ package() {
   printf "d /run/console 0755 root root\n" >"$pkgdir/usr/lib/tmpfiles.d/console.conf"
 
   # compat symlinks
-  install -dm755 "$pkgdir"/sbin
   for tool in runlevel reboot shutdown poweroff halt telinit; do
-    ln -s '/usr/bin/systemctl' "$pkgdir/sbin/$tool"
+    ln -s '/usr/bin/systemctl' "$pkgdir/usr/bin/$tool"
   done
-  ln -s '../usr/lib/systemd/systemd' "$pkgdir/sbin/init"
+  #ln -s '../usr/lib/systemd/systemd' "$pkgdir/sbin/init"
 
   # fix .so links in manpage stubs
   find "$pkgdir/usr/share/man" -type f -name '*.[[:digit:]]' \
