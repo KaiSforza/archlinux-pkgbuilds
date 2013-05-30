@@ -6,10 +6,10 @@
 
 pkgname=rpm-org
 pkgver=4.11.0.1
-pkgrel=1
+pkgrel=2
 pkgdesc="RPM Package Manager - RPM.org fork, used in major RPM distros"
 arch=('i686' 'x86_64')
-url=("http://www.rpm.org/")
+url="http://www.rpm.org/"
 license=('GPL2')
 depends=('lua' 'file' 'nss>=3.12' 'popt' 'elfutils' 'db' 'libarchive')
 makedepends=('python2')
@@ -46,4 +46,8 @@ package() {
 	rmdir ${pkgdir}/var/tmp
 	# rpmextract using bsdtar, needs libarchive
 	install -m755 ${srcdir}/rpmextract.sh ${pkgdir}/usr/bin/
+  for i in "${pkgdir}/bin/"*; do
+    mv "$i" "$pkgdir/usr/bin/"
+  done
+  rm -r "${pkgdir}/bin"
 }
