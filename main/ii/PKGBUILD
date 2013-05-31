@@ -15,9 +15,13 @@ depends=(glibc)
 source=("http://dl.suckless.org/tools/${pkgname}-${pkgver}.tar.gz")
 md5sums=('6191008ca09770873d84f40270493d0e')
 
-build() {
+prepare() {
 	cd "$srcdir/$pkgname-$pkgver"
 	sed -i "s/CFLAGS = /CFLAGS = ${CFLAGS} /" config.mk
+}
+
+build() {
+	cd "$srcdir/$pkgname-$pkgver"
 	make
 }
 
