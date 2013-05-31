@@ -2,7 +2,7 @@
 
 pkgname=util-linux-git
 _pkgname=util-linux
-pkgver=2.23.r98.gd4be073
+pkgver=2.23.r103.g8225bb7
 pkgrel=1
 pkgdesc="Miscellaneous system utilities for Linux - the GIT version"
 url="http://userweb.kernel.org/~kzak/util-linux/"
@@ -42,7 +42,7 @@ build() {
       --localstatedir=/run \
       --prefix=/usr \
       --libdir=/usr/lib \
-      --enable-fs-paths-extra="/usr/sbin:/usr/bin" \
+      --enable-fs-paths-extra="/usr/bin" \
       --enable-raw \
       --enable-vipw \
       --enable-newgrp \
@@ -70,9 +70,11 @@ package() {
 
   # tmpfiles
   install -Dm644 "$srcdir/uuidd.tmpfiles" "$pkgdir/usr/lib/tmpfiles.d/uuidd.conf"
-  #ln -sv ../../bin/kill "$pkgdir/usr/bin/kill"
-  #for i in "$pkgdir"/usr/sbin/* "$pkgdir"/bin/* "$pkgdir"/sbin/*; do
-  #  mv "$i" "$pkgdir/usr/bin"
-  #done
+
+  # usrmove
+  cd "$pkgdir"
+  mv {,usr/}sbin/* usr/bin
+  mv bin/* usr/bin
+  rmdir bin sbin usr/sbin
 }
 
