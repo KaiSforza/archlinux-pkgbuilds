@@ -4,7 +4,7 @@
 pkgname=ii-git
 _pkgname=ii
 pkgver=1.7.r1.g28feb9a
-pkgrel=1
+pkgrel=2
 pkgdesc="A minimalist FIFO and filesystem-based IRC client"
 arch=(i686 x86_64)
 url="http://wmii.de/index.php/WMII/ii"
@@ -31,17 +31,17 @@ build() {
     sed -i "s|%CFLAGS%|$CFLAGS|g" config.mk
     sed -i "s|%LDFLAGS%|$LDFLAGS|g" config.mk
 
-    make
+    make PREFIX=/usr
 }
 
 package() {
     cd "$srcdir/$_pkgname"
-    make DESTDIR="$pkgdir" install
+    make PREFIX=/usr DESTDIR="$pkgdir" install
 
     install -m755 -d  "$pkgdir/usr/share/licenses/ii-git"
     install -m644 LICENSE "$pkgdir/usr/share/licenses/ii-git"
     # make install sets permissions to 775...
 
-    chmod 755 "$pkgdir/usr/local/bin/ii"
+    chmod 755 "$pkgdir/usr/bin/ii"
     rm -f "$pkgdir/usr/share/doc/ii/LICENSE" # no duplicate files, please
 }
