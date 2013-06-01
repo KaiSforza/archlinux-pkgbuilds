@@ -7,7 +7,7 @@
 pkgname=git-git
 _pkgname=git
 epoch=1
-pkgver=1.8.3.rc2.r0.gab84621
+pkgver=1.8.3.rv101.g727a46b
 pkgrel=1
 pkgdesc="The fast distributed version control system - Git version"
 arch=('i686' 'x86_64')
@@ -36,12 +36,10 @@ md5sums=('042524f942785772d7bd52a1f02fe5ae'
          'f67869315c2cc112e076f0c73f248002'
          'SKIP')
 
-# template start; name=git-pkgver-r; version=1.0;
 pkgver() {
   cd "$srcdir/$_pkgname"
-  git describe --tags --long | sed -E 's/([^-]+-g)/r\1/;s/-/./g;s/^v//g'
+  git describe --tags --long | sed -E 's/([^-]+-g)/rv\1/;s/-/./g;s/^v//g'
 }
-# template end;
 
 build() {
   cd "$srcdir/"$_pkgname
