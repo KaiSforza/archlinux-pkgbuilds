@@ -3,7 +3,7 @@
 
 pkgname=i3status-git
 _pkgname=i3status
-pkgver=2.7.r10.g6a84138
+pkgver=2.7.r13.g3beb6b4
 pkgrel=1
 pkgdesc="Generates status bar to use with dzen2 or wmii"
 arch=('i686' 'x86_64')

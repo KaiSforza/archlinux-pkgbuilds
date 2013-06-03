@@ -3,7 +3,7 @@
 pkgname=netctl-git
 _pkgname=netctl
 epoch=1
-pkgver=1.0.r3.g711c464
+pkgver=1.1.r0.g6e48f6b
 pkgrel=1
 pkgdesc="Network configuration and profile scripts"
 url="http://archlinux.org/netctl/"

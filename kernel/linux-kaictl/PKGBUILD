@@ -8,9 +8,9 @@
 #BUILDDIR=~/.cache/pacman/build/
 pkgbase=linux-kaictl
 #pkgname=linux-mainline
-_gitver=v3.10-rc3
-pkgver=3.10.rc3.r0.ge4aa937
-pkgrel=2
+_gitver=v3.10-rc4
+pkgver=3.10.rc4.r0.gd683b96
+pkgrel=1
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -27,7 +27,7 @@ source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#ta
         'change-default-console-loglevel-2.patch')
 
 md5sums=('SKIP'
-         'bb6f36d39c42e63a3cd05ddca01de723'
+         'bb5b4bd605b25303ba09b08a6718efa3'
          '6a8a28db0c8d3ec0bffff749cd4fa5cb'
          'cf26f47deab79e07ade19188d6bf450e')
 options=('!strip')

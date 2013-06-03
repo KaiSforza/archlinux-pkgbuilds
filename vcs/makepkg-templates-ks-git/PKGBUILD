@@ -2,7 +2,7 @@
 
 pkgname=makepkg-templates-ks-git
 _pkgname=makepkg-templates-ks
-pkgver=0.5.gfe9b6f9
+pkgver=0.7.g39a284c
 pkgrel=1
 pkgdesc="A collection of templates for makepkg-template"
 arch=('any')

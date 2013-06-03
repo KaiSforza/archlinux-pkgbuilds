@@ -4,7 +4,7 @@
 pkgname=libxft-git
 _pkgname=libXft
 pkgver=2.3.1.r3.gc5e760a
-pkgrel=1
+pkgrel=2
 pkgdesc="FreeType-based font drawing library for X"
 arch=('i686' 'x86_64')
 license=('custom')

@@ -3,7 +3,7 @@
 
 pkgname=i3-git
 _pkgname=i3
-pkgver=4.5.1.r57.gdc522b6
+pkgver=4.5.1.r68.g4937788
 pkgrel=1
 pkgdesc="An improved dynamic tiling window manager"
 arch=('i686' 'x86_64')

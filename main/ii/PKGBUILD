@@ -5,7 +5,7 @@
 
 pkgname=ii
 pkgver=1.7
-pkgrel=5
+pkgrel=6
 pkgdesc="A minimalist FIFO and filesystem-based IRC client"
 license=(MIT)
 arch=(i686 x86_64)

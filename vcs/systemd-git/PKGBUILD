@@ -3,8 +3,8 @@
 export CC=gcc
 pkgname=systemd-git
 _pkgname=systemd
-pkgver=204.r79.g98627dc
-pkgrel=2
+pkgver=204.r100.g2b7d696
+pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
 url="http://www.freedesktop.org/wiki/Software/systemd"

@@ -2,7 +2,7 @@
 
 _pkgname=YouCompleteMe
 pkgname=vim-youcompleteme-git
-pkgver=0.590.g4b433ba
+pkgver=0.637.g872b483
 pkgrel=1
 epoch=2
 pkgdesc='A code-completion engine for Vim'

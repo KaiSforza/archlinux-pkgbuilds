@@ -5,7 +5,7 @@
 pkgname=python-sphinx-hg
 _pkgname="sphinx"
 epoch=1
-pkgver=1.2b1.r4164
+pkgver=1.2b1.r4165
 pkgrel=1
 pkgdesc='Python3 documentation generator'
 url="http://sphinx.pocoo.org/latest/"

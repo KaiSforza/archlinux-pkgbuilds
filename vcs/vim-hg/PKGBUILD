@@ -1,7 +1,7 @@
 export CC=clang
 pkgname=vim-hg
 _pkgname="vim"
-pkgver=7.3.944.r4392
+pkgver=7.3.1090.r4687
 pkgrel=1
 pkgdesc='Vi Improved, a highly configurable, improved version of the vi text editor'
 arch=(i686 x86_64)
