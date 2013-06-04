@@ -1,0 +1,75 @@
+pkgname=inspircd
+_pkgname=inspircd
+pkgver=2.0.12.r0.g9b96fee
+_pkgver=v2.0.12
+pkgrel=1
+pkgdesc='A lightweight IRC daemon'
+arch=('x86_64' 'i686')
+url='http://www.inspircd.org/'
+license=('GPL2')
+depends=('perl')
+makedepends=('pkg-config' 'libmysqlclient' 'postgresql' 'sqlite3' 'libldap' 'geoip'
+             'tre' 'gnutls' 'openssl' 'libgcrypt')
+optdepends=('gnutls: m_ssl_gnutls'
+            'libgcrypt: m_ssl_gnutls'
+            'openssl: m_ssl_openssl'
+            'libmysqlclient: m_mysql'
+            'pcre: m_regex_pcre'
+            'postgresql: m_pgsql'
+            'sqlite3: m_sqlite3'
+            'libldap: m_ldapoper and m_ldapauth'
+            'geoip: m_geoip'
+            'tre: m_regex_tre')
+install=inspircd.install
+
+source=("git://github.com/inspircd/inspircd.git#tag=$_pkgver"
+        inspircd.service)
+sha1sums=('SKIP'
+          '667b28d0d086be6daad7a0c2f110c68e6526264e')
+
+# template start; name=git-pkgver-r; version=1.0;
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  git describe --tags --long | sed -E 's/([^-]+-g)/r\1/;s/-/./g;s/^v//g'
+}
+# template end;
+
+build() {
+  cd "${srcdir}/inspircd"
+
+  ./configure \
+    --enable-extras=m_geoip.cpp \
+    --enable-extras=m_ldapauth.cpp \
+    --enable-extras=m_ldapoper.cpp \
+    --enable-extras=m_mysql.cpp \
+    --enable-extras=m_pgsql.cpp \
+    --enable-extras=m_regex_pcre.cpp \
+    --enable-extras=m_regex_posix.cpp \
+    --enable-extras=m_regex_tre.cpp \
+    --enable-extras=m_sqlite3.cpp
+
+  ./configure \
+    --prefix=/usr/lib/inspircd \
+    --binary-dir=/usr/bin \
+    --module-dir=/usr/lib/inspircd/modules \
+    --config-dir=/etc/inspircd \
+    --enable-gnutls \
+    --enable-openssl \
+    --enable-epoll
+
+  make
+}
+
+package() {
+  install -Dm644 "${srcdir}"/inspircd.service "${pkgdir}"/usr/lib/systemd/system/inspircd.service
+  install -o141 -g141 -dm750 "${pkgdir}/var/log/inspircd"
+
+  cd "${srcdir}/inspircd"
+  make DESTDIR="$pkgdir" INSTUID=141 install
+
+  mkdir -p "${pkgdir}"/usr/share/inspircd
+  mv "${pkgdir}"/etc/inspircd/examples "${pkgdir}"/usr/share/inspircd/examples
+
+  rm -rf "${pkgdir}"/usr/lib/inspircd/logs
+  rm -rf "${pkgdir}"/usr/lib/inspircd/data
+}
