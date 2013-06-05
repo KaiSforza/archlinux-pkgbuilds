@@ -1,0 +1,32 @@
+# Maintainer: Simon Gomizelj <simongmzlj@gmail.com>
+
+export CFLAGS+=' -g'
+export CC=clang
+
+pkgname=repose-git
+pkgver=1.10.g08bd5ee
+pkgver() {
+  cd "repose"
+  git describe | sed 's/^v//;s/-/./g'
+}
+pkgrel=1
+pkgdesc="A archlinux repo building tool"
+
+arch=('i686' 'x86_64')
+url="http://github.com/vodik/repose"
+license=('GPL')
+depends=('pacman' 'libarchive' 'gnupg')
+makedepends=('git')
+conflicts=('repose')
+provides=('repose')
+source=('git+git://github.com/vodik/repose.git')
+sha1sums=('SKIP')
+options=('!strip')
+
+build() {
+  make -C "repose"
+}
+
+package() {
+  make -C "repose" DESTDIR="$pkgdir" install
+}
