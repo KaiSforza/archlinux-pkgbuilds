@@ -3,7 +3,7 @@
 export CC=gcc
 pkgname=systemd-git
 _pkgname=systemd
-pkgver=204.r100.g2b7d696
+pkgver=204.r111.gf3dbb13
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
@@ -11,7 +11,7 @@ url="http://www.freedesktop.org/wiki/Software/systemd"
 license=('GPL2' 'LGPL2.1' 'MIT')
 depends=('acl' 'bash' 'dbus-core' 'glib2' 'kbd' 'kmod' 'libcap' 'libgcrypt' 'pam' 'util-linux' 'xz')
 makedepends=('docbook-xsl' 'git' 'gobject-introspection' 'gperf'
-             'gtk-doc' 'intltool' 'libxslt' 'python2')
+             'intltool' 'libxslt' 'python2')
 optdepends=('cryptsetup: required for encrypted block devices'
             'python2: systemd library bindings'
             'quota-tools: kernel-level quota management')
