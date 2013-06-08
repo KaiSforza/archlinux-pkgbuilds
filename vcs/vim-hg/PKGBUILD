@@ -1,13 +1,14 @@
 export CC=clang
 pkgname=vim-hg
 _pkgname="vim"
-pkgver=7.3.1090.r4687
+pkgver=7.3.1136.r4779
+_versiondir="vim73"
 pkgrel=1
 pkgdesc='Vi Improved, a highly configurable, improved version of the vi text editor'
 arch=(i686 x86_64)
 license=('custom:vim')
 url="http://www.vim.org"
-depends=('gpm' 'perl' 'python' 'python2')
+depends=('gpm' 'perl' 'python' 'python2' 'gawk')
 makedepends=('sed' 'grep' 'gettext' 'mercurial')
 conflicts=(vim vim-runtime)
 provides=(vim=7.3 vim-runtime=7.3)
@@ -39,12 +40,12 @@ build()
     --prefix=/usr \
     --localstatedir=/var/lib/vim \
     --mandir=/usr/share/man \
-    --with-compiledby=ArchLinux \
-    --with-features=big \
+    --with-compiledby='Arch Linux' \
+    --with-features=huge \
     --enable-gpm \
     --enable-acl \
     --with-x=yes \
-    --enable-gui \
+    --disable-gui \
     --enable-multibyte \
     --enable-cscope \
     --disable-netbeans \
@@ -59,30 +60,39 @@ build()
 
 package() {
   cd "$srcdir/$_pkgname"
-  make VIMRCLOC=/etc DESTDIR=${pkgdir} install
+  make VIMRCLOC=/etc DESTDIR="${pkgdir}" install
 
-  cd "$pkgdir/usr/bin"
-  rm ex view                # provided by (n)vi in core
+  rm "$pkgdir"/usr/bin/{ex,view}             # provided by (n)vi in core
 
   # delete some manpages
-  cd ${pkgdir}/usr/share/man
-  rm -f {*/,}man1/ex.1 {*/,}man1/view.1      # provided by (n)vi
-  rm -f {*/,}man1/evim.1                     # this does not make sense in the console version
+  find "${pkgdir}"/usr/share/man -type d -name 'man1' 2>/dev/null | \
+    while read _mandir; do
+    cd ${_mandir}
+    rm -f ex.1 view.1 # provided by (n)vi
+    rm -f evim.1    # this does not make sense if we have no GUI
+  done
 
-  # patch runtime
-  cd $pkgdir/usr/share/vim/vim73/
-  sed -i "s/rpmsave/pacsave/;s/rpmnew/pacnew/;s/,\*\.ebuild/\0,PKGBUILD*,*.install/" filetype.vim
+  # Don't forget logtalk.dict
+  install -Dm644 "${srcdir}"/"${_pkgname}"/runtime/ftplugin/logtalk.dict \
+    "${pkgdir}"/usr/share/vim/${_versiondir}/ftplugin/logtalk.dict
+
+  # patch filetype.vim for better handling of pacman related files
+  sed -i "s/rpmsave/pacsave/;s/rpmnew/pacnew/;s/,\*\.ebuild/\0,PKGBUILD*,*.install/" \
+    "${pkgdir}"/usr/share/vim/${_versiondir}/filetype.vim
+  sed -i "/find the end/,+3{s/changelog_date_entry_search/changelog_date_end_entry_search/}" \
+    "${pkgdir}"/usr/share/vim/${_versiondir}/ftplugin/changelog.vim
 
   # fix FS#17216
   sed -i 's|messages,/var|messages,/var/log/messages.log,/var|' \
-    ${pkgdir}/usr/share/vim/vim73/filetype.vim
+    "${pkgdir}"/usr/share/vim/vim73/filetype.vim
 
+  install -Dm644 "${srcdir}"/vimrc  "${pkgdir}"/etc/vimrc
+  install -Dm644 "${srcdir}"/archlinux.vim  \
+                 "${pkgdir}"/usr/share/vim/vimfiles/archlinux.vim
 
-  install -Dm644 ${srcdir}/vimrc  ${pkgdir}/etc/vimrc
-  install -Dm644 ${srcdir}/archlinux.vim  \
-                 ${pkgdir}/usr/share/vim/vimfiles/archlinux.vim
-  install -dm755 ${pkgdir}/usr/share/licenses/$pkgname
-  cd ${pkgdir}/usr/share/licenses/$pkgname
+  # License
+  install -dm755 "${pkgdir}"/usr/share/licenses/$pkgname
+  cd "${pkgdir}"/usr/share/licenses/$pkgname
   ln -s ../../vim/vim73/doc/uganda.txt license.txt
 }
 
