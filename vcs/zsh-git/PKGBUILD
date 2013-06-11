@@ -6,7 +6,7 @@ pkgname=zsh-git
 _pkgname=zsh
 epoch=1
 pkgver=5.0.2.r99.g68d0d76
-pkgrel=1
+pkgrel=2
 pkgdesc='A very advanced and programmable command interpreter (shell) for UNIX'
 arch=('i686' 'x86_64')
 url='http://www.zsh.org/'
@@ -23,19 +23,14 @@ md5sums=('24a9335edf77252a7b5f52e079f7aef7'
          'SKIP')
 
 pkgver() {
-    cd "$srcdir/$_pkgname"
-    git describe --tags --always --long | sed -E 's/^zsh.//;s/([^-]*-g)/r\1/;s/-/./g'
+  cd "$srcdir/$_pkgname"
+  git describe --tags --always --long | sed -E 's/^zsh.//;s/([^-]*-g)/r\1/;s/-/./g'
 }
 
 build() {
-    cd "$srcdir/$_pkgname"
+  cd "$srcdir/$_pkgname"
 
-    ./Util/preconfig
-    
-	sed -i 's/init.d/rc.d/g' Doc/Zsh/compsys.yo \
-				 Completion/Unix/Type/_services \
-				 Completion/Unix/Command/_init_d
-				 #Doc/zsh.texi \
+  ./Util/preconfig
 
 	# Set correct keymap path
 	sed -i 's#/usr/share/keymaps#/usr/share/kbd/keymaps#g' Completion/Unix/Command/_loadkeys
