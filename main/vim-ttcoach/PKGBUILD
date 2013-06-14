@@ -21,5 +21,6 @@ package() {
     install -Dm755  ${srcdir}/doc/* ${pkgdir}/usr/share/vim/doc/
     install -Dm755  ${srcdir}/plugin/* ${pkgdir}/usr/share/vim/plugin/
     cp      -r      ${srcdir}/macros ${pkgdir}/usr/share/vim/
-    install -Dm755  ${srcdir}/license.txt ${pkgdir}/usr/share/licenses/${pkgname}/license.txt
+    install -Dm755  ${srcdir}/license.txt \
+                      ${pkgdir}/usr/share/licenses/${pkgname}/license.txt
 }
