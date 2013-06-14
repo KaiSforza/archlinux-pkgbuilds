@@ -1,6 +1,8 @@
+# Maintainer: William Giokas <1007380@gmail.com>
+
 pkgname=dwm-ks-git
 _pkgname=dwm
-pkgver=6.0.r89.g4bce023
+pkgver=6.0.r90.g5809321
 pkgrel=1
 pkgdesc="A dynamic window manager for X - config by KaiSforza"
 url="http://dwm.suckless.org"
