@@ -3,7 +3,7 @@
 pkgname=cgames
 pkgver=2.2
 pkgrel=4
-pkgdesc="Collection of three ncurses games. csokoban (sokoban), cmines (minesweeper) and cblocks (sliding-block puzzles)."
+pkgdesc="Collection of three ncurses games. csokoban, cmines and cblocks."
 arch=('i686' 'x86_64')
 url="http://www.muppetlabs.com/~breadbox/software/cgames.html"
 license=('GPL2')
@@ -16,7 +16,7 @@ md5sums=('6e260e87728bd67975cafbf09d480a01'
 build() {
   cd "$srcdir/$pkgname-$pkgver"
 
-  patch -p1 -i "$srcdir/cgames.patch" || return 1
+  patch -p1 -i "$srcdir/cgames.patch"
 
   ./configure --prefix=/usr --with-ncurses
   make DESTDIR=$pkgdir
