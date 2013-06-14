@@ -1,10 +1,8 @@
 # Maintainer: Simon Gomizelj <simongmzlj@gmail.com>
 
-export CFLAGS+=' -g'
 export CC=clang
-
 pkgname=repose-git
-pkgver=1.10.g08bd5ee
+pkgver=1.28.g199dff1
 pkgver() {
   cd "repose"
   git describe | sed 's/^v//;s/-/./g'
