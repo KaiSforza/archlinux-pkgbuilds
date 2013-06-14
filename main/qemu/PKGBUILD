@@ -3,7 +3,7 @@
 pkgname=qemu
 pkgver=1.5.0
 pkgrel=2
-pkgdesc="A generic and open source processor emulator which achieves a good emulation speed by using dynamic translation."
+pkgdesc="A generic and open source processor emulator"
 arch=('i686' 'x86_64')
 license=('GPL2' 'LGPL2.1')
 url="http://wiki.qemu.org/Index.html"
