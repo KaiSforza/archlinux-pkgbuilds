@@ -4,7 +4,7 @@
 pkgname=arm
 pkgver=1.4.5.0
 pkgrel=1
-pkgdesc="Anonymizing Relay Monitor is a terminal status monitor for Tor relays. This works much like top does for system usage, providing real time statistics."
+pkgdesc="A terminal status monitor for Tor relays."
 url="http://www.atagar.com/arm/"
 groups=('network')
 license=('GPL')
