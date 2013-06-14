@@ -2,7 +2,7 @@
 
 pkgname=util-linux-git
 _pkgname=util-linux
-pkgver=2.23.r103.g8225bb7
+pkgver=2.23.r125.g97b820b
 pkgrel=1
 pkgdesc="Miscellaneous system utilities for Linux - the GIT version"
 url="http://userweb.kernel.org/~kzak/util-linux/"
@@ -10,7 +10,12 @@ arch=('i686' 'x86_64')
 license=('GPL2')
 depends=('ncurses' 'pam' 'systemd' 'shadow' 'zlib')
 makedepends=('git')
-provides=("util-linux=$pkgver" "util-linux-ng=$pkgver" 'eject')
+provides=("util-linux=$pkgver" "util-linux-ng=$pkgver" 'eject'
+          # soprovides:
+          'libblkid.so'
+          'libmount.so'
+          'libuuid.so'
+          )
 conflicts=('util-linux' 'util-linux-ng' 'eject')
 replaces=('eject')
 options=('!libtool')

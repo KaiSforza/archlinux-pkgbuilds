@@ -3,7 +3,7 @@
 export CC=gcc
 pkgname=systemd-git
 _pkgname=systemd
-pkgver=204.r111.gf3dbb13
+pkgver=204.r151.g330fe87
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
@@ -15,7 +15,16 @@ makedepends=('docbook-xsl' 'git' 'gobject-introspection' 'gperf'
 optdepends=('cryptsetup: required for encrypted block devices'
             'python2: systemd library bindings'
             'quota-tools: kernel-level quota management')
-provides=('systemd' 'libsystemd' 'systemd-sysvcompat' 'systemd-tools' 'udev=999' 'nss-myhostname')
+provides=('systemd' 'libsystemd' 'systemd-sysvcompat' 'systemd-tools' 'udev=999' 'nss-myhostname'
+          # soprovides:
+          'libgudev-1.0.so'
+          'libnss_myhostname.so'
+          'libsystemd-daemon.so'
+          'libsystemd-id128.so'
+          'libsystemd-journal.so'
+          'libsystemd-login.so'
+          'libudev.so'
+          )
 conflicts=('systemd' 'libsystemd' 'systemd-sysvcompat' 'systemd-tools' 'sysvinit' 'initscripts' 'udev' 'nss-myhostname')
 replaces=('nss-myhostname')
 groups=('systemd')
