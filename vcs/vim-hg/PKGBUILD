@@ -1,7 +1,7 @@
 export CC=clang
 pkgname=vim-hg
 _pkgname="vim"
-pkgver=7.3.1136.r4779
+pkgver=7.3.1221.r4953
 _versiondir="vim73"
 pkgrel=1
 pkgdesc='Vi Improved, a highly configurable, improved version of the vi text editor'
@@ -28,26 +28,30 @@ pkgver() {
 }
 # template end;
 
-build()
-{
+prepare() {
   cd "$srcdir/$_pkgname"
 
   sed -i 's|set dummy python;|set dummy python2;|g' src/auto/configure
   sed -i 's|^.*\(#define SYS_.*VIMRC_FILE.*"\) .*$|\1|' src/feature.h
   sed -i 's|^.*\(#define VIMRC_FILE.*"\) .*$|\1|' src/feature.h
+}
+
+build()
+{
+  cd "$srcdir/$_pkgname"
+
   # build party
   ./configure \
     --prefix=/usr \
     --localstatedir=/var/lib/vim \
     --mandir=/usr/share/man \
-    --with-compiledby='Arch Linux' \
-    --with-features=huge \
+    --with-compiledby='Arch:kaictl' \
+    --with-features=normal \
     --enable-gpm \
     --enable-acl \
     --with-x=yes \
     --disable-gui \
     --enable-multibyte \
-    --enable-cscope \
     --disable-netbeans \
     --enable-perlinterp \
     --enable-pythoninterp \
