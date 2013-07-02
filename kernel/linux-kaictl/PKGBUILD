@@ -8,15 +8,15 @@
 #BUILDDIR=~/.cache/pacman/build/
 pkgbase=linux-kaictl
 #pkgname=linux-mainline
-_gitver=v3.10-rc7
-pkgver=3.10.rc7.r0.g9e895ac
+_gitver=v3.10
+pkgver=3.10.0.r0.g8bb495e
 pkgrel=1
 arch=('x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git' 'qt4')
-_rcnum=${_gitver#*-}
-#_rcnum=""
+#_rcnum=${_gitver#*-}
+_rcnum=""
 _kernelname=${pkgbase#linux}
 PKGEXT='.pkg.tar.gz'
 source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_gitver"
@@ -82,7 +82,7 @@ build() {
   #yes "" | make config >/dev/null
 
   # save configuration for later reuse
-  #cat .config > "$srcdir/config.x86_64.last"
+  cat .config > "$startdir/config.x86_64.$pkgver-$pkgrel"
 
   # build!
   time make ${MAKEFLAGS} LOCALVERSION= bzImage modules
