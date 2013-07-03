@@ -1,0 +1,46 @@
+# $Id$
+# Maintainer: Kyle Keen <keenerd@gmail.com>
+# Maintainer: Sergej Pupykin <pupykin.s+arch@gmail.com>
+# Maintainer: Andrea Scarpino <andrea@archlinux.org>
+# Contributor: damir <damir@archlinux.org>
+# Contributor: Ben <contrasutra@myrealbox.com>
+
+export CC=clang
+pkgname=elinks-git
+_pkgname=elinks
+pkgver=0.12.rv5.r672.g9151599
+pkgrel=5
+pkgdesc="An advanced and well-established feature-rich text mode web browser."
+arch=("i686" "x86_64")
+url="http://elinks.or.cz"
+license=('GPL')
+depends=('bzip2' 'expat>=2.0' 'gpm>=1.20.4' 'openssl' 'libidn' 'js185'
+         'gc' 'tre')
+makedepends=('git')
+provides=('elinks')
+conflicts=('elinks')
+source=("git://repo.or.cz/elinks.git#branch=master")
+md5sums=('SKIP')
+
+pkgver() {
+  cd elinks
+  git describe --always --long | sed -E \
+    's/([^-]+-g)/r\1/;s/^elinks-//;s/pre/-rv/;s/-/./g'
+}
+
+build() {
+  cd elinks
+  [ -x configure ] || sh autogen.sh
+  ./configure --prefix=/usr --mandir=/usr/share/man \
+              --sysconfdir=/etc \
+              --disable-smb --without-x --enable-cgi \
+              --enable-leds --enable-256-colors --disable-html-highlight \
+              --with-zlib --with-lzma --without-lua --enable-exmode
+  make
+}
+
+package() {
+  cd elinks
+  make DESTDIR="$pkgdir" install
+  rm -f "$pkgdir/usr/share/locale/locale.alias"
+}
