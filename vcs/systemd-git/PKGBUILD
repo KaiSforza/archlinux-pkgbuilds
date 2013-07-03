@@ -3,7 +3,7 @@
 export CC=gcc
 pkgname=systemd-git
 _pkgname=systemd
-pkgver=204.r151.g330fe87
+pkgver=205.r0.g34627e3
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
@@ -114,7 +114,7 @@ package() {
   rmdir "$pkgdir/etc/systemd/system/getty.target.wants"
 
   # get rid of RPM macros
-  rm -r "$pkgdir/etc/rpm"
+  rm -fr "$pkgdir/etc/rpm"
 
   # Replace dialout/tape/cdrom group in rules with uucp/storage/optical group
   sed -i 's#GROUP="dialout"#GROUP="uucp"#g;
