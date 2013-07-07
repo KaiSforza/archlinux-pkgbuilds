@@ -1,8 +1,8 @@
 export CC=clang
 pkgname=vim-hg
 _pkgname="vim"
-pkgver=7.3.1221.r4953
-_versiondir="vim73"
+pkgver=7.4a.001.r5150
+_versiondir="vim74a"
 pkgrel=1
 pkgdesc='Vi Improved, a highly configurable, improved version of the vi text editor'
 arch=(i686 x86_64)
@@ -11,7 +11,7 @@ url="http://www.vim.org"
 depends=('gpm' 'perl' 'python' 'python2' 'gawk')
 makedepends=('sed' 'grep' 'gettext' 'mercurial')
 conflicts=(vim vim-runtime)
-provides=(vim=7.3 vim-runtime=7.3)
+provides=(vim=7.4 vim-runtime=7.4)
 source=("vimrc"
         "archlinux.vim"
         "vim::hg+https://vim.googlecode.com/hg/")
@@ -88,7 +88,7 @@ package() {
 
   # fix FS#17216
   sed -i 's|messages,/var|messages,/var/log/messages.log,/var|' \
-    "${pkgdir}"/usr/share/vim/vim73/filetype.vim
+    "${pkgdir}"/usr/share/vim/${_versiondir}/filetype.vim
 
   install -Dm644 "${srcdir}"/vimrc  "${pkgdir}"/etc/vimrc
   install -Dm644 "${srcdir}"/archlinux.vim  \
@@ -97,7 +97,7 @@ package() {
   # License
   install -dm755 "${pkgdir}"/usr/share/licenses/$pkgname
   cd "${pkgdir}"/usr/share/licenses/$pkgname
-  ln -s ../../vim/vim73/doc/uganda.txt license.txt
+  ln -s ../../vim/${_versiondir}/doc/uganda.txt license.txt
 }
 
 # vim:set ts=2 sw=2 et:
