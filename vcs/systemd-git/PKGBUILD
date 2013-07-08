@@ -3,7 +3,7 @@
 export CC=gcc
 pkgname=systemd-git
 _pkgname=systemd
-pkgver=205.r0.g34627e3
+pkgver=205.r12.gbfdf1ad
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
@@ -74,7 +74,8 @@ build(){
       --disable-microhttpd \
       --disable-selinux \
       --with-sysvinit-path= \
-      --with-sysvrcnd-path= 
+      --with-sysvrcnd-path= \
+      --with-firmware-path="/usr/lib/firmware/updates:/usr/lib/firmware"
 
   time make
 }
