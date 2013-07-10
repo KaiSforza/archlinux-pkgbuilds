@@ -2,7 +2,7 @@
 
 pkgname=util-linux-git
 _pkgname=util-linux
-pkgver=2.23.r125.g97b820b
+pkgver=2.23.r210.g8bd6450
 pkgrel=1
 pkgdesc="Miscellaneous system utilities for Linux - the GIT version"
 url="http://userweb.kernel.org/~kzak/util-linux/"
@@ -44,16 +44,16 @@ build() {
 
   ./autogen.sh
   ./configure \
-      --localstatedir=/run \
       --prefix=/usr \
       --libdir=/usr/lib \
+      --localstatedir=/run \
       --enable-fs-paths-extra="/usr/bin" \
       --enable-raw \
       --enable-vipw \
       --enable-newgrp \
       --enable-chfn-chsh \
       --enable-write \
-      --enable-mest \
+      --enable-mesg \
       --enable-socket-activation \
 
   make
