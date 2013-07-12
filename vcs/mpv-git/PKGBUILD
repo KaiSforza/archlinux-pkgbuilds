@@ -4,7 +4,7 @@
 export CC=clang
 pkgname=mpv-git
 _pkgname="mpv"
-pkgver=0.35135.gf4dcb93
+pkgver=0.35438.gd176f95
 pkgrel=1
 pkgdesc="A movie player and encoder for linux (uses dynamically linked ffmpeg; git version)"
 arch=('i686' 'x86_64')
@@ -42,10 +42,8 @@ build() {
       --disable-radio \
       --disable-radio-capture \
       --disable-radio-v4l2 \
-      --disable-winsock2_h \
       --disable-macosx-bundle \
       --disable-rpath \
-      --disable-vstream \
       --disable-libbs2b \
       --disable-direct3d \
       --disable-corevideo \
