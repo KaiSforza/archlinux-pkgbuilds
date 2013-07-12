@@ -3,7 +3,7 @@
 export CC=gcc
 pkgname=systemd-git
 _pkgname=systemd
-pkgver=205.r12.gbfdf1ad
+pkgver=205.r71.gd868475
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
