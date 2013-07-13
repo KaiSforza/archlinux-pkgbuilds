@@ -3,45 +3,40 @@
 
 pkgname=ii-git
 _pkgname=ii
+epoch=1
 pkgver=1.7.r1.g28feb9a
-pkgrel=2
+pkgrel=1
 pkgdesc="A minimalist FIFO and filesystem-based IRC client"
 arch=(i686 x86_64)
-url="http://wmii.de/index.php/WMII/ii"
+url="http://tools.suckless.org/ii/"
 license=('MIT')
 depends=('glibc')
 makedepends=('git')
 replaces=('ii-hg')
 provides=('ii')
 conflicts=('ii')
-source=('config.mk'
-	"${_pkgname}::git+http://git.suckless.org/ii#branch=master")
-md5sums=('17d6db42d3297691e4a8e98598065f59'
-         'SKIP')
+source=("${_pkgname}::git+http://git.suckless.org/ii#branch=master")
+md5sums=('SKIP')
 
-# template start; name=git-pkgver-r; version=1.0;
 pkgver() {
   cd "$srcdir/$_pkgname"
   git describe --tags --long | sed -E 's/([^-]+-g)/r\1/;s/-/./g;s/^v//g'
 }
-# template end;
+
+prepare() {
+  cd "$srcdir/$_pkgname"
+  # Set a descriptive version for ii-git.
+  sed -i "s|^VERSION.*=.*|VERSION = ${pkgver}-${pkgrel}|g" config.mk
+}
 
 build() {
-    cd "$srcdir/$_pkgname"
-    sed -i "s|%CFLAGS%|$CFLAGS|g" config.mk
-    sed -i "s|%LDFLAGS%|$LDFLAGS|g" config.mk
-
-    make PREFIX=/usr
+  cd "$srcdir/$_pkgname"
+  make PREFIX=/usr
 }
 
 package() {
-    cd "$srcdir/$_pkgname"
-    make PREFIX=/usr DESTDIR="$pkgdir" install
-
-    install -m755 -d  "$pkgdir/usr/share/licenses/ii-git"
-    install -m644 LICENSE "$pkgdir/usr/share/licenses/ii-git"
-    # make install sets permissions to 775...
-
-    chmod 755 "$pkgdir/usr/bin/ii"
-    rm -f "$pkgdir/usr/share/doc/ii/LICENSE" # no duplicate files, please
+  cd "$srcdir/$_pkgname"
+  make PREFIX=/usr DESTDIR="$pkgdir" install
+  # We want ii to be installed with 755, not 775 perms.
+  chmod 755 "$pkgdir/usr/bin/ii"
 }
