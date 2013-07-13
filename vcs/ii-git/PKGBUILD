@@ -1,5 +1,7 @@
+# Maintainer: Daniel Wallace <danielwallace at gtmanfred dot com>
 # Contributor: Anthony Martin <ality@pbrane.org>
 # Contributor: Chris Brannon <cmbrannon79 (at) gmail.com>
+# Contributor: William Giokas <1007380@gmail.com>
 
 pkgname=ii-git
 _pkgname=ii
