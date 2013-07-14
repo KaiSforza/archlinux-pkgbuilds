@@ -5,11 +5,11 @@
 # Contributor: damir <damir@archlinux.org>
 # Contributor: Ben <contrasutra@myrealbox.com>
 
-export CC=clang
 pkgname=elinks-git
 _pkgname=elinks
-pkgver=0.12.rv5.r672.g9151599
-pkgrel=5
+epoch=1
+pkgver=0.12.rv5.r673.ga229adb
+pkgrel=1
 pkgdesc="An advanced and well-established feature-rich text mode web browser."
 arch=("i686" "x86_64")
 url="http://elinks.or.cz"
@@ -35,7 +35,8 @@ build() {
               --sysconfdir=/etc \
               --disable-smb --without-x --enable-cgi \
               --enable-leds --enable-256-colors --disable-html-highlight \
-              --with-zlib --with-lzma --without-lua --enable-exmode
+              --with-zlib --enable-exmode \
+              --without-lua # The lua stuff does not compile at the moment.
   make
 }
 
@@ -43,4 +44,7 @@ package() {
   cd elinks
   make DESTDIR="$pkgdir" install
   rm -f "$pkgdir/usr/share/locale/locale.alias"
+
+  install -D -m644 "contrib/debian/$_pkgname.desktop" \
+  "$pkgdir/usr/share/applications/$_pkgname.desktop"
 }
