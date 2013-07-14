@@ -1,10 +1,5 @@
 post_install() {
-  grep -x /bin/mksh /etc/shells >/dev/null || echo /usr/bin/mksh >>/etc/shells
-}
-
-post_upgrade() {
-      sed -i "/^\/bin\/mksh$/d" /etc/shells
-      post_install $1
+  grep -x /usr/bin/mksh /etc/shells >/dev/null || echo /usr/bin/mksh >>/etc/shells
 }
 
 post_remove() {
