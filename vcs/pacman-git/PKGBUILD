@@ -7,7 +7,7 @@ export CC=clang
 DEBUG_CFLAGS="-g"
 pkgname=pacman-git
 _pkgname=pacman
-pkgver=4.1.2.r58.gf13b989
+pkgver=4.1.2.r84.gcfe1d52
 pkgrel=1
 arch=('i686' 'x86_64')
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
@@ -36,7 +36,7 @@ checkdepends=('python2'
               'fakechroot'
               )
 options=('!libtool')
-source=('pacman::git+git://projects.archlinux.org/users/allan/pacman.git#branch=autotools')
+source=('pacman::git+git://projects.archlinux.org/users/allan/pacman.git#branch=working')
 sha1sums=('SKIP')
 backup=(etc/pacman/pacman.conf
         etc/pacman/makepkg.conf)
