@@ -3,11 +3,10 @@
 # Contributor: godane <slaxemulator@gmail.com.com>
 # Contributor: Andres Perera <aepd87@gmail.com>
 
-export CC=clang
-DEBUG_CFLAGS="-g"
+# Variables  {{{
 pkgname=pacman-git
 _pkgname=pacman
-pkgver=4.1.2.r84.gcfe1d52
+pkgver=4.1.2.r94.gbf62cf0
 pkgrel=1
 arch=('i686' 'x86_64')
 pkgdesc="A library-based package manager with dependency support. git version. Allan's branch."
@@ -44,15 +43,16 @@ provides=("pacman=$pkgver"
           'libalpm.so')
 replaces=pacman-contrib
 conflicts=('pacman')
+export CC=clang
+DEBUG_CFLAGS="-g"
+#}}}
 
-# template start; name=git-pkgver-r; version=1.0;
-pkgver() {
+pkgver() { #{{{
   cd "$srcdir/$_pkgname"
   git describe --tags --long | sed -E 's/([^-]+-g)/r\1/;s/-/./g;s/^v//g'
-}
-# template end;
+} #}}}
 
-build() {
+build() { #{{{
   cd "$srcdir/$_pkgname"
 
   ./autogen.sh
@@ -68,14 +68,14 @@ build() {
 
   time make
   time make -C contrib
-}
+} #}}}
 
-check() {
+check() { #{{{
   cd "$srcdir"
   make -C "$_pkgname" check
-}
+} #}}}
 
-package() {
+package() { #{{{
   cd "$srcdir/$_pkgname"
 
   # main {{{
@@ -109,6 +109,6 @@ package() {
 
   install -Dm644 contrib/zsh_completion $pkgdir/usr/share/zsh/site-functions/_pacman
   # }}}
-}
+} #}}}
 
 # vim: set ts=2 sw=2 et:
