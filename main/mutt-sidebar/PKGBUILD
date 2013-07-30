@@ -3,15 +3,16 @@
 
 pkgname=mutt-sidebar
 pkgver=1.5.21
-pkgrel=11
+pkgrel=12
 pkgdesc='Small but very powerful text-based mail client with a sidebar'
 url='http://www.mutt.org/'
 license=('GPL')
 backup=('etc/Muttrc')
 arch=('i686' 'x86_64')
 conflicts=('mutt')
-optdepends=('smtp-forwarder: to send mail')
-depends=('gpgme' 'ncurses' 'openssl' 'libsasl' 'gdbm' 'libidn' 'mime-types' 'krb5')
+optdepends=('msmtp: to send mail'
+            'offlineimap: to recieve mail')
+depends=('gpgme' 'ncurses' 'openssl' 'gdbm' 'libidn' 'mime-types' 'krb5')
 provides=('mutt')
 conflicts=('mutt')
 source=("ftp://ftp.mutt.org/mutt/devel/mutt-${pkgver}.tar.gz"
@@ -23,7 +24,7 @@ md5sums=('a29db8f1d51e2f10c070bf88e8a553fd'
          '9d95c08295f8ec5171f774f776ef8413'
          '537e6e55255ce82bd7877f4b696bca50')
 
-build() {
+prepare() {
         cd "${srcdir}/mutt-${pkgver}"
 
         msg "Patching... Sidebar"
@@ -31,20 +32,25 @@ build() {
 
         msg "Patching... Trashfolder"
         patch -p1 -i ${srcdir}/trash_folder-1.5.18.patch
+}
+
+build() {
+        cd "${srcdir}/mutt-${pkgver}"
 
         ./configure \
                 --prefix=/usr \
                 --sysconfdir=/etc \
                 --enable-gpgme \
-                --enable-pop \
-                --enable-imap \
-                --enable-smtp \
+                --disable-pop \
+                --disable-imap \
+                --disable-smtp \
+                --disable-nfs-fix \
                 --enable-hcache \
                 --with-curses=/usr \
                 --with-regex \
                 --with-gss=/usr \
                 --with-ssl=/usr \
-                --with-sasl \
+                --without-sasl \
                 --with-idn \
 
         make
