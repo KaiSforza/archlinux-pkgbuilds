@@ -2,8 +2,8 @@
 
 export CC=gcc
 pkgname=systemd-git
-_pkgname=systemd
-pkgver=205.r71.gd868475
+_pkgname=systemd-usr
+pkgver=206.r59.g6f60d58
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
@@ -41,14 +41,15 @@ backup=(etc/dbus-1/system.d/org.freedesktop.systemd1.conf
         etc/systemd/bootchart.conf
         etc/udev/udev.conf)
 install=systemd.install
-source=("$_pkgname::git://anongit.freedesktop.org/systemd/systemd.git#branch=master"
+#source=("$_pkgname::git://anongit.freedesktop.org/systemd/systemd.git#branch=master"
+source=("$_pkgname::git+file:///home/wgiokas/git/KaiSforza/systemd#branch=zshcomp"
         'initcpio-hook-udev'
         'initcpio-install-udev'
-        'initcpio-install-timestamp')
+        'initcpio-install-systemd')
 md5sums=('SKIP'
          'e99e9189aa2f6084ac28b8ddf605aeb8'
          'fb37e34ea006c79be1c54cbb0f803414'
-         'df69615503ad293c9ddf9d8b7755282d')
+         '120a3cc7dc1e07772705e1c8cc259e78')
 _gitname="${source[0]%%::*}"
 
 # template start; name=git-pkgver-r; version=1.0;
@@ -100,16 +101,6 @@ package() {
   find "$pkgdir/usr/share/man" -type f -name '*.[[:digit:]]' \
       -exec sed -ri '1s|^\.so (.*)\.([0-9]+)|.so man\2/\1.\2|' {} +
 
-  # move bash-completion and symlink for loginctl
-  #install -Dm644 "$pkgdir/etc/bash_completion.d/systemd-bash-completion.sh" \
-  #  "$pkgdir/usr/share/bash-completion/completions/systemctl"
-  #for ctl in {login,journal,timedate,locale,hostname,systemd-coredump}ctl udevadm; do
-  #  ln -s systemctl "$pkgdir/usr/share/bash-completion/completions/$ctl"
-  #done
-  rm -rf "$pkgdir/etc/bash_completion.d"
-  install -Dm644 "$srcdir/${_gitname}/shell-completion/${_pkgname}-zsh-completion.zsh" \
-      "$pkgdir/usr/share/zsh/site-functions/_${_pkgname}"
-
   # don't write units to /etc by default
   rm "$pkgdir/etc/systemd/system/getty.target.wants/getty@tty1.service"
   rmdir "$pkgdir/etc/systemd/system/getty.target.wants"
@@ -123,7 +114,7 @@ package() {
           s#GROUP="cdrom"#GROUP="optical"#g' "$pkgdir"/usr/lib/udev/rules.d/*.rules
 
   # add mkinitcpio hooks
+  install -Dm644 "$srcdir/initcpio-install-systemd" "$pkgdir/usr/lib/initcpio/install/systemd"
   install -Dm644 "$srcdir/initcpio-install-udev" "$pkgdir/usr/lib/initcpio/install/udev"
   install -Dm644 "$srcdir/initcpio-hook-udev" "$pkgdir/usr/lib/initcpio/hooks/udev"
-  install -Dm644 "$srcdir/initcpio-install-timestamp" "$pkgdir/usr/lib/initcpio/install/timestamp"
 }
