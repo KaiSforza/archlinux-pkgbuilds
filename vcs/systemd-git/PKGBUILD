@@ -2,8 +2,8 @@
 
 export CC=gcc
 pkgname=systemd-git
-_pkgname=systemd-usr
-pkgver=206.r59.g6f60d58
+_pkgname=systemd
+pkgver=206.r74.g8e6d939
 pkgrel=1
 pkgdesc="system and service manager"
 arch=('i686' 'x86_64')
@@ -41,8 +41,7 @@ backup=(etc/dbus-1/system.d/org.freedesktop.systemd1.conf
         etc/systemd/bootchart.conf
         etc/udev/udev.conf)
 install=systemd.install
-#source=("$_pkgname::git://anongit.freedesktop.org/systemd/systemd.git#branch=master"
-source=("$_pkgname::git+file:///home/wgiokas/git/KaiSforza/systemd#branch=zshcomp"
+source=("$_pkgname::git://anongit.freedesktop.org/systemd/systemd.git#branch=master"
         'initcpio-hook-udev'
         'initcpio-install-udev'
         'initcpio-install-systemd')
