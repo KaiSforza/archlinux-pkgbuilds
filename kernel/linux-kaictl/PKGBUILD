@@ -8,8 +8,8 @@
 #BUILDDIR=~/.cache/pacman/build/
 pkgbase=linux-kaictl
 #pkgname=linux-mainline
-_gitver=v3.11-rc3
-pkgver=3.11.rc3.r0.g5ae90d8
+_gitver=v3.11-rc4
+pkgver=3.11.rc4.r0.gc095ba7
 pkgrel=1
 arch=('x86_64')
 url="http://www.kernel.org/"
@@ -24,12 +24,12 @@ source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#ta
         'config.x86_64'
         # standard config files for mkinitcpio ramdisk
         'linux.preset'
-        'change-default-console-loglevel-2.patch')
+        'change-default-console-loglevel.patch')
 
 md5sums=('SKIP'
          '5c8bc81d73aaa75ae0ac28d9c2c9060c'
          '6a8a28db0c8d3ec0bffff749cd4fa5cb'
-         'cf26f47deab79e07ade19188d6bf450e')
+         'fc26d496e54bc606f88e0ba4f66bdd08')
 options=('!strip')
 
 pkgver() {
@@ -47,7 +47,7 @@ prepare() {
   # set DEFAULT_CONSOLE_LOGLEVEL to 4 (same value as the 'quiet' kernel param)
   # remove this when a Kconfig knob is made available by upstream
   # (relevant patch sent upstream: https://lkml.org/lkml/2011/7/26/227)
-  git apply -v "${srcdir}/change-default-console-loglevel-2.patch"
+  git apply -v "${srcdir}/change-default-console-loglevel.patch"
 
   cat "${srcdir}/config.x86_64" > ./.config
 
