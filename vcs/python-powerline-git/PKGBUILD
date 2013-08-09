@@ -1,8 +1,8 @@
 # Maintainer: Kim Silkebækken <kim.silkebaekken+aur@gmail.com>
 
 pkgname=python-powerline-git
-pkgver=778.2758c34
-pkgrel=3
+pkgver=827.70e279a
+pkgrel=1
 pkgdesc='The ultimate statusline/prompt utility.'
 url='https://github.com/Lokaltog/powerline'
 license=('MIT')
@@ -26,15 +26,9 @@ pkgver() {
   echo $(git rev-list --count $_gitbranch).$(git rev-parse --short $_gitbranch)
 }
 
-prepare() {
-  sed -i 's/sphinx-build2/sphinx-build/g' "$_gitname/docs/Makefile"
-}
-
 build() {
 	cd "$_gitname"
 	python setup.py -q build
-	#cd "$_gitname/docs/"
-	#make html
 }
 
 package() {
