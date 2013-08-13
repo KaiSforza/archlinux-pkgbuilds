@@ -12,7 +12,7 @@ machine_id_setup() {
 
 post_install() {
   # enable getty@tty1 by default, but don't track the file
-  systemctl enable getty@.service
+  systemctl enable getty@tty1.service
 
   echo ":: Append 'init=/bin/systemd' to your kernel command line in your"
   echo "   bootloader to replace sysvinit with systemd"
