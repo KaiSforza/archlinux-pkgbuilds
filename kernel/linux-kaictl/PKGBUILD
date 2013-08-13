@@ -8,8 +8,8 @@
 #BUILDDIR=~/.cache/pacman/build/
 pkgbase=linux-kaictl
 #pkgname=linux-mainline
-_gitver=v3.11-rc4
-pkgver=3.11.rc4.r0.gc095ba7
+_gitver=v3.11-rc5
+pkgver=3.11.rc5.r0.gd4e4ab8
 pkgrel=1
 arch=('x86_64')
 url="http://www.kernel.org/"
