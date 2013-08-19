@@ -2,7 +2,7 @@
 # arg 2:  the old package version
 
 KERNEL_NAME=-kaictl
-KERNEL_VERSION=3.11.0-1-rc5-kaictl
+KERNEL_VERSION=3.11.0-1-rc6-kaictl
 
 # set a sane PATH to ensure that critical utils like depmod will be found
 export PATH='/usr/local/sbin:/usr/local/bin:/usr/bin'
