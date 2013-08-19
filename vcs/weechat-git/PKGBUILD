@@ -7,8 +7,8 @@ export CC=clang
 DEBUG_CFLAGS="-g"
 pkgname=weechat-git
 _pkgname=weechat
-pkgver=0.4.1.r24.gc070481
-pkgrel=1
+pkgver=0.4.1.r164.g7dea560
+pkgrel=2
 pkgdesc="Fast, light & extensible IRC client (curses UI)"
 arch=('i686' 'x86_64')
 url="http://www.weechat.org/"
@@ -35,7 +35,7 @@ build() {
   cmake "$srcdir/$_pkgname" -DPREFIX=/usr \
         -DPYTHON_EXECUTABLE=/usr/bin/python2 \
         -DPYTHON_LIBRARY=/usr/lib/libpython2.7.so \
-        -DENABLE_RUBY=OFF -DENABLE_DOC=OFF
+        -DENABLE_RUBY=OFF -DENABLE_DOC=OFF -DENABLE_MAN=ON
   make
 }
 
