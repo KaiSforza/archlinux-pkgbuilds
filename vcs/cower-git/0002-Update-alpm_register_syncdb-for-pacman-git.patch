@@ -1,0 +1,25 @@
+From c4e5e7785680c2ecc553e815d35456ce33d2a103 Mon Sep 17 00:00:00 2001
+From: William Giokas <1007380@gmail.com>
+Date: Fri, 16 Aug 2013 23:28:07 -0500
+Subject: [PATCH 2/2] Update alpm_register_syncdb for pacman-git
+
+---
+ cower.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cower.c b/cower.c
+index 2d11272..d60ab89 100644
+--- a/cower.c
++++ b/cower.c
+@@ -431,7 +431,7 @@ alpm_handle_t *alpm_init(void) /* {{{ */
+ 
+ 			if(!streq(section, "options")) {
+ 				if(!cfg.skiprepos && !alpm_list_find_str(cfg.ignore.repos, section)) {
+-					alpm_register_syncdb(pmhandle, section, 0);
++					alpm_register_syncdb(pmhandle, section, 0, 0);
+ 					cwr_printf(LOG_DEBUG, "registering alpm db: %s\n", section);
+ 				}
+ 			}
+-- 
+1.8.4.rc3.500.gc3113b0
+

@@ -2,8 +2,8 @@
 
 pkgname=cower-git
 _pkgname=cower
-pkgver=9.r7.ga7ebb5d
-pkgrel=2
+pkgver=9.r15.ge444ac6
+pkgrel=1
 pkgdesc="A simple AUR agent with a pretentious name"
 arch=('i686' 'x86_64')
 url="http://github.com/falconindy/cower"
@@ -13,8 +13,15 @@ makedepends=('git' 'perl')
 conflicts=('cower')
 provides=('cower')
 
-source=("git://github.com/falconindy/cower.git#branch=master")
-md5sums=('SKIP')
+source=("git://github.com/falconindy/cower.git#branch=master"
+        "0002-Update-alpm_register_syncdb-for-pacman-git.patch")
+md5sums=('SKIP'
+         '58594646b76723f7a807159d1cccb095')
+
+prepare() {
+  cd "$srcdir/$_pkgname"
+  git am "$srcdir/${source[1]}"
+}
 
 # template start; name=git-pkgver-r; version=1.0;
 pkgver() {
