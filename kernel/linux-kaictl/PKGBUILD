@@ -3,11 +3,8 @@
 # Maintainer: Thomas Baechler <thomas@archlinux.org>
 # Mainline package
 # Maintainer: William Giokas <1007380@gmail.com>
-# NOTE: Only includes a 64-bit config. Please feel free to submit a 32-bit config.
 
-#BUILDDIR=~/.cache/pacman/build/
 pkgbase=linux-kaictl
-#pkgname=linux-mainline
 _gitver=v3.11-rc6
 pkgver=3.11.rc6.r0.gb36f4be
 pkgrel=1
@@ -217,10 +214,6 @@ _package-headers() {
 
   cp arch/${KARCH}/Makefile "${pkgdir}/usr/src/linux-${_kernver}/arch/${KARCH}/"
 
-  if [ "${CARCH}" = "i686" ]; then
-    cp arch/${KARCH}/Makefile_32.cpu "${pkgdir}/usr/src/linux-${_kernver}/arch/${KARCH}/"
-  fi
-
   cp arch/${KARCH}/kernel/asm-offsets.s "${pkgdir}/usr/src/linux-${_kernver}/arch/${KARCH}/kernel/"
 
   # add headers for lirc package
@@ -312,7 +305,7 @@ _package-headers() {
   done
 
   # remove unneeded architectures
-  rm -rf "${pkgdir}"/usr/src/linux-${_kernver}/arch/{alpha,arm,arm26,avr32,blackfin,c6x,cris,frv,h8300,hexagon,ia64,m32r,m68k,m68knommu,mips,microblaze,mn10300,openrisc,parisc,powerpc,ppc,s390,score,sh,sh64,sparc,sparc64,tile,unicore32,um,v850,xtensa}
+  rm -rf "${pkgdir}"/usr/src/linux-${_kernver}/arch/{alpha,arm,arm26,arm64,arc,avr32,blackfin,c6x,cris,frv,h8300,hexagon,ia64,m32r,m68k,m68knommu,metag,mips,microblaze,mn10300,openrisc,parisc,powerpc,ppc,s390,score,sh,sh64,sparc,sparc64,tile,unicore32,um,v850,xtensa}
 }
 
 _package-docs() {
