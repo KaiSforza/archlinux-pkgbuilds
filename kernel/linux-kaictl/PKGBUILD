@@ -24,7 +24,8 @@ source=("git+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#ta
         'config.x86_64'
         # standard config files for mkinitcpio ramdisk
         'linux.preset'
-        'change-default-console-loglevel.patch')
+        'change-default-console-loglevel.patch'
+        "${pkgbase#linux-}.conf")
 
 md5sums=('SKIP'
          '5c8bc81d73aaa75ae0ac28d9c2c9060c'
@@ -109,14 +110,27 @@ _package() {
   _basekernel=${_kernver%%-*}
   _basekernel=${_basekernel%.*}
 
-  mkdir -p "${pkgdir}"/{lib/modules,lib/firmware,boot}
+  mkdir -p "${pkgdir}"/{lib/modules,lib/firmware,boot/loader/entries}
   make LOCALVERSION= INSTALL_MOD_PATH="${pkgdir}" modules_install
-  if [[ -d /sys/firmware/efi ]]; then
-    msg "Using EFI. Installing as vmlinux-${pkgbase}.efi..."
-    cp arch/$KARCH/boot/bzImage "${pkgdir}/boot/vmlinuz-${pkgbase}.efi"
-  else
-    cp arch/$KARCH/boot/bzImage "${pkgdir}/boot/vmlinuz-${pkgbase}"
-  fi
+  cp arch/$KARCH/boot/bzImage "${pkgdir}/boot/vmlinuz-${pkgbase}"
+
+  # Set up the kaictl.conf file
+  # This should be edited by the user. I made the defaults my own stuff
+  #   because this is my kernel, but you can do whatever you want. I am
+  #   quite sure that you are going to want to change the _OPTIONS variable.
+  _ROOT="${_ROOT:-/dev/sda1}"
+  _OPTIONS="${_OPTIONS:-rw rootfstype=btrfs efivars.pstore_disable=1 libahci.ignore_sss=1 audit=0 add_efi_memmap rootflags=rw,noatime,ssd,space_cache,discard,subvol=@ init=/usr/lib/systemd/systemd}"
+  _INIT="${_INIT:-/usr/lib/systemd/systemd}"
+  sed -i \
+    -e "s/@TITLE@/Arch Linux (${pkgbase#linux-})/" \
+    -e "s/@PKGBASE@/${pkgbase}/" \
+    -e "s/@VERSION@/${pkgver}-${pkgrel}/" \
+    -e "s/@ROOT@/$_ROOT/" \
+    -e "s/@INIT@/$_INIT/" \
+    -e "s/@OPTIONS@/$_OPTIONS/" \
+    "${srcdir}/${pkgbase#linux-}.conf"
+
+  cp "${srcdir}/kaictl.net" "${pkgdir}/boot/loader/entries/kaictl.conf"
 
   # add vmlinux
   install -D -m644 vmlinux "${pkgdir}/usr/src/linux-${_kernver}/vmlinux"
