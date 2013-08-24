@@ -5,7 +5,7 @@
 
 pkgname=yum
 pkgver=3.4.3
-pkgrel=4
+pkgrel=5
 pkgdesc="a popular channel based package manager for RPM distros."
 arch=('i686' 'x86_64')
 license=('GPL')
@@ -18,19 +18,15 @@ md5sums=('7c8ea8beba5b4e7fe0c215e4ebaa26ed'
 
 prepare() {
   cd "${srcdir}/${pkgname}-${pkgver}/etc"
-
   # Apply patch to remove the RedHat style init script from being installed
   patch < "${srcdir}/yum0.patch"
+  msg 'Patching python2 shebangs'
+  sed -i -e "s|#![ ]*/usr/bin/python|#!/usr/bin/python2|" -e "s|#![ ]*/usr/bin/env python|#!/usr/bin/env python2|" $(find ${srcdir} -name '*.py')
+  msg 'Patching Makefile'
+  sed -i -e "s/PYTHON=python/PYTHON=python2/" "${srcdir}/${pkgname}-${pkgver}/Makefile"
 }
 
 build() {
-  msg 'Patching python2 shebangs'
-  sed -i -e "s|#![ ]*/usr/bin/python$|#!/usr/bin/python2|" -e "s|#![ ]*/usr/bin/env python$|#!/usr/bin/env python2|" $(find ${srcdir} -name '*.py')
-
-  msg 'Patching Makefile'
-  
-  sed -i -e "s/PYTHON=python/PYTHON=python2/" "${srcdir}/${pkgname}-${pkgver}/Makefile"
-
   cd "${srcdir}/${pkgname}-${pkgver}"
   make
 }
