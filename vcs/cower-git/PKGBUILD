@@ -3,13 +3,13 @@
 pkgname=cower-git
 _pkgname=cower
 pkgver=9.r15.ge444ac6
-pkgrel=1
+pkgrel=2
 pkgdesc="A simple AUR agent with a pretentious name"
 arch=('i686' 'x86_64')
 url="http://github.com/falconindy/cower"
 license=('MIT')
 depends=('curl' 'libarchive' 'pacman' 'yajl' )
-makedepends=('git' 'perl')
+makedepends=('git' 'perl' 'bash-completion')
 conflicts=('cower')
 provides=('cower')
 
