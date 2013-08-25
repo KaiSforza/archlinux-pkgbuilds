@@ -1,0 +1,391 @@
+From 8a52e6d4c4b799cc1c0a6e182720b4420b55b156 Mon Sep 17 00:00:00 2001
+From: William Giokas <1007380@gmail.com>
+Date: Sat, 24 Aug 2013 17:17:18 -0500
+Subject: [PATCH] doc: Create English man pages for asciidoc files
+
+Previously they only created html pages, but as weechat is a console IRC
+client, it only makes sense to also be able to generate manual pages.
+---
+ doc/en/CMakeLists.txt                | 105 +++++++++++++++++++++++++++++++++++
+ doc/en/Makefile.am                   |  30 +++++++++-
+ doc/en/weechat_dev.en.txt            |  12 +++-
+ doc/en/weechat_faq.en.txt            |  13 ++++-
+ doc/en/weechat_plugin_api.en.txt     |  13 ++++-
+ doc/en/weechat_quickstart.en.txt     |  13 ++++-
+ doc/en/weechat_relay_protocol.en.txt |  13 ++++-
+ doc/en/weechat_scripting.en.txt      |  11 +++-
+ doc/en/weechat_tester.en.txt         |  13 ++++-
+ doc/en/weechat_user.en.txt           |  13 ++++-
+ 10 files changed, 219 insertions(+), 17 deletions(-)
+
+diff --git a/doc/en/CMakeLists.txt b/doc/en/CMakeLists.txt
+index dd310de..6185bfe 100644
+--- a/doc/en/CMakeLists.txt
++++ b/doc/en/CMakeLists.txt
+@@ -29,6 +29,111 @@ IF(ENABLE_MAN)
+   )
+   ADD_CUSTOM_TARGET(doc-man-en ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/weechat.1)
+   INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/weechat.1 DESTINATION ${MANDIR}/man1)
++
++  # man page
++  ADD_CUSTOM_COMMAND(
++    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/weechat-user.7
++    COMMAND ${A2X_EXECUTABLE} ARGS -a revision='WeeChat ${VERSION}' -d manpage -f manpage -L -D ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/weechat_user.en.txt
++    DEPENDS
++    ${CMAKE_CURRENT_SOURCE_DIR}/weechat_user.en.txt
++    ${CMAKE_CURRENT_SOURCE_DIR}/cmdline_options.en.txt
++    ${CMAKE_CURRENT_SOURCE_DIR}/autogen/user/*.txt
++    COMMENT "Building weechat-user.7 (en)"
++  )
++  ADD_CUSTOM_TARGET(doc-user-man-en ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/weechat-user.7)
++  INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/weechat-user.7 DESTINATION ${MANDIR}/man7)
++
++  # man page
++  ADD_CUSTOM_COMMAND(
++    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/weechat-plugin-api.7
++    COMMAND ${A2X_EXECUTABLE} ARGS -a revision='WeeChat ${VERSION}' -d manpage -f manpage -L -D ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/weechat_plugin_api.en.txt
++    DEPENDS
++    ${CMAKE_CURRENT_SOURCE_DIR}/weechat_plugin_api.en.txt
++    ${CMAKE_CURRENT_SOURCE_DIR}/cmdline_options.en.txt
++    ${CMAKE_CURRENT_SOURCE_DIR}/autogen/user/*.txt
++    COMMENT "Building weechat-plugin-api.7 (en)"
++  )
++  ADD_CUSTOM_TARGET(doc-plugin-api-man-en ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/weechat-plugin-api.7)
++  INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/weechat-plugin-api.7 DESTINATION ${MANDIR}/man7)
++
++  # man page
++  ADD_CUSTOM_COMMAND(
++    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/weechat-scripting.7
++    COMMAND ${A2X_EXECUTABLE} ARGS -a revision='WeeChat ${VERSION}' -d manpage -f manpage -L -D ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/weechat_scripting.en.txt
++    DEPENDS
++    ${CMAKE_CURRENT_SOURCE_DIR}/weechat_scripting.en.txt
++    ${CMAKE_CURRENT_SOURCE_DIR}/cmdline_options.en.txt
++    ${CMAKE_CURRENT_SOURCE_DIR}/autogen/user/*.txt
++    COMMENT "Building weechat-scripting.7 (en)"
++  )
++  ADD_CUSTOM_TARGET(doc-scripting-man-en ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/weechat-scripting.7)
++  INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/weechat-scripting.7 DESTINATION ${MANDIR}/man7)
++
++  # man page
++  ADD_CUSTOM_COMMAND(
++    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/weechat-faq.7
++    COMMAND ${A2X_EXECUTABLE} ARGS -a revision='WeeChat ${VERSION}' -d manpage -f manpage -L -D ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/weechat_faq.en.txt
++    DEPENDS
++    ${CMAKE_CURRENT_SOURCE_DIR}/weechat_faq.en.txt
++    ${CMAKE_CURRENT_SOURCE_DIR}/cmdline_options.en.txt
++    ${CMAKE_CURRENT_SOURCE_DIR}/autogen/user/*.txt
++    COMMENT "Building weechat-faq.7 (en)"
++  )
++  ADD_CUSTOM_TARGET(doc-faq-man-en ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/weechat-faq.7)
++  INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/weechat-faq.7 DESTINATION ${MANDIR}/man7)
++
++  # man page
++  ADD_CUSTOM_COMMAND(
++    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/weechat-quickstart.7
++    COMMAND ${A2X_EXECUTABLE} ARGS -a revision='WeeChat ${VERSION}' -d manpage -f manpage -L -D ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/weechat_quickstart.en.txt
++    DEPENDS
++    ${CMAKE_CURRENT_SOURCE_DIR}/weechat_quickstart.en.txt
++    ${CMAKE_CURRENT_SOURCE_DIR}/cmdline_options.en.txt
++    ${CMAKE_CURRENT_SOURCE_DIR}/autogen/user/*.txt
++    COMMENT "Building weechat-quickstart.7 (en)"
++  )
++  ADD_CUSTOM_TARGET(doc-quickstart-man-en ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/weechat-quickstart.7)
++  INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/weechat-quickstart.7 DESTINATION ${MANDIR}/man7)
++
++  # man page
++  ADD_CUSTOM_COMMAND(
++    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/weechat-tester.7
++    COMMAND ${A2X_EXECUTABLE} ARGS -a revision='WeeChat ${VERSION}' -d manpage -f manpage -L -D ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/weechat_tester.en.txt
++    DEPENDS
++    ${CMAKE_CURRENT_SOURCE_DIR}/weechat_tester.en.txt
++    ${CMAKE_CURRENT_SOURCE_DIR}/cmdline_options.en.txt
++    ${CMAKE_CURRENT_SOURCE_DIR}/autogen/user/*.txt
++    COMMENT "Building weechat-tester.7 (en)"
++  )
++  ADD_CUSTOM_TARGET(doc-tester-guide-man-en ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/weechat-tester.7)
++  INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/weechat-tester.7 DESTINATION ${MANDIR}/man7)
++
++  # man page
++  ADD_CUSTOM_COMMAND(
++    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/weechat-dev.7
++    COMMAND ${A2X_EXECUTABLE} ARGS -a revision='WeeChat ${VERSION}' -d manpage -f manpage -L -D ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/weechat_dev.en.txt
++    DEPENDS
++    ${CMAKE_CURRENT_SOURCE_DIR}/weechat_dev.en.txt
++    ${CMAKE_CURRENT_SOURCE_DIR}/cmdline_options.en.txt
++    ${CMAKE_CURRENT_SOURCE_DIR}/autogen/user/*.txt
++    COMMENT "Building weechat-dev.7 (en)"
++  )
++  ADD_CUSTOM_TARGET(doc-dev-man-en ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/weechat-dev.7)
++  INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/weechat-dev.7 DESTINATION ${MANDIR}/man7)
++
++  # man page
++  ADD_CUSTOM_COMMAND(
++    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/weechat-relay.7
++    COMMAND ${A2X_EXECUTABLE} ARGS -a revision='WeeChat ${VERSION}' -d manpage -f manpage -L -D ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/weechat_relay_protocol.en.txt
++    DEPENDS
++    ${CMAKE_CURRENT_SOURCE_DIR}/weechat_relay_protocol.en.txt
++    ${CMAKE_CURRENT_SOURCE_DIR}/cmdline_options.en.txt
++    ${CMAKE_CURRENT_SOURCE_DIR}/autogen/user/*.txt
++    COMMENT "Building weechat-relay.7 (en)"
++  )
++  ADD_CUSTOM_TARGET(doc-relay-man-en ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/weechat-relay.7)
++  INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/weechat-relay.7 DESTINATION ${MANDIR}/man7)
++
+ ENDIF(ENABLE_MAN)
+ 
+ IF(ENABLE_DOC AND SOURCEHIGHLIGHT_FOUND)
+diff --git a/doc/en/Makefile.am b/doc/en/Makefile.am
+index d219e99..2500cd6 100644
+--- a/doc/en/Makefile.am
++++ b/doc/en/Makefile.am
+@@ -35,7 +35,15 @@ EXTRA_DIST = CMakeLists.txt \
+              $(wildcard autogen/plugin_api/*.txt)
+ 
+ if MAN
+-  man_targets = weechat.1
++  man_targets = weechat.1 \
++								weechat_user.7 \
++								weechat_plugin_api.7 \
++								weechat_scripting.7 \
++								weechat_faq.7 \
++								weechat_quickstart.7 \
++								weechat_tester.7 \
++								weechat_dev.7 \
++								weechat_relay_protocol.7
+   man_install = install-man
+   man_uninstall = uninstall-man
+ endif
+@@ -61,33 +69,50 @@ weechat.1: weechat.1.en.txt cmdline_options.en.txt
+ weechat_user.en.html: weechat_user.en.txt cmdline_options.en.txt $(wildcard autogen/user/*.txt)
+ 	$(ASCIIDOC) -a toc -a toclevels=4 -a date=`date "+%F"` -a revision="$(VERSION)" -a stylesheet=$(abs_top_srcdir)/doc/asciidoc.css -f $(abs_top_srcdir)/doc/asciidoc.conf -n -o weechat_user.en.html $(abs_top_srcdir)/doc/en/weechat_user.en.txt
+ 
++weechat_user.7: weechat_user.en.txt cmdline_options.en.txt $(wildcard autogen/user/*.txt)
++	$(A2X) -a revision="WeeChat $(VERSION)" -d manpage -f manpage -L -D . $(abs_top_srcdir)/doc/en/weechat.1.en.txt
++
+ # plugin API reference
+ weechat_plugin_api.en.html: weechat_plugin_api.en.txt $(wildcard autogen/plugin_api/*.txt)
+ 	$(ASCIIDOC) -a toc -a toclevels=4 -a date=`date "+%F"` -a revision="$(VERSION)" -a stylesheet=$(abs_top_srcdir)/doc/asciidoc.css -n -o weechat_plugin_api.en.html $(abs_top_srcdir)/doc/en/weechat_plugin_api.en.txt
++weechat_plugin_api.7: weechat_plugin_api.en.txt $(wildcard autogen/plugin_api/*.txt)
++	$(A2X) -a revision="WeeChat $(VERSION)" -d manpage -f manpage -L -D . $(abs_top_srcdir)/doc/en/weechat_plugin_api.en.txt
+ 
+ # scripting guide
+ weechat_scripting.en.html: weechat_scripting.en.txt
+ 	$(ASCIIDOC) -a toc -a toclevels=3 -a date=`date "+%F"` -a revision="$(VERSION)" -a stylesheet=$(abs_top_srcdir)/doc/asciidoc.css -n -o weechat_scripting.en.html $(abs_top_srcdir)/doc/en/weechat_scripting.en.txt
++weechat_scripting.7: weechat_scripting.en.txt
++	$(A2X) -a revision="WeeChat $(VERSION)" -d manpage -f manpage -L -D . $(abs_top_srcdir)/doc/en/weechat_scripting.en.txt
+ 
+ # FAQ
+ weechat_faq.en.html: weechat_faq.en.txt
+ 	$(ASCIIDOC) -a toc -a date=`date "+%F"` -a revision="$(VERSION)" -a stylesheet=$(abs_top_srcdir)/doc/asciidoc.css -f $(abs_top_srcdir)/doc/asciidoc.conf -n -o weechat_faq.en.html $(abs_top_srcdir)/doc/en/weechat_faq.en.txt
++weechat_faq.7: weechat_faq.en.txt
++	$(A2X) -a revision="WeeChat $(VERSION)" -d manpage -f manpage -L -D . $(abs_top_srcdir)/doc/en/weechat_faq.en.txt
+ 
+ # quickstart
+ weechat_quickstart.en.html: weechat_quickstart.en.txt
+ 	$(ASCIIDOC) -a toc -a date=`date "+%F"` -a revision="$(VERSION)" -a stylesheet=$(abs_top_srcdir)/doc/asciidoc.css -n -o weechat_quickstart.en.html $(abs_top_srcdir)/doc/en/weechat_quickstart.en.txt
++weechat_quickstart.7: weechat_quickstart.en.txt
++	$(A2X) -a revision="WeeChat $(VERSION)" -d manpage -f manpage -L -D . $(abs_top_srcdir)/doc/en/weechat_quickstart.en.txt
+ 
+ # tester's guide
+ weechat_tester.en.html: weechat_tester.en.txt
+ 	$(ASCIIDOC) -a toc -a date=`date "+%F"` -a revision="$(VERSION)" -a stylesheet=$(abs_top_srcdir)/doc/asciidoc.css -n -o weechat_tester.en.html $(abs_top_srcdir)/doc/en/weechat_tester.en.txt
++weechat_tester.7: weechat_tester.en.txt
++	$(A2X) -a revision="WeeChat $(VERSION)" -d manpage -f manpage -L -D . $(abs_top_srcdir)/doc/en/weechat_tester.en.txt
+ 
+ # developer's guide
+ weechat_dev.en.html: weechat_dev.en.txt
+ 	$(ASCIIDOC) -a toc -a toclevels=4 -a date=`date "+%F"` -a revision="$(VERSION)" -a stylesheet=$(abs_top_srcdir)/doc/asciidoc.css -f $(abs_top_srcdir)/doc/asciidoc.conf -n -o weechat_dev.en.html $(abs_top_srcdir)/doc/en/weechat_dev.en.txt
++weechat_dev.7: weechat_dev.en.txt
++	$(A2X) -a revision="WeeChat $(VERSION)" -d manpage -f manpage -L -D . $(abs_top_srcdir)/doc/en/weechat_dev.en.txt
+ 
+ # relay protocol
+ weechat_relay_protocol.en.html: weechat_relay_protocol.en.txt
+ 	$(ASCIIDOC) -a toc -a toclevels=4 -a date=`date "+%F"` -a revision="$(VERSION)" -a stylesheet=$(abs_top_srcdir)/doc/asciidoc.css -f $(abs_top_srcdir)/doc/asciidoc.conf -n -o weechat_relay_protocol.en.html $(abs_top_srcdir)/doc/en/weechat_relay_protocol.en.txt
++weechat_relay_protocol.7: weechat_relay_protocol.en.txt
++	$(A2X) -a revision="WeeChat $(VERSION)" -d manpage -f manpage -L -D . $(abs_top_srcdir)/doc/en/weechat_relay_protocol.en.txt
+ 
+ # install man/docs
+ 
+@@ -96,6 +121,8 @@ install-data-hook: $(man_install) $(doc_install)
+ install-man:
+ 	$(mkinstalldirs) $(DESTDIR)$(mandir)/man1/
+ 	$(INSTALL_DATA) *.1 $(DESTDIR)$(mandir)/man1/
++	$(mkinstalldirs) $(DESTDIR)$(mandir)/man7/
++	$(INSTALL_DATA) *.7 $(DESTDIR)$(mandir)/man7/
+ 
+ install-doc:
+ 	$(mkinstalldirs) $(DESTDIR)$(docdir)/
+@@ -117,4 +144,5 @@ uninstall-doc:
+ 
+ clean-local:
+ 	-rm -f weechat.1
++	-rm -f *.7
+ 	-rm -f *.html
+diff --git a/doc/en/weechat_dev.en.txt b/doc/en/weechat_dev.en.txt
+index c802b01..1eb833a 100644
+--- a/doc/en/weechat_dev.en.txt
++++ b/doc/en/weechat_dev.en.txt
+@@ -1,5 +1,13 @@
+-WeeChat Developer's Guide
+-=========================
++WEECHAT-DEV(7)
++==============
++
++NAME
++----
++
++weechat-dev - Developers Guide to WeeChat
++
++INFO
++----
+ Sébastien Helleu <flashcode@flashtux.org>
+ 
+ 
+diff --git a/doc/en/weechat_faq.en.txt b/doc/en/weechat_faq.en.txt
+index 9f3a3c6..ace193d 100644
+--- a/doc/en/weechat_faq.en.txt
++++ b/doc/en/weechat_faq.en.txt
+@@ -1,5 +1,14 @@
+-WeeChat FAQ (Frequently Asked Questions)
+-========================================
++WEECHAT-FAQ(7)
++==============
++
++NAME
++----
++
++weechat-faq - WeeChat Frequently Asked Qeustions
++
++INFO
++----
++
+ Sébastien Helleu <flashcode@flashtux.org>
+ 
+ 
+diff --git a/doc/en/weechat_plugin_api.en.txt b/doc/en/weechat_plugin_api.en.txt
+index 0442d0d..6183b88 100644
+--- a/doc/en/weechat_plugin_api.en.txt
++++ b/doc/en/weechat_plugin_api.en.txt
+@@ -1,5 +1,14 @@
+-WeeChat Plugin API Reference
+-============================
++WEECHAT-PLUGIN-API(7)
++=====================
++
++NAME
++----
++
++weechat-plugin-api - WeeChat API Reference
++
++INFO
++----
++
+ Sébastien Helleu <flashcode@flashtux.org>
+ 
+ 
+diff --git a/doc/en/weechat_quickstart.en.txt b/doc/en/weechat_quickstart.en.txt
+index d556d3c..f5247ff 100644
+--- a/doc/en/weechat_quickstart.en.txt
++++ b/doc/en/weechat_quickstart.en.txt
+@@ -1,5 +1,14 @@
+-WeeChat Quick Start Guide
+-=========================
++WEECHAT-QUICKSTART(7)
++=====================
++
++NAME
++----
++
++weechat-quickstart - WeeChat Quick Start Guide
++
++INFO
++----
++
+ Sébastien Helleu <flashcode@flashtux.org>
+ 
+ 
+diff --git a/doc/en/weechat_relay_protocol.en.txt b/doc/en/weechat_relay_protocol.en.txt
+index 2d4087c..927e663 100644
+--- a/doc/en/weechat_relay_protocol.en.txt
++++ b/doc/en/weechat_relay_protocol.en.txt
+@@ -1,5 +1,14 @@
+-WeeChat Relay Protocol
+-======================
++WEECHAT-RELAY(7)
++================
++
++NAME
++----
++
++weechat-relay - WeeChat Relay Protocol
++
++INFO
++----
++
+ Sébastien Helleu <flashcode@flashtux.org>
+ 
+ 
+diff --git a/doc/en/weechat_scripting.en.txt b/doc/en/weechat_scripting.en.txt
+index 124a87b..904fc51 100644
+--- a/doc/en/weechat_scripting.en.txt
++++ b/doc/en/weechat_scripting.en.txt
+@@ -1,5 +1,12 @@
+-WeeChat Scripting Guide
+-=======================
++WEECHAT-SCRIPTING(7)
++====================
++
++NAME
++----
++weechat-scripting - WeeChat Scripting Guide
++
++INFO
++----
+ Sébastien Helleu <flashcode@flashtux.org>
+ 
+ 
+diff --git a/doc/en/weechat_tester.en.txt b/doc/en/weechat_tester.en.txt
+index fff8f23..db597c1 100644
+--- a/doc/en/weechat_tester.en.txt
++++ b/doc/en/weechat_tester.en.txt
+@@ -1,5 +1,14 @@
+-WeeChat Tester's Guide
+-======================
++WEECHAT-TESTER(7)
++=================
++
++NAME
++----
++
++weechat-tester - Tester's Guide for WeeChat
++
++INFO
++----
++
+ Sébastien Helleu <flashcode@flashtux.org>
+ 
+ 
+diff --git a/doc/en/weechat_user.en.txt b/doc/en/weechat_user.en.txt
+index 36cfde2..80c4f5f 100644
+--- a/doc/en/weechat_user.en.txt
++++ b/doc/en/weechat_user.en.txt
+@@ -1,5 +1,14 @@
+-WeeChat User's Guide
+-====================
++WEECHAT-USER(7)
++===============
++
++NAME
++----
++
++weechat-user - WeeChat User's Guide
++
++INFO
++----
++
+ Sébastien Helleu <flashcode@flashtux.org>
+ 
+ 
+-- 
+1.8.4.557.g34b3a2e
+

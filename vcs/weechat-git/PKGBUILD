@@ -7,21 +7,27 @@ export CC=clang
 DEBUG_CFLAGS="-g"
 pkgname=weechat-git
 _pkgname=weechat
-pkgver=0.4.1.r164.g7dea560
+pkgver=0.4.1.r181.g73f2c2c
 pkgrel=2
 pkgdesc="Fast, light & extensible IRC client (curses UI)"
 arch=('i686' 'x86_64')
 url="http://www.weechat.org/"
 license=('GPL3')
 depends=('gnutls')
-makedepends=('git' 'cmake' 'pkgconfig' 'perl' 'python2' 'lua' 'tcl' 'aspell' 'clang')
-optdepends=('perl' 'python2' 'lua' 'tcl' 'ruby' 'aspell')
+makedepends=('git' 'cmake' 'pkgconfig' 'perl' 'lua' 'tcl' 'aspell' 'clang')
+optdepends=('perl' 'lua' 'tcl' 'ruby' 'aspell')
 provides=('weechat')
 conflicts=('weechat')
 options=(!libtool)
-source=("git://git.sv.gnu.org/weechat.git")
-md5sums=('SKIP')
-_targets=("")
+source=("git://git.sv.gnu.org/weechat.git"
+        '0001-doc-Create-English-man-pages-for-asciidoc-files.patch')
+md5sums=('SKIP'
+         'f86814dc30f4ebabbe01acacf5fa3804')
+
+prepare() {
+  cd "$srcdir/$_pkgname"
+  git am "$srcdir/${source[1]}"
+}
 
 # template start; name=git-pkgver-r; version=1.0;
 pkgver() {
@@ -33,8 +39,8 @@ pkgver() {
 build() {
   cd "$srcdir/$_pkgname"
   cmake "$srcdir/$_pkgname" -DPREFIX=/usr \
-        -DPYTHON_EXECUTABLE=/usr/bin/python2 \
-        -DPYTHON_LIBRARY=/usr/lib/libpython2.7.so \
+        -DPYTHON_EXECUTABLE=/usr/bin/python3 \
+        -DPYTHON_LIBRARY=/usr/lib/libpython3.3m.so \
         -DENABLE_RUBY=OFF -DENABLE_DOC=OFF -DENABLE_MAN=ON
   make
 }
